@@ -1,0 +1,100 @@
+/* Tổng thể trang */
+.customer-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  .customer-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .customer-header h1 {
+    font-size: 32px;
+    margin: 0;
+  }
+  
+  .customer-header p {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  /* Thanh tìm kiếm */
+  .customer-search {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .customer-search input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Danh sách khách hàng */
+  .customer-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+  }
+  
+  .customer-list th, .customer-list td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .customer-list th {
+    background-color: #2c3e50;
+    color: white;
+  }
+  
+  .customer-list tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .customer-list .btn-edit,
+  .customer-list .btn-delete {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .customer-list .btn-edit {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .customer-list .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  /* Nút thêm khách hàng */
+  .customer-add {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .customer-add .btn-add {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .customer-add .btn-add:hover {
+    background-color: #2980b9;
+  }
+  

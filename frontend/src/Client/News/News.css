@@ -1,0 +1,85 @@
+.new-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+.new-about-banner {
+  position: relative;
+  background-image: url("https://images.viblo.asia/86be5bf5-7905-4255-b54d-3aaf806cd0a8.png"); /* Thay đổi đường dẫn ảnh */
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.new-about-banner h1 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+.new-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.new-item {
+  width: 28%; /* Mỗi phần tử chiếm 30% chiều rộng */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.new-item-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.new-item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-item h2 {
+  color: #f39c12;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.new-item p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.new-item .btn {
+  background-color: #f39c12;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.new-item .btn:hover {
+  background-color: #f39c12;
+}
