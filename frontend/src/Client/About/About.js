@@ -1,6 +1,7 @@
 import React from 'react';
 import './About.css';
-// import Header from '../../Components/Header/Header';
+import Header from '../../Components/Header/Header';
+import Footer from '../../Components/Footer/Footer';
 import { TbSlash } from "react-icons/tb";
 import { RiFacebookFill } from "react-icons/ri";
 import { RiTwitterXFill } from "react-icons/ri";
@@ -13,8 +14,9 @@ import Values from './Values/Values';
 
 const About = () => {
   return (
+    <div>
+    <Header />
     <div className='about-mon'>
-      {/* <Header /> */}
       <div className='about-share'>
         <div className='about-crumb'>
           <nav className='about-pon'>
@@ -68,6 +70,8 @@ const About = () => {
       <Section/>
       <Share/>
       <Values/>
+      <Footer/>
+    </div>
     </div>
   );
 };

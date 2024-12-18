@@ -6,7 +6,10 @@
   display: flex;
   justify-content: space-between;
   max-width: 1240px;
-  margin: 32px auto 20px;
+  /* margin: 32px auto 20px; */
+  padding-top: 32px;
+  padding-left: 11%;
+  padding-right: 11%;
 }
 .about-pon{
   display: inline-block;

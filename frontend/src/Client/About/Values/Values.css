@@ -59,6 +59,7 @@
     display: flex;
 }
 .values-content{
+    text-align: left;
     flex: 0 0 458px;
     width: 100%;
     max-width: 608px;
