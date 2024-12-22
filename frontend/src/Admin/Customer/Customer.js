@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./ManageCustomer.css";
+import "./Customer.css";
 import "./CustomerResponsive.css";
 
 
-const API_URL = "http://localhost:5024/api/customers"
+const API_URL = "http://localhost:5024/api/customer"
 
 function Customer() {
   const [customers, setCustomers] = useState([]);

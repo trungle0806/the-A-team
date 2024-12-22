@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAccounts, addAccount, updateAccount, deleteAccount } from "../../Service/AccountService";
-import "./ManageUser.css";
+import "./Image.css";
 
 function User() {
   const [accounts, setAccounts] = useState([]);

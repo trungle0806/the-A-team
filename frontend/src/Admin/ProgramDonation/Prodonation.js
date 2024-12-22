@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Inventory.css';
-import './InventoryResponsive.css'
+import './Prodonation.css';
+import './ProdonationResponsive.css'
 
 function Inventory() {
   const [products, setProducts] = useState([

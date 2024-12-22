@@ -13,13 +13,15 @@ import AuthContext, { AuthProvider } from "./Context/AuthContext"; // Import Aut
 // import Productclient from "./Client/Productclient/Productclient";
 
 // Admin routes
-import Dashboard from "./Admin/Dashboard/Dashboard";
-import Customer from "./Admin/ManageCustomer/ManageCustomer";
-import Product from "./Admin/Product/Product";
-import Order from "./Admin/Order/Order";
-import Inventory from "./Admin/Inventory/Inventory";
-import NewsAdmin from "./Admin/NewsAdmin/NewAdmin";
-import User from "./Admin/ManageUser/ManageUser";
+import Customer from "./Admin/Customer/Customer";
+import GalleryImage from "./Admin/GalleryImage/Image";
+import Inviation from "./Admin/Invitation/Invitation";
+import Ngo from "../src/Admin/NGOs/Ngos";
+import Partner from "../src/Admin/Partner/Partner";
+import Program1 from "../src/Admin/Program1/Program1";
+import ProgramDonation from "../src/Admin/ProgramDonation/Prodonation";
+import Query from "../src/Admin/Query/Query";
+import TransactionHistory from "../src/Admin/TransactionHistory/TransactionHistory";
 import ForgotPassword from "./Client/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
 import "./App.css"; // Avoid duplicate import
@@ -46,13 +48,15 @@ function App() {
           {/* <Route path="/admin" element={<Admin />}></Route> */}
 
           <Route path="/admin" element={<Authentication />}>
-            <Route path="dashboard" element={<Dashboard />} />
             <Route path="customers" element={<Customer />} />
-            <Route path="product" element={<Product />} />
-            <Route path="order" element={<Order />} />
-            <Route path="inventory" element={<Inventory />} />
-            <Route path="news" element={<NewsAdmin />} />
-            <Route path="users" element={<User />} />
+            <Route path="galleryimage" element={<GalleryImage />} />
+            <Route path="inviation" element={<Inviation />} />
+            <Route path="ngo" element={<Ngo />} />
+            <Route path="partner" element={<Partner />} />
+            <Route path="program1" element={<Program1 />} />
+            <Route path="programDonation" element={<ProgramDonation />} />
+            <Route path="query" element={<Query />} />
+            <Route path="transactionhistory" element={<TransactionHistory />} />
           </Route>
 
           <Route path="/forgot-password" element={<ForgotPassword />} />

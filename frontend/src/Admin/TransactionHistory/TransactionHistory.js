@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Order.css';
+import './TransactionHistory.css';
 
 function Order() {
   const [orders, setOrders] = useState([

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./NewAdmin.css";
+import "./Invitation.css";
 
 const API_URL = "http://localhost:5000/api/news";
 

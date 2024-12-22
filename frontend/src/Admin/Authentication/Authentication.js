@@ -39,25 +39,31 @@ function Authentication() {
         <nav className="admin-nav">
           <ul>
             <li>
-              <Link to="dashboard">Dashboard</Link>
-            </li>
-            <li>
               <Link to="customers">Customers</Link>
             </li>
             <li>
-              <Link to="product">Product</Link>
+              <Link to="galleryimage">GalleryImage</Link>
             </li>
             <li>
-              <Link to="order">Order</Link>
+              <Link to="inviation">Invitation</Link>
             </li>
             <li>
-              <Link to="inventory">Inventory</Link>
+              <Link to="ngo">NGOs</Link>
             </li>
             <li>
-              <Link to="news">News</Link>
+              <Link to="partner">Partner</Link>
             </li>
             <li>
-              <Link to="users">Users</Link>
+              <Link to="program1">Program1</Link>
+            </li>
+            <li>
+              <Link to="programDonation">Donation</Link>
+            </li>
+            <li>
+              <Link to="query">Query</Link>
+            </li>
+            <li>
+              <Link to="transactionhistory">TransactionHistory</Link>
             </li>
           </ul>
         </nav>

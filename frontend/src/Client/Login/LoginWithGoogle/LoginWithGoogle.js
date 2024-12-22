@@ -33,7 +33,7 @@ const LoginWithGoogle = ({ onLoginSuccess }) => {
       navigate("/", {
         state: {
           message:
-            "Chúc mừng bạn đã đăng nhập thành công!, Charity Navigator chúc bạn có một trải nghiệm thật nhiều thú vị.",
+            "Congratulations on your successful login! Charity Navigator wishes you an enjoyable experience.",
         },
       });
     } else {
