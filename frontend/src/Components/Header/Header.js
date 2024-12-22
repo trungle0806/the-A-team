@@ -1,33 +1,51 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 
 export const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Đăng nhập
-  const navigate = useNavigate(); // Điều hướng
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
-  };
-
-  const handleSearch = () => {
-    console.log("Search for:", searchQuery);
   };
 
   const handleUserClick = () => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isHomePage = location.pathname === "/";
+
   return (
-    <div className="header-container">
+    <div
+      className={`header-container ${isScrolled ? "scrolled" : ""} ${
+        !isHomePage ? "other-page" : ""
+      }`}
+    >
       {/* Logo */}
       <div className="logo-search-container">
         <div className="logo-header">
-          <img src="https://www.charitynavigator.org/content/dam/cn/cn/logos/CharityNav_Logo_Hor1.png" alt="logo"/>
+          <img
+            src="https://www.charitynavigator.org/content/dam/cn/cn/logos/CharityNav_Logo_Hor1.png"
+            alt="logo"
+          />
         </div>
       </div>
 
@@ -41,14 +59,6 @@ export const Header = () => {
         >
           <Link to="/">Home</Link>
         </div>
-        {/* <div
-          className={`navbar-header-product ${
-            activeLink === "productclient" ? "active" : ""
-          }`}
-          onClick={() => handleLinkClick("productclient")}
-        >
-          <Link to="/productclient">Product</Link>
-        </div> */}
         <div
           className={`navbar-header-about ${
             activeLink === "about" ? "active" : ""
@@ -79,7 +89,7 @@ export const Header = () => {
       <div className="navbar-header-container3">
         {/* Cart Icon */}
         <div className="cart">
-          <Link to="/cart">
+          <Link  className="cart-link" to="/cart">
             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
           </Link>
         </div>

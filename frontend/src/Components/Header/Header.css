@@ -1,27 +1,98 @@
+/* Header container */
 .header-container {
   top: 0;
   left: 0;
   display: flex;
-  justify-content: space-between; /* Sắp xếp các phần cách đều */
+  justify-content: space-between;
   align-items: center;
   width: 94%;
-  /* background-color: #fff; */
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-  color: #333;
+  color: white; /* Màu mặc định */
   font-family: Arial, sans-serif;
-  padding-left: 48px;
-  padding-right: 44px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  z-index: 100;
+  padding: 30px 48px;
   position: fixed;
+  z-index: 100;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+.cart {
+  color: #49516f;
 }
 
-.logo-search-container {
-  display: flex;
-  align-items: center;
-  gap: 35px; /* Khoảng cách giữa logo và thanh tìm kiếm */
+/* Khi header cuộn */
+.header-container.scrolled {
+  background-color: rgba(255, 255, 255, 0.95); /* Nền trắng nhạt */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 48px;
+  color: #000; /* Đổi thành màu đen */
 }
+
+.header-container.scrolled .navbar-header-link a,
+.header-container.scrolled .cart-icon,
+.header-container.scrolled .user-icon-style {
+  color: #000; /* Màu đen cho các liên kết và icon */
+}
+
+.header-container.scrolled .navbar-header-link a:hover,
+.header-container.scrolled .cart-icon:hover,
+.header-container.scrolled .user-icon-style:hover {
+  color: #49516f; /* Màu vàng khi hover */
+}
+
+.header-container.scrolled .logo-header img {
+  filter: brightness(0); /* Biến logo thành đen */
+}
+
+/* Header cho các trang khác */
+.header-container.other-page {
+  background-color: white; /* Nền trắng */
+  color: black; /* Chữ màu đen */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container.other-page .navbar-header-link a,
+.header-container.other-page .cart-icon,
+.header-container.other-page .user-icon-style {
+  color: black; /* Màu đen cho các liên kết và icon */
+}
+
+.header-container.other-page .navbar-header-link a:hover,
+.header-container.other-page .cart-icon:hover,
+.header-container.other-page .user-icon-style:hover {
+  color: #49516f; /* Màu vàng khi hover */
+}
+
+.header-container.other-page .logo-header img {
+  filter: brightness(0); /* Biến logo thành đen */
+}
+
+/* Navigation links */
+.navbar-header-link {
+  display: flex;
+  gap: 30px;
+  flex-grow: 1; /* Đẩy menu vào giữa */
+  justify-content: center; /* Canh giữa menu */
+  margin-left: -97px;
+}
+
+.navbar-header-link a {
+  text-decoration: none;
+  color: inherit; /* Kế thừa màu từ header-container */
+  font-size: 18px;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+.cart-link {
+  color: white;
+}
+.navbar-header-link a:hover {
+  color: #49516f;
+}
+
+/* Đổi màu khi link được chọn */
+.navbar-header-home.active a {
+  color: #49516f;
+}
+
+/* Logo and search */
 
 /* Logo */
 .logo-header img {
@@ -31,68 +102,14 @@
   color: #f39c12;
 }
 
-/* Thanh tìm kiếm */
-.search-bar {
-  display: flex;
-  gap: 10px;
-}
-
-.search-bar input {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-  width: 200px;
-}
-
-.search-bar button {
-  padding: 8px 15px;
-  background-color: #f39c12;
-  color: #333;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.search-bar button:hover {
-  background-color: #e67e22;
-}
-
-/* Liên kết điều hướng */
-.navbar-header-link {
-  display: flex;
-  gap: 30px;
-  flex-grow: 1; /* Đẩy menu vào giữa */
-  justify-content: center; /* Canh giữa menu */
-  margin-left: -97px;
-}
-.navbar-header-link a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-  padding: 10px;
-  transition: color 0.3s ease;
-}
-
-.navbar-header-link a:hover {
-  color: #f39c12;
-}
-
-/* Đổi màu khi link được chọn */
-.navbar-header-home.active a {
-  color: #f39c12;
-}
-
+/* Auth and cart container */
 .auth-cart-container {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-/* Phần đăng nhập và giỏ hàng */
+/* Auth buttons */
 .auth-buttons {
   display: flex;
   gap: 10px;
@@ -107,7 +124,7 @@
 }
 
 .auth-buttons a:hover {
-  color: #f39c12;
+  color: #49516f;
 }
 
 .auth-buttons button {
@@ -124,30 +141,33 @@
   background-color: #c0392b;
 }
 
-.cart-icon {
-  color: #fff;
+/* Cart and user icons */
+.cart-icon,
+.user-icon-style {
+  color: inherit; /* Kế thừa màu từ header-container */
   font-size: 20px;
   transition: color 0.3s ease;
 }
 
 .cart-icon:hover {
-  color: #f39c12;
+  color: #49516f;
 }
+
 .navbar-header-container3 {
   display: flex;
   align-items: center;
   gap: 20px;
-  border-right: 100px;
 }
+
 .user-icon {
   cursor: pointer;
   font-size: 20px;
-  color: #fff;
+  color: inherit;
   transition: color 0.3s ease;
 }
 
 .user-icon:hover {
-  color: #f39c12;
+  color: #49516f;
 }
 
 .user-icon-style {

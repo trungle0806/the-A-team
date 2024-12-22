@@ -1,85 +1,232 @@
-.new-container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 40px 20px;
-  font-family: Arial, sans-serif;
-}
-.new-about-banner {
-  position: relative;
-  background-image: url("https://images.viblo.asia/86be5bf5-7905-4255-b54d-3aaf806cd0a8.png"); /* Thay đổi đường dẫn ảnh */
-  background-size: cover;
-  background-position: center;
-  height: 300px;
+/* Header Section */
+.news-header {  
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding-top: 70px;
-  padding-bottom: 70px;
-}
-.new-about-banner h1 {
-  text-align: center;
-  color: #fff;
-  margin-bottom: 40px;
+  margin: 15px 0;
+  justify-content: space-around;
+  background-color: #E8EAE6;
+  
 }
 
-.new-items {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
+.banner-image img {  
+  width: 90%; /* Kích thước ảnh lớn */
+  height: 342px; /* Chiều cao cố định */
+  border-radius: 20px;
+  padding-bottom: 0px;
+  margin-left: 55px;
+  border-radius: 24px; /* Bo nhẹ các góc */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
 }
 
-.new-item {
-  width: 28%; /* Mỗi phần tử chiếm 30% chiều rộng */
-  background-color: #fff;
+.header-content {  
+  margin-right: 180px;
+  background-color: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+  border-radius: 16px; /* Bo góc cho khối nội dung */
+  margin-left: 20px;
+  max-width: 30%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
 }
 
-.new-item-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 15px;
+.header-content h1 {  
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #333;  
 }
 
-.new-item-content {
-  display: flex;
-  flex-direction: column;
+.header-content p {  
+  font-size: 16px;  
+  color: #555;  
+  line-height: 1.5;  
 }
 
-.new-item h2 {
-  color: #f39c12;
-  font-size: 20px;
-  margin-bottom: 10px;
+/* News Grid Section */
+.new-container {  
+  padding: 80px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
-.date {
+.new-items {  
+  padding-left: 200px;
+  padding-right: 200px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột trên mỗi hàng */
+  gap: 45px; /* Khoảng cách giữa các mục */
+}
+
+.new-item {  
+  background-color: white;
+  border-radius: 16px; /* Bo góc thẻ */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.new-item:hover {  
+  transform: translateY(-5px);
+}
+
+.new-item-image {  
+  width: 100%;  
+  height: 150px; /* Chiều cao cố định */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  border-radius: 16px; /* Bo nhẹ các góc ảnh */
+}
+
+.new-item-content {  
+  padding: 15px;
+}
+
+.new-item-content h2 {  
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.new-item-content p {  
   font-size: 14px;
-  color: #888;
-  margin-bottom: 15px;
-}
-
-.new-item p {
-  font-size: 16px;
   color: #555;
-  margin-bottom: 20px;
 }
 
-.new-item .btn {
-  background-color: #f39c12;
+.btn {  
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  /* background-color: #007bff; */
   color: white;
-  padding: 10px 20px;
   border-radius: 4px;
   text-decoration: none;
-  font-weight: bold;
-  margin-top: 10px;
 }
 
-.new-item .btn:hover {
-  background-color: #f39c12;
+.btn:hover {  
+  background-color: #0056b3;
+}
+
+/* Breadcrumb Section */
+.breadcrumb {
+  margin-right: 200px;
+  color: #555;
+  /* max-width: 620px; */
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #0056b3;
+  font-weight: 500;
+}
+
+.breadcrumb a:hover {
+  color: #007bff;
+}
+
+.breadcrumb span.separator {
+  margin: 0 5px;
+  color: #888;
+}
+
+.breadcrumb .current {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Additional Styling for Background */
+.color {
+  background-color: #fff;
+  padding: 30px;
+}
+
+.load-more-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.load-more {
+  /* background-color: #007bff; */
+  background: #49516f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.load-more:hover {
+  background-color: #0056b3;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+
+
+/* Search Section */
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+.search-bar {
+  width: 30%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  padding-right: 285px;
+}
+
+/* Search Bar Positioning */
+.searchbar-container {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  width: 100%
+}
+
+.searchbar-input {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 200px; 
+}
+.search{
+  display: flex;
+  justify-content: space-around;
+}
+.search-icon-new{
+  margin-left: -30px;
+  font-size: 1.8rem;
+}
+.search-bar-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.suggestions-dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.search-bar-container {
+  position: relative;
+  display: flex;
 }

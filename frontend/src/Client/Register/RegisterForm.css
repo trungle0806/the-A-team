@@ -1,19 +1,30 @@
 /* Form.css */
-.form-container {
+.form-container-register {
   width: 100%;
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: white;
+  border-radius: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+.register-h2 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
-  color: #333;
+  color: black;
+}
+.register-p {
+  color: black;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.register-img {
+  width: 80%;
+  top: 10px;
+  margin-top: 25px;
+  margin-left: 34px;
 }
 
 .form {
@@ -21,31 +32,32 @@ h2 {
   flex-direction: column;
 }
 
-.form-group {
+.form-group-register {
   margin-bottom: 15px;
 }
 
-.form-group label {
-  font-size: 14px;
+.form-group-register label {
+  font-size: 13px;
   color: #333;
 }
 
-.form-group input {
+.form-group-register input {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%;
+  width: 95%;
+  margin-top: 10px;
 }
 
-.form-group input:focus {
+.form-group-register input:focus {
   outline: none;
-  border-color: #f39c12;
+  border-color: #49516f;
 }
 
-.btn-submit {
+.btn-submit-register {
   padding: 10px;
-  background-color: #f39c12;
+  background-color: #49516f;
   color: white;
   border: none;
   border-radius: 5px;
@@ -54,8 +66,8 @@ h2 {
   transition: background-color 0.3s;
 }
 
-.btn-submit:hover {
-  background-color: #e67e22;
+.btn-submit-register:hover {
+  background-color: #49517f;
 }
 
 .error-message {
@@ -64,34 +76,37 @@ h2 {
   margin-bottom: 10px;
   text-align: center;
 }
-.additional-links {
+/* .additional-links {
   margin-top: 20px;
-  display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+} */
+.conten-register {
+  color: black;
+  font-weight: 500;
 }
-
-.additional-links a {
-  color: #f39c12; /* Màu vàng đồng nhất */
+.additional-links {
+  color: #49516f;
   text-decoration: none;
   font-size: 14px;
   font-weight: bold;
   transition: color 0.3s ease;
+  margin-right: 45px;
 }
 
 .additional-links a:hover {
-  color: #e67e22; /* Chuyển sang cam khi hover */
+  color: #49517f; /* Chuyển sang cam khi hover */
 }
-
-.home-link {
-  font-size: 16px;
-  color: #333; /* Màu đen cho đường link quay lại trang chủ */
+.login-link-register {
+  color: #49516f;
+  text-decoration: none;
 }
-
-.login-link {
-  font-size: 16px;
-  color: #f39c12; /* Màu vàng cho liên kết đăng nhập */
+.home-link-register {
+  font-size: 14px;
+  color: #49516f;
+  text-decoration: none; /* Màu đen cho đường link quay lại trang chủ */
 }
 
 @media (max-width: 600px) {

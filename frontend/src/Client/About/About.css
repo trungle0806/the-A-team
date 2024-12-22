@@ -1,4 +1,6 @@
 .about-mon{
+  position: absolute;
+  top: 90px;
   background-color: #fff;
 }
 .about-share{

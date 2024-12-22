@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./RegisterForm.css";
-import { Link } from "react-router-dom";
+import "./RegisterForm.css"; // Nếu cần tùy chỉnh CSS cho form
+import { Link, useNavigate } from "react-router-dom"; // Để chuyển hướng sau khi đăng ký thành công
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5024/api/auth";
+  const API_URL = "http://localhost:5024/api/auth"; // Thay đổi API_URL nếu cần
 
   // Kiểm tra email hợp lệ
   const isEmailValid = (email) => {
@@ -54,6 +56,7 @@ const RegisterForm = () => {
       !lastName ||
       !dateOfBirth ||
       !email ||
+      !username ||
       !password ||
       !confirmPassword
     ) {
@@ -87,27 +90,36 @@ const RegisterForm = () => {
         lastName,
         dateOfBirth,
         email,
+        username,
         password,
       });
 
-      // Nếu thành công, hiển thị thông báo thành công và reset form
-      setSuccess("Registration successful! You can now log in.");
-      setError("");
+      // Nếu thành công, hiển thị thông báo thành công và chuyển hướng
+      setSuccess("Registration successful! Redirecting to login page...");
+      setTimeout(() => {
+        navigate("/login"); // Chuyển hướng đến trang đăng nhập sau 3 giây
+      }, 3000);
     } catch (err) {
-      setError(
-        err.response?.data?.message || "Registration failed. Please try again."
-      );
+      setError(err.response?.data || "Registration failed. Please try again.");
       setSuccess("");
     }
   };
 
   return (
-    <div className="form-container">
-      <h2>Register</h2>
+    <div className="form-container-register">
+      <img
+        src="https://d20umu42aunjpx.cloudfront.net/_gfx_/main/CN_Logo_New2022.png"
+        className="register-img"
+      />
+      <h2 className="register-h2">Welcome</h2>
+      <p className="register-p">
+        Register in to Charity Navigator to continue.
+      </p>
+
       {error && <div className="error-message">{error}</div>}
       {success && <div className="success-message">{success}</div>}
       <form onSubmit={handleSubmit} className="form">
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="firstName">First Name</label>
           <input
             type="text"
@@ -117,7 +129,7 @@ const RegisterForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
@@ -127,7 +139,7 @@ const RegisterForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="dateOfBirth">Date of Birth</label>
           <input
             type="date"
@@ -137,7 +149,7 @@ const RegisterForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -147,7 +159,17 @@ const RegisterForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group-register">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -157,7 +179,7 @@ const RegisterForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             type="password"
@@ -167,17 +189,19 @@ const RegisterForm = () => {
             required
           />
         </div>
-        <button type="submit" className="btn-submit">
+        <button type="submit" className="btn-submit-register">
           Register
         </button>
       </form>
-
       <div className="additional-links">
-        <Link to="/" className="home-link">
+      <div className="conten-register">
+          Already have an account?{" "}
+          <Link to="/login" className="login-link-register">
+            Login
+          </Link>
+        </div>
+        <Link to="/" className="home-link-register">
           Back to Home
-        </Link>
-        <Link to="/login" className="login-link">
-          Already have an account? Login
         </Link>
       </div>
     </div>
