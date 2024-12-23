@@ -10,6 +10,7 @@ import CartForm from "./Client/Cart/CartForm";
 import ForgotAndResetPassword from "./Client/ForgotPassword/ForgotPassword";
 import Authentication from "./Admin/Authentication/Authentication";
 import AuthContext, { AuthProvider } from "./Context/AuthContext"; // Import AuthProvider
+import Profile from "./Client/Profile/Profile";
 // import Productclient from "./Client/Productclient/Productclient";
 
 // Admin routes
@@ -43,6 +44,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/cart" element={<CartForm />} />
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
+          <Route path="/profile" element={<Profile />} />
 
           {/* Admin Routes */}
           {/* <Route path="/admin" element={<Admin />}></Route> */}

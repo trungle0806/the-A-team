@@ -193,8 +193,9 @@ const RegisterForm = () => {
           Register
         </button>
       </form>
+
       <div className="additional-links">
-      <div className="conten-register">
+        <div className="conten-register">
           Already have an account?{" "}
           <Link to="/login" className="login-link-register">
             Login

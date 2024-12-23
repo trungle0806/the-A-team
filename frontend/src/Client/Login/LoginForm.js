@@ -1,8 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-
-import AuthContext from "../../Context/AuthContext";
 import LoginWithGoogle from "./LoginWithGoogle/LoginWithGoogle";
 import "./LoginForm.css";
 
@@ -11,7 +9,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const API_URL = "http://localhost:5024/api/auth";
@@ -19,6 +16,14 @@ const LoginForm = () => {
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const handleNavigation = (role) => {
+    if (role === "Admin") {
+      navigate("/Admin", { state: { message: "Welcome Admin!" } });
+    } else {
+      navigate("/", { state: { message: "Login successful! Welcome back!" } });
+    }
   };
 
   const loginRequest = async (emailOrUsername, password) => {
@@ -37,27 +42,6 @@ const LoginForm = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Backend Error:", errorData);
-
-        if (errorData.errors) {
-          let errorMessage = "Validation errors:\n";
-          if (typeof errorData.errors === "object") {
-            Object.keys(errorData.errors).forEach((key) => {
-              const errorArr = errorData.errors[key];
-              if (Array.isArray(errorArr)) {
-                errorArr.forEach((error) => {
-                  errorMessage += `${key}: ${error}\n`;
-                });
-              } else {
-                errorMessage += `${key}: ${errorArr}\n`;
-              }
-            });
-          }
-          setError(errorMessage);
-        } else {
-          setError(errorData.message || "Login failed.");
-        }
-
         throw new Error(errorData.message || "Login failed.");
       }
 
@@ -67,15 +51,11 @@ const LoginForm = () => {
       const decodedToken = jwtDecode(token);
       const userRole = decodedToken.Role;
 
-      localStorage.setItem("token", token);
+      localStorage.setItem("authToken", token);
       localStorage.setItem("role", userRole);
 
-      login(token, userRole);
-
-      // Redirect to Home with a success message
-      navigate("/", { state: { message: "Login successful! Welcome back!" } });
+      handleNavigation(userRole);
     } catch (err) {
-      console.error("Login error:", err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -83,7 +63,6 @@ const LoginForm = () => {
   };
 
   const handleGoogleLoginSuccess = async (idToken) => {
-    console.log("Google Login Success. Token received:", idToken);
     setLoading(true);
 
     try {
@@ -104,13 +83,15 @@ const LoginForm = () => {
       const decodedToken = jwtDecode(token);
       const userRole = decodedToken.Role;
 
-      localStorage.setItem("token", token);
+      // Lưu token vào localStorage
+      localStorage.setItem("authToken", token);
       localStorage.setItem("role", userRole);
 
-      login(token, userRole);
-      navigate("/", { state: { message: "Login successful! Welcome back!" } });
-    } catch (error) {
-      console.error("Google login error:", error.message);
+      // Gửi sự kiện cập nhật giao diện
+      window.dispatchEvent(new Event("loginStatusChanged"));
+
+      handleNavigation(userRole);
+    } catch (err) {
       setError("Google login failed. Please try again.");
     } finally {
       setLoading(false);
@@ -131,6 +112,7 @@ const LoginForm = () => {
       <img
         src="https://d20umu42aunjpx.cloudfront.net/_gfx_/main/CN_Logo_New2022.png"
         className="form-img"
+        alt="Logo"
       />
       <h1 className="form-h1">Welcome</h1>
       <p className="form-p1">Login in to Charity Navigator to continue.</p>
@@ -175,7 +157,6 @@ const LoginForm = () => {
             Register here.
           </Link>
         </p>
-
         <Link to="/" className="login-link3">
           Back to Home
         </Link>

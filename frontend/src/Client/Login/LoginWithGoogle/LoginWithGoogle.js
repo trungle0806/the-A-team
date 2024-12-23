@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import './LoginWithGoogle.css'
 
 const LoginWithGoogle = ({ onLoginSuccess }) => {
   const navigate = useNavigate();

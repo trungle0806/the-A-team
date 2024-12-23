@@ -173,3 +173,24 @@
 .user-icon-style {
   font-size: 25px;
 }
+
+/* Logout icon */
+.logout-icon {
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.logout-icon-style {
+  font-size: 20px;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.logout-icon-style:hover {
+  color: #49516f;
+}
+
+/* Khi header cuộn, thay đổi màu của logo đăng xuất thành màu đen */
+.header-container.scrolled .logout-icon-style {
+  color: black; /* Thay đổi màu của icon đăng xuất thành đen khi cuộn */
+}
