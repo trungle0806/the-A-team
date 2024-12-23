@@ -14,7 +14,7 @@ import Profile from "./Client/Profile/Profile";
 // import Productclient from "./Client/Productclient/Productclient";
 
 // Admin routes
-import Customer from "./Admin/Customer/Customer";
+import CustomerManagement from "./Admin/Customer/CustomerManagement";
 import GalleryImage from "./Admin/GalleryImage/Image";
 import Inviation from "./Admin/Invitation/Invitation";
 import Ngo from "../src/Admin/NGOs/Ngos";
@@ -50,7 +50,7 @@ function App() {
           {/* <Route path="/admin" element={<Admin />}></Route> */}
 
           <Route path="/admin" element={<Authentication />}>
-            <Route path="customers" element={<Customer />} />
+            <Route path="customers" element={<CustomerManagement />} />
             <Route path="galleryimage" element={<GalleryImage />} />
             <Route path="inviation" element={<Inviation />} />
             <Route path="ngo" element={<Ngo />} />
