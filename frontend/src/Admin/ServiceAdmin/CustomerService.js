@@ -5,35 +5,30 @@ const API_URL = 'http://localhost:5024/api/customer/'; // Adjusted to match the 
 // Fetch all customers (Admin only)
 const getAllCustomers = async () => {
     const token = localStorage.getItem('token');
-    if (token) {
-        const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
-        const role = payload.scope;
-        console.log('Role:', role);  // Debug: Ensure the role is correct
-        try {
-            if (role !== 'Admin') {
-                throw new Error('Unauthorized: Only admins can access customer data.');
-            }
-            const response = await axios.get(`${API_URL}all`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Failed to fetch all customers:', error.response?.data || error.message);
-            throw error;
+    const role = localStorage.getItem('role'); // Fetch role from localStorage
+    console.log('Role:', role); // Debugging
+    try {
+        if (role !== 'Admin') {
+            throw new Error('Unauthorized: Only admins can access customer data.');
         }
-    } else {
-        throw new Error('Token not found.');
+        const response = await axios.get(`${API_URL}all`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch all customers:', error.response?.data || error.message);
+        throw error;
     }
 };
+
 
 
 // Add a new customer (Admin only)
 const addCustomer = async (customer) => {
     const token = localStorage.getItem('token');
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
-    const role = payload.scope;
+    const role = localStorage.getItem('role');
     try {
         if (role !== 'Admin') {
             throw new Error('Unauthorized: Only admins can add customers.');
@@ -53,8 +48,7 @@ const addCustomer = async (customer) => {
 // Update an existing customer (Admin only)
 const updateCustomer = async (id, updatedCustomer) => {
     const token = localStorage.getItem('token');
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
-    const role = payload.scope;
+    const role = localStorage.getItem('role');
     try {
         if (role !== 'Admin') {
             throw new Error('Unauthorized: Only admins can update customers.');
@@ -74,8 +68,7 @@ const updateCustomer = async (id, updatedCustomer) => {
 // Delete a customer (Admin only)
 const deleteCustomer = async (id) => {
     const token = localStorage.getItem('token');
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
-    const role = payload.scope;
+    const role = localStorage.getItem('role');
     try {
         if (role !== 'Admin') {
             throw new Error('Unauthorized: Only admins can delete customers.');
@@ -95,8 +88,7 @@ const deleteCustomer = async (id) => {
 // Get a specific customer by ID (Admin and User)
 const getCustomerById = async (id) => {
     const token = localStorage.getItem('token');
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
-    const role = payload.scope;
+    const role = localStorage.getItem('role');
     try {
         if (!['Admin', 'User'].includes(role)) {
             throw new Error('Unauthorized: Access is restricted to Admins and Users.');
@@ -116,8 +108,7 @@ const getCustomerById = async (id) => {
 // Search for customers with an optional query (Admin and User)
 const searchCustomers = async (searchQuery = '') => {
     const token = localStorage.getItem('token');
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
-    const role = payload.scope;
+    const role = localStorage.getItem('role');
     try {
         if (!['Admin', 'User'].includes(role)) {
             throw new Error('Unauthorized: Access is restricted to Admins and Users.');

@@ -19,7 +19,9 @@ const CustomerManagement = () => {
             const data = searchQuery
                 ? await searchCustomers(searchQuery)
                 : await getAllCustomers();
-            setCustomers(data);
+            // Extract array from `$values` property
+            const customerList = data?.$values || [];
+            setCustomers(customerList);
         } catch (error) {
             console.error('Error fetching customers:', error.message);
         }
@@ -85,9 +87,9 @@ const CustomerManagement = () => {
                         {customers.map((customer) => (
                             <tr key={customer.customerId}>
                                 <td>{customer.customerId}</td>
-                                <td>{customer.name}</td>
-                                <td>{customer.email}</td>
-                                <td>{customer.phone}</td>
+                                <td>{`${customer.firstName} ${customer.lastName}`}</td>
+                                <td>{customer.accountId.email || 'N/A'}</td>
+                                <td>{customer.phoneNumber || 'N/A'}</td>
                                 <td>
                                     <button onClick={() => setEditingCustomer(customer)}>
                                         Edit
