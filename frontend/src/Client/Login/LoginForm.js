@@ -109,7 +109,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="body-login">
       <Header />
       <div className="form-container-login">
         {/* <img
