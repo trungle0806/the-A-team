@@ -11,15 +11,17 @@
   padding: 30px 48px;
   position: fixed;
   z-index: 100;
+  background-color: transparent; /* Nền trong suốt */
   transition: background-color 0.3s ease, padding 0.3s ease;
 }
+
 .cart {
   color: #49516f;
 }
 
 /* Khi header cuộn */
 .header-container.scrolled {
-  background-color: rgba(255, 255, 255, 0.95); /* Nền trắng nhạt */
+  background-color: rgba(255, 255, 255, 0.95); /* Nền trắng nhạt khi cuộn */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px 48px;
   color: #000; /* Đổi thành màu đen */
@@ -80,9 +82,11 @@
   padding: 10px;
   transition: color 0.3s ease;
 }
+
 .cart-link {
   color: white;
 }
+
 .navbar-header-link a:hover {
   color: #49516f;
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import LoginWithGoogle from "./LoginWithGoogle/LoginWithGoogle";
+import Header from "../../Components/Header/Header";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -108,60 +109,63 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="form-container-login">
-      <img
+    <div>
+      <Header />
+      <div className="form-container-login">
+        {/* <img
         src="https://d20umu42aunjpx.cloudfront.net/_gfx_/main/CN_Logo_New2022.png"
         className="form-img"
         alt="Logo"
       />
       <h1 className="form-h1">Welcome</h1>
-      <p className="form-p1">Login in to Charity Navigator to continue.</p>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form-group-login">
-          <label htmlFor="emailOrUsername" className="conten-login">
-            Email or Username
-          </label>
-          <input
-            type="text"
-            id="emailOrUsername"
-            value={emailOrUsername}
-            onChange={(e) => setEmailOrUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-login">
-          <label htmlFor="password" className="conten-login">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p className="error-message">{error}</p>}
-        <Link to="/forgot-password" className="login-link1">
-          Forgot Password?
-        </Link>
-        <button type="submit" className="btn-submit-login" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
-      <div className="additional-links-login">
-        <p className="login-link1-p">
-          Don't have an account?
-          <Link to="/register" className="login-link2">
-            {" "}
-            Register here.
+      <p className="form-p1">Login in to Charity Navigator to continue.</p> */}
+        <form onSubmit={handleSubmit} className="form">
+          <div className="form-group-login">
+            <label htmlFor="emailOrUsername" className="conten-login">
+              Email or Username
+            </label>
+            <input
+              type="text"
+              id="emailOrUsername"
+              value={emailOrUsername}
+              onChange={(e) => setEmailOrUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group-login">
+            <label htmlFor="password" className="conten-login">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          {error && <p className="error-message">{error}</p>}
+          <Link to="/forgot-password" className="login-link1">
+            Forgot Password?
           </Link>
-        </p>
-        <Link to="/" className="login-link3">
-          Back to Home
-        </Link>
+          <button type="submit" className="btn-submit-login" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+        <div className="additional-links-login">
+          <p className="login-link1-p">
+            Don't have an account?
+            <Link to="/register" className="login-link2">
+              {" "}
+              Register here.
+            </Link>
+          </p>
+          <Link to="/" className="login-link3">
+            Back to Home
+          </Link>
+        </div>
+        <LoginWithGoogle onLoginSuccess={handleGoogleLoginSuccess} />
       </div>
-      <LoginWithGoogle onLoginSuccess={handleGoogleLoginSuccess} />
     </div>
   );
 };

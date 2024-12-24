@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./RegisterForm.css"; // Nếu cần tùy chỉnh CSS cho form
+import Header from "../../Components/Header/Header";
 import { Link, useNavigate } from "react-router-dom"; // Để chuyển hướng sau khi đăng ký thành công
 
 const RegisterForm = () => {
@@ -106,104 +107,104 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="form-container-register">
-      <img
+    <div>
+      <Header />
+      <div className="form-container-register">
+        {/* <img
         src="https://d20umu42aunjpx.cloudfront.net/_gfx_/main/CN_Logo_New2022.png"
         className="register-img"
       />
       <h2 className="register-h2">Welcome</h2>
       <p className="register-p">
         Register in to Charity Navigator to continue.
-      </p>
+      </p> */}
 
-      {error && <div className="error-message">{error}</div>}
-      {success && <div className="success-message">{success}</div>}
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form-group-register">
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-register">
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-register">
-          <label htmlFor="dateOfBirth">Date of Birth</label>
-          <input
-            type="date"
-            id="dateOfBirth"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-register">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-register">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-register">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-register">
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn-submit-register">
-          Register
-        </button>
-      </form>
+        {error && <div className="error-message">{error}</div>}
+        {success && <div className="success-message">{success}</div>}
+        <form onSubmit={handleSubmit} className="form-register">
+          <div className="form-group-register1">
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group-register1">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group-register2">
+            <label htmlFor="dateOfBirth">Date of Birth</label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group-register2">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group-register3">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group-register3">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group-register4">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="btn-submit-register">
+            Register
+          </button>
+        </form>
 
-      <div className="additional-links">
-        <div className="conten-register">
-          Already have an account?{" "}
-          <Link to="/login" className="login-link-register">
-            Login
-          </Link>
+        <div className="additional-links">
+          <div className="conten-register">
+            Already have an account?{" "}
+            <Link to="/login" className="login-link-register">
+              Login
+            </Link>
+          </div>
         </div>
-        <Link to="/" className="home-link-register">
-          Back to Home
-        </Link>
       </div>
     </div>
   );

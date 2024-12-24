@@ -4,9 +4,6 @@
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .register-h2 {
@@ -26,31 +23,107 @@
   margin-top: 25px;
   margin-left: 34px;
 }
-
-.form {
+.form-register {
   display: flex;
   flex-direction: column;
+  margin-top: 100px;
 }
 
-.form-group-register {
-  margin-bottom: 15px;
+.form-group-register1 {
+  margin-bottom: -85px;
+  margin-left: -440px;
+  margin-right: 594px;
+  margin-top: 99px;
 }
 
-.form-group-register label {
+.form-group-register1 label {
   font-size: 13px;
-  color: #333;
+  color: white;
 }
 
-.form-group-register input {
+.form-group-register1 input {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
   width: 95%;
   margin-top: 10px;
 }
 
-.form-group-register input:focus {
+.form-group-register1 input:focus {
+  outline: none;
+  border-color: #49516f;
+}
+.form-group-register2 {
+  margin-bottom: 73px;
+  margin-left: -113px;
+  margin-right: 260px;
+  margin-top: -64px;
+}
+
+.form-group-register2 label {
+  font-size: 13px;
+  color: white;
+}
+
+.form-group-register2 input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  width: 95%;
+  margin-top: 10px;
+}
+
+.form-group-register2 input:focus {
+  outline: none;
+  border-color: #49516f;
+}
+.form-group-register3 {
+  margin-bottom: 234px;
+  margin-left: 216px;
+  margin-right: -58px;
+  /* padding-left: 100px; */
+  margin-top: -220px;
+}
+
+.form-group-register3 label {
+  font-size: 13px;
+  color: white;
+}
+
+.form-group-register3 input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  width: 95%;
+  margin-top: 10px;
+}
+
+.form-group-register3 input:focus {
+  outline: none;
+  border-color: #49516f;
+}
+.form-group-register4 {
+  margin-bottom: 234px;
+  margin-left: 561px;
+  margin-right: -362px;
+  /* padding-left: 100px; */
+  margin-top: -385px;
+}
+
+.form-group-register4 label {
+  font-size: 13px;
+  color: white;
+}
+
+.form-group-register4 input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  width: 95%;
+  margin-top: 10px;
+}
+
+.form-group-register4 input:focus {
   outline: none;
   border-color: #49516f;
 }
@@ -60,10 +133,10 @@
   background-color: #49516f;
   color: white;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  margin-top: -96px;
 }
 
 .btn-submit-register:hover {
@@ -84,7 +157,7 @@
   gap: 10px;
 } */
 .conten-register {
-  color: black;
+  color: white;
   font-weight: 500;
 }
 .additional-links {

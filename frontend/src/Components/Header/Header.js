@@ -68,12 +68,14 @@ export const Header = () => {
   };
 
   const isHomePage = location.pathname === "/";
+  const isLoginPage = location.pathname === "/login"; // Kiểm tra nếu đang ở trang login
+  const isRegisterPage = location.pathname === "/register"; // Kiểm tra nếu đang ở trang register
 
   return (
     <div
       className={`header-container ${isScrolled ? "scrolled" : ""} ${
-        !isHomePage ? "other-page" : ""
-      }`}
+        !isHomePage && !isLoginPage && !isRegisterPage ? "other-page" : ""
+      } ${isLoginPage || isRegisterPage ? "transparent" : ""}`} // Thêm điều kiện cho trang đăng ký
     >
       {/* Logo */}
       <div className="logo-search-container">
