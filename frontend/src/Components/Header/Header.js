@@ -109,6 +109,11 @@ export const Header = () => {
             News
           </Link>
         </div>
+        <div>
+          <Link className="navbar-link" to="/program">
+            Program
+          </Link>
+        </div>
       </div>
 
       {/* Auth and Cart */}

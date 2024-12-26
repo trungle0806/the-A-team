@@ -25,6 +25,7 @@ import Query from "../src/Admin/Query/Query";
 import TransactionHistory from "../src/Admin/TransactionHistory/TransactionHistory";
 import ForgotPassword from "./Client/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
+import ProgramList from "./Client/ProgramList/ProgramList";
 import "./App.css"; // Avoid duplicate import
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/news" element={<News />} />
+          <Route path="/program" element={<ProgramList />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/cart" element={<CartForm />} />

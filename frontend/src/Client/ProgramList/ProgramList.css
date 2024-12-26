@@ -1,0 +1,19 @@
+.program-list {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .program-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .program-item h2 {
+    margin: 0 0 10px;
+  }
+  
+  .program-item p {
+    margin: 5px 0;
+  }
+  
