@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   getAllNGOs,
   addNGO,
   updateNGO,
   deleteNGO,
-} from '../ServiceAdmin/NgosService';
-import './Ngos.css';
+} from "../ServiceAdmin/NgosService";
+import { useNavigate } from "react-router-dom";
+import "./Ngos.css";
 
 const AdminNGOManagement = () => {
   const [ngos, setNgos] = useState([]);
   const [selectedNGO, setSelectedNGO] = useState(null);
-  const [formData, setFormData] = useState({ name: '', description: '' });
+  const [formData, setFormData] = useState({ name: "", description: "" });
+  const [searchTerm, setSearchTerm] = useState(""); // Thêm state cho tìm kiếm
+  const [isAddFormVisible, setIsAddFormVisible] = useState(false); // Điều khiển hiển thị form thêm NGO
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchNGOs();
@@ -22,7 +26,7 @@ const AdminNGOManagement = () => {
       const NGOList = data?.$values || [];
       setNgos(NGOList);
     } catch (error) {
-      console.error('Failed to fetch NGOs:', error.message);
+      console.error("Failed to fetch NGOs:", error.message);
     }
   };
 
@@ -31,16 +35,17 @@ const AdminNGOManagement = () => {
     try {
       if (selectedNGO) {
         await updateNGO(selectedNGO.id, formData);
-        alert('NGO updated successfully');
+        alert("NGO updated successfully");
       } else {
         await addNGO(formData);
-        alert('NGO added successfully');
+        alert("NGO added successfully");
       }
       fetchNGOs();
-      setFormData({ name: '', description: '' });
+      setFormData({ name: "", description: "" });
       setSelectedNGO(null);
+      setIsAddFormVisible(false); // Ẩn form sau khi thêm tổ chức
     } catch (error) {
-      console.error('Failed to add/update NGO:', error.message);
+      console.error("Failed to add/update NGO:", error.message);
     }
   };
 
@@ -50,43 +55,80 @@ const AdminNGOManagement = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this NGO?')) return;
+    if (!window.confirm("Are you sure you want to delete this NGO?")) return;
 
     try {
       await deleteNGO(id);
-      alert('NGO deleted successfully');
+      alert("NGO deleted successfully");
       fetchNGOs();
     } catch (error) {
-      console.error('Failed to delete NGO:', error.message);
+      console.error("Failed to delete NGO:", error.message);
     }
   };
+
+  const viewDetails = (id) => {
+    navigate(`/ngo-details/${id}`);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Lọc danh sách NGO dựa trên tìm kiếm
+  const filteredNgos = ngos.filter((ngo) =>
+    ngo.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="admin-ngo-management">
       <h1>Admin NGO Management</h1>
-
-      <form onSubmit={handleAddOrUpdateNGO} className="ngo-form">
+      <div className="search-icon1">
+        {/* Tìm kiếm NGO */}
         <input
           type="text"
-          placeholder="NGO Name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          required
+          className="search-bar"
+          placeholder="Search by name"
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
-        <textarea
-          placeholder="NGO Description"
-          value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          required
-        ></textarea>
-        <button type="submit">{selectedNGO ? 'Update NGO' : 'Add NGO'}</button>
-        {selectedNGO && (
-          <button type="button" onClick={() => setSelectedNGO(null)}>
+
+        {/* Icon để hiển thị form thêm tổ chức */}
+        <button
+          onClick={() => setIsAddFormVisible(true)}
+          className="icon-btn-add"
+        >
+          <i className="fas fa-user-plus"></i> {/* Icon người và dấu cộng */}
+        </button>
+      </div>
+
+      {/* Form thêm tổ chức, ẩn/hiện khi nhấn vào icon */}
+      {isAddFormVisible && (
+        <form onSubmit={handleAddOrUpdateNGO} className="ngo-form">
+          <input
+            type="text"
+            placeholder="NGO Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+          />
+          <textarea
+            placeholder="NGO Description"
+            value={formData.description}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
+            required
+          ></textarea>
+          <button type="submit">
+            {selectedNGO ? "Update NGO" : "Add NGO"}
+          </button>
+          <button type="button" onClick={() => setIsAddFormVisible(false)}>
             Cancel
           </button>
-        )}
-      </form>
+        </form>
+      )}
 
+      {/* Bảng hiển thị NGO */}
       <table className="ngo-table">
         <thead>
           <tr>
@@ -95,36 +137,41 @@ const AdminNGOManagement = () => {
             <th>Description</th>
             <th>Code</th>
             <th>Logo</th>
-            <th>Mission</th>
-            <th>Team</th>
-            <th>Careers</th>
             <th>Achievements</th>
-            <th>Approved</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {ngos.map((ngo) => (
+          {filteredNgos.map((ngo) => (
             <tr key={ngo.id}>
               <td>{ngo.id}</td>
-              <td>{ngo.name}</td>
-              <td>{ngo.description}</td>
-              <td>{ngo.code}</td>
+              <td className="ngo-name">{ngo.name}</td>
+              <td className="ngo-description">{ngo.description}</td>
+              <td className="ngo-code">{ngo.code}</td>
               <td>
                 <img
-                    src={ngo.logoUrl}
-                    alt={ngo.name}
-                    style={{ width: '50px', height: '50px' }}
+                  src={ngo.logoUrl}
+                  alt={ngo.name}
+                  style={{ width: "50px", height: "50px" }}
                 />
               </td>
-              <td>{ngo.mission}</td>
-              <td>{ngo.team}</td>
-              <td>{ngo.careers}</td>
-              <td>{ngo.achievements}</td>
-              <td>{ngo.isApproved ? 'Yes' : 'No'}</td>
-              <td>
-                <button onClick={() => handleEdit(ngo)}>Edit</button>
-                <button onClick={() => handleDelete(ngo.id)}>Delete</button>
+              <td className="ngo-achievements">{ngo.achievements}</td>
+              <td className="ngo-icon">
+                <button onClick={() => handleEdit(ngo)} className="icon-btn1">
+                  <i className="fas fa-edit"></i>
+                </button>
+                <button
+                  onClick={() => handleDelete(ngo.id)}
+                  className="icon-btn2"
+                >
+                  <i className="fas fa-trash-alt"></i>
+                </button>
+                <button
+                  onClick={() => viewDetails(ngo.id)}
+                  className="icon-btn3"
+                >
+                  <i className="fas fa-eye"></i>
+                </button>
               </td>
             </tr>
           ))}

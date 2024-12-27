@@ -26,6 +26,7 @@ import TransactionHistory from "../src/Admin/TransactionHistory/TransactionHisto
 import ForgotPassword from "./Client/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
 import ProgramList from "./Client/ProgramList/ProgramList";
+import NGODetails from "../src/Admin/NGOs/NGODetails/NGODetails";
 import "./App.css"; // Avoid duplicate import
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
             <Route path="galleryimage" element={<GalleryImage />} />
             <Route path="inviation" element={<Inviation />} />
             <Route path="ngo" element={<Ngo />} />
+            <Route path="ngo-details/:id" element={<NGODetails />} />
             <Route path="partner" element={<Partner />} />
             <Route path="program1" element={<Program1 />} />
             <Route path="programDonation" element={<ProgramDonation />} />

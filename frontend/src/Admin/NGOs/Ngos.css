@@ -6,6 +6,45 @@
   padding: 0;
   color: #333;
 } */
+/* CSS cho ô tìm kiếm */
+.search-bar {
+  padding: 10px;
+  font-size: 1rem;
+  width: 300px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* CSS cho icon thêm tổ chức */
+.icon-btn-add {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px; /* Đặt kích thước cho icon */
+
+  padding: 12px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.search-icon1 {
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn-add i {
+  color: black; /* Màu sắc cho icon */
+}
+
+/* Nếu muốn thêm kiểu CSS cho vòng tròn bao quanh icon */
+.icon-btn-add:hover {
+  color: #333;
+}
+
+.icon-btn-add i {
+  font-size: 20px; /* Điều chỉnh kích thước icon */
+}
 
 .admin-ngo-management {
   max-width: 1200px;
@@ -77,18 +116,35 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .ngo-table th,
 .ngo-table td {
-  padding: 0.8rem;
+  padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+}
+.ngo-name {
+  font-size: 0.9rem;
+  /* line-height: 1; */
+  font-weight: 500;
+}
+.ngo-description {
+  font-size: 0.9rem;
+}
+.ngo-code {
+  font-size: 0.9rem;
+  color: #007bff;
+  cursor: pointer;
+}
+.ngo-achievements {
+  font-size: 0.9rem;
 }
 
 .ngo-table th {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #f5f6fa;
+  color: #000;
   font-weight: bold;
 }
 
@@ -109,9 +165,11 @@
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 100px;
+  gap: 10px;
 }
 
-.ngo-table button:nth-child(1) {
+/* .ngo-table button:nth-child(1) {
   background-color: #007bff;
   color: #fff;
 }
@@ -127,6 +185,59 @@
 
 .ngo-table button:nth-child(2):hover {
   background-color: #a71d2a;
+} */
+.ngo-icon {
+  display: flex;
+  gap: 10px; /* Tăng khoảng cách giữa các icon */
+  justify-content: center; /* Căn giữa các icon */
+}
+
+.icon-btn1,
+.icon-btn2,
+.icon-btn3 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px; /* Tăng padding để biểu tượng không bị quá sát */
+  border-radius: 50%;
+  transition: all 0.3s ease; /* Thêm hiệu ứng khi hover */
+}
+
+.icon-btn1 {
+  background-color: #d1e9d9;
+}
+
+.icon-btn2 {
+  background-color: #ecbfab;
+}
+
+.icon-btn3 {
+  background-color: #b3c3ef;
+}
+
+.icon-btn:hover {
+  transform: scale(1.1); /* Phóng to icon khi hover */
+}
+
+.icon-btn1 i,
+.icon-btn2 i,
+.icon-btn3 i {
+  font-size: 13px; /* Kích thước nhỏ hơn */
+  font-weight: lighter; /* Làm mỏng icon */
+  opacity: 0.8; /* Tạo cảm giác nhẹ nhàng hơn */
+}
+
+.fa-edit {
+  color: #45b369;
+}
+
+.fa-trash-alt {
+  color: #ef4a00;
+}
+
+.fa-eye {
+  color: #487fff;
 }
 
 /* Responsive Design */

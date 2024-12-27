@@ -16,7 +16,7 @@
   padding: 20px;
 }
 
-.admin-content{
+.admin-content {
   height: 100%;
 }
 
@@ -40,7 +40,7 @@
 
 .admin-nav ul {
   margin-top: 0;
-  list-style-type: none;  /* Loại bỏ dấu chấm */
+  list-style-type: none; /* Loại bỏ dấu chấm */
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,6 @@
   margin: 5px 0;
   height: 50px;
 }
-
 
 .admin-nav a {
   font-size: 1.5rem;
@@ -73,7 +72,7 @@
 .admin-main {
   flex: 1;
   padding: 20px;
-  background-color: #ecf0f1;
+  background-color: white;
   overflow-y: auto;
 }
 
@@ -96,7 +95,7 @@
 }
 
 /* Mobile nav*/
-.logo1{
+.logo1 {
   text-align: center;
   display: none;
 }
@@ -108,14 +107,14 @@
   display: none;
 }
 
-.admin-icon1{
+.admin-icon1 {
   border: none;
   color: #7c9095;
   font-size: 1.5rem;
   display: none;
 }
 
-.admin-icon:hover{
+.admin-icon:hover {
   cursor: pointer;
 }
 
@@ -130,7 +129,7 @@
   cursor: pointer;
 }
 
-.admin-overlay1{
+.admin-overlay1 {
   position: fixed;
   top: 0;
   left: 0;
@@ -141,7 +140,7 @@
   cursor: pointer;
 }
 
-.admin-into{
+.admin-into {
   text-align: center;
   padding-top: 10px;
 }
@@ -162,7 +161,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.admin-mobile1{
+.admin-mobile1 {
   position: fixed;
   top: 0;
   left: 0;
@@ -186,7 +185,6 @@
   padding-left: 0;
 }
 
-
 .admin-mobile-list {
   text-decoration: none;
   text-align: center;
@@ -205,7 +203,7 @@
   right: 1rem;
 }
 
-.admin-mobile-close:hover{
+.admin-mobile-close:hover {
   cursor: pointer;
 }
 
@@ -221,7 +219,7 @@
   border-bottom: 1px solid #ddd;
 }
 
-.admin-isolate{
+.admin-isolate {
   margin-right: 56%;
 }
 
@@ -267,7 +265,6 @@
 
 /* Icon Gmail và Thông báo */
 .icon {
-
   font-size: 1.5rem;
   cursor: pointer;
   color: #555;
@@ -304,7 +301,6 @@
   font-weight: bold;
 }
 
-
 @media (max-width: 1023px) {
   .admin-icon {
     display: block;
@@ -317,42 +313,40 @@
   .admin-sidebar {
     display: none;
   }
-  .adimn-a{
-
+  .adimn-a {
   }
-  .logo1{
+  .logo1 {
     margin-bottom: 0;
     margin-top: 0;
     display: block;
   }
-  .admin-vs{
+  .admin-vs {
     display: none;
   }
-  .admin-inhud{
+  .admin-inhud {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 15px;
   }
-  .admin-mobile1{
+  .admin-mobile1 {
     display: block;
   }
-  .admin-isolate{
+  .admin-isolate {
     margin-right: 0;
   }
-  .icon{
+  .icon {
     color: #fff;
   }
-  .user-name{
+  .user-name {
     color: #fff;
   }
 
-  .user-info{
+  .user-info {
     padding-top: 20px;
   }
 
-  .notification-icon{
+  .notification-icon {
     padding-top: 20px;
   }
 }
-
