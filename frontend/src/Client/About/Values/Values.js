@@ -24,7 +24,7 @@ const Values = () => {
                                             <p className='values-sky'>Get in touch with our team to answer questions, explore partnerships, or fund our work.</p>
                                         </div>
                                         <div className='values-bottom'>
-                                            <a className='values-repo' href=''>
+                                            <a className='values-repo' href='http://localhost:3001/contact'>
                                                 <span className='values-span'>Get in touch</span>
                                             </a>
                                         </div>

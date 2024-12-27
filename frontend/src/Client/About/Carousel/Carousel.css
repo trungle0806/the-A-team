@@ -95,7 +95,7 @@
     font-weight: bold;
 }
 
-iframe {
+.iframe1 {
     width: 100%;
     height: calc(100% - 40px);
     border-radius: 10px;
