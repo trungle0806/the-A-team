@@ -28,13 +28,13 @@
 }
 
 .header-container.scrolled .navbar-header-link a,
-.header-container.scrolled .cart-icon,
+.header-container.scrolled .favorites-icon,
 .header-container.scrolled .user-icon-style {
   color: #000; /* Màu đen cho các liên kết và icon */
 }
 
 .header-container.scrolled .navbar-header-link a:hover,
-.header-container.scrolled .cart-icon:hover,
+.header-container.scrolled .favorites-icon :hover,
 .header-container.scrolled .user-icon-style:hover {
   color: #49516f; /* Màu vàng khi hover */
 }
@@ -51,13 +51,13 @@
 }
 
 .header-container.other-page .navbar-header-link a,
-.header-container.other-page .cart-icon,
+.header-container.other-page .favorites-icon,
 .header-container.other-page .user-icon-style {
   color: black; /* Màu đen cho các liên kết và icon */
 }
 
 .header-container.other-page .navbar-header-link a:hover,
-.header-container.other-page .cart-icon:hover,
+.header-container.other-page .favorites-icon :hover,
 .header-container.other-page .user-icon-style:hover {
   color: #49516f; /* Màu vàng khi hover */
 }
@@ -146,14 +146,14 @@
 }
 
 /* Cart and user icons */
-.cart-icon,
+.favorites-icon,
 .user-icon-style {
   color: inherit; /* Kế thừa màu từ header-container */
   font-size: 20px;
   transition: color 0.3s ease;
 }
 
-.cart-icon:hover {
+.favorites-icon:hover {
   color: #49516f;
 }
 
@@ -197,4 +197,28 @@
 /* Khi header cuộn, thay đổi màu của logo đăng xuất thành màu đen */
 .header-container.scrolled .logout-icon-style {
   color: black; /* Thay đổi màu của icon đăng xuất thành đen khi cuộn */
+}
+.favorites {
+  display: flex;
+  align-items: center;
+  margin-right: 2px; /* Adjust spacing to the right */
+}
+
+.favorites-link {
+  text-decoration: none; /* Remove underline from the link */
+  color: inherit; /* Inherit text color from parent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth animation for hover */
+}
+
+.favorites-icon {
+  font-size: 24px; /* Adjust icon size */
+  color: white; /* Default heart icon color */
+}
+
+.favorites-link:hover .favorites-icon {
+  color: #49516f; /* Bright red on hover */
+  /* transform: scale(1.2); */
 }

@@ -1,101 +1,116 @@
-import React, { useState } from "react"; // Đảm bảo import useState từ React
+import React from "react";
+import "./Contact.css";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
-import "./Contact.css";
+import { FaMapLocationDot } from "react-icons/fa6";
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const Contact = () => {
-  // Khai báo state cho form data
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  // Hàm xử lý sự kiện thay đổi giá trị input
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  // Hàm xử lý khi form được gửi
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Xử lý gửi form (ví dụ: gọi API gửi email hoặc lưu vào cơ sở dữ liệu)
-    console.log("Form Data:", formData);
-  };
-
   return (
     <div>
       <Header />
-      {/* Section for the image and the contact text */}
-      <div className="contact-banner">
-        <h1 className="contact-title">Contact Us</h1>
-      </div>
-
-      <div className="contact-container">
-        <div className="contact-line">
-          <section className="contact-info">
-            <div className="contact-details">
-              <h2>Our Contact Information</h2>
-              <p>Address: 123 Main Street, City, Country</p>
-              <p>Email: contact@company.com</p>
-              <p>Phone: +123 456 7890</p>
-            </div>
-          </section>
-
-          <section className="contact-form">
-            <h2>Send Us a Message</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
+      <div className="contact-section">
+        <div className="contact-container">
+          {/* Form liên hệ */}
+          <div className="contact-form-section">
+            <h3 className="contact-title">Contact Us</h3>
+            <form className="contact-form">
+              <div className="contact-name">
+                {/* Name */}
+                <div className="contact-field">
+                  <label htmlFor="fullName" className="contact-label">
+                    FULL NAME
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="Name"
+                    className="contact-input"
+                  />
+                </div>
+                {/* Email */}
+                <div className="contact-field">
+                  <label htmlFor="email" className="contact-label">
+                    EMAIL ADDRESS
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    className="contact-input"
+                  />
+                </div>
+              </div>
+              {/* Subject */}
+              <div className="contact-field">
+                <label htmlFor="subject" className="contact-label">
+                  SUBJECT
+                </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
+                  id="subject"
+                  name="subject"
+                  placeholder="Subject"
+                  className="contact-input"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
+              {/* Message */}
+              <div className="contact-field">
+                <label htmlFor="message" className="contact-label">
+                  MESSAGE
+                </label>
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
+                  placeholder="Message"
+                  className="contact-textarea"
+                ></textarea>
               </div>
-              <button className="btn-submit" type="submit">
+              {/* Submit Button */}
+              <button type="submit" className="contact-submit">
                 Send Message
               </button>
             </form>
-          </section>
+          </div>
+
+          {/* Phần bản đồ */}
+          <div className="contact-info-section">
+            <div className="contact-map-error">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.09648430204!2d105.77971641151625!3d21.028825087694138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4cd376479b%3A0xbc2e0bb9db373ed2!2zOGEgVMO0biBUaOG6pXQgVGh1eeG6v3QsIE3hu7kgxJDDrG5oLCBD4bqndSBHaeG6pXksIEjDoCBO4buZaSAxMDAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1735056169933!5m2!1svi!2s"
+                allowFullScreen=""
+                loading="lazy"
+                title="Google Map"
+              ></iframe>
+            </div>
+          </div>
         </div>
-        <div className="contact-map">
-          <iframe
-            width="800"
-            height="500"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.09726409829!2d105.78011607503147!3d21.02879388062048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4cd0c66f05%3A0xea31563511af2e54!2zOCBUw7RuIFRo4bqldCBUaHV54bq_dCwgTeG7uSDEkMOsbmgsIEPhuqd1IEdp4bqleSwgSMOgIE7hu5lpLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1732174599749!5m2!1sen!2s"
-          ></iframe>
+
+        <div className="contact-footer">
+          <div>
+            <FaMapLocationDot className="contact-map" />
+
+            <p>Address:</p>
+            <span>8a tôn thất thuyết</span>
+          </div>
+          <div>
+            <FaPhoneAlt className="contact-phone" />
+
+            <p>Phone:</p>
+            <span>+1235 2355 98</span>
+          </div>
+          <div>
+            <MdEmail className="contact-email" />
+
+            <p>Email:</p>
+            <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

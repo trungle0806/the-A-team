@@ -1,84 +1,197 @@
-.contact-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Toàn bộ giao diện */
+body {
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa; /* Màu nền */
 }
 
-.contact-banner {
-  width: 100vw;
-  position: relative;
-  background-image: url("https://images.viblo.asia/86be5bf5-7905-4255-b54d-3aaf806cd0a8.png"); /* Thay đổi đường dẫn ảnh */
-  background-size: cover;
-  background-position: center;
-  height: 300px;
+.contact-section {
+  position: absolute;
+  top: 90px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.contact-container {
   display: flex;
+  max-width: 1161px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 563px;
+}
+
+/* Form liên hệ */
+.contact-form-section {
+  background: #e8edf0;
+  flex: 1.5;
+  border-right: 1px solid #eeeeee;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-bottom: 40px;
 }
 
 .contact-title {
-  position: absolute;
-  color: #fff;
-  font-size: 48px;
+  margin-left: 70px;
+  font-size: 24px;
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Tạo bóng cho chữ */
+  margin-bottom: 20px;
+  color: #333333;
+  text-align: left;
 }
 
-.contact-info,
 .contact-form {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-left: 70px;
+  margin-right: 105px;
 }
 
-.contact-details {
-  padding-top: 25px;
+/* Chỉnh sửa phần Name và Email */
+.contact-name {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Chỉnh sửa label và input */
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+}
+
+.contact-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333333;
+}
+
+.contact-input,
+.contact-textarea {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #dcdcdc;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  /* border-radius: 4px; */
+}
+
+.contact-textarea {
+  height: 145px;
+  resize: none;
+}
+
+.contact-submit {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 28%;
+  transition: background-color 0.3s;
+}
+
+.contact-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Phần bản đồ */
+.contact-info-section {
+  flex: 1;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-map-error {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.contact-map-error iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Footer thông tin liên hệ */
+.contact-footer {
+  /* padding-bottom: 46px; */
+  height: 111px;
+  padding-bottom: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-right: -15px; */
+  /* margin-left: -15px; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* background-color: #f8f9fa; */
+  padding: 20px 40px;
+  font-size: 14px;
+  color: #666;
+}
+
+.contact-footer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.contact-details h2 {
-  font-size: 24px;
-  color: #333;
-}
-
-.contact-details p {
-  font-size: 16px;
-  color: #555;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 16px;
-  color: #333;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 10px;
+.contact-footer a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
   margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
-.contact-btn-submit {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.contact-footer a:hover {
+  text-decoration: underline;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
 .contact-map {
-  padding-left: 250px;
+  font-size: 35px;
+}
+.contact-phone {
+  font-size: 30px;
+}
+.contact-email {
+  font-size: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .contact-form-section {
+    border-right: none;
+    border-bottom: 1px solid #eeeeee;
+    padding: 20px;
+  }
+
+  .contact-info-section {
+    height: 300px;
+  }
+
+  .contact-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

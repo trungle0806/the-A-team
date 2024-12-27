@@ -57,8 +57,8 @@ const Profile = () => {
       <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />
 
       {/* Render tabs based on activeTab */}
-      {activeTab === "info" && <ProfileInfo userData={userData} />}
-      {activeTab === "edit" && <EditProfile userData={userData} />}
+      {activeTab === "info" && userData && <ProfileInfo userData={userData} />}
+      {activeTab === "edit" && userData && <EditProfile userData={userData} />}
 
       {/* Show donation history or message only on the donations tab */}
       {activeTab === "donations" && (

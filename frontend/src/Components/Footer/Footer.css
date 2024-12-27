@@ -12,11 +12,13 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between; 
+  justify-content: space-between; /* Chia 2 bên */
   flex-wrap: wrap;
-  gap: 30px; */
+  gap: 30px;
 }
 
-.footer-left, .footer-right {
+.footer-left,
+.footer-right {
   flex: 1; /* Chia đều 50% */
   min-width: 300px; /* Đảm bảo kích thước tối thiểu */
   text-align: left;
@@ -30,7 +32,7 @@
 
 .footer-logo {
   width: 20rem;
-  padding-top:5px;
+  padding-top: 5px;
   margin-bottom: 20px;
 }
 
@@ -140,26 +142,27 @@
 } */
 .footer-certifications {
   width: 406px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  align-items: center;
 }
 
 .certification-badge {
   /* width: 115px;  */
   /* width: 23.6%; */
   width: 31.6%;
-  height: 130px; 
+  height: 130px;
+  width: 115px;
+  height: auto;
 }
-.certification-badge1{
-   margin-right: 77px;
-    width: 23.6%;
-    height: 100px;
-
+.certification-badge1 {
+  margin-right: 77px;
+  width: 23.6%;
+  height: 100px;
 }
-.footer-container-inner{
+.footer-container-inner {
   display: flex;
   margin-left: 150px;
   margin-right: 150px;

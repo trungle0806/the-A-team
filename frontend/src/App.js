@@ -6,7 +6,7 @@ import Contact from "./Client/Contact/Contact";
 import News from "./Client/News/News";
 import LoginForm from "./Client/Login/LoginForm";
 import RegisterForm from "./Client/Register/RegisterForm";
-import CartForm from "./Client/Cart/CartForm";
+import Favorites from "./Client/Favorites/Favorites";
 import ForgotAndResetPassword from "./Client/ForgotPassword/ForgotPassword";
 import Authentication from "./Admin/Authentication/Authentication";
 import AuthContext, { AuthProvider } from "./Context/AuthContext"; // Import AuthProvider
@@ -44,7 +44,7 @@ function App() {
           <Route path="/program" element={<ProgramList />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
-          <Route path="/cart" element={<CartForm />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<Profile />} />
 

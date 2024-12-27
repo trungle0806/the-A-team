@@ -25,10 +25,10 @@ const CustomerService = {
     try {
       const response = await axios.get(`${API_BASE_URL}/${id}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Thêm token xác thực nếu cần
         },
       });
-      return response.data; // Dữ liệu khách hàng
+      return response.data;
     } catch (error) {
       console.error(`Error fetching customer with ID ${id}:`, error);
       throw error;

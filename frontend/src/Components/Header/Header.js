@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faShoppingCart,
+  faHeart,
   faUser,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -116,12 +116,12 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Auth and Cart */}
+      {/* Auth and Favorites */}
       <div className="navbar-header-container3">
-        {/* Cart Icon */}
-        <div className="cart">
-          <Link className="cart-link" to="/cart">
-            <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+        {/* Favorites Icon */}
+        <div className="favorites">
+          <Link className="favorites-link" to="/favorites">
+            <FontAwesomeIcon icon={faHeart} className="favorites-icon" />
           </Link>
         </div>
 

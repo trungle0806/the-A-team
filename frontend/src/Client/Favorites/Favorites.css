@@ -1,0 +1,79 @@
+.favorites-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.favorite-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.favorite-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.org-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.org-details {
+  flex: 1;
+}
+
+.org-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #222;
+}
+
+.org-description {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.remove-btn {
+  background-color: #ff5757;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #ff1a1a;
+}
