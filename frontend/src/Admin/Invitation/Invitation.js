@@ -1,142 +1,182 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./Invitation.css";
+import React, { useState, useEffect } from 'react';
+import {
+  getInvitations,
+  addInvitation,
+  updateInvitation,
+  deleteInvitation,
+} from '../ServiceAdmin/InvitationService';
+import './Invitation.css';
 
-const API_URL = "http://localhost:5000/api/news";
+const InvitationAdmin = () => {
+  const [invitations, setInvitations] = useState([]);
+  const [currentInvitation, setCurrentInvitation] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [newInvitation, setNewInvitation] = useState({
+    title: '',
+    description: '',
+    date: '',
+    senderId: '',
+    recipientEmail: '',
+    message: '',
+    status: 'Pending',
+    sentAt: '',
+  });
+  const [error, setError] = useState(null);
 
-function News() {
-  const [newsList, setNewsList] = useState([]); // Danh sách tin tức
-  const [newsTitle, setNewsTitle] = useState("");
-  const [newsAuthor, setNewsAuthor] = useState("");
-  const [newsDate, setNewsDate] = useState("");
-  const [newsSummary, setNewsSummary] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  useEffect(() => {
+    const fetchInvitations = async () => {
+      try {
+        const data = await getInvitations(searchQuery);
+        const invitationList = data?.$values || [];
+        setInvitations(invitationList);
+      } catch (err) {
+        setError('Failed to fetch invitations.');
+      }
+    };
 
-  // Lấy danh sách tin tức từ API
-  const fetchNews = async () => {
-    setLoading(true);
+    fetchInvitations();
+  }, [searchQuery]);
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleAddInvitation = async () => {
     try {
-      const response = await axios.get(API_URL);
-      setNewsList(response.data);
+      const invitation = await addInvitation(newInvitation);
+      setInvitations([...invitations, invitation]);
+      setNewInvitation({
+        title: '',
+        description: '',
+        date: '',
+        senderId: '',
+        recipientEmail: '',
+        message: '',
+        status: 'Pending',
+        sentAt: '',
+      });
     } catch (err) {
-      setError("Failed to load news.");
-    } finally {
-      setLoading(false);
+      setError('Failed to add invitation.');
     }
   };
 
-  // Gọi API khi component được render
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
-  // Thêm tin tức mới
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const newNews = {
-      title: newsTitle,
-      author: newsAuthor,
-      date: newsDate,
-      summary: newsSummary,
-    };
-
+  const handleUpdateInvitation = async (id) => {
     try {
-      const response = await axios.post(API_URL, newNews);
-      if (response.status === 200) {
-        setMessage("News added successfully!");
-        setNewsTitle("");
-        setNewsAuthor("");
-        setNewsDate("");
-        setNewsSummary("");
-        fetchNews(); // Làm mới danh sách tin tức
-      }
-    } catch (error) {
-      setMessage("Error adding news");
+      const updatedInvitation = await updateInvitation(id, currentInvitation);
+      setInvitations(invitations.map((invitation) =>
+        invitation.InvitationId === id ? updatedInvitation : invitation
+      ));
+      setCurrentInvitation(null);
+    } catch (err) {
+      setError('Failed to update invitation.');
+    }
+  };
+
+  const handleDeleteInvitation = async (id) => {
+    try {
+      await deleteInvitation(id);
+      setInvitations(invitations.filter((invitation) => invitation.InvitationId !== id));
+    } catch (err) {
+      setError('Failed to delete invitation.');
     }
   };
 
   return (
-    <div className="news-container">
-      <header>
-        <h1>News Management</h1>
-        <p>Add and manage news articles here.</p>
-      </header>
+    <div className="invitation-admin-container">
+      <h1 className="invitation-admin-title">Invitation Management</h1>
+      {error && <p className="error-message">{error}</p>}
 
-      {/* Form thêm tin tức */}
-      <form onSubmit={handleSubmit} className="news-form">
+      <div className="search-invitations">
         <input
           type="text"
-          placeholder="News Title"
-          value={newsTitle}
-          onChange={(e) => setNewsTitle(e.target.value)}
-          required
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search invitations"
+          className="search-input"
         />
+      </div>
+
+      <div className="invitation-list">
+        {invitations.map((invitation) => (
+          <div key={invitation.InvitationId} className="invitation-card">
+            <h3 className="invitation-card-title">{invitation.title}</h3>
+            <p>{`Description: ${invitation.description}`}</p>
+            <p>{`Date: ${invitation.date}`}</p>
+            <p>{`Sender ID: ${invitation.senderId}`}</p>
+            <p>{`Recipient Email: ${invitation.recipientEmail}`}</p>
+            <p>{`Message: ${invitation.message}`}</p>
+            <p>{`Status: ${invitation.status}`}</p>
+            <p>{`Sent At: ${invitation.sentAt}`}</p>
+            <button className="edit-button" onClick={() => setCurrentInvitation(invitation)}>Edit</button>
+            <button className="delete-button" onClick={() => handleDeleteInvitation(invitation.InvitationId)}>Delete</button>
+          </div>
+        ))}
+      </div>
+
+      <div className="add-invitation-form">
+        <h2>Add New Invitation</h2>
         <input
           type="text"
-          placeholder="Author"
-          value={newsAuthor}
-          onChange={(e) => setNewsAuthor(e.target.value)}
-          required
+          placeholder="Title"
+          value={newInvitation.title}
+          onChange={(e) => setNewInvitation({ ...newInvitation, title: e.target.value })}
+        />
+        <textarea
+          placeholder="Description"
+          value={newInvitation.description}
+          onChange={(e) => setNewInvitation({ ...newInvitation, description: e.target.value })}
         />
         <input
           type="date"
-          value={newsDate}
-          onChange={(e) => setNewsDate(e.target.value)}
-          required
+          value={newInvitation.date}
+          onChange={(e) => setNewInvitation({ ...newInvitation, date: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Sender ID"
+          value={newInvitation.senderId}
+          onChange={(e) => setNewInvitation({ ...newInvitation, senderId: e.target.value })}
+        />
+        <input
+          type="email"
+          placeholder="Recipient Email"
+          value={newInvitation.recipientEmail}
+          onChange={(e) => setNewInvitation({ ...newInvitation, recipientEmail: e.target.value })}
         />
         <textarea
-          placeholder="Summary"
-          value={newsSummary}
-          onChange={(e) => setNewsSummary(e.target.value)}
-          required
+          placeholder="Message"
+          value={newInvitation.message}
+          onChange={(e) => setNewInvitation({ ...newInvitation, message: e.target.value })}
         />
-        <button type="submit">Add News</button>
-      </form>
+        <input
+          type="text"
+          placeholder="Status"
+          value={newInvitation.status}
+          onChange={(e) => setNewInvitation({ ...newInvitation, status: e.target.value })}
+        />
+        <input
+          type="datetime-local"
+          value={newInvitation.sentAt}
+          onChange={(e) => setNewInvitation({ ...newInvitation, sentAt: e.target.value })}
+        />
+        <button onClick={handleAddInvitation}>Add Invitation</button>
+      </div>
 
-      {message && <p className="message">{message}</p>}
-
-      {/* Hiển thị danh sách tin tức */}
-      {loading ? (
-        <p>Loading news...</p>
-      ) : error ? (
-        <p className="error">{error}</p>
-      ) : (
-        <div className="news-list">
-          <h2>Existing News</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Date</th>
-                <th>Summary</th>
-              </tr>
-            </thead>
-            <tbody>
-              {newsList.length > 0 ? (
-                newsList.map((news) => (
-                  <tr key={news.id}>
-                    <td>{news.title}</td>
-                    <td>{news.author}</td>
-                    <td>{new Date(news.date).toLocaleDateString()}</td>
-                    <td>{news.summary}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="4">No news found.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+      {currentInvitation && (
+        <div className="edit-invitation-form">
+          <h2>Edit Invitation</h2>
+          <input
+            type="text"
+            placeholder="Title"
+            value={currentInvitation.title}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, title: e.target.value })}
+          />
+          {/* Add similar fields for other properties */}
+          <button onClick={() => handleUpdateInvitation(currentInvitation.InvitationId)}>Update Invitation</button>
         </div>
       )}
     </div>
   );
-}
+};
 
-export default News;
-
+export default InvitationAdmin;

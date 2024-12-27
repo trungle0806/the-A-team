@@ -26,7 +26,7 @@ const List = () => {
                                 <p className='list-night'>You can use Charity Navigator to find and support thousands of charities that align with your passions and values. We use data from the IRS, partners, and the charities themselves to power our unbiased ratings so that you can give with confidence.</p>
                             </div>
                             <div className='list-phan4'>
-                                <a className='list-button'>
+                                <a className='list-button' href='http://localhost:3000/about'>
                                     <FaArrowRightLong className='list-long' />
                                     <span className='list-cmp'>Learn more about us</span>
                                 </a>

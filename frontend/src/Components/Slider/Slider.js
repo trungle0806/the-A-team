@@ -26,12 +26,6 @@ const Slider = () => {
               "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--1f13ca08-8080-4f0a-bbc8-e2cf06e045f0/hunger-services.png.webp?preferwebp=true&width=760",
           },
           {
-            title: "Hope in Every Heart, Help in Every Hand",
-            description: "Encourage the spirit of contribution from each individual to make a difference.",
-            image:
-              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--97b706a2-b2d3-4d82-97e9-c337dad377e0/homeless_giving.png.webp?preferwebp=true&width=760",
-          },
-          {
             title: "Building a Brighter Tomorrow, One Act of Kindness at a Time",
             description: "Emphasize positive change through each small action",
             image:
@@ -47,13 +41,19 @@ const Slider = () => {
             title: "Creating a World Where No One Is Left Behind",
             description: "Aiming for a mission to eliminate inequality and bring opportunities to all.",
             image:
-              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--79434f55-4f45-4108-a045-1728c7d23bba/larm-rmah-AEaTUnvneik-unsplash1.jpg.webp?preferwebp=true&width=760",
+              "https://amity.keydesign.xyz/ngo/wp-content/uploads/sites/9/2024/03/home-ngo-donation-1.jpg",
+          },
+          {
+            title: "Hope in Every Heart, Help in Every Hand",
+            description: "Encourage the spirit of contribution from each individual to make a difference.",
+            image:
+              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--ff9d8ac6-4055-413b-9856-8f44237efd59/mentoring-charities.jpg.webp?preferwebp=true&width=760",
           },
           {
             title: "Your Compassion, Their Hope",
             description: "Connect supporters with people receiving help.",
             image:
-              "https://cdn.tuoitrethudo.vn/stores/news_dataimages/2023/032023/23/10/in_article/bai-nguoi-tre-120230323105950.jpg?rt=20230323105959",
+              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--ed426efd-bbb0-44ce-b7e1-0155fbbd71c1/girl_leaf_env.png.webp?preferwebp=true&width=760",
           },
         ].map((slide, index) => (
           <li

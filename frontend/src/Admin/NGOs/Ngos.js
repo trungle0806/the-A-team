@@ -1,106 +1,137 @@
-import React from "react";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import React, { useState, useEffect } from 'react';
+import {
+  getAllNGOs,
+  addNGO,
+  updateNGO,
+  deleteNGO,
+} from '../ServiceAdmin/NgosService';
 import './Ngos.css';
 
-// Đăng ký các thành phần của Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+const AdminNGOManagement = () => {
+  const [ngos, setNgos] = useState([]);
+  const [selectedNGO, setSelectedNGO] = useState(null);
+  const [formData, setFormData] = useState({ name: '', description: '' });
 
-function Dashboard() {
-  // Dữ liệu biểu đồ
-  const barData = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        label: "Monthly Sales ($)",
-        data: [12000, 19000, 3000, 5000, 20000, 30000],
-        backgroundColor: "rgba(75, 192, 192, 0.5)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-    ],
+  useEffect(() => {
+    fetchNGOs();
+  }, []);
+
+  const fetchNGOs = async () => {
+    try {
+      const data = await getAllNGOs();
+      const NGOList = data?.$values || [];
+      setNgos(NGOList);
+    } catch (error) {
+      console.error('Failed to fetch NGOs:', error.message);
+    }
   };
 
-  // Cấu hình biểu đồ
-  const barOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Monthly Sales Overview",
-      },
-    },
+  const handleAddOrUpdateNGO = async (e) => {
+    e.preventDefault();
+    try {
+      if (selectedNGO) {
+        await updateNGO(selectedNGO.id, formData);
+        alert('NGO updated successfully');
+      } else {
+        await addNGO(formData);
+        alert('NGO added successfully');
+      }
+      fetchNGOs();
+      setFormData({ name: '', description: '' });
+      setSelectedNGO(null);
+    } catch (error) {
+      console.error('Failed to add/update NGO:', error.message);
+    }
+  };
+
+  const handleEdit = (ngo) => {
+    setSelectedNGO(ngo);
+    setFormData({ name: ngo.name, description: ngo.description });
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this NGO?')) return;
+
+    try {
+      await deleteNGO(id);
+      alert('NGO deleted successfully');
+      fetchNGOs();
+    } catch (error) {
+      console.error('Failed to delete NGO:', error.message);
+    }
   };
 
   return (
-    <div className="dashboard-container">
-      {/* Tiêu đề */}
-      <header className="dashboard-header">
-        <h1 className="dashboard-name">Admin Dashboard</h1>
-        <p>Welcome to the admin panel, where you can monitor all activities.</p>
-      </header>
+    <div className="admin-ngo-management">
+      <h1>Admin NGO Management</h1>
 
-      {/* Các thẻ thống kê */}
-      <section className="dashboard-stats">
-        <div className="stat-card">
-          <h3>Total Users</h3>
-          <p>1,254</p>
-        </div>
-        <div className="stat-card">
-          <h3>New Customers</h3>
-          <p>327</p>
-        </div>
-        <div className="stat-card">
-          <h3>Sales</h3>
-          <p>$45,632</p>
-        </div>
-        <div className="stat-card">
-          <h3>Pending Tasks</h3>
-          <p>12</p>
-        </div>
-      </section>
+      <form onSubmit={handleAddOrUpdateNGO} className="ngo-form">
+        <input
+          type="text"
+          placeholder="NGO Name"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          required
+        />
+        <textarea
+          placeholder="NGO Description"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          required
+        ></textarea>
+        <button type="submit">{selectedNGO ? 'Update NGO' : 'Add NGO'}</button>
+        {selectedNGO && (
+          <button type="button" onClick={() => setSelectedNGO(null)}>
+            Cancel
+          </button>
+        )}
+      </form>
 
-      {/* Biểu đồ và hoạt động gần đây */}
-      <section className="dashboard-content">
-        <div className="dashboard-chart">
-          <h3 className="dashboard-sale">Monthly Sales</h3>
-          <Bar data={barData} options={barOptions} />
-        </div>
-        <div className="recent-activity">
-          <h3 className="dashboard-recent">Recent Activities</h3>
-          <table className="dashboard-table">
-            <thead className="dashboard-thead">
-              <tr className="dashboard-tr">
-                <th>Date</th>
-                <th>Activity</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="dashboard-tr1">
-                <td>2024-11-18</td>
-                <td>Added new user</td>
-                <td>Completed</td>
-              </tr>
-              <tr className="dashboard-tr2">
-                <td>2024-11-17</td>
-                <td>Generated sales report</td>
-                <td>In Progress</td>
-              </tr>
-              <tr className="dashboard-tr3">
-                <td>2024-11-16</td>
-                <td>Updated product details</td>
-                <td>Completed</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <table className="ngo-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Code</th>
+            <th>Logo</th>
+            <th>Mission</th>
+            <th>Team</th>
+            <th>Careers</th>
+            <th>Achievements</th>
+            <th>Approved</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ngos.map((ngo) => (
+            <tr key={ngo.id}>
+              <td>{ngo.id}</td>
+              <td>{ngo.name}</td>
+              <td>{ngo.description}</td>
+              <td>{ngo.code}</td>
+              <td>
+                <img
+                    src={ngo.logoUrl}
+                    alt={ngo.name}
+                    style={{ width: '50px', height: '50px' }}
+                />
+              </td>
+              <td>{ngo.mission}</td>
+              <td>{ngo.team}</td>
+              <td>{ngo.careers}</td>
+              <td>{ngo.achievements}</td>
+              <td>{ngo.isApproved ? 'Yes' : 'No'}</td>
+              <td>
+                <button onClick={() => handleEdit(ngo)}>Edit</button>
+                <button onClick={() => handleDelete(ngo.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
-export default Dashboard;
+export default AdminNGOManagement;

@@ -14,12 +14,23 @@ const CustomerManagement = () => {
     const [newCustomer, setNewCustomer] = useState({ name: '', email: '', phone: '' });
     const [editingCustomer, setEditingCustomer] = useState(null);
 
+    const validateAuth = () => {
+        const token = localStorage.getItem('authToken');
+        const role = localStorage.getItem('role');
+        if (!token || !role) {
+            console.error('User is not authenticated.');
+            // window.location.href = '/login'; // Redirect to login page
+            return false;
+        }
+        return true;
+    };
+
     const fetchCustomers = async () => {
+        if (!validateAuth()) return; // Stop fetching if user is not authenticated
         try {
             const data = searchQuery
                 ? await searchCustomers(searchQuery)
                 : await getAllCustomers();
-            // Extract array from `$values` property
             const customerList = data?.$values || [];
             setCustomers(customerList);
         } catch (error) {
@@ -64,7 +75,7 @@ const CustomerManagement = () => {
     return (
         <div className="customer-management">
             <h1>Customer Management</h1>
-            <div className="search-bar">
+            <div className="search-column">
                 <input
                     type="text"
                     placeholder="Search customers..."

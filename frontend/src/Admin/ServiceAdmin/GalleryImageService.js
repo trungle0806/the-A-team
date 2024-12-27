@@ -1,96 +1,129 @@
-// GalleryImageService.js
+import axios from 'axios';
 
-class GalleryImageService {
-    constructor(apiUrl) {
-        this.apiUrl = "http://localhost:5024";
-    }
+const API_URL = 'http://localhost:5024/api/GalleryImage/'; // URL của GalleryImageController
 
-    // Get all gallery images with optional search query
-    async getAllGalleryImages(searchQuery = "") {
-        const response = await fetch(`${this.apiUrl}/api/GalleryImage?searchQuery=${encodeURIComponent(searchQuery)}`, {
-            method: 'GET',
+// Lấy danh sách tất cả Gallery Images (có thể thêm query để tìm kiếm)
+const getGalleryImages = async (searchQuery = '') => {
+    try {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (!['Admin', 'User', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Chỉ các vai trò Admin, User, và NGO mới được truy cập.');
+        }
+
+        const response = await axios.get(API_URL, {
+            params: { searchQuery },
             headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${token}`,
             },
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch gallery images');
+        return response.data;
+    } catch (error) {
+        console.error('Không thể lấy danh sách gallery images:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Lấy một Gallery Image cụ thể bằng ID
+const getGalleryImageById = async (id) => {
+    try {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (!['Admin', 'User', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Chỉ các vai trò Admin, User, và NGO mới được truy cập.');
         }
 
-        return await response.json();
-    }
-
-    // Get gallery image by ID
-    async getGalleryImageById(id) {
-        const response = await fetch(`${this.apiUrl}/api/GalleryImage/${id}`, {
-            method: 'GET',
+        const response = await axios.get(`${API_URL}${id}`, {
             headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${token}`,
             },
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch gallery image');
+        return response.data;
+    } catch (error) {
+        console.error(`Không thể lấy gallery image với ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Thêm một Gallery Image mới
+const addGalleryImage = async (formData) => {
+    try {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (!['Admin', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Chỉ các vai trò Admin và NGO mới có thể thêm gallery images.');
         }
 
-        return await response.json();
-    }
-
-    // Add a new gallery image (Admin and NGO roles)
-    async addGalleryImage(galleryImage) {
-        const response = await fetch(`${this.apiUrl}/api/GalleryImage`, {
-            method: 'POST',
+        const response = await axios.post(API_URL, formData, {
             headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(galleryImage),
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to add gallery image');
-        }
-
-        return await response.json();
-    }
-
-    // Update an existing gallery image by ID (Admin and NGO roles)
-    async updateGalleryImage(id, updatedGalleryImage) {
-        const response = await fetch(`${this.apiUrl}/api/GalleryImage/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(updatedGalleryImage),
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to update gallery image');
-        }
-
-        return await response.json();
-    }
-
-    // Delete a gallery image by ID (Admin role only)
-    async deleteGalleryImage(id) {
-        const response = await fetch(`${this.apiUrl}/api/GalleryImage/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
             },
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to delete gallery image');
+        return response.data;
+    } catch (error) {
+        console.error('Không thể thêm gallery image:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Cập nhật một Gallery Image
+const updateGalleryImage = async (id, formData) => {
+    try {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (!['Admin', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Chỉ các vai trò Admin và NGO mới có thể cập nhật gallery images.');
         }
 
-        return true;
-    }
-}
+        const response = await axios.put(`${API_URL}${id}`, formData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        });
 
-export default GalleryImageService;
+        return response.data;
+    } catch (error) {
+        console.error(`Không thể cập nhật gallery image với ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Xóa một Gallery Image
+const deleteGalleryImage = async (id) => {
+    try {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (role !== 'Admin') {
+            throw new Error('Unauthorized: Chỉ vai trò Admin mới có thể xóa gallery images.');
+        }
+
+        const response = await axios.delete(`${API_URL}${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error(`Không thể xóa gallery image với ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
+
+export {
+    getGalleryImages,
+    getGalleryImageById,
+    addGalleryImage,
+    updateGalleryImage,
+    deleteGalleryImage,
+};

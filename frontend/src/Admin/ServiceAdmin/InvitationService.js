@@ -1,96 +1,118 @@
-// InvitationService.js
+import axios from 'axios';
 
-class InvitationService {
-    constructor(apiUrl) {
-        this.apiUrl = "http://localhost:5024";
+const API_URL = 'http://localhost:5024/api/Invitation/'; // API endpoint cho InvitationController
+
+// Hàm tiện ích để lấy headers xác thực
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('authToken');
+    const role = localStorage.getItem('role');
+
+    if (!token) {
+        throw new Error('Unauthorized: Missing authorization token.');
     }
 
-    // Get all invitations with optional search query
-    async getAllInvitations(searchQuery = "") {
-        const response = await fetch(`${this.apiUrl}/api/Invitation?searchQuery=${encodeURIComponent(searchQuery)}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+    if (!role) {
+        throw new Error('Unauthorized: Missing user role.');
+    }
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch invitations');
+    return {
+        headers: { Authorization: `Bearer ${token}` },
+        role,
+    };
+};
+
+// Lấy tất cả lời mời với tùy chọn tìm kiếm (Admin, User, NGO roles)
+const getInvitations = async (searchQuery = '') => {
+    const { headers, role } = getAuthHeaders();
+    try {
+
+        if (!['Admin', 'User', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Access restricted to Admin, User, and NGO roles.');
         }
 
-        return await response.json();
-    }
-
-    // Get invitation by ID
-    async getInvitationById(id) {
-        const response = await fetch(`${this.apiUrl}/api/Invitation/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+        const response = await axios.get(API_URL, {
+            params: { searchQuery },
+            headers,
         });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching invitations:', error.response?.data || error.message);
+        throw error;
+    }
+};
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch invitation');
+// Lấy thông tin chi tiết lời mời theo ID (Admin, User, NGO roles)
+const getInvitationById = async (id) => {
+    const { headers, role } = getAuthHeaders();
+    try {
+
+        if (!['Admin', 'User', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Access restricted to Admin, User, and NGO roles.');
         }
 
-        return await response.json();
+        const response = await axios.get(`${API_URL}${id}`, { headers });
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching invitation with ID ${id}:`, error.response?.data || error.message);
+        throw error;
     }
+};
 
-    // Add a new invitation (Admin and NGO roles)
-    async addInvitation(invitation) {
-        const response = await fetch(`${this.apiUrl}/api/Invitation`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(invitation),
-        });
+// Thêm lời mời mới (Admin, NGO roles)
+const addInvitation = async (invitation) => {
+    const { headers, role } = getAuthHeaders();
+    try {
 
-        if (!response.ok) {
-            throw new Error('Failed to add invitation');
+        if (!['Admin', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Only Admin and NGO roles can add invitations.');
         }
 
-        return await response.json();
+        const response = await axios.post(API_URL, invitation, { headers });
+        return response.data;
+    } catch (error) {
+        console.error('Error adding invitation:', error.response?.data || error.message);
+        throw error;
     }
+};
 
-    // Update an existing invitation by ID (Admin and NGO roles)
-    async updateInvitation(id, updatedInvitation) {
-        const response = await fetch(`${this.apiUrl}/api/Invitation/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(updatedInvitation),
-        });
+// Cập nhật lời mời (Admin, NGO roles)
+const updateInvitation = async (id, updatedInvitation) => {
+    const { headers, role } = getAuthHeaders();
+    try {
 
-        if (!response.ok) {
-            throw new Error('Failed to update invitation');
+        if (!['Admin', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Only Admin and NGO roles can update invitations.');
         }
 
-        return await response.json();
+        const response = await axios.put(`${API_URL}${id}`, updatedInvitation, { headers });
+        return response.data;
+    } catch (error) {
+        console.error(`Error updating invitation with ID ${id}:`, error.response?.data || error.message);
+        throw error;
     }
+};
 
-    // Delete an invitation by ID (Admin role only)
-    async deleteInvitation(id) {
-        const response = await fetch(`${this.apiUrl}/api/Invitation/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+// Xóa lời mời (Admin role only)
+const deleteInvitation = async (id) => {
+    const { headers, role } = getAuthHeaders();
+    try {
 
-        if (!response.ok) {
-            throw new Error('Failed to delete invitation');
+        if (role !== 'Admin') {
+            throw new Error('Unauthorized: Only Admin can delete invitations.');
         }
 
-        return true;
+        const response = await axios.delete(`${API_URL}${id}`, { headers });
+        return response.data;
+    } catch (error) {
+        console.error(`Error deleting invitation with ID ${id}:`, error.response?.data || error.message);
+        throw error;
     }
-}
+};
 
-export default InvitationService;
+export {
+    getInvitations,
+    getInvitationById,
+    addInvitation,
+    updateInvitation,
+    deleteInvitation,
+};
