@@ -1,23 +1,30 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5024/api/customer/'; // Adjusted to match the CustomerController route
+const API_URL = 'http://localhost:5024/api/Customer/'; // Adjusted to match the CustomerController route
 
 // Utility function to get token and role
 const getAuthHeaders = () => {
-  const token = localStorage.getItem('authToken');
-  const role = localStorage.getItem('role');
-
-  if (!token || !role) {
-    console.error('Unauthorized: Missing token or role.');
-    throw new Error('Unauthorized: Missing token or role.');
-  }
-
-  return { token, role, headers: { Authorization: `Bearer ${token}` } };
-};
+    const token = localStorage.getItem('authToken');
+    const role = localStorage.getItem('role');
+  
+    if (!token) {
+      console.error('Authorization token is missing.');
+      throw new Error('Unauthorized: Missing authorization token.');
+    }
+  
+    if (!role) {
+      console.error('User role is missing.');
+      throw new Error('Unauthorized: Missing user role.');
+    }
+  
+    return { token, role, headers: { Authorization: `Bearer ${token}` } };
+  };
 
 // Fetch all customers (Admin only)
 const getAllCustomers = async () => {
   const { token, role, headers } = getAuthHeaders();
+  console.log('Role and Token:', { role, token });
+
   if (role !== 'Admin') {
     console.error('Unauthorized: Only admins can fetch customers.');
     throw new Error('Unauthorized: Only admins can fetch customers.');

@@ -1,96 +1,135 @@
-// DonationService.js
+import axios from 'axios';
 
-class DonationService {
-    constructor(apiUrl) {
-        this.apiUrl = "http://localhost:5024";
+const API_URL = 'http://localhost:5024/api/ProgramDonation/'; // Adjusted to match the ProgramDonationController route
+
+// Utility function to get token and role
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+
+    if (!token) {
+        console.error('Authorization token is missing.');
+        throw new Error('Unauthorized: Missing authorization token.');
     }
 
-    // Get all donations with optional search query
-    async getAllDonations(searchQuery = "") {
-        const response = await fetch(`${this.apiUrl}/api/ProgramDonation?searchQuery=${encodeURIComponent(searchQuery)}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+    if (!role) {
+        console.error('User role is missing.');
+        throw new Error('Unauthorized: Missing user role.');
+    }
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch donations');
+    return { token, role, headers: { Authorization: `Bearer ${token}` } };
+};
+
+// Fetch all Program Donations with an optional search query (Admin, User, NGO roles)
+const getProgramDonations = async (searchQuery = '') => {
+    const { token, role, headers } = getAuthHeaders();
+    console.log('Token:', token); // Check if token is available and valid
+    console.log('Role:', role); // Check if the role matches the expected roles
+
+    try {
+        if (!['Admin', 'User', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Access is restricted to Admin, User, and NGO roles.');
         }
 
-        return await response.json();
-    }
-
-    // Get donation by ID
-    async getDonationById(id) {
-        const response = await fetch(`${this.apiUrl}/api/ProgramDonation/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+        const response = await axios.get(API_URL, {
+            params: { searchQuery },
+            headers,
         });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch program donations:', error.response?.data || error.message);
+        throw error;
+    }
+};
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch donation');
+// Fetch Program Donation by ID (Admin, User, NGO roles)
+const getProgramDonationById = async (id) => {
+    const { token, role, headers } = getAuthHeaders();
+    console.log('Token:', token); // Check if token is available and valid
+    console.log('Role:', role); // Check if the role matches the expected roles
+
+    try {
+        if (!['Admin', 'User', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Access is restricted to Admin, User, and NGO roles.');
         }
 
-        return await response.json();
-    }
-
-    // Add a new donation (Admin and NGO roles)
-    async addDonation(donation) {
-        const response = await fetch(`${this.apiUrl}/api/ProgramDonation`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(donation),
+        const response = await axios.get(`${API_URL}${id}`, {
+            headers,
         });
+        return response.data;
+    } catch (error) {
+        console.error(`Failed to fetch program donation with ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
 
-        if (!response.ok) {
-            throw new Error('Failed to add donation');
+// Add a new Program Donation (Admin, NGO roles)
+const addProgramDonation = async (donation) => {
+    const { token, role, headers } = getAuthHeaders();
+    console.log('Token:', token); // Check if token is available and valid
+    console.log('Role:', role); // Check if the role matches the expected roles
+
+    try {
+        if (!['Admin', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Only Admin and NGO roles can add program donations.');
         }
 
-        return await response.json();
-    }
-
-    // Update an existing donation by ID (Admin and NGO roles)
-    async updateDonation(id, updatedDonation) {
-        const response = await fetch(`${this.apiUrl}/api/ProgramDonation/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(updatedDonation),
+        const response = await axios.post(API_URL, donation, {
+            headers,
         });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to add program donation:', error.response?.data || error.message);
+        throw error;
+    }
+};
 
-        if (!response.ok) {
-            throw new Error('Failed to update donation');
+// Update an existing Program Donation (Admin, NGO roles)
+const updateProgramDonation = async (id, updatedDonation) => {
+    const { token, role, headers } = getAuthHeaders();
+    console.log('Token:', token); // Check if token is available and valid
+    console.log('Role:', role); // Check if the role matches the expected roles
+
+    try {
+        if (!['Admin', 'NGO'].includes(role)) {
+            throw new Error('Unauthorized: Only Admin and NGO roles can update program donations.');
         }
 
-        return await response.json();
-    }
-
-    // Delete a donation by ID (Admin role only)
-    async deleteDonation(id) {
-        const response = await fetch(`${this.apiUrl}/api/ProgramDonation/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+        const response = await axios.put(`${API_URL}${id}`, updatedDonation, {
+            headers,
         });
+        return response.data;
+    } catch (error) {
+        console.error(`Failed to update program donation with ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
 
-        if (!response.ok) {
-            throw new Error('Failed to delete donation');
+// Delete a Program Donation (Admin role only)
+const deleteProgramDonation = async (id) => {
+    const { token, role, headers } = getAuthHeaders();
+    console.log('Token:', token); // Check if token is available and valid
+    console.log('Role:', role); // Check if the role matches the expected roles
+
+    try {
+        if (role !== 'Admin') {
+            throw new Error('Unauthorized: Only Admin role can delete program donations.');
         }
 
-        return true;
+        const response = await axios.delete(`${API_URL}${id}`, {
+            headers,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`Failed to delete program donation with ID ${id}:`, error.response?.data || error.message);
+        throw error;
     }
-}
+};
 
-export default DonationService;
+export {
+    getProgramDonations,
+    getProgramDonationById,
+    addProgramDonation,
+    updateProgramDonation,
+    deleteProgramDonation,
+};

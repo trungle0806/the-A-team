@@ -1,150 +1,133 @@
-import React, { useState, useEffect } from "react";
-import { getAccounts, addAccount, updateAccount, deleteAccount } from "../../Service/AccountService";
-import "./Image.css";
+import React, { useState, useEffect } from 'react';
+import { getGalleryImages, getGalleryImageById, addGalleryImage, updateGalleryImage, deleteGalleryImage } from '../ServiceAdmin/GalleryImageService';
+import './Image.css';
 
-function User() {
-  const [accounts, setAccounts] = useState([]);
-  const [search, setSearch] = useState("");
-  const [newAccount, setNewAccount] = useState({ email: "", role: "", isActive: true });
-  const [editAccount, setEditAccount] = useState(null);
+const GalleryImageAdmin = () => {
+    const [galleryImages, setGalleryImages] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [formData, setFormData] = useState(new FormData());
+    const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchAccounts = async () => {
-      try {
-        const response = await getAccounts();
-        setAccounts(response.$values || []);
-      } catch (error) {
-        console.error("Error fetching accounts:", error);
-      }
+    useEffect(() => {
+        fetchGalleryImages();
+    }, []);
+
+    const fetchGalleryImages = async () => {
+        try {
+            setLoading(true);
+            const images = await getGalleryImages();
+            setGalleryImages(images);
+        } catch (error) {
+            console.error('Lỗi khi lấy gallery images:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    fetchAccounts();
-  }, []);
+    const handleViewImage = async (id) => {
+        try {
+            const image = await getGalleryImageById(id);
+            setSelectedImage(image);
+        } catch (error) {
+            console.error('Lỗi khi lấy gallery image:', error);
+        }
+    };
 
-  const filteredAccounts = accounts.filter(
-    (account) =>
-      account.email.toLowerCase().includes(search.toLowerCase()) ||
-      account.role.toLowerCase().includes(search.toLowerCase())
-  );
+    const handleAddImage = async () => {
+        try {
+            await addGalleryImage(formData);
+            fetchGalleryImages();
+            setFormData(new FormData());
+        } catch (error) {
+            console.error('Lỗi khi thêm gallery image:', error);
+        }
+    };
 
-  // Thêm tài khoản
-  const handleAddAccount = async () => {
-    try {
-      await addAccount(newAccount);
-      setNewAccount({ email: "", role: "", isActive: true });
-      // Cập nhật lại danh sách tài khoản
-      const response = await getAccounts();
-      setAccounts(response.$values || []);
-    } catch (error) {
-      console.error("Error adding account:", error);
-    }
-  };
+    const handleUpdateImage = async (id) => {
+        try {
+            await updateGalleryImage(id, formData);
+            fetchGalleryImages();
+            setSelectedImage(null);
+        } catch (error) {
+            console.error('Lỗi khi cập nhật gallery image:', error);
+        }
+    };
 
-  // Cập nhật tài khoản
-  const handleEditAccount = async () => {
-    try {
-      if (editAccount) {
-        await updateAccount(editAccount.accountId, editAccount);
-        setEditAccount(null);
-        const response = await getAccounts();
-        setAccounts(response.$values || []);
-      }
-    } catch (error) {
-      console.error("Error updating account:", error);
-    }
-  };
+    const handleDeleteImage = async (id) => {
+        try {
+            await deleteGalleryImage(id);
+            fetchGalleryImages();
+        } catch (error) {
+            console.error('Lỗi khi xóa gallery image:', error);
+        }
+    };
 
-  // Xóa tài khoản
-  const handleDeleteAccount = async (accountId) => {
-    try {
-      await deleteAccount(accountId);
-      const response = await getAccounts();
-      setAccounts(response.$values || []);
-    } catch (error) {
-      console.error("Error deleting account:", error);
-    }
-  };
+    return (
+        <div className="gallery-image-admin">
+            <h2 className="gallery-header">Gallery Images</h2>
 
-  return (
-    <div className="user-home">
-    <h1 className="user-mana">User Management</h1>
-    
-    {/* Input tìm kiếm */}
-    <input className="user-search"
-      type="text"
-      placeholder="Search accounts..."
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-    />
-    
-    {/* Thêm tài khoản */}
-    <div className="user-key">
-      <input className="user-email"
-        type="text"
-        placeholder="Email"
-        value={newAccount.email}
-        onChange={(e) => setNewAccount({ ...newAccount, email: e.target.value })}
-      />
-      <input className="user-password"
-        type="text"
-        placeholder="Role"
-        value={newAccount.role}
-        onChange={(e) => setNewAccount({ ...newAccount, role: e.target.value })}
-      />
-      <button className="user-btn" onClick={handleAddAccount}>Add Account</button>
-    </div>
+            {loading ? (
+                <p className="loading-text">Đang tải...</p>
+            ) : (
+                <>
+                    <div className="gallery-list">
+                        <h3 className="list-title">Danh sách Gallery Images</h3>
+                        <ul className="image-list">
+                            {galleryImages.map((image) => (
+                                <li key={image.id} className="image-item">
+                                    <img src={image.url} alt={image.name} className="image-thumbnail" />
+                                    <button className="view-button" onClick={() => handleViewImage(image.id)}>Xem</button>
+                                    <button className="delete-button" onClick={() => handleDeleteImage(image.id)}>Xóa</button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-    {/* Sửa tài khoản */}
-    {editAccount && (
-      <div className="user-edit">
-        <input className="user-edit-email"
-          type="text"
-          value={editAccount.email}
-          onChange={(e) => setEditAccount({ ...editAccount, email: e.target.value })}
-        />
-        <input className="user-edit-role"
-          type="text"
-          value={editAccount.role}
-          onChange={(e) => setEditAccount({ ...editAccount, role: e.target.value })}
-        />
-        <button className="user-btn1" onClick={handleEditAccount}>Update Account</button>
-      </div>
-    )}
+                    {selectedImage && (
+                        <div className="image-details">
+                            <h3 className="details-title">Chi tiết Gallery Image</h3>
+                            <img src={selectedImage.url} alt={selectedImage.name} className="image-detail-thumbnail" />
+                            <form className="update-form">
+                                <label className="form-label">
+                                    Tên:
+                                    <input
+                                        type="text"
+                                        className="input-text"
+                                        value={selectedImage.name}
+                                        onChange={(e) => setSelectedImage({ ...selectedImage, name: e.target.value })}
+                                    />
+                                </label>
+                                <button type="button" className="update-button" onClick={() => handleUpdateImage(selectedImage.id)}>
+                                    Cập nhật
+                                </button>
+                            </form>
+                        </div>
+                    )}
 
-    {/* Bảng hiển thị tài khoản */}
-    <table className="user-table">
-      <thead className="user-the">
-        <tr className="user-tr">
-          <th className="user-id">Account ID</th>
-          <th className="user-e">Email</th>
-          <th className="user-r">Role</th>
-          <th className="user-s">Status</th>
-          <th className="user-a">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {filteredAccounts.length > 0 ? (
-          filteredAccounts.map((account) => (
-            <tr className="user-account" key={account.accountId}>
-              <td className="user-account-id">{account.accountId}</td>
-              <td className="user-account-email">{account.email}</td>
-              <td className="user-account-role">{account.role}</td>
-              <td className="user-account-is">{account.isActive ? "Active" : "Inactive"}</td>
-              <td>
-                <button className="user-btn1" onClick={() => setEditAccount(account)}>Edit</button>
-                <button className="user-btn2" onClick={() => handleDeleteAccount(account.accountId)}>Delete</button>
-              </td>
-            </tr>
-          ))
-        ) : (
-          <tr className="user-found">
-            <td className="user-col" colSpan="5">No accounts found.</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
-  </div>
-);
-}
+                    <div className="add-image">
+                        <h3 className="add-title">Thêm Gallery Image mới</h3>
+                        <form
+                            className="add-form"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                handleAddImage();
+                            }}
+                        >
+                            <label className="form-label">
+                                Tải ảnh lên:
+                                <input
+                                    type="file"
+                                    className="file-input"
+                                    onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
+                                />
+                            </label>
+                            <button type="submit" className="add-button1">Thêm ảnh</button>
+                        </form>
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
 
-export default User;
+export default GalleryImageAdmin;

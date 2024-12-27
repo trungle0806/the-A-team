@@ -1,50 +1,175 @@
-import React, { useState } from 'react';
-import './Prodonation.css';
-import './ProdonationResponsive.css'
+import React, { useState, useEffect } from 'react';
+import { getProgramDonations, addProgramDonation, updateProgramDonation, deleteProgramDonation } from '../ServiceAdmin/DonationService';
+import './Prodonation.css'
 
-function Inventory() {
-  const [products, setProducts] = useState([
-    { id: 1, name: 'Laptop', stock: 50, category: 'Electronics', updated: '2024-11-18' },
-    { id: 2, name: 'Chair', stock: 120, category: 'Furniture', updated: '2024-11-17' },
-    { id: 3, name: 'Notebook', stock: 200, category: 'Stationery', updated: '2024-11-16' },
-  ]);
+const ProgramDonationAdmin = () => {
+  const [donations, setDonations] = useState([]);
+  const [newDonation, setNewDonation] = useState({ name: '', description: '', amount: 0 });
+  const [editingDonation, setEditingDonation] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Fetch program donations on component mount
+  useEffect(() => {
+    const fetchDonations = async () => {
+      try {
+        const token = localStorage.getItem('authToken'); // Or sessionStorage
+        if (!token) {
+          console.error('User is not authenticated');
+          return; // Stop if no token is available
+        }
+        
+        const data = await getProgramDonations(searchQuery, token); // Pass token to your service
+        const donationList = data?.$values || [];
+        setDonations(donationList);
+      } catch (error) {
+        if (error.response?.status === 401) {
+          console.error('Unauthorized: Please log in again.');
+          // Optionally, redirect to login page
+        } else {
+          console.error('Error fetching donations:', error);
+        }
+      }
+    };
+  
+    fetchDonations();
+  }, [searchQuery]);   
+
+  // Handle adding a new donation
+  const handleAddDonation = async () => {
+    try {
+      await addProgramDonation(newDonation);
+      setNewDonation({ name: '', description: '', amount: 0 });
+      const data = await getProgramDonations(searchQuery);  // Refresh donation list
+      setDonations(data);
+    } catch (error) {
+      console.error('Error adding donation:', error);
+    }
+  };
+
+  // Handle updating an existing donation
+  const handleUpdateDonation = async () => {
+    if (editingDonation) {
+      try {
+        await updateProgramDonation(editingDonation.donationId, editingDonation);
+        setEditingDonation(null);  // Reset after update
+        const data = await getProgramDonations(searchQuery);  // Refresh donation list
+        setDonations(data);
+      } catch (error) {
+        console.error('Error updating donation:', error);
+      }
+    }
+  };
+
+  // Handle deleting a donation
+  const handleDeleteDonation = async (id) => {
+    try {
+      await deleteProgramDonation(id);
+      const data = await getProgramDonations(searchQuery);  // Refresh donation list
+      setDonations(data);
+    } catch (error) {
+      console.error('Error deleting donation:', error);
+    }
+  };
 
   return (
-    <div className="inventory-container">
-      {/* Header */}
-      <header className="inventory-header">
-        <h1>Inventory Management</h1>
-        <p>Manage and monitor product stock levels.</p>
-      </header>
+    <div className="program-donation-admin">
+      <h2 className="admin-title">Program Donations Management</h2>
 
-      {/* Product List */}
-      <section className="inventory-list">
-        <h3>Product Inventory</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Product ID</th>
-              <th>Product Name</th>
-              <th>Stock Quantity</th>
-              <th>Category</th>
-              <th>Last Updated</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.stock}</td>
-                <td>{product.category}</td>
-                <td>{product.updated}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+      {/* Search Bar */}
+      <div className="search-pro">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search donations..."
+        />
+        <button className="search-button">Search</button>
+      </div>
+
+      {/* Add Donation Form */}
+      <div className="add-donation-form">
+        <h3>Add New Donation</h3>
+        <input
+          type="text"
+          placeholder="Donation Name"
+          value={newDonation.name}
+          onChange={(e) => setNewDonation({ ...newDonation, name: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={newDonation.description}
+          onChange={(e) => setNewDonation({ ...newDonation, description: e.target.value })}
+        />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={newDonation.amount}
+          onChange={(e) => setNewDonation({ ...newDonation, amount: parseFloat(e.target.value) })}
+        />
+        <button className="add-button" onClick={handleAddDonation}>Add Donation</button>
+      </div>
+
+      {/* Donation List */}
+      <div className="donation-list">
+        <h3>Existing Donations</h3>
+        <ul>
+          {donations.map((donation) => (
+            <li key={donation.donationId} className="donation-item">
+              <div>
+                <h4>{donation.name}</h4>
+                <p>{donation.description}</p>
+                <p>Amount: ${donation.amount}</p>
+                <p>Remaining Amount: ${donation.remainingAmount}</p>
+                <p>Excess Amount: ${donation.excessAmount}</p>
+                <p>Percentage Achieved: {donation.percentageAchieved}%</p>
+                <p>Status: {donation.paymentStatus}</p>
+                <p>Donation Date: {new Date(donation.donationDate).toLocaleDateString()}</p>
+              </div>
+              <button
+                className="edit-button"
+                onClick={() => setEditingDonation(donation)}
+              >
+                Edit
+              </button>
+              <button
+                className="delete-button"
+                onClick={() => handleDeleteDonation(donation.donationId)}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Edit Donation Form */}
+      {editingDonation && (
+        <div className="edit-donation-form">
+          <h3>Edit Donation</h3>
+          <input
+            type="text"
+            placeholder="Donation Name"
+            value={editingDonation.name}
+            onChange={(e) => setEditingDonation({ ...editingDonation, name: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            value={editingDonation.description}
+            onChange={(e) => setEditingDonation({ ...editingDonation, description: e.target.value })}
+          />
+          <input
+            type="number"
+            placeholder="Amount"
+            value={editingDonation.amount}
+            onChange={(e) => setEditingDonation({ ...editingDonation, amount: parseFloat(e.target.value) })}
+          />
+          <button className="update-button" onClick={handleUpdateDonation}>Update Donation</button>
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default Inventory;
+export default ProgramDonationAdmin;

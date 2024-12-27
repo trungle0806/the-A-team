@@ -1,96 +1,132 @@
-// NGOService.js
+import axios from 'axios';
 
-class NGOService {
-    constructor(apiUrl) {
-        this.apiUrl = "http://localhost:5024";
+const API_URL = 'http://localhost:5024/api/NGO/';
+
+// Utility function to get token and role
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('authToken');
+    const role = localStorage.getItem('role');
+
+    if (!token) {
+        console.error('Authorization token is missing.');
+        throw new Error('Unauthorized: Missing authorization token.');
     }
 
-    // Get all NGOs with optional search query
-    async getAllNGOs(searchQuery = "") {
-        const response = await fetch(`${this.apiUrl}/api/NGO?searchQuery=${encodeURIComponent(searchQuery)}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+    if (!role) {
+        console.error('User role is missing.');
+        throw new Error('Unauthorized: Missing user role.');
+    }
+
+    return { token, role, headers: { Authorization: `Bearer ${token}` } };
+};
+
+// Fetch all NGOs (Admin only)
+const getAllNGOs = async () => {
+    const { token, role, headers } = getAuthHeaders();
+    console.log('Role and Token:', { role, token });
+
+    if (role !== 'Admin') {
+        console.error('Unauthorized: Only admins can fetch NGOs.');
+        throw new Error('Unauthorized: Only admins can fetch NGOs.');
+    }
+
+    try {
+        const response = await axios.get(`${API_URL}`, { headers });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching NGOs:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Add a new NGO (Admin only)
+const addNGO = async (ngo) => {
+    const { role, headers } = getAuthHeaders();
+    if (role !== 'Admin') {
+        throw new Error('Unauthorized: Only admins can add NGOs.');
+    }
+
+    try {
+        const response = await axios.post(API_URL, ngo, { headers });
+        return response.data;
+    } catch (error) {
+        console.error('Error adding NGO:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Update an existing NGO (Admin and NGO roles)
+const updateNGO = async (id, updatedNGO) => {
+    const { role, headers } = getAuthHeaders();
+    if (!['Admin', 'NGO'].includes(role)) {
+        throw new Error('Unauthorized: Only admins and NGOs can update NGOs.');
+    }
+
+    try {
+        const response = await axios.put(`${API_URL}${id}`, updatedNGO, { headers });
+        return response.data;
+    } catch (error) {
+        console.error(`Error updating NGO with ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Delete a NGO (Admin only)
+const deleteNGO = async (id) => {
+    const { role, headers } = getAuthHeaders();
+    if (role !== 'Admin') {
+        throw new Error('Unauthorized: Only admins can delete NGOs.');
+    }
+
+    try {
+        const response = await axios.delete(`${API_URL}${id}`, { headers });
+        return response.data;
+    } catch (error) {
+        console.error(`Error deleting NGO with ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Get a specific NGO by ID (Admin and User roles)
+const getNGOById = async (id) => {
+    const { role, headers } = getAuthHeaders();
+    if (!['Admin', 'User'].includes(role)) {
+        throw new Error('Unauthorized: Access is restricted to Admins and Users.');
+    }
+
+    try {
+        const response = await axios.get(`${API_URL}${id}`, { headers });
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching NGO with ID ${id}:`, error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// Search for NGOs with an optional query (Admin and User roles)
+const searchNGOs = async (searchQuery = '') => {
+    const { role, headers } = getAuthHeaders();
+    if (!['Admin', 'User'].includes(role)) {
+        throw new Error('Unauthorized: Access is restricted to Admins and Users.');
+    }
+
+    try {
+        const response = await axios.get(API_URL, {
+            params: { searchQuery },
+            headers,
         });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch NGOs');
-        }
-
-        return await response.json();
+        return response.data;
+    } catch (error) {
+        console.error('Error searching NGOs:', error.response?.data || error.message);
+        throw error;
     }
+};
 
-    // Get NGO by ID
-    async getNGOById(id) {
-        const response = await fetch(`${this.apiUrl}/api/NGO/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch NGO');
-        }
-
-        return await response.json();
-    }
-
-    // Add a new NGO (Admin role only)
-    async addNGO(ngo) {
-        const response = await fetch(`${this.apiUrl}/api/NGO`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(ngo),
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to add NGO');
-        }
-
-        return await response.json();
-    }
-
-    // Update an existing NGO by ID (Admin and NGO roles)
-    async updateNGO(id, updatedNGO) {
-        const response = await fetch(`${this.apiUrl}/api/NGO/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(updatedNGO),
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to update NGO');
-        }
-
-        return await response.json();
-    }
-
-    // Delete an NGO by ID (Admin role only)
-    async deleteNGO(id) {
-        const response = await fetch(`${this.apiUrl}/api/NGO/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete NGO');
-        }
-
-        return true;
-    }
-}
-
-export default NGOService;
+export {
+    getAllNGOs,
+    addNGO,
+    updateNGO,
+    deleteNGO,
+    getNGOById,
+    searchNGOs,
+};
