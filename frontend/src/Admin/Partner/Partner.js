@@ -69,7 +69,7 @@ const AdminPartnersManagement = () => {
     <div className="admin-partners-management">
       <h1 className="management-title">Partner Management</h1>
 
-      <div className="search-icon">
+      <div className="search-icon-partner">
         {/* Search Section */}
         <div className="search-section-partner">
           <input
