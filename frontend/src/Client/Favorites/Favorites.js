@@ -1,39 +1,53 @@
 import React from "react";
-import PropTypes from "prop-types"; // For prop validation
+import { useFavorites } from "../../Context/FavoritesContext"; // Correct import for accessing the context
+import Header from "../../Components/Header/Header";
+import Footer from "../../Components/Footer/Footer";
 import "./Favorites.css";
 
-const Favorites = ({ favorites = [], removeFromFavorites }) => {
+const Favorites = () => {
+  const { favorites, removeFromFavorites } = useFavorites();
+
   return (
-    <div className="favorites-container">
-      <h2>Your Favorite Organizations</h2>
-      {favorites.length === 0 ? (
-        <p className="empty-message">You haven't added any favorites yet.</p>
-      ) : (
-        <div className="favorites-list">
-          {favorites.map((org) => (
-            <div key={org.id} className="favorite-card">
-              <div className="org-details">
-                <h3>{org.name}</h3>
-                <p>{org.description}</p>
-              </div>
-              <button
-                className="remove-btn"
-                onClick={() => removeFromFavorites(org.id)}
-              >
-                Remove
-              </button>
+    <div>
+      <Header />
+
+      {/* Full-Width Banner with Text Overlay */}
+      <div className="favorites-banner">
+        <h1>Your Favorite Programs</h1>
+      </div>
+
+      <div className="favorites-container">
+        {favorites.length === 0 ? (
+          <p className="empty-message">You haven't added any favorites yet.</p>
+        ) : (
+          <div className="favorites-list">
+            <div className="favorites-header">
+              <div className="favorites-column">Name</div>
+              <div className="favorites-column">Details</div>
+              <div className="favorites-column">Location</div>
             </div>
-          ))}
-        </div>
-      )}
+            {favorites.map((program) => (
+              <div key={program.programId} className="favorite-card">
+                <div className="favorites-column">{program.name}</div>
+                <div className="favorites-column">{program.details}</div>
+                <div className="favorites-column">{program.location}</div>
+                <div className="remove-column">
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeFromFavorites(program.programId)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Footer />
     </div>
   );
-};
-
-// Validate props with PropTypes
-Favorites.propTypes = {
-  favorites: PropTypes.array, // Array of favorite items
-  removeFromFavorites: PropTypes.func.isRequired, // Function to remove items
 };
 
 export default Favorites;

@@ -1,79 +1,89 @@
 .favorites-container {
-  max-width: 800px;
-  margin: 0 auto;
+  position: relative;
   padding: 20px;
-  font-family: Arial, sans-serif;
-  color: #333;
+  text-align: center;
+  width: 96vw;
+  height: auto;
+  margin-top: 10px;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #444;
+.favorites-banner {
+  background-image: url("https://imagev3.vietnamplus.vn/w1000/Uploaded/2024/fsmsy/2024_06_16/ttxvn-tre-em-gaza-1855.jpg.webp"); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  height: 500px; /* Set the height of the banner */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: white;
 }
 
-.empty-message {
-  text-align: center;
-  font-size: 16px;
-  color: #777;
+.favorites-banner h1 {
+  font-size: 36px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds a shadow to make text stand out */
+  margin: 0;
 }
 
 .favorites-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #ccc;
+}
+
+.favorites-header {
+  display: flex;
+  width: 98%;
+  justify-content: space-between;
+  font-weight: bold;
+  /* border-bottom: 2px solid #ddd; */
+  padding: 10px;
+  background-color: #f5f5f5;
+  align-items: center;
+}
+
+.favorites-column {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
 }
 
 .favorite-card {
   display: flex;
-  align-items: center;
+  width: 98%;
+  justify-content: space-between;
   padding: 15px;
-  border: 1px solid #ddd;
+
+  margin: 10px;
   border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
 }
 
-.favorite-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.favorite-card .favorites-column {
+  text-align: left;
 }
 
-.org-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.org-details {
-  flex: 1;
-}
-
-.org-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-  color: #222;
-}
-
-.org-description {
-  margin: 5px 0 0;
-  font-size: 14px;
-  color: #555;
+.remove-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .remove-btn {
-  background-color: #ff5757;
+  background-color: red;
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: 4px;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
 }
 
 .remove-btn:hover {
-  background-color: #ff1a1a;
+  background-color: darkred;
+}
+
+.empty-message {
+  font-size: 18px;
+  color: gray;
 }

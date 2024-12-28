@@ -222,3 +222,28 @@
   color: #49516f; /* Bright red on hover */
   /* transform: scale(1.2); */
 }
+.favorites-count {
+  color: white;
+  background-color: #49516f;
+  border-radius: 49%;
+  /* margin: 10px; */
+  padding: 4px;
+  margin-bottom: 18px;
+  /* margin-right: 10px; */
+  position: relative;
+}
+/* When on the About, News, Contact, and Program pages */
+.header-container.other-page .logout-icon-style {
+  color: black; /* Set the color to black for logout icon */
+}
+
+/* Default logout icon style for other pages */
+.logout-icon-style {
+  font-size: 20px;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.logout-icon-style:hover {
+  color: #49516f;
+}

@@ -6,6 +6,7 @@ import {
   faUser,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { useFavorites } from "../../Context/FavoritesContext"; // Correct import for accessing the context
 import "./Header.css";
 
 export const Header = () => {
@@ -14,28 +15,26 @@ export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Lấy danh sách yêu thích từ context
+  const { favorites } = useFavorites(); // Correct usage of the custom hook
+
   // Kiểm tra token trong localStorage khi component mount
   useEffect(() => {
     const checkAuth = () => {
-      const token = localStorage.getItem("authToken"); // Kiểm tra token trong localStorage
-      console.log("Checking auth token:", token); // Kiểm tra token trong console
-      setIsAuthenticated(!!token); // Cập nhật trạng thái nếu token tồn tại
+      const token = localStorage.getItem("authToken");
+      setIsAuthenticated(!!token);
     };
 
-    checkAuth(); // Kiểm tra ngay khi component mount
+    checkAuth();
 
-    // Lắng nghe sự kiện đăng nhập/đăng xuất (bao gồm cả login bằng Google)
-    const handleLoginStatusChange = () => {
-      console.log("Login status changed");
-      checkAuth();
-    };
+    const handleLoginStatusChange = () => checkAuth();
 
     window.addEventListener("loginStatusChanged", handleLoginStatusChange);
-    window.addEventListener("storage", checkAuth); // Đồng bộ giữa các tab
+    window.addEventListener("storage", checkAuth);
 
     return () => {
       window.removeEventListener("loginStatusChanged", handleLoginStatusChange);
-      window.removeEventListener("storage", checkAuth); // Dọn dẹp
+      window.removeEventListener("storage", checkAuth);
     };
   }, []);
 
@@ -51,31 +50,30 @@ export const Header = () => {
 
   // Xử lý đăng xuất
   const handleLogout = () => {
-    console.log("Logging out...");
-    localStorage.removeItem("authToken"); // Xóa token khỏi localStorage
-    localStorage.removeItem("role"); // Xóa role khỏi localStorage
-    setIsAuthenticated(false); // Đặt lại trạng thái đăng nhập
-    navigate("/login"); // Điều hướng về trang đăng nhập
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("role");
+    setIsAuthenticated(false);
+    navigate("/login");
   };
 
   // Xử lý chuyển hướng khi nhấn vào biểu tượng người dùng
   const handleUserClick = () => {
     if (isAuthenticated) {
-      navigate("/profile"); // Điều hướng đến trang profile nếu đã đăng nhập
+      navigate("/profile");
     } else {
-      navigate("/login"); // Điều hướng đến trang đăng nhập nếu chưa đăng nhập
+      navigate("/login");
     }
   };
 
   const isHomePage = location.pathname === "/";
-  const isLoginPage = location.pathname === "/login"; // Kiểm tra nếu đang ở trang login
-  const isRegisterPage = location.pathname === "/register"; // Kiểm tra nếu đang ở trang register
+  const isLoginPage = location.pathname === "/login";
+  const isRegisterPage = location.pathname === "/register";
 
   return (
     <div
       className={`header-container ${isScrolled ? "scrolled" : ""} ${
         !isHomePage && !isLoginPage && !isRegisterPage ? "other-page" : ""
-      } ${isLoginPage || isRegisterPage ? "transparent" : ""}`} // Thêm điều kiện cho trang đăng ký
+      } ${isLoginPage || isRegisterPage ? "transparent" : ""}`}
     >
       {/* Logo */}
       <div className="logo-search-container">
@@ -89,31 +87,21 @@ export const Header = () => {
 
       {/* Navigation Links */}
       <div className="navbar-header-link">
-        <div>
-          <Link className="navbar-link" to="/">
-            Home
-          </Link>
-        </div>
-        <div>
-          <Link className="navbar-link" to="/about">
-            About
-          </Link>
-        </div>
-        <div>
-          <Link className="navbar-link" to="/contact">
-            Contact
-          </Link>
-        </div>
-        <div>
-          <Link className="navbar-link" to="/news">
-            News
-          </Link>
-        </div>
-        <div>
-          <Link className="navbar-link" to="/program">
-            Program
-          </Link>
-        </div>
+        <Link className="navbar-link" to="/">
+          Home
+        </Link>
+        <Link className="navbar-link" to="/about">
+          About
+        </Link>
+        <Link className="navbar-link" to="/contact">
+          Contact
+        </Link>
+        <Link className="navbar-link" to="/news">
+          News
+        </Link>
+        <Link className="navbar-link" to="/program">
+          Program
+        </Link>
       </div>
 
       {/* Auth and Favorites */}
@@ -122,6 +110,9 @@ export const Header = () => {
         <div className="favorites">
           <Link className="favorites-link" to="/favorites">
             <FontAwesomeIcon icon={faHeart} className="favorites-icon" />
+            {favorites.length > 0 && (
+              <span className="favorites-count">{favorites.length}</span>
+            )}
           </Link>
         </div>
 

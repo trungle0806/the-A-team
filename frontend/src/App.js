@@ -6,29 +6,30 @@ import Contact from "./Client/Contact/Contact";
 import News from "./Client/News/News";
 import LoginForm from "./Client/Login/LoginForm";
 import RegisterForm from "./Client/Register/RegisterForm";
-import Favorites from "./Client/Favorites/Favorites";
 import ForgotAndResetPassword from "./Client/ForgotPassword/ForgotPassword";
 import Authentication from "./Admin/Authentication/Authentication";
 import AuthContext, { AuthProvider } from "./Context/AuthContext"; // Import AuthProvider
 import Profile from "./Client/Profile/Profile";
-// import Productclient from "./Client/Productclient/Productclient";
+import Favorites from "./Client/Favorites/Favorites";
+import ProgramList from "./Client/ProgramList/ProgramList"; // Đảm bảo đúng path
 
 // Admin routes
 import CustomerManagement from "./Admin/Customer/CustomerManagement";
 import GalleryImage from "./Admin/GalleryImage/Image";
 import Inviation from "./Admin/Invitation/Invitation";
-import Ngo from "../src/Admin/NGOs/Ngos";
-import Partner from "../src/Admin/Partner/Partner";
-import Program1 from "../src/Admin/Program1/Program1";
-import ProgramDonation from "../src/Admin/ProgramDonation/Prodonation";
-import Query from "../src/Admin/Query/Query";
-import TransactionHistory from "../src/Admin/TransactionHistory/TransactionHistory";
-import ForgotPassword from "./Client/ForgotPassword/ForgotPassword";
+import Ngo from "./Admin/NGOs/Ngos";
+import Partner from "./Admin/Partner/Partner";
+import Program1 from "./Admin/Program1/Program1";
+import ProgramDonation from "./Admin/ProgramDonation/Prodonation";
+import Query from "./Admin/Query/Query";
+import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
+import NGODetails from "./Admin/NGOs/NGODetails/NGODetails";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
-import ProgramList from "./Client/ProgramList/ProgramList";
-import NGODetails from "../src/Admin/NGOs/NGODetails/NGODetails";
-import "./App.css"; // Avoid duplicate import
+import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
+import "./App.css"; // Ensure no duplicate imports
+
+// Wrapper function to ensure AuthProvider and FavoritesProvider are available
 function App() {
   const { auth } = useContext(AuthContext); // Access auth state
 
@@ -38,7 +39,6 @@ function App() {
         <Routes>
           {/* Client Routes */}
           <Route path="/" element={<Home />} />
-          {/* <Route path="/productclient" element={<Productclient/>} /> */}
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/news" element={<News />} />
@@ -50,8 +50,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
 
           {/* Admin Routes */}
-          {/* <Route path="/admin" element={<Admin />}></Route> */}
-
           <Route path="/admin" element={<Authentication />}>
             <Route path="customers" element={<CustomerManagement />} />
             <Route path="galleryimage" element={<GalleryImage />} />
@@ -65,8 +63,7 @@ function App() {
             <Route path="transactionhistory" element={<TransactionHistory />} />
           </Route>
 
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          {/* <Route path="/enter-code" element={<EnterCode />} /> */}
+          {/* Reset Password Route */}
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
@@ -74,10 +71,15 @@ function App() {
   );
 }
 
+// Wrap App with AuthProvider and FavoritesProvider
 export default function WrappedApp() {
   return (
     <AuthProvider>
-      <App />
+      <FavoritesProvider>
+        {" "}
+        {/* Wrap with FavoritesProvider */}
+        <App />
+      </FavoritesProvider>
     </AuthProvider>
   );
 }
