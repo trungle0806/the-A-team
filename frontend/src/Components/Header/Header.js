@@ -6,7 +6,8 @@ import {
   faUser,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { useFavorites } from "../../Context/FavoritesContext"; // Correct import for accessing the context
+import { useFavorites } from "../../Context/FavoritesContext";
+// Correct import for accessing the context
 import "./Header.css";
 
 export const Header = () => {
