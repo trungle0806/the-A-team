@@ -37,7 +37,7 @@ const Carousel = () => {
                 <div className='video-overlay'>
                     <div className='video-container'>
                         <button className='close-btn' onClick={closeModal}>×</button>
-                        <iframe
+                        <iframe1
                             width="560"
                             height="315"
                             src={videoUrl}
@@ -45,7 +45,7 @@ const Carousel = () => {
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
-                        ></iframe>
+                        ></iframe1>
                     </div>
                 </div>
             )}
