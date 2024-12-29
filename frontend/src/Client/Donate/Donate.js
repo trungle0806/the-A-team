@@ -16,6 +16,7 @@ const Donate = () => {
     const [program, setProgram] = useState(null);
     const [amount, setAmount] = useState("");
     const [error, setError] = useState("");
+    const [customerId, setCustomerId] = useState(null);
     const [isPaymentSelected, setIsPaymentSelected] = useState(false);
 
     useEffect(() => {
@@ -30,8 +31,25 @@ const Donate = () => {
             }
         };
 
+        const fetchCustomerId = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:5024/api/customer/get-customer-data`, // Replace with the correct endpoint
+                    {
+                        headers: { Authorization: `Bearer ${auth.token}` }
+                    }
+                );
+                console.log(response.data.customerId);
+                setCustomerId(response.data.customerId);
+
+            } catch (err) {
+                console.error("Failed to fetch customer details.");
+            }
+        };
+
         fetchProgram();
-    }, [programId]);
+        fetchCustomerId();
+    }, [programId, auth.token]);
 
     const handleAmountChange = (e) => {
         const value = parseFloat(e.target.value) || "";
@@ -45,13 +63,21 @@ const Donate = () => {
 
     const handleSuccess = async (details) => {
         try {
-            await axios.post("http://localhost:5024/api/ProgramDonation", {
-                programId,
-                customerId: auth.token,
-                amount,
-                paymentStatus: "Completed",
-                transactionId: details.id,
-            });
+            await axios.post(
+                "http://localhost:5024/api/ProgramDonation",
+                {
+                    programId,
+                    customerId,
+                    amount,
+                    paymentStatus: "Completed",
+                    transactionId: details.id,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.token}`, // Add token to headers
+                    },
+                }
+            );
             alert("Donation successful! Thank you for your support.");
             setAmount("");
             setIsPaymentSelected(false);
@@ -88,7 +114,7 @@ const Donate = () => {
     return (
         <PayPalScriptProvider
             options={{
-                "client-id": "AQV2ly1LbulZS2pYX3Vmdf2FB9kT3StwDS_sSXfMfKnQjplYj9ZvP8Y1PVY9VpB5jk_zi7ua81Vsty57",
+                "client-id": "Aav1YKJFkaHRupG_cEWkSfWU0PhNiXEh0ejGI_0lstFJDzEQRvk-TQ9CzhdMytp_03I1JWJozf_YNSdd",
                 currency: "USD",
             }}
         >
@@ -120,6 +146,7 @@ const Donate = () => {
                         Percentage Achieved: {program.percentageAchieved?.toFixed(2)}%
                     </p>
 
+
                     <div className="donation-stats">
                         <div className="stat-box">
                             <FaUsers className="icon" />
@@ -147,38 +174,35 @@ const Donate = () => {
                             <span className="stat-value">{remainingDonationDays}</span>
                         </div>
                     </div>
+
                 </div>
 
                 <div className="donate-paypal">
-
-                <div className="donation-input-section">
-                    {isPaymentSelected && (
-                        <>
-                            <input
-                                type="number"
-                                value={amount}
-                                onChange={handleAmountChange}
-                                placeholder="Enter amount"
-                                min="0.01"
-                                step="0.01"
-                                className="donation-amount-input"
-                            />
-                            {error && <p className="error-message">{error}</p>}
-                        </>
-                    )}
+                    <div className="donation-input-section">
+                        {isPaymentSelected && (
+                            <>
+                                <input
+                                    type="number"
+                                    value={amount}
+                                    onChange={handleAmountChange}
+                                    placeholder="Enter amount"
+                                    min="0.01"
+                                    step="0.01"
+                                    className="donation-amount-input"
+                                />
+                                {error && <p className="error-message">{error}</p>}
+                            </>
+                        )}
+                    </div>
+                    <div className="payment-button">
+                        <button
+                            onClick={() => setIsPaymentSelected(true)}
+                            disabled={false} // Always enable this button to toggle the input visibility.
+                        >
+                            Donate Now
+                        </button>
+                    </div>
                 </div>
-                <div className="payment-button">
-                    <button
-                        onClick={() => setIsPaymentSelected(true)}
-                        disabled={false} // Always enable this button to toggle the input visibility.
-                    >
-                        Donate Now
-                    </button>
-                </div>
-                </div>
-
-
-
 
                 {isPaymentSelected && amount > 0 && !error && (
                     <PayPalButtons
