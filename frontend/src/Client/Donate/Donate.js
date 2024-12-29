@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { FaBullseye, FaHandHoldingHeart, FaClock, FaUsers, FaCalendarAlt } from "react-icons/fa";
 import { AiOutlineDollarCircle } from "react-icons/ai";
@@ -19,37 +19,42 @@ const Donate = () => {
     const [customerId, setCustomerId] = useState(null);
     const [isPaymentSelected, setIsPaymentSelected] = useState(false);
 
+    const navigate = useNavigate(); // Use the new useNavigate hook
+
+    const fetchProgram = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:5024/api/program1/${programId}`
+            );
+            setProgram(response.data);
+        } catch (err) {
+            console.error("Failed to fetch program details.");
+        }
+    };
+
+    const fetchCustomerId = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:5024/api/customer/get-customer-data`,
+                {
+                    headers: { Authorization: `Bearer ${auth.token}` }
+                }
+            );
+            setCustomerId(response.data.customerId);
+        } catch (err) {
+            console.error("Failed to fetch customer details.");
+        }
+    };
+
     useEffect(() => {
-        const fetchProgram = async () => {
-            try {
-                const response = await axios.get(
-                    `http://localhost:5024/api/program1/${programId}`
-                );
-                setProgram(response.data);
-            } catch (err) {
-                console.error("Failed to fetch program details.");
-            }
-        };
-
-        const fetchCustomerId = async () => {
-            try {
-                const response = await axios.get(
-                    `http://localhost:5024/api/customer/get-customer-data`, // Replace with the correct endpoint
-                    {
-                        headers: { Authorization: `Bearer ${auth.token}` }
-                    }
-                );
-                console.log(response.data.customerId);
-                setCustomerId(response.data.customerId);
-
-            } catch (err) {
-                console.error("Failed to fetch customer details.");
-            }
-        };
+        if (!auth.token) {
+            navigate("/login"); // Redirect to login if not authenticated
+            return;
+        }
 
         fetchProgram();
         fetchCustomerId();
-    }, [programId, auth.token]);
+    }, [programId, auth.token, navigate]); // Add navigate to dependencies
 
     const handleAmountChange = (e) => {
         const value = parseFloat(e.target.value) || "";
@@ -74,13 +79,14 @@ const Donate = () => {
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${auth.token}`, // Add token to headers
+                        Authorization: `Bearer ${auth.token}`,
                     },
                 }
             );
             alert("Donation successful! Thank you for your support.");
             setAmount("");
             setIsPaymentSelected(false);
+            await fetchProgram(); // Re-fetch program details after a successful donation
         } catch (err) {
             console.error("Donation processing failed.");
             alert("Donation processing failed. Please try again.");
@@ -146,7 +152,6 @@ const Donate = () => {
                         Percentage Achieved: {program.percentageAchieved?.toFixed(2)}%
                     </p>
 
-
                     <div className="donation-stats">
                         <div className="stat-box">
                             <FaUsers className="icon" />
@@ -174,7 +179,6 @@ const Donate = () => {
                             <span className="stat-value">{remainingDonationDays}</span>
                         </div>
                     </div>
-
                 </div>
 
                 <div className="donate-paypal">
@@ -194,32 +198,30 @@ const Donate = () => {
                             </>
                         )}
                     </div>
+                    {isPaymentSelected && amount > 0 && !error && (
+                        <PayPalButtons
+                            createOrder={(data, actions) => {
+                                return actions.order.create({
+                                    purchase_units: [{ amount: { value: amount.toString() } }],
+                                });
+                            }}
+                            onApprove={(data, actions) => {
+                                return actions.order.capture().then(handleSuccess);
+                            }}
+                            onError={(err) => {
+                                console.error("PayPal transaction error: ", err);
+                                alert("An error occurred during the transaction. Please try again.");
+                            }}
+                        />
+                    )}
                     <div className="payment-button">
                         <button
                             onClick={() => setIsPaymentSelected(true)}
-                            disabled={false} // Always enable this button to toggle the input visibility.
                         >
                             Donate Now
                         </button>
                     </div>
                 </div>
-
-                {isPaymentSelected && amount > 0 && !error && (
-                    <PayPalButtons
-                        createOrder={(data, actions) => {
-                            return actions.order.create({
-                                purchase_units: [{ amount: { value: amount.toString() } }],
-                            });
-                        }}
-                        onApprove={(data, actions) => {
-                            return actions.order.capture().then(handleSuccess);
-                        }}
-                        onError={(err) => {
-                            console.error("PayPal transaction error: ", err);
-                            alert("An error occurred during the transaction. Please try again.");
-                        }}
-                    />
-                )}
             </div>
             <Footer />
         </PayPalScriptProvider>
