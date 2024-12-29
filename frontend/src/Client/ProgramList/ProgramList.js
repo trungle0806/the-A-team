@@ -3,6 +3,7 @@ import axios from "axios";
 import { CiHeart } from "react-icons/ci";
 import { useFavorites } from "../../Context/FavoritesContext";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./ProgramList.css";
 import Header from "../../Components/Header/Header";
@@ -13,6 +14,7 @@ const ProgramList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -41,6 +43,10 @@ const ProgramList = () => {
         "Congratulations! You've added this program to your favorites."
       );
     }
+  };
+
+  const handleDonateClick = (programId) => {
+    navigate(`/donate/${programId}`);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -105,6 +111,12 @@ const ProgramList = () => {
                               }`}
                               onClick={() => toggleFavorite(program)}
                             />
+                            <button
+                              className="program-donate-btn"
+                              onClick={() => handleDonateClick(program.programId)}
+                            >
+                              Donate
+                            </button>
                           </div>
                         </div>
                       ))

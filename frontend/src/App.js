@@ -26,6 +26,7 @@ import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import NGODetails from "./Admin/NGOs/NGODetails/NGODetails";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
+import Donate from "./Client/Donate/Donate";
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/news" element={<News />} />
           <Route path="/program" element={<ProgramList />} />
+          <Route path="/donate/:programId" element={<Donate />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/favorites" element={<Favorites />} />
