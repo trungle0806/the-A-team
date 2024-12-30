@@ -13,6 +13,7 @@ import Profile from "./Client/Profile/Profile";
 import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
+import ThankYouBill from "./Client/Bill/ThankYouBill";
 
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/thank-you" element={<ThankYouBill />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>

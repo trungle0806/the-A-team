@@ -1,7 +1,15 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import "./ThankYouBill.css";
 
-const ThankYouBill = ({ donationData }) => {
+const ThankYouBill = () => {
+  const { state } = useLocation();
+  const { donationData } = state || {};
+
+  if (!donationData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="container">
       <div className="logo">
@@ -13,7 +21,8 @@ const ThankYouBill = ({ donationData }) => {
       </div>
       <div className="details">
         <p>
-          <span className="label">Người quyên góp:</span> {donationData.donorName}
+          <span className="label">Người quyên góp:</span>{" "}
+          {donationData.donorName}
         </p>
         <p>
           <span className="label">Email:</span> {donationData.donorEmail}
