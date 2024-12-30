@@ -1,9 +1,11 @@
+// File: ProgramService.js
+
 import axios from 'axios';
 
 const API_URL = 'http://localhost:5024/api/Program1/'; // Địa chỉ API của Program1Controller
 
 // Fetch all Program1s (Admin, User, and NGO roles)
-const getProgram1s = async (searchQuery = '') => {
+const getProgram1s = async (searchQuery = '', page = 1, pageSize = 10) => {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role'); // Vai trò người dùng
     try {
@@ -11,7 +13,7 @@ const getProgram1s = async (searchQuery = '') => {
             throw new Error('Unauthorized: Access is restricted to Admins, Users, and NGOs.');
         }
         const response = await axios.get(API_URL, {
-            params: { searchQuery },
+            params: { searchQuery, page, pageSize },
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -91,12 +93,12 @@ const deleteProgram1 = async (id) => {
         if (role !== 'Admin') {
             throw new Error('Unauthorized: Only Admins can delete Program1s.');
         }
-        const response = await axios.delete(`${API_URL}${id}`, {
+        await axios.delete(`${API_URL}${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return response.data;
+        return true;
     } catch (error) {
         console.error(`Failed to delete Program1 with ID ${id}:`, error.response?.data || error.message);
         throw error;

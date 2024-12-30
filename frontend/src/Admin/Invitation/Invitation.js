@@ -92,7 +92,7 @@ const InvitationAdmin = () => {
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Search invitations"
-          className="search-input"
+          className="search-input1"
         />
       </div>
 
