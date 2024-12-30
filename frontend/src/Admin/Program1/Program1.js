@@ -1,3 +1,5 @@
+// File: AdminProgramManagement.js
+
 import React, { useEffect, useState } from 'react';
 import { getProgram1s, addProgram1, updateProgram1, deleteProgram1 } from '../ServiceAdmin/ProgramService';
 import './Program1.css';
@@ -15,8 +17,7 @@ const AdminProgramManagement = () => {
     const fetchPrograms = async () => {
         try {
             const data = await getProgram1s(searchQuery);
-            const programList = data?.$values || [];
-            setPrograms(programList);
+            setPrograms(data?.$values || []);
         } catch (error) {
             console.error('Error fetching programs:', error.message);
         }

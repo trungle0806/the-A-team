@@ -30,7 +30,7 @@ function Authentication() {
         <div className="logo">
           <a className="admin-dark">
             <img
-              src="https://modernize-nextjs.adminmart.com/images/logos/dark-logo.svg"
+              src="https://www.charitynavigator.org/content/dam/cn/cn/logos/CharityNav_Logo_Hor1.png"
               className="admin-light"
               alt="Logo"
             />
@@ -38,6 +38,9 @@ function Authentication() {
         </div>
         <nav className="admin-nav">
           <ul>
+            <li>
+              <Link to="dashboard">Dashboard</Link>
+            </li>
             <li>
               <Link to="customers">Customers</Link>
             </li>
@@ -151,29 +154,28 @@ function Authentication() {
               </Link>
             </li>
             <li>
-              <Link to="product" className="admin-mobile-list">
-                Product
-              </Link>
+              <Link to="galleryimage" className="admin-mobile-list">GalleryImage</Link>
             </li>
             <li>
-              <Link to="order" className="admin-mobile-list">
-                Order
-              </Link>
+              <Link to="inviation" className="admin-mobile-list">Invitation</Link>
             </li>
             <li>
-              <Link to="inventory" className="admin-mobile-list">
-                Inventory
-              </Link>
+              <Link to="ngo" className="admin-mobile-list">NGOs</Link>
             </li>
             <li>
-              <Link to="news" className="admin-mobile-list">
-                News
-              </Link>
+              <Link to="partner" className="admin-mobile-list">Partner</Link>
             </li>
             <li>
-              <Link to="users" className="admin-mobile-list">
-                Users
-              </Link>
+              <Link to="program1" className="admin-mobile-list">Program1</Link>
+            </li>
+            <li>
+              <Link to="programDonation" className="admin-mobile-list">Donation</Link>
+            </li>
+            <li>
+              <Link to="query" className="admin-mobile-list">Query</Link>
+            </li>
+            <li>
+              <Link to="transactionhistory" className="admin-mobile-list">TransactionHistory</Link>
             </li>
           </ul>
         </nav>

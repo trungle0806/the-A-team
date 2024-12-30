@@ -17,6 +17,7 @@ import Donate from "./Client/Donate/Donate";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
 // Admin routes
+import Dashboard from "./Admin/Dashboard/Dashboard";
 import CustomerManagement from "./Admin/Customer/CustomerManagement";
 import GalleryImage from "./Admin/GalleryImage/Image";
 import Inviation from "./Admin/Invitation/Invitation";
@@ -54,6 +55,7 @@ function App() {
 
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="customers" element={<CustomerManagement />} />
             <Route path="galleryimage" element={<GalleryImage />} />
             <Route path="inviation" element={<Inviation />} />
