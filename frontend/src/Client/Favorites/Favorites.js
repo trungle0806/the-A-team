@@ -1,48 +1,62 @@
 import React from "react";
 import { useFavorites } from "../../Context/FavoritesContext";
-// Correct import for accessing the context
+import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
+import { FiTrash2, FiDollarSign } from "react-icons/fi"; // Import icon đồng tiền
+
 import "./Favorites.css";
 
 const Favorites = () => {
-  const { favorites, removeFromFavorites } = useFavorites(); // Access favorites and remove function from context
+  const { favorites, removeFromFavorites } = useFavorites();
+  const navigate = useNavigate();
+
+  const handleDonateClick = (programId) => {
+    navigate(`/donate/${programId}`);
+  };
 
   return (
     <div>
       <Header />
-
-      {/* Full-Width Banner with Text Overlay */}
       <div className="favorites-banner">
         <h1>Your Favorite Programs</h1>
       </div>
-
       <div className="favorites-container">
         {favorites.length === 0 ? (
           <p className="empty-message">You haven't added any favorites yet.</p>
         ) : (
           <div className="favorites-list">
-            {/* Table Header */}
             <div className="favorites-header">
+              <div className="favorites-column sl-column">SL</div>
+              <div className="favorites-column">Image</div>
               <div className="favorites-column">Name</div>
               <div className="favorites-column">Details</div>
-              <div className="favorites-column">Location</div>
-              <div className="favorites-column">Actions</div>{" "}
-              {/* For remove button */}
+              <div className="favorites-column">Actions</div>
             </div>
-
-            {/* List of Favorite Programs */}
-            {favorites.map((program) => (
+            {favorites.map((program, index) => (
               <div key={program.programId} className="favorite-card">
+                <div className="favorites-column sl-column">{index + 1}</div>
+                <div className="favorites-column">
+                  <img
+                    src={program.imageUrl || "default-image.jpg"}
+                    alt={program.name}
+                    className="program-image"
+                  />
+                </div>
                 <div className="favorites-column">{program.name}</div>
                 <div className="favorites-column">{program.details}</div>
-                <div className="favorites-column">{program.location}</div>
                 <div className="favorites-column">
                   <button
                     className="remove-btn"
-                    onClick={() => removeFromFavorites(program.programId)} // Remove from favorites on click
+                    onClick={() => removeFromFavorites(program.programId)}
                   >
-                    Remove
+                    <FiTrash2 size={18} /> {/* Icon xóa */}
+                  </button>
+                  <button
+                    className="donate-btn"
+                    onClick={() => handleDonateClick(program.programId)}
+                  >
+                    <FiDollarSign size={18} /> {/* Icon đồng tiền */}
                   </button>
                 </div>
               </div>
@@ -50,7 +64,6 @@ const Favorites = () => {
           </div>
         )}
       </div>
-
       <Footer />
     </div>
   );

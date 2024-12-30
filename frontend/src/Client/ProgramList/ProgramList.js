@@ -16,6 +16,7 @@ const ProgramList = () => {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const navigate = useNavigate();
 
+  // Fetch programs from API
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
@@ -25,6 +26,7 @@ const ProgramList = () => {
         setPrograms(programsData);
       } catch (err) {
         setError("Failed to fetch programs.");
+        toast.error("Failed to load programs.");
       } finally {
         setLoading(false);
       }
@@ -33,8 +35,12 @@ const ProgramList = () => {
     fetchPrograms();
   }, []);
 
+  // Toggle favorite status for a program
   const toggleFavorite = (program) => {
-    if (favorites.some((fav) => fav.programId === program.programId)) {
+    const isFavorite = favorites.some(
+      (fav) => fav.programId === program.programId
+    );
+    if (isFavorite) {
       removeFromFavorites(program.programId);
       toast.success("Program removed from your favorites.");
     } else {
@@ -45,12 +51,13 @@ const ProgramList = () => {
     }
   };
 
+  // Handle donation click
   const handleDonateClick = (programId) => {
     navigate(`/donate/${programId}`);
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
     <div>
@@ -110,10 +117,14 @@ const ProgramList = () => {
                                   : ""
                               }`}
                               onClick={() => toggleFavorite(program)}
+                              aria-label="Toggle favorite"
                             />
                             <button
                               className="program-donate-btn"
-                              onClick={() => handleDonateClick(program.programId)}
+                              onClick={() =>
+                                handleDonateClick(program.programId)
+                              }
+                              aria-label="Donate to program"
                             >
                               Donate
                             </button>

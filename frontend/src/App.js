@@ -11,7 +11,10 @@ import Authentication from "./Admin/Authentication/Authentication";
 import AuthContext, { AuthProvider } from "./Context/AuthContext"; // Import AuthProvider
 import Profile from "./Client/Profile/Profile";
 import Favorites from "./Client/Favorites/Favorites";
-import ProgramList from "./Client/ProgramList/ProgramList"; // Đảm bảo đúng path
+import ProgramList from "./Client/ProgramList/ProgramList";
+import Donate from "./Client/Donate/Donate";
+
+import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
 // Admin routes
 import CustomerManagement from "./Admin/Customer/CustomerManagement";
@@ -25,8 +28,6 @@ import Query from "./Admin/Query/Query";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import NGODetails from "./Admin/NGOs/NGODetails/NGODetails";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
-import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
-import Donate from "./Client/Donate/Donate";
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -78,8 +79,6 @@ export default function WrappedApp() {
   return (
     <AuthProvider>
       <FavoritesProvider>
-        {" "}
-        {/* Wrap with FavoritesProvider */}
         <App />
       </FavoritesProvider>
     </AuthProvider>
