@@ -42,7 +42,7 @@
     margin-bottom: 2rem;
 }
 
-.target-amount, .total-donated, .progress-percentage {
+.target-amount, .total-donated, .progress-percentage, .excess-amount {
     font-size: 1.1rem;
     margin: 0.5rem 0;
     
