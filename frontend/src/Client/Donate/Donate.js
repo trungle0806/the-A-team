@@ -138,7 +138,12 @@ const Donate = () => {
     const totalDonationDays = calculateDonationDays(program.startDate, program.endDate);
     const remainingDonationDays = calculateRemainingDays(program.endDate);
     const organizationName = program.ngo?.name || "No organization";
-    const percentageAchieved = Math.min(program.percentageAchieved, 100);
+    const percentageAchieved =
+        program.targetAmount > 0
+            ? Math.min((program.totalDonatedAmount / program.targetAmount) * 100, 100)
+            : 0;
+
+
 
     return (
         <PayPalScriptProvider
