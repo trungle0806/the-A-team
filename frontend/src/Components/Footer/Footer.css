@@ -22,7 +22,7 @@
   flex: 1; /* Chia đều 50% */
   min-width: 300px; /* Đảm bảo kích thước tối thiểu */
   text-align: left;
-  padding-top: 20px;
+  /* padding-top: 20px; */
 }
 
 .footer-right {
@@ -97,23 +97,25 @@
   display: flex;
   justify-content: space-between;
   /* gap: 20px; */
-  margin-right: 202px;
+  /* margin-right: 202px; */
 }
 
 .footer-links {
   list-style: none;
   padding: 0;
   margin: 0;
+  padding-right: 40px;
+  width: 100%;
 }
 
 .footer-links li {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .footer-links li a {
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .footer-links li a:hover {
@@ -125,6 +127,7 @@
   justify-content: flex-start;
   gap: 15px;
   margin-top: 20px;
+  font-size: 40px;
 }
 
 .footer-bottom {
@@ -168,4 +171,28 @@
   margin-right: 150px;
   margin-bottom: 70px;
   padding-top: 15px;
+}
+.footer-123{
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.footer-g{
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.footer-faphone{
+  font-size: 1.4rem;
+}
+.face1{
+  color: white;
+  font-size: 1.5rem;
+}
+.program-icon-face{
+  margin-right: 50px;
+    display: flex;
+    margin-top: 25px;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
