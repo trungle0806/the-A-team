@@ -4,10 +4,15 @@ import { CiHeart } from "react-icons/ci";
 import { useFavorites } from "../../Context/FavoritesContext";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import "./ProgramList.css";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
+// import { FaAngleLeft } from "react-icons/fa";
+// import { FaAngleRight } from "react-icons/fa";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+
 
 const ProgramList = () => {
   const [programs, setPrograms] = useState([]);
@@ -15,8 +20,8 @@ const ProgramList = () => {
   const [error, setError] = useState("");
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch programs from API
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
@@ -26,7 +31,6 @@ const ProgramList = () => {
         setPrograms(programsData);
       } catch (err) {
         setError("Failed to fetch programs.");
-        toast.error("Failed to load programs.");
       } finally {
         setLoading(false);
       }
@@ -35,12 +39,8 @@ const ProgramList = () => {
     fetchPrograms();
   }, []);
 
-  // Toggle favorite status for a program
   const toggleFavorite = (program) => {
-    const isFavorite = favorites.some(
-      (fav) => fav.programId === program.programId
-    );
-    if (isFavorite) {
+    if (favorites.some((fav) => fav.programId === program.programId)) {
       removeFromFavorites(program.programId);
       toast.success("Program removed from your favorites.");
     } else {
@@ -51,13 +51,22 @@ const ProgramList = () => {
     }
   };
 
-  // Handle donation click
   const handleDonateClick = (programId) => {
     navigate(`/donate/${programId}`);
   };
 
-  if (loading) return <div className="loading">Loading...</div>;
-  if (error) return <div className="error">{error}</div>;
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPrograms = programs.filter(
+    (program) =>
+      program.name &&
+      program.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div>
@@ -65,10 +74,29 @@ const ProgramList = () => {
       <div className="program-header">
         <div className="program-list1">
           <h1 className="program-list">PROGRAM LIST</h1>
+
           <div className="program-to">
-            <div className="program-to2">
+            
+            <div className="program-to2">          
               <div className="program-to3">
+                
                 <div className="program-sidebar">
+                  <div className="search-bar3">
+                    <div className="program-container">
+                      <div className="program-content">
+                        <input
+                          type="text"
+                          placeholder="Search..."
+                          value={searchTerm}
+                          onChange={handleSearch}
+                        />
+                        <button className="program-btn1">
+                          <FaSearch className="program-fa" />
+                        </button>
+
+                      </div>
+                    </div>
+                  </div>
                   <h1 className="program-title">Charity</h1>
                   <div className="program-border"></div>
                   <ul className="program-categor">
@@ -81,7 +109,79 @@ const ProgramList = () => {
                   </ul>
                 </div>
                 <div className="program-col">
-                  <div className="program-grid">
+                  <div class="bwp-top-bar top clearfix">  
+                    <div class="woocommerce-notices-wrapper"></div>  
+                      <ul class="display hidden-sm hidden-xs pull-left">  
+                 <li>  
+                     <a data-col="col-lg-6 col-md-4 col-sm-6" class="view-grid two"   
+                        href="">  
+                     <span class="icon-column">  
+                    <span class="layer first">  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                    <span class="layer middle">  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                    <span class="layer last">  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                </span>  
+            </a>  
+        </li>  
+        <li>  
+            <a data-col="col-lg-4 col-md-4 col-sm-6" class="view-grid three"   
+               href="/product-category/classic/?category-view-mode=grid&amp;product_col_large=3">  
+                <span class="icon-column">  
+                    <span class="layer first">  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                    <span class="layer middle">  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                    <span class="layer last">  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                </span>  
+            </a>  
+        </li>  
+        <li>  
+            <a data-col="col-lg-3 col-md-4 col-sm-6" class="view-grid four active"   
+               href="/product-category/classic/?category-view-mode=grid&amp;product_col_large=4">  
+                <span class="icon-column">  
+                    <span class="layer first">  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                    <span class="layer middle">  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                    <span class="layer last">  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                        <span></span>  
+                    </span>  
+                </span>  
+            </a>  
+        </li>  
+    </ul>    
+    
+</div>                       
+                 <div className="program-grid">
                     {programs.length === 0 ? (
                       <p>No programs available.</p>
                     ) : (
@@ -108,6 +208,7 @@ const ProgramList = () => {
                               <strong>Is about to happen:</strong>{" "}
                               {program.isUpcoming ? "Yes" : "No"}
                             </p>
+                            <div className="program-ci">
                             <CiHeart
                               className={`program-heart ${
                                 favorites.some(
@@ -128,15 +229,78 @@ const ProgramList = () => {
                             >
                               Donate
                             </button>
+                            </div>
                           </div>
                         </div>
                       ))
                     )}
                   </div>
+                  <ul class="pagination program-grid__pagination">
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">
+                        {/* <i className="pagination-item__icon FaAngleLeft "></i> */}
+                        <MdKeyboardArrowLeft className="program-left" />
+                    </a>
+                  </li>
+
+                  
+                  <li class="pagination-item pagination-item--active">
+                    <a href="" className="pagination-item__link">1</a>
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">2</a>
+                    
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">3</a>
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">...</a>
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">6</a>
+                  </li>
+
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">
+                        <i className="pagination-iitem__icon FaAnglerigth "></i>
+                    </a>
+                  </li>
+                </ul> 
                 </div>
               </div>
             </div>
           </div>
+          {/* <ul class="pagination">
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">
+                        <i className="pagination-iitem__icon FaAngleLeft "></i>
+                    </a>
+                  </li>
+
+                  
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">1</a>
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">2</a>
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">3</a>
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">...</a>
+                  </li>
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">6</a>
+                  </li>
+
+                  <li class="pagination-item">
+                    <a href="" className="pagination-item__link">
+                        <i className="pagination-iitem__icon FaAnglerigth "></i>
+                    </a>
+                  </li>
+                </ul>  */}
         </div>
         <ToastContainer />
         <Footer />
