@@ -107,7 +107,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div>
+    <div className="body-register">
       <Header />
       <div className="form-container-register">
         {/* <img

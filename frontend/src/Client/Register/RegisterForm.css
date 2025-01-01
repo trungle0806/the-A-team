@@ -1,4 +1,17 @@
 /* Form.css */
+.body-register {
+  background-image: url("https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Đường dẫn tới hình ảnh nền */
+  background-size: cover; /* Tự động co dãn để phủ hết màn hình */
+  background-position: center center; /* Đặt hình ảnh ở giữa màn hình */
+  background-attachment: fixed; /* Nền cố định khi cuộn trang */
+  background-repeat: no-repeat; /* Không lặp lại hình ảnh nền */
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 .form-container-register {
   width: 100%;
   max-width: 400px;

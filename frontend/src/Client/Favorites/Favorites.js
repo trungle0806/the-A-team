@@ -23,7 +23,14 @@ const Favorites = () => {
       </div>
       <div className="favorites-container">
         {favorites.length === 0 ? (
-          <p className="empty-message">You haven't added any favorites yet.</p>
+          <div className="empty-message">
+            <img
+              src="https://png.pngtree.com/png-vector/20190716/ourlarge/pngtree-add-to-favorite-icon-trendy-style-isolated-background-png-image_1543111.jpg"
+              alt="No favorites"
+              className="empty-image"
+            />
+            <p>You haven't added any favorites yet.</p>
+          </div>
         ) : (
           <div className="favorites-list">
             <div className="favorites-header">

@@ -212,6 +212,17 @@
   color: #487fff;
   font-weight: bold;
 }
+.empty-message {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.empty-image {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
