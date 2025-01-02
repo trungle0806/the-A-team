@@ -239,7 +239,7 @@
 }  
 
 .program-btn1:hover {  
-  background-color: #ff4d4d;  
+  background-color: #0a2440;  
 }  
 
 .program-btn1 .program-fa {  
@@ -526,7 +526,7 @@ list-style: none;
   background-color: #EE4D2D;
 }
 .pagination-item--active .pagination-item__link{
-  background-color: #ed5c3f;
+  background-color: #0a2440;
 }
 .pagination-item__link{
 
