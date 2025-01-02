@@ -64,10 +64,28 @@
   transition: background 0.3s;
 }
 
-.admin-nav a:hover {
+.admin-nav a:hover{
   background-color: #34495e;
   color: #fff;
 }
+
+/* .admin-nav ul li .active a {
+  background-color: #34495e;
+  color: #fff;
+} */
+
+.admin-nav ul li.active a {
+  background-color: #34495e;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+  padding: 10px 20px;
+  display: block;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
 
 /* Main Content */
 .admin-main {
@@ -213,7 +231,7 @@
 
 .admin-content {
   height: 100%;
-  padding-top: 20px;
+  /* padding-top: 20px; */
   background-color: #fff;
 }
 

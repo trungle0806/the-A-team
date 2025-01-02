@@ -1,6 +1,8 @@
 import React from 'react';
 import './Dashboard.css';
+import { IoMdArrowDropdown } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { RiArrowUpSFill } from "react-icons/ri";
 
 const Dashboard = () => {
     return (
@@ -142,7 +144,7 @@ const Dashboard = () => {
                                 <h6 className='dashboard-nav'>$27,200</h6>
                                 <span className='dashboard-one'>
                                     10%
-                                    <i className='dashboard-bxs'></i>
+                                    <i className='dashboard-bxs'><RiArrowUpSFill /></i>
                                 </span>
                                 <span className='dashboard-two'>+ $1500 Per Day</span>
                             </div>
@@ -159,7 +161,7 @@ const Dashboard = () => {
                                 <p className='dashboard-mbo'>
                                     <span className='dashboard-focus'>
                                         10%
-                                        <i className='dashboard-bxs1'></i>
+                                        <i className='dashboard-bxs1'><IoMdArrowDropdown /></i>
                                     </span>
                                         - 20 Per Day
                                 </p>

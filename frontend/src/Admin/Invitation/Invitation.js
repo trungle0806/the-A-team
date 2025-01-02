@@ -5,6 +5,8 @@ import {
   updateInvitation,
   deleteInvitation,
 } from '../ServiceAdmin/InvitationService';
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBinFill } from "react-icons/ri";
 import './Invitation.css';
 
 const InvitationAdmin = () => {
@@ -60,17 +62,23 @@ const InvitationAdmin = () => {
     }
   };
 
-  const handleUpdateInvitation = async (id) => {
+  const handleUpdateInvitation = async () => {
+    if (!currentInvitation || !currentInvitation.InvitationId) {
+      setError('Invitation ID is missing.');
+      return;
+    }
+  
     try {
-      const updatedInvitation = await updateInvitation(id, currentInvitation);
+      const updatedInvitation = await updateInvitation(currentInvitation.InvitationId, currentInvitation);
       setInvitations(invitations.map((invitation) =>
-        invitation.InvitationId === id ? updatedInvitation : invitation
+        invitation.InvitationId === currentInvitation.InvitationId ? updatedInvitation : invitation
       ));
-      setCurrentInvitation(null);
+      setCurrentInvitation(null); // Reset form after update
     } catch (err) {
       setError('Failed to update invitation.');
     }
   };
+  
 
   const handleDeleteInvitation = async (id) => {
     try {
@@ -94,23 +102,6 @@ const InvitationAdmin = () => {
           placeholder="Search invitations"
           className="search-input1"
         />
-      </div>
-
-      <div className="invitation-list">
-        {invitations.map((invitation) => (
-          <div key={invitation.InvitationId} className="invitation-card">
-            <h3 className="invitation-card-title">{invitation.title}</h3>
-            <p>{`Description: ${invitation.description}`}</p>
-            <p>{`Date: ${invitation.date}`}</p>
-            <p>{`Sender ID: ${invitation.senderId}`}</p>
-            <p>{`Recipient Email: ${invitation.recipientEmail}`}</p>
-            <p>{`Message: ${invitation.message}`}</p>
-            <p>{`Status: ${invitation.status}`}</p>
-            <p>{`Sent At: ${invitation.sentAt}`}</p>
-            <button className="edit-button" onClick={() => setCurrentInvitation(invitation)}>Edit</button>
-            <button className="delete-button" onClick={() => handleDeleteInvitation(invitation.InvitationId)}>Delete</button>
-          </div>
-        ))}
       </div>
 
       <div className="add-invitation-form">
@@ -162,6 +153,23 @@ const InvitationAdmin = () => {
         <button onClick={handleAddInvitation}>Add Invitation</button>
       </div>
 
+      <div className="invitation-list">
+        {invitations.map((invitation) => (
+          <div key={invitation.InvitationId} className="invitation-card">
+            <h3 className="invitation-card-title">{invitation.title}</h3>
+            <p>{`Description: ${invitation.description}`}</p>
+            <p>{`Date: ${invitation.date}`}</p>
+            <p>{`Sender ID: ${invitation.senderId}`}</p>
+            <p>{`Recipient Email: ${invitation.recipientEmail}`}</p>
+            <p>{`Message: ${invitation.message}`}</p>
+            <p>{`Status: ${invitation.status}`}</p>
+            <p>{`Sent At: ${invitation.sentAt}`}</p>
+            <button className="edit-button1" onClick={() => setCurrentInvitation(invitation)}><FiEdit /></button>
+            <button className="delete-button1" onClick={() => handleDeleteInvitation(invitation.InvitationId)}><RiDeleteBinFill /></button>
+          </div>
+        ))}
+      </div>
+
       {currentInvitation && (
         <div className="edit-invitation-form">
           <h2>Edit Invitation</h2>
@@ -171,8 +179,45 @@ const InvitationAdmin = () => {
             value={currentInvitation.title}
             onChange={(e) => setCurrentInvitation({ ...currentInvitation, title: e.target.value })}
           />
-          {/* Add similar fields for other properties */}
-          <button onClick={() => handleUpdateInvitation(currentInvitation.InvitationId)}>Update Invitation</button>
+          <textarea
+            placeholder="Description"
+            value={currentInvitation.description}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, description: e.target.value })}
+          />
+          <input
+            type="date"
+            value={currentInvitation.date}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, date: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Sender ID"
+            value={currentInvitation.senderId}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, senderId: e.target.value })}
+          />
+          <input
+            type="email"
+            placeholder="Recipient Email"
+            value={currentInvitation.recipientEmail}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, recipientEmail: e.target.value })}
+          />
+          <textarea
+            placeholder="Message"
+            value={currentInvitation.message}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, message: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Status"
+            value={currentInvitation.status}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, status: e.target.value })}
+          />
+          <input
+            type="datetime-local"
+            value={currentInvitation.sentAt}
+            onChange={(e) => setCurrentInvitation({ ...currentInvitation, sentAt: e.target.value })}
+          />
+          <button onClick={handleUpdateInvitation}>Update Invitation</button>
         </div>
       )}
     </div>

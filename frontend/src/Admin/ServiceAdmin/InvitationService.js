@@ -79,9 +79,13 @@ const addInvitation = async (invitation) => {
 const updateInvitation = async (id, updatedInvitation) => {
     const { headers, role } = getAuthHeaders();
     try {
-
         if (!['Admin', 'NGO'].includes(role)) {
             throw new Error('Unauthorized: Only Admin and NGO roles can update invitations.');
+        }
+
+        // Ensure `id` is properly passed to the URL
+        if (!id) {
+            throw new Error('Invalid invitation ID.');
         }
 
         const response = await axios.put(`${API_URL}${id}`, updatedInvitation, { headers });
@@ -91,6 +95,7 @@ const updateInvitation = async (id, updatedInvitation) => {
         throw error;
     }
 };
+
 
 // Xóa lời mời (Admin role only)
 const deleteInvitation = async (id) => {

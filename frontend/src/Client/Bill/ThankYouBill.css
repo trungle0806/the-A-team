@@ -8,7 +8,7 @@
     text-align: center;
   }
   
-  .logo img {
+  .logo-chartity img {
     max-width: 150px;
     margin-bottom: 20px;
   }
@@ -33,14 +33,37 @@
     font-weight: bold;
   }
   
-  .footer {
+  .footer1 {
+    background-color: #0a2440;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 50px 20px;
     margin-top: 30px;
     color: #888;
     font-size: 0.9em;
   }
   
-  .footer a {
+  .footer1 a {
     color: #4CAF50;
     text-decoration: none;
   }
   
+  .go-home-btn {
+    padding: 10px 20px;
+    /* background-color: #4CAF50; */
+    color: #4CAF50;
+    border-bottom: 1px solid #4CAF50;
+    /* border: none; */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .go-home-btn:hover {
+    /* background-color: #45a049; */
+  }
+  
+  .thank-ted{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }

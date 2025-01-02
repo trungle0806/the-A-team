@@ -143,7 +143,7 @@ const AdminNGOManagement = () => {
         </thead>
         <tbody>
           {filteredNgos.map((ngo) => (
-            <tr key={ngo.id}>
+            <tr key={ngo.id}> {/* Đảm bảo ngo.id là duy nhất */}
               <td>{ngo.id}</td>
               <td className="ngo-name">{ngo.name}</td>
               <td className="ngo-description">{ngo.description}</td>

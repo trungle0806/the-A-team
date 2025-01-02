@@ -115,7 +115,7 @@ body {
 }
 
 .contact-submit {
-  background-color: #007bff;
+  background-color: #0a2440;
   color: white;
   border: none;
   padding: 15px;
@@ -129,7 +129,8 @@ body {
 }
 
 .contact-submit:hover {
-  background-color: #0056b3;
+  background-color: #fff;
+  color: #0a2440;
 }
 
 /* Phần bản đồ */

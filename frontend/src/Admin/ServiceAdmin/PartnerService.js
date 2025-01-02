@@ -82,6 +82,13 @@ const updatePartner = async (id, updatedPartner) => {
         throw new Error('Unauthorized: Only Admins and NGOs can update Partner information.');
     }
 
+    console.log('Updating Partner with ID:', id);
+
+    if (!id) {
+        console.error('Partner ID is missing.');
+        throw new Error('Partner ID is missing.');
+    }
+
     try {
         const response = await axios.put(`${API_URL}${id}`, updatedPartner, { headers });
         return response.data;

@@ -6,6 +6,10 @@ import {
     deleteCustomer,
     searchCustomers,
 } from '../ServiceAdmin/CustomerService'; // Adjust the path if necessary
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FiSearch } from "react-icons/fi";
+import { FaUserPlus } from "react-icons/fa";
 import './Customer.css';
 
 const CustomerManagement = () => {
@@ -13,6 +17,12 @@ const CustomerManagement = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [newCustomer, setNewCustomer] = useState({ name: '', email: '', phone: '' });
     const [editingCustomer, setEditingCustomer] = useState(null);
+    const [showForm, setShowForm] = useState(false);
+
+    const toggleForm = () => {
+        setShowForm(!showForm);
+    };
+
 
     const validateAuth = () => {
         const token = localStorage.getItem('authToken');
@@ -74,47 +84,19 @@ const CustomerManagement = () => {
 
     return (
         <div className="customer-management">
-            <h1>Customer Management</h1>
+            {/* <h1>Customer Management</h1> */}
             <div className="search-column">
-                <input
+                <input className='search-field'
                     type="text"
                     placeholder="Search customers..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
+                <i className='customer-search'><FiSearch /></i>
+                    <a className='customer-setbin' onClick={toggleForm}><FaUserPlus /></a>
             </div>
-            <div className="customer-list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {customers.map((customer) => (
-                            <tr key={customer.customerId}>
-                                <td>{customer.customerId}</td>
-                                <td>{`${customer.firstName} ${customer.lastName}`}</td>
-                                <td>{customer.accountId.email || 'N/A'}</td>
-                                <td>{customer.phoneNumber || 'N/A'}</td>
-                                <td>
-                                    <button onClick={() => setEditingCustomer(customer)}>
-                                        Edit
-                                    </button>
-                                    <button onClick={() => handleDeleteCustomer(customer.customerId)}>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            <div className="customer-form">
+
+            <div className={`customer-form ${showForm ? 'show' : 'hide'}`}>
                 <h2>{editingCustomer ? 'Edit Customer' : 'Add Customer'}</h2>
                 <input
                     type="text"
@@ -149,6 +131,38 @@ const CustomerManagement = () => {
                 <button onClick={editingCustomer ? handleUpdateCustomer : handleAddCustomer}>
                     {editingCustomer ? 'Update' : 'Add'}
                 </button>
+            </div>
+
+            <div className="customer-list">
+                <table className='customer-table'>
+                    <thead className='customer-thead'> 
+                        <tr className='customer-tr'>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody className='customer-tbody'>
+                        {customers.map((customer) => (
+                            <tr key={customer.customerId}>
+                                <td>{customer.customerId}</td>
+                                <td>{`${customer.firstName} ${customer.lastName}`}</td>
+                                <td>{customer.accountId.email || 'N/A'}</td>
+                                <td>{customer.phoneNumber || 'N/A'}</td>
+                                <td>
+                                    <button className='customer-btn' onClick={() => setEditingCustomer(customer)}>
+                                        <FiEdit />
+                                    </button>
+                                    <button className='customer-delete' onClick={() => handleDeleteCustomer(customer.customerId)}>
+                                        <RiDeleteBin6Line />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

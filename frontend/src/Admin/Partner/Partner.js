@@ -27,6 +27,9 @@ const AdminPartnersManagement = () => {
     try {
       const data = await getPartners(searchQuery);
       const partnerList = data?.$values || [];
+
+      console.log("Fetched partners:", partnerList);
+
       setPartners(partnerList);
     } catch (error) {
       console.error("Error fetching partners:", error.message);
@@ -46,15 +49,21 @@ const AdminPartnersManagement = () => {
 
   const handleUpdatePartner = async () => {
     try {
-      if (selectedPartner) {
-        await updatePartner(selectedPartner.id, selectedPartner);
+      // Kiểm tra partnerId thay vì id
+      if (selectedPartner && selectedPartner.partnerId) {
+        console.log('Updating partner with ID:', selectedPartner.partnerId);
+        await updatePartner(selectedPartner.partnerId, selectedPartner); // Sử dụng partnerId
         setSelectedPartner(null);
         fetchPartners();
+      } else {
+        console.error('Partner ID is missing');
       }
     } catch (error) {
       console.error("Error updating partner:", error.message);
     }
   };
+  
+  
 
   const handleDeletePartner = async (id) => {
     try {
@@ -145,7 +154,7 @@ const AdminPartnersManagement = () => {
 
               {/* Icon Edit */}
               <button
-                onClick={() => setSelectedPartner(partner)}
+                onClick={() => {console.log("Selected partner:", partner); setSelectedPartner(partner);}}
                 className="edit-icon-btn1"
               >
                 <i className="fas fa-edit"></i> {/* Icon Edit */}

@@ -42,12 +42,13 @@
 
 .invitation-list {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-around;
   margin-bottom: 30px;
 }
 
 .invitation-card {
+  text-align: center;
   width: 45%;
   margin: 15px;
   background-color: #f9f9f9;
@@ -80,8 +81,19 @@
   margin-bottom: 15px;
 }
 
-.edit-button, .delete-button {
-  background-color: #007bff;
+.edit-button1 {
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button1 {
+  background-color: red;
   color: white;
   border: none;
   padding: 8px 15px;

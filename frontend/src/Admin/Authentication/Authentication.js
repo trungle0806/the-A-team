@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
@@ -12,6 +12,7 @@ import "./Authentication.css";
 function Authentication() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
   const [isRightMenuOpen, setIsRightMenuOpen] = useState(false); // State for right menu
+  const location = useLocation();
 
   // Toggle sidebar visibility
   const toggleSidebar = () => {
@@ -22,6 +23,9 @@ function Authentication() {
   const toggleRightMenu = () => {
     setIsRightMenuOpen(!isRightMenuOpen);
   };
+
+  // Function to check if the current link is active
+  const isActive = (path) => location.pathname.includes(path);
 
   return (
     <div className="admin-container">
@@ -38,34 +42,34 @@ function Authentication() {
         </div>
         <nav className="admin-nav">
           <ul>
-            <li>
+            <li className={isActive("dashboard") ? "active" : ""}>
               <Link to="dashboard">Dashboard</Link>
             </li>
-            <li>
+            <li className={isActive("customers") ? "active" : ""}>
               <Link to="customers">Customers</Link>
             </li>
-            <li>
+            <li className={isActive("galleryimage") ? "active" : ""}>
               <Link to="galleryimage">GalleryImage</Link>
             </li>
-            <li>
+            <li className={isActive("inviation") ? "active" : ""}>
               <Link to="inviation">Invitation</Link>
             </li>
-            <li>
+            <li className={isActive("ngo") ? "active" : ""}>
               <Link to="ngo">NGOs</Link>
             </li>
-            <li>
+            <li className={isActive("partner") ? "active" : ""}>
               <Link to="partner">Partner</Link>
             </li>
-            <li>
+            <li className={isActive("program1") ? "active" : ""}>
               <Link to="program1">Program1</Link>
             </li>
-            <li>
+            <li className={isActive("programDonation") ? "active" : ""}>
               <Link to="programDonation">Donation</Link>
             </li>
-            <li>
+            <li className={isActive("query") ? "active" : ""}>
               <Link to="query">Query</Link>
             </li>
-            <li>
+            <li className={isActive("transactionhistory") ? "active" : ""}>
               <Link to="transactionhistory">TransactionHistory</Link>
             </li>
           </ul>

@@ -28,7 +28,7 @@
       border-radius: 8px;
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
-      padding: 15px;
+      padding: 14px;
       background-color: #fff;
       width: 29%;
       flex-direction: column;
@@ -224,7 +224,7 @@
   top: 50%;  
   right: 5px;  
   transform: translateY(-50%);  
-  background-color: #f86d72;  
+  background-color: #0a2440;  
   border: none;  
   color: white;  
   height: 35px;  
@@ -497,7 +497,7 @@ a {
   left: 18px;
 }
 .bwp-top-bar .display li a.active .icon-column .layer>span, .bwp-top-bar .display li a:hover .icon-column .layer>span {
-  background: #f86d72;
+  background: #0a2440;
 }
 .bwp-top-bar .display li a .icon-column .layer>span {
   position: absolute;
