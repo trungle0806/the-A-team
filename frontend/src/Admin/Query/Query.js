@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { getQueries, addQuery, updateQuery, deleteQuery } from '../ServiceAdmin/QueryService';
-import './Query.css';
+import React, { useState, useEffect } from "react";
+import {
+  getQueries,
+  addQuery,
+  updateQuery,
+  deleteQuery,
+} from "../ServiceAdmin/QueryService";
+import "./Query.css";
 
 const QueriesAdmin = () => {
   const [queries, setQueries] = useState([]);
-  const [newQuery, setNewQuery] = useState({ title: '', description: '', customerId: '' });
+  const [newQuery, setNewQuery] = useState({
+    title: "",
+    description: "",
+    customerId: "",
+  });
   const [editingQuery, setEditingQuery] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Fetch queries on component mount
   useEffect(() => {
@@ -16,22 +25,23 @@ const QueriesAdmin = () => {
         const queryList = mapQueryData(data); // Ánh xạ dữ liệu trả về
         setQueries(queryList);
       } catch (error) {
-        console.error('Error fetching queries:', error);
+        console.error("Error fetching queries:", error);
       }
     };
-  
     fetchQueries();
   }, [searchQuery]);
-  
+
   const mapQueryData = (data) => {
-    return data?.$values.map((item) => ({
-      id: item.queryId,
-      title: item.subject,
-      description: item.queryText,
-      customerId: item.customerId,
-      status: item.status,
-      createdAt: item.createdAt,
-    })) || [];
+    return (
+      data?.$values.map((item) => ({
+        id: item.queryId,
+        title: item.subject,
+        description: item.queryText,
+        customerId: item.customerId,
+        status: item.status,
+        createdAt: item.createdAt,
+      })) || []
+    );
   };
 
   // Handle adding a new query
@@ -43,14 +53,14 @@ const QueriesAdmin = () => {
         customerId: newQuery.customerId,
       };
       await addQuery(payload);
-      setNewQuery({ title: '', description: '', customerId: '' });
+      setNewQuery({ title: "", description: "", customerId: "" });
       const data = await getQueries(searchQuery); // Làm mới danh sách query
       setQueries(mapQueryData(data));
     } catch (error) {
-      console.error('Error adding query:', error);
+      console.error("Error adding query:", error);
     }
   };
-  
+
   const handleUpdateQuery = async () => {
     if (editingQuery) {
       try {
@@ -65,20 +75,19 @@ const QueriesAdmin = () => {
         const data = await getQueries(searchQuery); // Làm mới danh sách query
         setQueries(mapQueryData(data));
       } catch (error) {
-        console.error('Error updating query:', error);
+        console.error("Error updating query:", error);
       }
     }
   };
-  
 
   // Handle deleting a query
   const handleDeleteQuery = async (id) => {
     try {
       await deleteQuery(id);
-      const data = await getQueries(searchQuery);  // Refresh query list
+      const data = await getQueries(searchQuery); // Refresh query list
       setQueries(data);
     } catch (error) {
-      console.error('Error deleting query:', error);
+      console.error("Error deleting query:", error);
     }
   };
 
@@ -109,15 +118,21 @@ const QueriesAdmin = () => {
         <textarea
           placeholder="Description"
           value={newQuery.description}
-          onChange={(e) => setNewQuery({ ...newQuery, description: e.target.value })}
+          onChange={(e) =>
+            setNewQuery({ ...newQuery, description: e.target.value })
+          }
         />
         <input
           type="number"
           placeholder="Customer ID"
           value={newQuery.customerId}
-          onChange={(e) => setNewQuery({ ...newQuery, customerId: e.target.value })}
+          onChange={(e) =>
+            setNewQuery({ ...newQuery, customerId: e.target.value })
+          }
         />
-        <button className="add-button" onClick={handleAddQuery}>Add Query</button>
+        <button className="add-button" onClick={handleAddQuery}>
+          Add Query
+        </button>
       </div>
 
       {/* Query List */}
@@ -158,20 +173,28 @@ const QueriesAdmin = () => {
             type="text"
             placeholder="Query Title"
             value={editingQuery.title}
-            onChange={(e) => setEditingQuery({ ...editingQuery, title: e.target.value })}
+            onChange={(e) =>
+              setEditingQuery({ ...editingQuery, title: e.target.value })
+            }
           />
           <textarea
             placeholder="Description"
             value={editingQuery.description}
-            onChange={(e) => setEditingQuery({ ...editingQuery, description: e.target.value })}
+            onChange={(e) =>
+              setEditingQuery({ ...editingQuery, description: e.target.value })
+            }
           />
           <input
             type="number"
             placeholder="Customer ID"
             value={editingQuery.customerId}
-            onChange={(e) => setEditingQuery({ ...editingQuery, customerId: e.target.value })}
+            onChange={(e) =>
+              setEditingQuery({ ...editingQuery, customerId: e.target.value })
+            }
           />
-          <button className="update-button" onClick={handleUpdateQuery}>Update Query</button>
+          <button className="update-button" onClick={handleUpdateQuery}>
+            Update Query
+          </button>
         </div>
       )}
     </div>

@@ -42,12 +42,8 @@ const ProgramList = () => {
     );
     if (isFavorite) {
       removeFromFavorites(program.programId);
-      toast.success("Program removed from your favorites.");
     } else {
       addToFavorites(program);
-      toast.success(
-        "Congratulations! You've added this program to your favorites."
-      );
     }
   };
 

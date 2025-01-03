@@ -26,10 +26,9 @@ const Contact = () => {
       [name]: value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Lấy token từ localStorage
     const token = localStorage.getItem("token");
 
@@ -40,25 +39,36 @@ const Contact = () => {
     }
 
     // Gửi dữ liệu tới backend API
-    const response = await fetch("http://localhost:5024/api/query", {  // Đảm bảo URL này trỏ đúng tới backend
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,  // Gửi token trong header
-      },
-      body: JSON.stringify(formData),  // Chuyển formData thành JSON
-    });
-
-    if (response.ok) {
-      alert("Message sent successfully!");
-      setFormData({
-        fullName: "",
-        email: "",
-        subject: "",
-        message: "",
+    try {
+      const response = await fetch("http://localhost:5024/api/query", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Gửi token trong header
+        },
+        body: JSON.stringify(formData), // Chuyển formData thành JSON
       });
-    } else {
-      alert("Failed to send message.");
+
+      // Log phản hồi từ backend
+      const responseData = await response.json();
+      console.log("Response Data: ", responseData); // Để xem chi tiết
+
+      if (response.ok) {
+        alert("Message sent successfully!");
+        setFormData({
+          fullName: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert(
+          "Failed to send message: " + responseData.message || "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("An error occurred while sending the message.");
     }
   };
 
@@ -217,7 +227,6 @@ const Contact = () => {
         </div>
         <Footer />
       </div>
-      
     </div>
   );
 };
