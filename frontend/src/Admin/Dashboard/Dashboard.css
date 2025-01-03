@@ -535,7 +535,7 @@
 }
 
 .dashboard-two{
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 500;
     display: inline-block;
 }
@@ -593,6 +593,7 @@
     margin-top: 0;
 }
 .dashboard-focus{
+    margin-right: 10px;
     border: 1px solid #d1d5db80;
     font-size: 0.875rem;
     padding-block: 0.125rem;
@@ -614,6 +615,27 @@
     padding-right: calc(1.5rem* .5);
     padding-left: calc(1.5rem* .5);
     margin-top: 1.5rem;
+}
+.dashboard-one{
+    border: 1px solid #d1d5db80;
+    font-size: 0.875rem;
+    padding-block: 0.125rem;
+    padding-inline: 0.5rem;
+    background-color: rgba(69, 179, 105, 0.1490196078);;
+    color: #45b369;
+    border-radius: 50rem;
+    font-weight: 600;
+    gap: 0.25rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    align-items: center;
+    display: inline-flex;
+}
+.dashboard-bxs1{
+    font-size: 1rem;
+}
+.dashboard-bxs{
+    font-size: 1rem;
 }
 .dashboard-over{
     background-color: #fff;
