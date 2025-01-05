@@ -149,7 +149,7 @@ const CustomerManagement = () => {
                             <tr key={customer.customerId}>
                                 <td>{customer.customerId}</td>
                                 <td>{`${customer.firstName} ${customer.lastName}`}</td>
-                                <td>{customer.accountId.email || 'N/A'}</td>
+                                <td>{customer?.account?.email || 'N/A'}</td>
                                 <td>{customer.phoneNumber || 'N/A'}</td>
                                 <td>
                                     <button className='customer-btn' onClick={() => setEditingCustomer(customer)}>

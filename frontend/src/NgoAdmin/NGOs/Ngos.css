@@ -1,0 +1,257 @@
+/* General Styles */
+/* body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
+} */
+/* CSS cho ô tìm kiếm */
+.search-bar {
+  padding: 10px;
+  font-size: 1rem;
+  width: 300px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* CSS cho icon thêm tổ chức */
+.icon-btn-add {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px; /* Đặt kích thước cho icon */
+
+  padding: 12px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.search-icon1 {
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn-add i {
+  color: black; /* Màu sắc cho icon */
+}
+
+/* Nếu muốn thêm kiểu CSS cho vòng tròn bao quanh icon */
+.icon-btn-add:hover {
+  color: #333;
+}
+
+.icon-btn-add i {
+  font-size: 20px; /* Điều chỉnh kích thước icon */
+}
+
+.admin-ngo-management {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-ngo-management h1 {
+  font-size: 2rem;
+  color: #444;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Styles */
+.ngo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.ngo-form input,
+.ngo-form textarea,
+.ngo-form button {
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.ngo-form input:focus,
+.ngo-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.ngo-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.ngo-form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ngo-form button:hover {
+  background-color: #0056b3;
+}
+
+.ngo-form button[type="button"] {
+  background-color: #6c757d;
+}
+
+.ngo-form button[type="button"]:hover {
+  background-color: #495057;
+}
+
+/* Table Styles */
+.ngo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.ngo-table th,
+.ngo-table td {
+  padding: 1rem;
+  text-align: left;
+}
+.ngo-name {
+  font-size: 0.9rem;
+  /* line-height: 1; */
+  font-weight: 500;
+}
+.ngo-description {
+  font-size: 0.9rem;
+}
+.ngo-code {
+  font-size: 0.9rem;
+  color: #007bff;
+  cursor: pointer;
+}
+.ngo-achievements {
+  font-size: 0.9rem;
+}
+
+.ngo-table th {
+  background-color: #f5f6fa;
+  color: #000;
+  font-weight: bold;
+}
+
+.ngo-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.ngo-table img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Action Buttons */
+.ngo-table button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 100px;
+  gap: 10px;
+}
+
+/* .ngo-table button:nth-child(1) {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.ngo-table button:nth-child(1):hover {
+  background-color: #0056b3;
+}
+
+.ngo-table button:nth-child(2) {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.ngo-table button:nth-child(2):hover {
+  background-color: #a71d2a;
+} */
+.ngo-icon {
+  display: flex;
+  gap: 10px; /* Tăng khoảng cách giữa các icon */
+  justify-content: center; /* Căn giữa các icon */
+}
+
+.icon-btn1,
+.icon-btn2,
+.icon-btn3 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px; /* Tăng padding để biểu tượng không bị quá sát */
+  border-radius: 50%;
+  transition: all 0.3s ease; /* Thêm hiệu ứng khi hover */
+}
+
+.icon-btn1 {
+  background-color: #d1e9d9;
+}
+
+.icon-btn2 {
+  background-color: #ecbfab;
+}
+
+.icon-btn3 {
+  background-color: #b3c3ef;
+}
+
+.icon-btn:hover {
+  transform: scale(1.1); /* Phóng to icon khi hover */
+}
+
+.icon-btn1 i,
+.icon-btn2 i,
+.icon-btn3 i {
+  font-size: 13px; /* Kích thước nhỏ hơn */
+  font-weight: lighter; /* Làm mỏng icon */
+  opacity: 0.8; /* Tạo cảm giác nhẹ nhàng hơn */
+}
+
+.fa-edit {
+  color: #45b369;
+}
+
+.fa-trash-alt {
+  color: #ef4a00;
+}
+
+.fa-eye {
+  color: #487fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ngo-form {
+    gap: 0.8rem;
+  }
+
+  .ngo-table {
+    font-size: 0.9rem;
+  }
+
+  .ngo-table th,
+  .ngo-table td {
+    padding: 0.6rem;
+  }
+}
