@@ -29,6 +29,7 @@ import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
 
 // Ngo admin routes
+import Ngoadmin from "./NgoAdmin/Ngoad";
 import GalleryImage from "./NgoAdmin/GalleryImage/Image";
 import Ngos from "./NgoAdmin/NGOs/Ngos";
 import NgoDetails from "./NgoAdmin/NGOs/NGODetails/NGODetails";
@@ -71,7 +72,7 @@ function App() {
             <Route path="transactionhistory" element={<TransactionHistory />} />
           </Route>
 
-          <Route path="/ngoadmin" element={<Authentication />}>
+          <Route path="/ngo" element={<Ngoadmin />}>
             <Route path="galleryimage" element={<GalleryImage />} />
             <Route path="ngos" element={<Ngos />} />
             <Route path="ngodetails" element={<NgoDetails />} />

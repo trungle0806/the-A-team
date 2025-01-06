@@ -22,10 +22,15 @@ const LoginForm = () => {
   const handleNavigation = (role) => {
     if (role === "Admin") {
       navigate("/Admin", { state: { message: "Welcome Admin!" } });
-    } else {
+    } else if (role === "User") {
       navigate("/", { state: { message: "Login successful! Welcome back!" } });
+    } else if (role === "NGO") {
+      navigate("/ngo", { state: { message: "Welcome NgoAdmin!" } });
+    } else {
+      console.error("Invalid role provided:", role);
     }
   };
+  
 
   const loginRequest = async (emailOrUsername, password) => {
     setLoading(true);
