@@ -48,26 +48,20 @@ function Authentication() {
             <li className={isActive("customers") ? "active" : ""}>
               <Link to="customers">Customers</Link>
             </li>
-            <li className={isActive("galleryimage") ? "active" : ""}>
-              <Link to="galleryimage">GalleryImage</Link>
+            <li className={isActive("customerngo") ? "active" : ""}>
+              <Link to="customerngo">CustomerNgo</Link>
             </li>
             <li className={isActive("inviation") ? "active" : ""}>
               <Link to="inviation">Invitation</Link>
             </li>
-            <li className={isActive("ngo") ? "active" : ""}>
-              <Link to="ngo">NGOs</Link>
-            </li>
             <li className={isActive("partner") ? "active" : ""}>
               <Link to="partner">Partner</Link>
-            </li>
-            <li className={isActive("program1") ? "active" : ""}>
-              <Link to="program1">Program1</Link>
             </li>
             <li className={isActive("programDonation") ? "active" : ""}>
               <Link to="programDonation">Donation</Link>
             </li>
-            <li className={isActive("query") ? "active" : ""}>
-              <Link to="query">Query</Link>
+            <li className={isActive("censorngo") ? "active" : ""}>
+              <Link to="censorngo">CensorNgo</Link>
             </li>
             <li className={isActive("transactionhistory") ? "active" : ""}>
               <Link to="transactionhistory">TransactionHistory</Link>
@@ -158,25 +152,19 @@ function Authentication() {
               </Link>
             </li>
             <li>
-              <Link to="galleryimage" className="admin-mobile-list">GalleryImage</Link>
+              <Link to="customerngo" className="admin-mobile-list">CustomerNgo</Link>
             </li>
             <li>
               <Link to="inviation" className="admin-mobile-list">Invitation</Link>
             </li>
             <li>
-              <Link to="ngo" className="admin-mobile-list">NGOs</Link>
-            </li>
-            <li>
               <Link to="partner" className="admin-mobile-list">Partner</Link>
-            </li>
-            <li>
-              <Link to="program1" className="admin-mobile-list">Program1</Link>
             </li>
             <li>
               <Link to="programDonation" className="admin-mobile-list">Donation</Link>
             </li>
             <li>
-              <Link to="query" className="admin-mobile-list">Query</Link>
+              <Link to="censorngo" className="admin-mobile-list">CensorNgo</Link>
             </li>
             <li>
               <Link to="transactionhistory" className="admin-mobile-list">TransactionHistory</Link>

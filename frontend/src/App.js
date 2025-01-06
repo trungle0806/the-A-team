@@ -20,16 +20,20 @@ import { FavoritesProvider } from "./Context/FavoritesContext"; // Import Favori
 // Admin routes
 import Dashboard from "./Admin/Dashboard/Dashboard";
 import CustomerManagement from "./Admin/Customer/CustomerManagement";
-import GalleryImage from "./Admin/GalleryImage/Image";
+import CustomerNgo from "./Admin/CustomerNgo/CustomerNgo";
 import Inviation from "./Admin/Invitation/Invitation";
-import Ngo from "./Admin/NGOs/Ngos";
 import Partner from "./Admin/Partner/Partner";
-import Program1 from "./Admin/Program1/Program1";
 import ProgramDonation from "./Admin/ProgramDonation/Prodonation";
-import Query from "./Admin/Query/Query";
+import CensorNgo from "./Admin/CensorNgo/CensorNgo";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
-import NGODetails from "./Admin/NGOs/NGODetails/NGODetails";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
+
+// Ngo admin routes
+import GalleryImage from "./NgoAdmin/GalleryImage/Image";
+import Ngos from "./NgoAdmin/NGOs/Ngos";
+import NgoDetails from "./NgoAdmin/NGOs/NGODetails/NGODetails";
+import Program1 from "./NgoAdmin/Program1/Program1";
+import Query from "./NgoAdmin/Query/Query"
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -53,21 +57,26 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/thank-you" element={<ThankYouBill />} />
+          <Route path="/thank-you-bill" element={<ThankYouBill />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="customers" element={<CustomerManagement />} />
-            <Route path="galleryimage" element={<GalleryImage />} />
+            <Route path="customerngo" element={<CustomerNgo />} />
             <Route path="inviation" element={<Inviation />} />
-            <Route path="ngo" element={<Ngo />} />
-            <Route path="ngo-details/:id" element={<NGODetails />} />
             <Route path="partner" element={<Partner />} />
-            <Route path="program1" element={<Program1 />} />
             <Route path="programDonation" element={<ProgramDonation />} />
-            <Route path="query" element={<Query />} />
+            <Route path="censorngo" element={<CensorNgo />} />
             <Route path="transactionhistory" element={<TransactionHistory />} />
+          </Route>
+
+          <Route path="/ngoadmin" element={<Authentication />}>
+            <Route path="galleryimage" element={<GalleryImage />} />
+            <Route path="ngos" element={<Ngos />} />
+            <Route path="ngodetails" element={<NgoDetails />} />
+            <Route path="program1" element={<Program1 />} />
+            <Route path="query" element={<Query />} />
           </Route>
 
           {/* Reset Password Route */}
