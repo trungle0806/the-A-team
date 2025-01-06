@@ -1,7 +1,7 @@
 import React from 'react';
 import './About.css';
-import Header from '../../Components/Header/Header';
-import Footer from '../../Components/Footer/Footer';
+import Header from '../Components/Header/Header';
+import Footer from '../Components/Footer/Footer';
 import { TbSlash } from "react-icons/tb";
 import { RiFacebookFill } from "react-icons/ri";
 import { RiTwitterXFill } from "react-icons/ri";

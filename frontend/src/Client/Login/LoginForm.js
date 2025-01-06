@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import LoginWithGoogle from "./LoginWithGoogle/LoginWithGoogle";
-import Header from "../../Components/Header/Header";
+import Header from "../Components/Header/Header";
 import "./LoginForm.css";
 
 const LoginForm = () => {

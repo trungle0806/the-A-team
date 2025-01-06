@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./RegisterForm.css"; // Nếu cần tùy chỉnh CSS cho form
-import Header from "../../Components/Header/Header";
+import Header from "../Components/Header/Header";
 import { Link, useNavigate } from "react-router-dom"; // Để chuyển hướng sau khi đăng ký thành công
 
 const RegisterForm = () => {
