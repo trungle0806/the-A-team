@@ -14,11 +14,7 @@ import { AiOutlineDollarCircle } from "react-icons/ai";
 import "./Donate.css";
 import { GoOrganization } from "react-icons/go";
 import Header from "../Components/Header/Header";
-<<<<<<< HEAD
 import Footer from "../Components/Footer/Footer";
-=======
-import Footer from "../Components/Footer/Footer";   
->>>>>>> 7e3429101eef364cde0ecc932d3d31a1e523b5b5
 
 const Donate = () => {
   const { programId } = useParams();
