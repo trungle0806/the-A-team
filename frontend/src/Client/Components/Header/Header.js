@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom"; // Import NavLink
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faUser,
-  faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useFavorites } from "../../../Context/FavoritesContext";
-// Correct import for accessing the context
+import Logout from "../../../Logout/Logout";
 import "./Header.css";
 
 export const Header = () => {
@@ -49,14 +45,6 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Xử lý đăng xuất
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("role");
-    setIsAuthenticated(false);
-    navigate("/login");
-  };
-
   // Xử lý chuyển hướng khi nhấn vào biểu tượng người dùng
   const handleUserClick = () => {
     if (isAuthenticated) {
@@ -66,16 +54,24 @@ export const Header = () => {
     }
   };
 
+  // Check current page to determine if we are on a special page (Home, Login, Register)
   const isHomePage = location.pathname === "/";
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
+  const isOtherPage = !isHomePage && !isLoginPage && !isRegisterPage;
+
+  // Determine header className based on the current page
+  let headerClass = "";
+  if (isLoginPage || isRegisterPage) {
+    headerClass = "transparent"; // Transparent for login and register pages
+  } else if (isScrolled) {
+    headerClass = "scrolled"; // Scrolled for pages when user scrolls
+  } else if (isOtherPage) {
+    headerClass = "other-page"; // Styles for other pages
+  }
 
   return (
-    <div
-      className={`header-container ${isScrolled ? "scrolled" : ""} ${
-        !isHomePage && !isLoginPage && !isRegisterPage ? "other-page" : ""
-      } ${isLoginPage || isRegisterPage ? "transparent" : ""}`}
-    >
+    <div className={`header-container ${headerClass}`}>
       {/* Logo */}
       <div className="logo-search-container">
         <div className="logo-header">
@@ -88,33 +84,58 @@ export const Header = () => {
 
       {/* Navigation Links */}
       <div className="navbar-header-link">
-        <Link className="navbar-link" to="/">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "navbar-link active" : "navbar-link"
+          }
+        >
           Home
-        </Link>
-        <Link className="navbar-link" to="/about">
-          About
-        </Link>
-        <Link className="navbar-link" to="/contact">
-          Contact
-        </Link>
-        <Link className="navbar-link" to="/news">
-          News
-        </Link>
-        <Link className="navbar-link" to="/program">
+        </NavLink>
+        <NavLink
+          to="/program"
+          className={({ isActive }) =>
+            isActive ? "navbar-link active" : "navbar-link"
+          }
+        >
           Program
-        </Link>
+        </NavLink>
+        <NavLink
+          to="/news"
+          className={({ isActive }) =>
+            isActive ? "navbar-link active" : "navbar-link"
+          }
+        >
+          News
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive ? "navbar-link active" : "navbar-link"
+          }
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? "navbar-link active" : "navbar-link"
+          }
+        >
+          Contact
+        </NavLink>
       </div>
 
       {/* Auth and Favorites */}
       <div className="navbar-header-container3">
         {/* Favorites Icon */}
         <div className="favorites">
-          <Link className="favorites-link" to="/favorites">
+          <NavLink className="favorites-link" to="/favorites">
             <FontAwesomeIcon icon={faHeart} className="favorites-icon" />
             {favorites.length > 0 && (
               <span className="favorites-count">{favorites.length}</span>
             )}
-          </Link>
+          </NavLink>
         </div>
 
         {/* User Icon */}
@@ -124,12 +145,7 @@ export const Header = () => {
 
         {/* Logout Icon (Only visible when authenticated) */}
         {isAuthenticated && (
-          <div className="logout-icon" onClick={handleLogout}>
-            <FontAwesomeIcon
-              icon={faSignOutAlt}
-              className="logout-icon-style"
-            />
-          </div>
+          <Logout onLogout={() => setIsAuthenticated(false)} />
         )}
       </div>
     </div>

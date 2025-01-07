@@ -14,6 +14,7 @@ import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
+import NotFound from "./404/NotFound";
 
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
@@ -36,7 +37,6 @@ import NgoDetails from "./NgoAdmin/NGOs/NGODetails/NGODetails";
 import Program1 from "./NgoAdmin/Program1/Program1";
 import Query from "./NgoAdmin/Query/Query";
 
-
 import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
 import UserList from "./NGO/User/UserList";
@@ -47,8 +47,6 @@ import OrderList from "./NGO/Order/orderList";
 import ImageList from "./NGO/Image/ImageList";
 import OrderDetails from "./NGO/Order/orderDetail";
 import NewsBook from "./NGO/NewsBook/NewsBook";
-
-
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -73,6 +71,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/thank-you-bill" element={<ThankYouBill />} />
+          <Route path="/notfound" element={<NotFound />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
@@ -85,7 +84,6 @@ function App() {
             <Route path="censorngo" element={<CensorNgo />} />
             <Route path="transactionhistory" element={<TransactionHistory />} />
           </Route>
-
 
           <Route path="/ngo" element={<Ngo />}>
             <Route index element={<DashBoard />} />
@@ -102,12 +100,6 @@ function App() {
             <Route path="image" element={<ImageList />} />
             <Route path="newsBook" element={<NewsBook />} />
           </Route>
-
-
-
-
-
-
 
           {/* Reset Password Route */}
           <Route path="/reset-password" element={<ResetPassword />} />

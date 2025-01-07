@@ -36,7 +36,7 @@
 .header-container.scrolled .navbar-header-link a:hover,
 .header-container.scrolled .favorites-icon :hover,
 .header-container.scrolled .user-icon-style:hover {
-  color: #49516f; /* Màu vàng khi hover */
+  color: #ededed; /* Màu vàng khi hover */
 }
 
 .header-container.scrolled .logo-header img {
@@ -59,7 +59,7 @@
 .header-container.other-page .navbar-header-link a:hover,
 .header-container.other-page .favorites-icon :hover,
 .header-container.other-page .user-icon-style:hover {
-  color: #49516f; /* Màu vàng khi hover */
+  color: #8db883; /* Màu vàng khi hover */
 }
 
 /* .header-container.other-page .logo-header img {
