@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Contact.css";
-import Header from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import LoginWithGoogle from "./LoginWithGoogle/LoginWithGoogle";
-import Header from "../../Components/Header/Header";
+import Header from "../Components/Header/Header";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -22,10 +22,15 @@ const LoginForm = () => {
   const handleNavigation = (role) => {
     if (role === "Admin") {
       navigate("/Admin", { state: { message: "Welcome Admin!" } });
-    } else {
+    } else if (role === "User") {
       navigate("/", { state: { message: "Login successful! Welcome back!" } });
+    } else if (role === "NGO") {
+      navigate("/ngo", { state: { message: "Welcome NgoAdmin!" } });
+    } else {
+      console.error("Invalid role provided:", role);
     }
   };
+  
 
   const loginRequest = async (emailOrUsername, password) => {
     setLoading(true);
