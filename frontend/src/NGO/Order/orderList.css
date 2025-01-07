@@ -1,0 +1,255 @@
+
+.order-list-table {
+    width: 95%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .order-list-table, .order-list-table th, .order-list-table td {
+    border: 1px solid #ddd;
+  }
+  
+  .order-list-table th, .order-list-table td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .order-list-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .order-list-button-add {
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50; /* Màu xanh */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-right: 20px;
+  }
+  
+  .order-list-button-edit, .order-list-button-delete {
+    display: inline-block;
+    margin: 3px 0; /* Khoảng cách giữa các button */
+    padding: 5px 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .order-list-button-edit {
+    background-color: #008CBA; /* Màu xanh dương */
+    color: white;
+  }
+  
+  .order-list-button-delete {
+    background-color: #f44336; /* Màu đỏ */
+    color: white;
+  }
+  .order-search {
+    width: 35%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+.toggle-button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+/* orderList.css */
+
+.select-status-pending {
+  background-color: orange;
+  color: white;
+}
+
+.select-status-completed {
+  background-color: green;
+  color: white;
+}
+
+.select-status-processing {
+  background-color: blue;
+  color: white;
+}
+
+.select-status-cancelled {
+  background-color: red;
+  color: white;
+}
+.option-status-pending{
+  color:  orange;
+  background-color: white;
+}
+.option-status-completed{
+  color:  green;
+  background-color: white;
+}
+.option-status-processing{
+  color:  blue;
+  background-color: white;
+}
+.option-status-cancelled{
+  color:  red;
+  background-color: white;
+}
+.order-list-button-details {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  font-size: 1rem; /* Adjust font size */
+  color: white; /* Text color */
+  background-color: #f86d72; /* Background color of the button */
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.order-list-button-details:hover {
+  background-color: #f86d72; /* Darker shade for hover effect */
+  color: white; /* Lighter text color on hover */
+}
+
+.order-list-button-details:active {
+  background-color: #ec2930; /* Even darker shade for active state */
+}
+
+.order-search-container{
+  width: 80%;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa các trường */
+  flex-wrap: wrap; /* Để các trường có thể xuống dòng nếu không đủ không gian */
+}
+.order-search{
+  width: 50%;
+  margin-right: 20px;
+}
+.order-search:focus{
+  border-color: #007bff; /* Màu đường viền khi ô được chọn */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Đổ bóng sáng hơn khi ô được chọn */
+  outline: none; /* Xóa đường viền mặc định khi ô được chọn */
+}
+/* CSS cho các trường chọn ngày */
+.order-search-date {
+  width: 200px; /* Chiều rộng cố định cho các trường */
+  padding: 10px; /* Khoảng cách trong ô */
+  border: 1px solid #ddd; /* Đường viền mảnh */
+  border-radius: 4px; /* Bo góc nhẹ */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+  font-size: 16px; /* Kích thước chữ */
+  font-family: Arial, sans-serif; /* Phông chữ */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển tiếp khi thay đổi border */
+}
+
+.order-search-date:focus {
+  border-color: #007bff; /* Màu đường viền khi ô được chọn */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Đổ bóng sáng hơn khi ô được chọn */
+  outline: none; /* Xóa đường viền mặc định khi ô được chọn */
+}
+/* Styling for the status filter */
+.order-search-status {
+  width: 150px;
+  margin: 10px 0;
+  padding: 8px;
+}
+/* Styling for the date range inputs */
+
+
+.order-search-status {
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.order-search-status:focus{
+  border-color: #007bff; /* Màu đường viền khi ô được chọn */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Đổ bóng sáng hơn khi ô được chọn */
+  outline: none; /* Xóa đường viền mặc định khi ô được chọn */
+}
+
+
+/* Container for filters and pagination */
+.filter-pagination-container {
+  width: 70%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-container {
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  flex: 1; /* Take up available space */
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Styling for search input */
+.order-search {
+   width: 80%;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Styling for date inputs */
+.order-search-date {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+/* Styling for status select dropdown */
+.order-search-status {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Styling for pagination buttons */
+.pagination-button {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-button:hover {
+  background-color: #e0e0e0;
+}
+
+.pagination-button.active {
+  background-color: #007bff;
+  color: white;
+}
