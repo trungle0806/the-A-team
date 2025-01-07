@@ -9,7 +9,7 @@
   height: 55vh;
   display: grid;
   place-items: center;
-  overflow:auto;
+  overflow: auto;
 }
 
 main {
@@ -82,7 +82,7 @@ main {
   text-align: center;
   margin-bottom: 20px;
   font-size: 30px;
-  color: #333;
+  color: #ededed;
 }
 
 .description {
@@ -90,18 +90,23 @@ main {
   line-height: 1.7;
   margin: 1rem 0 1.5rem;
   font-size: 1rem;
+  font-family: "arial-black";
+  color: #8db883;
 }
 
 .slider-more {
   width: fit-content;
   background-color: rgba(0, 0, 0, 0.1);
-  color: white;
-  border: 2px solid white;
+  color: #ededed;
+  border: 2px solid #8db883;
   border-radius: 0.25rem;
   padding: 0.75rem;
   cursor: pointer;
+  font-family: "arial-black";
 }
-
+.slider-more:hover {
+  background-color: #8db883;
+}
 
 .item:nth-of-type(2) .content {
   display: block;
@@ -133,7 +138,7 @@ main {
   & .btn {
     background-color: rgba(255, 255, 255, 0.5);
     color: rgba(0, 0, 0, 0.7);
-    border: 2px solid rgba(0, 0, 0, 0.6);
+    border: 2px solid #8db883;
     margin: 0 0.25rem;
     padding: 0.75rem;
     border-radius: 50%;
@@ -182,7 +187,8 @@ main {
   .content {
     & .title {
       font-size: 0.9rem;
-    }& .description {
+    }
+    & .description {
       font-size: 0.65rem;
     }
     & button {

@@ -21,7 +21,7 @@
 
 /* Khi header cuộn */
 .header-container.scrolled {
-  background-color: rgba(255, 255, 255, 0.95); /* Nền trắng nhạt khi cuộn */
+  background-color: #8db883; /* Nền trắng nhạt khi cuộn */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px 48px;
   color: #000; /* Đổi thành màu đen */
@@ -30,7 +30,7 @@
 .header-container.scrolled .navbar-header-link a,
 .header-container.scrolled .favorites-icon,
 .header-container.scrolled .user-icon-style {
-  color: #000; /* Màu đen cho các liên kết và icon */
+  color: #ededed; /* Màu đen cho các liên kết và icon */
 }
 
 .header-container.scrolled .navbar-header-link a:hover,
@@ -62,8 +62,11 @@
   color: #49516f; /* Màu vàng khi hover */
 }
 
-.header-container.other-page .logo-header img {
-  filter: brightness(0); /* Biến logo thành đen */
+/* .header-container.other-page .logo-header img {
+  filter: brightness(0); 
+} */
+.header-container.scrolled .logo-header img {
+  filter: brightness(1100);
 }
 
 /* Navigation links */
@@ -78,7 +81,7 @@
 .navbar-header-link a {
   text-decoration: none;
   color: inherit; /* Kế thừa màu từ header-container */
-  font-size: 18px;
+  font-size: 22px;
   padding: 10px;
   transition: color 0.3s ease;
 }
@@ -88,7 +91,7 @@
 }
 
 .navbar-header-link a:hover {
-  color: #49516f;
+  color: #8db883;
 }
 
 /* Đổi màu khi link được chọn */
@@ -171,7 +174,7 @@
 }
 
 .user-icon:hover {
-  color: #49516f;
+  color: #8db883;
 }
 
 .user-icon-style {
@@ -196,7 +199,7 @@
 
 /* Khi header cuộn, thay đổi màu của logo đăng xuất thành màu đen */
 .header-container.scrolled .logout-icon-style {
-  color: black; /* Thay đổi màu của icon đăng xuất thành đen khi cuộn */
+  color: #ededed; /* Thay đổi màu của icon đăng xuất thành đen khi cuộn */
 }
 .favorites {
   display: flex;
@@ -219,7 +222,7 @@
 }
 
 .favorites-link:hover .favorites-icon {
-  color: #49516f; /* Bright red on hover */
+  color: #8db883; /* Bright red on hover */
   /* transform: scale(1.2); */
 }
 .favorites-count {
@@ -245,5 +248,5 @@
 }
 
 .logout-icon-style:hover {
-  color: #49516f;
+  color: #8db883;
 }
