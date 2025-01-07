@@ -7,8 +7,8 @@ import { FaBullseye, FaHandHoldingHeart, FaClock, FaUsers, FaCalendarAlt } from 
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import "./Donate.css";
 import { GoOrganization } from "react-icons/go";
-import Header from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";   
 
 const Donate = () => {
     const { programId } = useParams();
