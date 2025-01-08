@@ -25,6 +25,10 @@
   font-weight: bold;
   color: #2e7d32;
   margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #8db883;
+  margin-bottom: 1rem;
 }
 
 .donate-description {
@@ -141,6 +145,7 @@
 
 .payment-button button:hover {
   background-color: #218838; /* Màu khi hover */
+  background-color: #8db883; /* Màu khi hover */
 }
 
 .paypal-buttons-container {

@@ -8,10 +8,11 @@
   font-size: 1.5rem; /* Adjust icon size */
   cursor: pointer;
   transition: color 0.3s ease; /* Smooth color transition */
+  color: black;
 }
 
 .icon:hover {
-  color: #007bff; /* Change icon color on hover */
+  color: #8db883; /* Change icon color on hover */
 }
 
 .admin-container {

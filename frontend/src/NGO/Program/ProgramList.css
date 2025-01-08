@@ -1,0 +1,241 @@
+.product-container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.product-button-add {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.product-button-add:hover {
+  background-color: #218838;
+}
+
+.product-search {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.product-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.product-button-edit {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.product-button-edit:hover {
+  background-color: #0056b3;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  background-color: #f86d72;
+  color: white;
+  border-color: #f86d72;
+}
+.api-select {
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 18%;
+}
+.product-button-delete {
+  background-color: #dc3545; /* Màu đỏ */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.product-button-delete:c82333 {
+  background-color: #c0392b; /* Đỏ đậm hơn khi hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Nút Restore */
+.product-button-restore {
+  background-color: #27ae60; /* Màu xanh lá cây */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.product-button-restore:hover {
+  background-color: #28a745; /* Xanh lá đậm hơn khi hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+.Program-List-h1 {
+  font-size: 38px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.Program-icon {
+  gap: 10px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-left: 50px;
+  height: 112px;
+}
+.Program-search {
+  border: 1px solid #8db883;
+  font-size: 24px;
+  border-radius: 14px;
+  padding-left: 13px;
+}
+.Program-add {
+  font-size: 21px;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  background: #e0ebdd;
+  color: #8db883;
+}
+.Program-table {
+  width: 87%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin-left: 51px;
+  border: 1px solid #8db883;
+  height: auto;
+  border-radius: 5px;
+}
+.Program-tr {
+  border-bottom: 1px solid #8db883;
+  /* height: 22px; */
+  font-size: 20px;
+  padding: 10px;
+  background-color: #e0ebdd;
+}
+.Program-tr th {
+  padding: 10px;
+  text-align: left;
+}
+.Program-td {
+  color: #75df5d;
+}
+.Program-tr1 td {
+  padding: 10px;
+}
+.Program-icon1 {
+  display: flex;
+  gap: 10px;
+}
+.Program-Detail {
+  border: none;
+  padding: 8px;
+  background: #e0ebdd;
+  color: #8db883;
+  border-radius: 100%;
+}
+.Program-Detail-icon {
+  font-size: 19px;
+}
+.Program-Edit {
+  border: none;
+  padding: 8px;
+  background: #d0e3ff;
+  color: #334eac;
+  border-radius: 100%;
+}
+.Program-Edit-icon {
+  font-size: 17px;
+}
+.Program-Delete {
+  border: none;
+  padding: 8px;
+  background: #f0d2d2;
+  color: #ff0000;
+  border-radius: 100%;
+}
+.Program-Delete-icon {
+  font-size: 16px;
+}
+.Program-Pagination {
+  align-items: center;
+  display: flex;
+  justify-content: right;
+  gap: 4px;
+  width: 73vw;
+}

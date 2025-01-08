@@ -29,24 +29,11 @@ import CensorNgo from "./Admin/CensorNgo/CensorNgo";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
 
-// Ngo admin routes
-import Ngoadmin from "./NgoAdmin/Ngoad";
-import GalleryImage from "./NgoAdmin/GalleryImage/Image";
-import Ngos from "./NgoAdmin/NGOs/Ngos";
-import NgoDetails from "./NgoAdmin/NGOs/NGODetails/NGODetails";
-import Program1 from "./NgoAdmin/Program1/Program1";
-import Query from "./NgoAdmin/Query/Query";
 
 import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
-import UserList from "./NGO/User/UserList";
-import CategoryList from "./NGO/Category/CategoryList";
-import AuthorList from "./NGO/Author/AuthorList";
-import ProductList from "./NGO/Product/ProductList";
-import OrderList from "./NGO/Order/orderList";
-import ImageList from "./NGO/Image/ImageList";
-import OrderDetails from "./NGO/Order/orderDetail";
-import NewsBook from "./NGO/NewsBook/NewsBook";
+import ProgramList1 from "./NGO/Program/ProgramList1";
+import ProgramDetail from "./NGO/Program/ProgramDetail";
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -88,17 +75,8 @@ function App() {
           <Route path="/ngo" element={<Ngo />}>
             <Route index element={<DashBoard />} />
             <Route path="dashboard" element={<DashBoard />} />
-            <Route path="user" element={<UserList />} />
-            <Route path="category" element={<CategoryList />} />
-            <Route path="authors" element={<AuthorList />} />
-            <Route path="products" element={<ProductList />} />
-            {/* <Route path="/admin/products" element={<ProductList />} /> */}
-            <Route path="order" element={<OrderList />} />
-            {/* <Route path="/admin/order" element={<OrderList />} />
-            <Route path="/admin/orders/:status" element={<OrderList />} />
-            <Route path="orderdetail/:orderId" element={<OrderDetails />} /> */}
-            <Route path="image" element={<ImageList />} />
-            <Route path="newsBook" element={<NewsBook />} />
+            <Route path="program-list" element={<ProgramList1 />} />
+            <Route path="program/:id" element={<ProgramDetail />} />
           </Route>
 
           {/* Reset Password Route */}

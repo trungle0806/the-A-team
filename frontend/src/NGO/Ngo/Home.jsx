@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
 import { BarChart, Bar, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './DashBoard.css';
-import { getProducts } from '../Service (1)/productService';
-import { getUsers } from '../Service (1)/userService'; // Import your user service
-import { getOrder } from '../Service (1)/orderService';
 import { NavLink } from 'react-router-dom';
 
 // Function to format date to YYYY-MM-DD
@@ -43,21 +40,21 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         // Fetch products, users, and orders
-        const productResponse = await getProducts();
-        const productsData = productResponse;
+        // const productResponse = await getPrograms();
+        // const productsData = productResponse;
 
-        const userResponse = await getUsers();
-        const usersData = userResponse;
+        // const userResponse = await getUsers();
+        // const usersData = userResponse;
 
-        const orderResponse = await getOrder();
-        const orderData = orderResponse;
+        // const orderResponse = await getOrder();
+        // const orderData = orderResponse;
 
-        const orderDataFormatted = groupByDay(orderData); // Group data by day
+        // const orderDataFormatted = groupByDay(orderData); // Group data by day
 
-        setProducts(productsData);
-        setUsers(usersData);
-        setOrders(orderData);
-        setChartData(orderDataFormatted);
+        // setProducts(productsData);
+        // setUsers(usersData);
+        // setOrders(orderData);
+        // setChartData(orderDataFormatted);
 
       } catch (error) {
         console.error('Error fetching data:', error);
