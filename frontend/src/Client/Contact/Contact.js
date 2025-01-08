@@ -77,7 +77,7 @@ const Contact = () => {
       <Header />
       <div className="contact-section">
         <div className="contact-banner">
-          <h1>Contact Us</h1>
+          <h1 className="contact-h1">Contact Us</h1>
         </div>
         <div className="contact-container">
           <div className="contact-wrapper">
@@ -151,77 +151,6 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="contact-form-section">
-          <div className="contact-form-section1">
-            <h3 className="contact-title">Contact Us</h3>
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="contact-form1">
-                <div className="contact-name">
-                  <div className="contact-field">
-                    <label htmlFor="fullName" className="contact-label">
-                      FULL NAME
-                    </label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      placeholder="Name"
-                      className="contact-input"
-                    />
-                  </div>
-                  <div className="contact-field">
-                    <label htmlFor="email" className="contact-label">
-                      EMAIL ADDRESS
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Email"
-                      className="contact-input"
-                    />
-                  </div>
-                  <div className="contact-field">
-                    <label htmlFor="subject" className="contact-label">
-                      SUBJECT
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      placeholder="Subject"
-                      className="contact-input"
-                    />
-                  </div>
-                </div>
-                <div className="contact-field">
-                  <label htmlFor="message" className="contact-label">
-                    MESSAGE
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Message"
-                    className="contact-textarea"
-                  ></textarea>
-                </div>
-                <div className="contact-form2">
-                  <button type="submit" className="contact-submit">
-                    Send Message
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
         <Footer />
       </div>
     </div>
