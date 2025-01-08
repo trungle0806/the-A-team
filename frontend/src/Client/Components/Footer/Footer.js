@@ -4,142 +4,182 @@ import { FaPhone } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaFacebookF } from "react-icons/fa";
-import { PiInstagramLogoFill } from "react-icons/pi";
-import { FaGooglePlusG } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-
-
-
+import { FaPinterestP } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer class="footer">
-      <div class="footer-container">
-        <div className="footer-container-inner">
-          {/* <!-- Bên trái --> */}
-          <div class="footer-left">
-            <img
-              src="https://www.charitynavigator.org/content/experience-fragments/cn/us/en/site/footer/master/_jcr_content/root/container/responsivegrid_480299858/image.coreimg.svg/1672845994119/charitynav-logo-stack-white.svg"
-              alt="Charity Navigator Logo"
-              class="footer-logo"
-            />
-            {/* <address class="footer-address">
-              299 Market Street, Suite 250
-              <br />
-              Saddle Brook, NJ 07663
-            </address> */}
-            <div class="footer-certifications">
-              <img
-                src="https://www.charitynavigator.org/content/experience-fragments/cn/us/en/site/footer/master/_jcr_content/root/container/responsivegrid/image_455696160.coreimg.svg/1683206826996/four-star-rating-badge.svg"
-                alt="4-Star Rating"
-                class="certification-badge"
-              />
-              <img
-                src="https://www.charitynavigator.org/content/experience-fragments/cn/us/en/site/footer/master/_jcr_content/root/container/responsivegrid/image_455696160_copy.coreimg.svg/1657197394245/ac-s-cmyk-h-reversedwhite-w-url-01.svg"
-                alt="BBB Accredited Charity"
-                class="certification-badge"
-              />
-              <img
-                src="https://www.charitynavigator.org/content/experience-fragments/cn/us/en/site/footer/master/_jcr_content/root/container/responsivegrid/image_455696160_copy_1447565194.coreimg.85.1600.png/1730747908297/candid-seal-platinum-2024.png"
-                alt="Platinum Transparency 2024"
-                class="certification-badge1"              
-              />
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-sections">
+          {/* Organization */}
+          <div className="footer-section">
+            <h3>Organization</h3>
+            <ul>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Join Academy
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Press Releases
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Upcoming Events
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Recent Cause
+                </a>
+              </li>
+            </ul>
+            <div className="contact-item">
+              <div>
+                <p>
+                  {" "}
+                  <FaLocationDot className="footer-icon" />
+                  Road-2, East Shibgonj
+                </p>
+                <p className="footer-house">House No: M-23</p>
+              </div>
             </div>
           </div>
-          {/* <!-- Bên phải --> */}
-          <div class="footer-right">
-            {/* <h3 class="footer-title">Sign up for donor tips and resources</h3> */}
-            {/* <form class="footer-form">
-              <input type="text" placeholder="First name" required />
-              <input type="text" placeholder="Last name" required />
-              <input type="email" placeholder="Email" required />
-              <button type="submit">Sign up now</button>
-            </form> */}
-            <div class="footer-links-group">
-              <ul class="footer-links">
-                <li>
-                  <a href="#">Press Room</a>
-                </li>
-                <li>
-                  <a href="#">Financials and Policies</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#">Terms of Use</a>
-                </li>
-              </ul>
-              <ul class="footer-links">
-                <li>
-                  <a href="#">FAQs/Contact Us</a>
-                </li>
-                <li>
-                  <a href="#">Our Team</a>
-                </li>
-                <li>
-                  <a href="#">Careers</a>
-                </li>
-                <li>
-                  <a href="#">API</a>
-                </li>
-                <li>
-                  <a href="#">Sponsorship</a>
-                </li>
-              </ul>
-            </div>            
-            {/* <div class="footer-social">
-              <a href="#">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-youtube"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </div> */}
-          </div>
-          <div className="footer-1">
-          <div className="footer-g">
-            <FaLocationDot className="footer-faphone" />
-             <h3 className="footer-123">8a Ton That Thuyet</h3>
-             </div>
-             <div className="footer-g">
-             <MdEmail className="footer-faphone" /> 
-             <h3 className="footer-123">hongngoc200509@gmail.com</h3>
-             </div>
-            <div className="footer-g">
-            <FaPhone className="footer-faphone" />
-             <h3 className="footer-123">+ 01 234 567 89</h3>
-             </div>
 
-             <div className="program-icon-face">
-             <div className="program1">
-             <FaFacebookF src="" className="face1"/>
-             </div>
-             <div className="program1">
-             <PiInstagramLogoFill src="" className="face1" />
-             </div>
-             <div className="program1">
-             <FaGooglePlusG src="" className="face1" />
-             </div>
-             <div className="program1">
-             <FaTwitter src="" className="face1" />
-             </div>
-             </div>
-
+          {/* Support */}
+          <div className="footer-section">
+            <h3>Support</h3>
+            <ul>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Love Philosophy
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Share & Care
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Child Education
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Medical Treatment
+                </a>
+              </li>
+            </ul>
+            <div className="contact-item">
+              <div>
+                <p>
+                  {" "}
+                  <MdEmail className="footer-icon" />
+                  hoadzai247@gmail.com
+                </p>
+                <p className="footer-email">nduc37039@gmail.com</p>
+              </div>
             </div>
+          </div>
+
+          {/* Discover */}
+          <div className="footer-section">
+            <h3>Discover</h3>
+            <ul>
+              <li>
+                <a href="#">
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  How to Sponsor
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Support a Volunteer
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Community Attitudes
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {" "}
+                  <i className="fa fa-angle-double-right fa-footer"></i>
+                  Family Adopting
+                </a>
+              </li>
+            </ul>
+
+            <div className="contact-item">
+              <div>
+                <p>
+                  {" "}
+                  <FaPhone className="footer-icon" />
+                  (+84) 355 375 444
+                </p>
+                <p className="footer-sdt">(+84) 332 043 121</p>
+              </div>
+            </div>
+          </div>
+
+          {/* About */}
+          <div className="footer-section">
+            <h3>About</h3>
+            <p className="footer-p">
+              We are a volunteer-based organization and help disabled and
+              under-privileged children by providing them with funding for
+              equipment and services so they can live a better life.
+            </p>
+            <div className="footer-social1">
+              <p className="footer-p1">
+                <span className="fa fa-mail-forward"></span>
+                Spreads The Words
+              </p>
+
+              <div className="footer-social">
+                <a href="#">
+                  <FaFacebookF className="social-icon" />
+                </a>
+                <a href="#">
+                  <FaTwitter className="social-icon" />
+                </a>
+                <a href="#">
+                  <FaPinterestP className="social-icon" />
+                </a>
+                <a href="#">
+                  <FaLinkedinIn className="social-icon" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        Copyright ©2024 | EIN 13-4148824 | Bridge ID 3108588923
+      <div className="footer-bottom">
+        <p>Copyright © 2023. All rights reserved by bluewindlab.net</p>
       </div>
     </footer>
   );

@@ -14,6 +14,7 @@ import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
+import NotFound from "./404/NotFound";
 
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
@@ -29,13 +30,10 @@ import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
 
 
-
 import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
 import ProgramList1 from "./NGO/Program/ProgramList1";
 import ProgramDetail from "./NGO/Program/ProgramDetail";
-
-
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -60,6 +58,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/thank-you-bill" element={<ThankYouBill />} />
+          <Route path="/notfound" element={<NotFound />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
@@ -73,19 +72,12 @@ function App() {
             <Route path="transactionhistory" element={<TransactionHistory />} />
           </Route>
 
-
           <Route path="/ngo" element={<Ngo />}>
             <Route index element={<DashBoard />} />
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="program-list" element={<ProgramList1 />} />
             <Route path="program/:id" element={<ProgramDetail />} />
           </Route>
-
-
-
-
-
-
 
           {/* Reset Password Route */}
           <Route path="/reset-password" element={<ResetPassword />} />

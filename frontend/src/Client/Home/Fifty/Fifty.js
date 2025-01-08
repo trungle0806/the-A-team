@@ -27,7 +27,7 @@ const Fifty = () => {
               </p>
             </div>
             <div className="fifty-cta">
-              <a className="fifty-green" href="">
+              <a className="fifty-green" href="/program">
                 Take Action
               </a>
             </div>
