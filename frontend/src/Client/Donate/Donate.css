@@ -24,7 +24,7 @@
 .donate-title {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #2e7d32;
+    color: #8DB883;
     margin-bottom: 1rem;
 }
 
@@ -139,7 +139,7 @@
 }
 
 .payment-button button:hover {
-    background-color: #218838; /* Màu khi hover */
+    background-color: #8DB883; /* Màu khi hover */
 }
 
 .paypal-buttons-container {

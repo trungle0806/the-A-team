@@ -16,20 +16,21 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
 
       <ul className='sidebar-list'>
         <li className='sidebar-list-item'>
-          <Link to="/admin/dashboard" className="sidebar-link">
+          <Link to="/ngo/dashboard" className="sidebar-link">
             <BsGrid1X2Fill className='icon' /> Dashboard
           </Link>
         </li>
         <li className='sidebar-list-item'>
-          <Link to="/admin/image" className="sidebar-link">
+          <Link to="/ngo/program-list" className="sidebar-link">
+            <BsFillArchiveFill className='icon' /> Programs
+          </Link>
+        </li>
+        {/* <li className='sidebar-list-item'>
+          <Link to="/ngo/image" className="sidebar-link">
             <IoMdImages className='icon' /> Image Products
           </Link>
         </li>
-        <li className='sidebar-list-item'>
-          <Link to="/admin/products" className="sidebar-link">
-            <BsFillArchiveFill className='icon' /> Products
-          </Link>
-        </li>
+        
         <li className='sidebar-list-item'>
           <Link to="/admin/category" className="sidebar-link">
             <BsFillGrid3X3GapFill className='icon' /> Categories
@@ -54,7 +55,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           <Link to="/admin/newsBook" className="sidebar-link">
             <BsListCheck className='icon' /> News Book
           </Link>
-        </li>
+        </li> */}
         {/* <li className='sidebar-list-item'>
           <Link to="/admin/createorder" className="sidebar-link"> 
             <BsListCheck className='icon' /> Order Detail

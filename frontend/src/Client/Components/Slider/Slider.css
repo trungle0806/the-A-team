@@ -12,12 +12,12 @@
   overflow: auto;
 }
 
-main {
+/* main {
   position: relative;
   width: 100%;
   height: 100%;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .item-slider {
   margin: 0;

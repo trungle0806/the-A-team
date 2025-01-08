@@ -29,7 +29,7 @@
 #sidebar {
   grid-area: sidebar;
   height: 100%;
-  background-color: #f86d72;
+  background-color: #8DB883;
   color: #fff;
   overflow-y: auto;
   transition: all 0.5s;
@@ -62,7 +62,7 @@
 
 .sidebar-list-item {
   padding: 20px;
-  font-size: 18px;
+  font-size: 2rem;
 }
 
 .sidebar-list-item:hover {
@@ -80,7 +80,9 @@
   position: absolute;
   z-index: 12 !important;
 }
-
+.icon{
+  color: #EDEDED;
+}
 /* Main content area */
 .main {
   grid-area: main;
