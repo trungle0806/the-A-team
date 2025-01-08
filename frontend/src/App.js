@@ -34,6 +34,8 @@ import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
 import ProgramList1 from "./NGO/Program/ProgramList1";
 import ProgramDetail from "./NGO/Program/ProgramDetail";
+import NgoDetail from "./NGO/Ngocerter/NgoDetail";
+import NgoForm from "./NGO/Ngocerter/NgoForm";
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -77,6 +79,8 @@ function App() {
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="program-list" element={<ProgramList1 />} />
             <Route path="program/:id" element={<ProgramDetail />} />
+            <Route path="ngo-detail" element={<NgoDetail />} />
+            <Route path="ngo-form" element={<NgoForm />} />
           </Route>
 
           {/* Reset Password Route */}
