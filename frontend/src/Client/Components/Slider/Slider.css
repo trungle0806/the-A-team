@@ -4,7 +4,12 @@
   position: relative;
   overflow: hidden; /* Giới hạn nội dung hiển thị */
   height: 100vh; /* Giảm chiều cao xuống 100% chiều cao cửa sổ trình duyệt */
-  background-color: #ffffff; /* Nền trắng */
+  background: linear-gradient(
+    to left,
+
+    #c0eaca,
+    #eef2ed
+  ); /* Nền trắng */
   display: flex;
   align-items: center;
   justify-content: flex-start; /* Canh nội dung sang trái */
@@ -92,7 +97,7 @@
   border-radius: 15px;
   object-fit: cover;
   overflow: hidden;
-  border-radius: 450px 100px 20px 0;
+  border-radius: 450px 100px 100px 0;
   box-shadow: -27px 14px 40px #8db883;
   transform: translateX(100%); /* Đẩy ảnh ra ngoài màn hình */
   transition: transform 1s ease; /* Hiệu ứng trượt */

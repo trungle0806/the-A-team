@@ -198,20 +198,20 @@ const RegisterForm = () => {
               </div>
             </div>
           </div>
-
-          <button type="submit" className="btn-submit-register">
-            Register
-          </button>
-        </form>
-
-        <div className="additional-links">
-          <div className="conten-register">
-            Already have an account?{" "}
-            <Link to="/login" className="login-link-register">
-              Login
-            </Link>
+          <div className="form-register-button">
+            <button type="submit" className="btn-submit-register">
+              Register
+            </button>
+            <div className="additional-links">
+              <div className="conten-register">
+                Already have an account?{" "}
+                <Link to="/login" className="login-link-register">
+                  Login
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

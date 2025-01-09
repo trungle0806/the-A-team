@@ -1,3 +1,13 @@
+/* .form-container-login {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 20px; 
+  margin-left: 1000px;
+  margin-top: 150px;
+  border: 1px solid #8db883;
+} */
 .form-container-login {
   width: 100%;
   max-width: 400px;
@@ -5,10 +15,29 @@
   padding: 20px;
   border-radius: 20px; /* Bo góc mềm mại */
   margin-left: 1000px;
-  margin-top: 150px;
+  margin-top: 250px;
+  position: relative;
+  overflow: hidden; /* Ẩn phần dư thừa của pseudo-element */
 }
+
+/* Áp dụng nền mờ cho form */
+.form-container-login::before {
+  content: ""; /* Nội dung phải có */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pftEnvTMxS8Q7kNvgHLPfKH&_nc_oc=AdiOmTgcS1PVcje4rCF4T67yHhRkhWlLkKqz-xxmmCIGzr1EiTmh53CctVT_YwDJj8s&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=A-fUqKblFpGDEYhzxArhoXT&oh=00_AYCMdQlL6EYZnomkgnO4pwUAWPJ_sV5voP7wqeCQhCF2Tg&oe=6785F426");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  filter: blur(10px); /* Làm mờ nền */
+  z-index: -1; /* Đảm bảo ảnh nền không che nội dung */
+}
+
 .body-login {
-  background-image: url("https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Đường dẫn tới hình ảnh nền */
+  background-image: url("https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pftEnvTMxS8Q7kNvgHLPfKH&_nc_oc=AdiOmTgcS1PVcje4rCF4T67yHhRkhWlLkKqz-xxmmCIGzr1EiTmh53CctVT_YwDJj8s&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=A-fUqKblFpGDEYhzxArhoXT&oh=00_AYCMdQlL6EYZnomkgnO4pwUAWPJ_sV5voP7wqeCQhCF2Tg&oe=6785F426");
   background-size: cover; /* Tự động co dãn để phủ hết màn hình */
   background-position: center center; /* Đặt hình ảnh ở giữa màn hình */
   background-attachment: fixed; /* Nền cố định khi cuộn trang */
@@ -18,6 +47,7 @@
   height: 100vh;
   position: absolute;
   padding: 0;
+  z-index: -2;
   font-family: Arial, sans-serif;
 }
 
@@ -84,9 +114,9 @@
 /* Nút gửi */
 .btn-submit-login {
   padding: 12px;
-  background-color: #49516f;
-  color: #ffffff;
-  border: none;
+  background-color: white;
+  color: #8db883;
+  border: 1px solid #8db883;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
@@ -96,7 +126,8 @@
 }
 
 .btn-submit-login:hover {
-  background-color: #49517f; /* Màu cam đậm hơn khi hover */
+  background-color: #8db883;
+  color: white; /* Màu cam đậm hơn khi hover */
   transform: scale(1.03); /* Phóng to nhẹ khi hover */
 }
 .additional-links-login {
@@ -116,7 +147,7 @@
   font-size: 0.8rem;
 }
 .login-link2 {
-  color: #333;
+  color: #8db883;
   font-size: 0.8rem;
   padding: 10px;
   text-decoration: none;
@@ -132,6 +163,9 @@
   margin-top: -8px;
   font-weight: 600;
   margin-left: -10px;
+}
+.login-link3:hover {
+  color: #8db883;
 }
 
 /* Liên kết bổ sung */
@@ -156,13 +190,18 @@
 }
 .form-img {
   width: 84%;
-  /* padding: 20px; */
-  padding-right: -10px;
   position: relative;
-  /* margin-right: 24px; */
-  /* margin-right: -20px; */
   padding-top: 20px;
   padding-left: 24px;
+  /* Làm mờ ảnh bên trong form */
+  opacity: 0.6; /* Độ mờ */
+  filter: blur(2px); /* Hiệu ứng làm mờ */
+  transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động khi hover */
+}
+
+.form-img:hover {
+  opacity: 1; /* Ảnh rõ khi hover */
+  filter: blur(0px); /* Loại bỏ mờ khi hover */
 }
 
 .additional-links a:hover {

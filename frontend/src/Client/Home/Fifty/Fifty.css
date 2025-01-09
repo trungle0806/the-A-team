@@ -3,6 +3,7 @@
   padding-right: 120px;
   grid-column: main;
   margin-bottom: max(75px, min(12.5vw, 120px));
+  padding-top: 40px;
 }
 .fifty-inner {
   align-items: flex-start;

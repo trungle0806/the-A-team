@@ -1,6 +1,6 @@
 /* Form.css */
 .body-register {
-  background-image: url("https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Đường dẫn tới hình ảnh nền */
+  background-image: url("https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pftEnvTMxS8Q7kNvgHLPfKH&_nc_oc=AdiOmTgcS1PVcje4rCF4T67yHhRkhWlLkKqz-xxmmCIGzr1EiTmh53CctVT_YwDJj8s&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=A-fUqKblFpGDEYhzxArhoXT&oh=00_AYCMdQlL6EYZnomkgnO4pwUAWPJ_sV5voP7wqeCQhCF2Tg&oe=6785F426"); /* Đường dẫn tới hình ảnh nền */
   background-size: cover; /* Tự động co dãn để phủ hết màn hình */
   background-position: center center; /* Đặt hình ảnh ở giữa màn hình */
   background-attachment: fixed; /* Nền cố định khi cuộn trang */
@@ -11,13 +11,38 @@
   position: absolute;
   padding: 0;
   font-family: Arial, sans-serif;
+  z-index: -2;
 }
 .form-register-left-right {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   gap: 100px;
+  width: 50vw; */
   width: 50vw;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  align-items: center;
+  gap: 100px;
+  position: relative;
+  overflow: hidden; /* Ẩn phần dư thừa của pseudo-element */
+  margin-left: -107px;
+  margin-top: 57px;
+}
+.form-register-left-right::before {
+  content: ""; /* Nội dung phải có */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pftEnvTMxS8Q7kNvgHLPfKH&_nc_oc=AdiOmTgcS1PVcje4rCF4T67yHhRkhWlLkKqz-xxmmCIGzr1EiTmh53CctVT_YwDJj8s&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=A-fUqKblFpGDEYhzxArhoXT&oh=00_AYCMdQlL6EYZnomkgnO4pwUAWPJ_sV5voP7wqeCQhCF2Tg&oe=6785F426");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  filter: blur(10px); /* Làm mờ nền */
+  z-index: -1;
 }
 .form-register-left {
   width: 40%;
@@ -158,19 +183,22 @@
 
 .btn-submit-register {
   padding: 10px;
-  background-color: #49516f;
-  color: white;
-  border: none;
+  background-color: white;
+  color: #8db883;
+  border: 1px solid #8db883;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
   margin-top: 36px;
   margin-right: 63px;
+  position: relative;
   margin-left: 27px;
+  width: 20.5vw;
 }
 
 .btn-submit-register:hover {
-  background-color: #49517f;
+  background-color: #8db883;
+  color: white;
 }
 
 .error-message {
@@ -191,25 +219,32 @@
   font-weight: 500;
 }
 .additional-links {
-  color: #49516f;
+  color: black;
   text-decoration: none;
   font-size: 14px;
   font-weight: bold;
   transition: color 0.3s ease;
   margin-right: 45px;
+  position: relative;
+  width: 23vw;
 }
 
 .additional-links a:hover {
-  color: #49517f; /* Chuyển sang cam khi hover */
+  color: #8db883; /* Chuyển sang cam khi hover */
 }
 .login-link-register {
-  color: #49516f;
+  color: #8db883;
   text-decoration: none;
 }
 .home-link-register {
   font-size: 14px;
   color: #49516f;
   text-decoration: none; /* Màu đen cho đường link quay lại trang chủ */
+}
+.form-register-button {
+  margin-left: 350px;
+  /* margin-bottom: 10px; */
+  margin-top: -126px;
 }
 
 @media (max-width: 600px) {
