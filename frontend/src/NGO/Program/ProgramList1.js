@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getPrograms, deleteProgram } from "../Service/programService";
+import { getProgramsByNGO, deleteProgram } from "../Service/programService";
 import ProgramForm from "./ProgramForm";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import {
-  faInfoCircle,
-  faEdit,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faInfoCircle, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./ProgramList.css";
 
 const ProgramList1 = () => {
   const [programs, setPrograms] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [pageSize] = useState(10);
   const [editProgramId, setEditProgramId] = useState(null); // Track which program to edit
   const [showAddForm, setShowAddForm] = useState(false); // To toggle the Add Program form
   const navigate = useNavigate(); // Initialize navigate function
@@ -24,22 +16,14 @@ const ProgramList1 = () => {
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
-        const data = await getPrograms(searchQuery, page, pageSize);
+        const data = await getProgramsByNGO(); // Fetch programs by NGO
         setPrograms(data.$values); // Assuming your data follows this structure
       } catch (error) {
-        console.error("Error fetching programs:", error);
+        console.error("Error fetching programs by NGO:", error);
       }
     };
     fetchPrograms();
-  }, [searchQuery, page, pageSize]);
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
+  }, []);
 
   const handleAddProgramClick = () => {
     setShowAddForm(true);
@@ -65,14 +49,6 @@ const ProgramList1 = () => {
     <div>
       <h1 className="Program-List-h1">Program List</h1>
       <div className="Program-icon">
-        {/* Search bar */}
-        <input
-          className="Program-search"
-          type="text"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Search Programs"
-        />
         {/* Button to add new program */}
         <button className="Program-add" onClick={handleAddProgramClick}>
           <FontAwesomeIcon icon={faUserPlus} />
@@ -144,19 +120,6 @@ const ProgramList1 = () => {
           ))}
         </tbody>
       </table>
-
-      {/* Pagination */}
-      <div className="Program-Pagination">
-        <button
-          onClick={() => handlePageChange(page - 1)}
-          disabled={page === 1}
-        >
-          <i className="fas fa-chevron-left"></i> {/* Icon mũi tên trái */}
-        </button>
-        <button onClick={() => handlePageChange(page + 1)}>
-          <i className="fas fa-chevron-right"></i> {/* Icon mũi tên phải */}
-        </button>
-      </div>
     </div>
   );
 };

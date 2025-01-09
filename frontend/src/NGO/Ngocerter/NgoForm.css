@@ -1,0 +1,105 @@
+/* Tổng thể cho body */
+.ngo-body {
+    font-family: "arial-black";
+    background-color: #f5f5f5;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tiêu đề của form */
+  .ngo-h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Form */
+  .ngo-hand {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Các nhóm input */
+  .ngo-div,
+  .ngo-des,
+  .ngo-me,
+  .ngo-url,
+  .ngo-achi,
+  .ngo-box {
+    margin-bottom: 15px;
+  }
+  
+  /* Label */
+  .ngo-bel,
+  .ngo-la,
+  .ngo-mr,
+  .ngo-logo,
+  .ngo-aem {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Input và Textarea */
+  .ngo-input,
+  .ngo-code,
+  .ngo-data,
+  .ngo-textarea,
+  .ngo-change {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+  
+  .ngo-textarea,
+  .ngo-change {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* Checkbox */
+  .ngo-ved {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .ngo-is {
+    margin-right: 8px;
+  }
+  
+  /* Nút submit */
+  .ngo-btn {
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .ngo-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Đổi màu khi có lỗi */
+  p {
+    font-size: 14px;
+    text-align: center;
+  }
+  

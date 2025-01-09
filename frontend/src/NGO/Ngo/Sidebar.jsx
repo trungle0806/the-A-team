@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 import { IoMdImages } from "react-icons/io";
+import { FaBuildingNgo } from "react-icons/fa6";
 import "./Ngo.css";
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
@@ -38,13 +39,13 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
             <BsFillArchiveFill className="icon-1" /> Programs
           </Link>
         </li>
-        {/* <li className='sidebar-list-item'>
-          <Link to="/ngo/image" className="sidebar-link">
-            <IoMdImages className='icon' /> Image Products
+         <li className='sidebar-list-item'>
+          <Link to="/ngo/ngo-form" className="sidebar-link">
+            <FaBuildingNgo className='icon-1' /> NGO
           </Link>
         </li>
         
-        <li className='sidebar-list-item'>
+        {/* <li className='sidebar-list-item'>
           <Link to="/admin/category" className="sidebar-link">
             <BsFillGrid3X3GapFill className='icon' /> Categories
           </Link>
