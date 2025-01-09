@@ -1,12 +1,48 @@
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 
 // Tạo instance axios
 const api = axios.create({
-    baseURL: 'http://localhost:5024/api/',  // Cập nhật URL backend của bạn
+    baseURL: 'http://localhost:5024/api/', // Cập nhật URL backend của bạn
     headers: {
         'Content-Type': 'application/json',
     },
 });
+
+// Lấy accountId từ token
+const getAccountIdFromToken = () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        throw new Error('Token not found');
+    }
+    const decoded = jwtDecode(token);
+    return decoded.id; // Lấy `id` (accountId) từ token
+};
+
+// Lấy thông tin NGO từ accountId
+export const getNGOByAccountId = async () => {
+    try {
+        const accountId = getAccountIdFromToken(); // Lấy accountId từ token
+        const response = await api.get(`NGO/account/${accountId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching NGO by accountId:', error);
+        throw error;
+    }
+};
+
+// Lấy danh sách các chương trình của NGO
+export const getProgramsByNGO = async () => {
+    try {
+        const ngo = await getNGOByAccountId(); // Lấy thông tin NGO
+        const ngoId = ngo.ngoId; // Lấy ngoId từ thông tin NGO
+        const response = await api.get(`NGO/${ngoId}/programs`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching programs by NGO:', error);
+        throw error;
+    }
+};
 
 // Lấy danh sách tất cả các chương trình
 export const getPrograms = async (searchQuery = '', page = 1, pageSize = 10) => {
