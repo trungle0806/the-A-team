@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Client/Home/Home";
 import About from "./Client/About/About";
 import Contact from "./Client/Contact/Contact";
-import News from "./Client/News/News";
+import Ngos from "./Client/Ngos/Ngos";
 import LoginForm from "./Client/Login/LoginForm";
 import RegisterForm from "./Client/Register/RegisterForm";
 import ForgotAndResetPassword from "./Client/ForgotPassword/ForgotPassword";
@@ -29,7 +29,6 @@ import CensorNgo from "./Admin/CensorNgo/CensorNgo";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
 
-
 import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
 import ProgramList1 from "./NGO/Program/ProgramList1";
@@ -49,7 +48,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/news" element={<News />} />
+          <Route path="/ngos" element={<Ngos />} />
           <Route path="/program" element={<ProgramList />} />
           <Route path="/donate/:programId" element={<Donate />} />
           <Route path="/login" element={<LoginForm />} />

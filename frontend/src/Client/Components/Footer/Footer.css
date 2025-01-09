@@ -34,6 +34,7 @@
 .footer-container {
   flex-wrap: wrap;
   justify-content: space-between;
+  height: 229px;
   width: 80vw;
   text-align: center;
   margin-left: 131px;

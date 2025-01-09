@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { IoSearch } from "react-icons/io5";
-import "./News.css";
+import "./Ngos.css";
 
-const New = () => {
+const Ngos = () => {
   // Danh sách dữ liệu bài viết
   const newItems = [
     {
@@ -134,7 +134,7 @@ const New = () => {
         {/* Breadcrumb */}
         <div className="color">
           <div className="brand">
-            <h1 className="new-h1">News</h1>
+            <h1 className="new-h1">Ngos</h1>
           </div>
 
           {/* Header */}
@@ -192,4 +192,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default Ngos;

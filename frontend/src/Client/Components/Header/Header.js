@@ -101,12 +101,12 @@ export const Header = () => {
           Program
         </NavLink>
         <NavLink
-          to="/news"
+          to="/ngos"
           className={({ isActive }) =>
             isActive ? "navbar-link active" : "navbar-link"
           }
         >
-          News
+          Ngos
         </NavLink>
         <NavLink
           to="/about"

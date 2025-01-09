@@ -24,14 +24,14 @@ const Slider = () => {
             description:
               "Aim for community strength in supporting difficult situations.",
             image:
-              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--1f13ca08-8080-4f0a-bbc8-e2cf06e045f0/hunger-services.png.webp?preferwebp=true&width=760",
+              "https://scontent.xx.fbcdn.net/v/t1.15752-9/472336735_1493795368186907_432249080599126556_n.png?stp=dst-png_s640x640&_nc_cat=107&ccb=1-7&_nc_sid=0024fc&_nc_ohc=EJfMkW0PG54Q7kNvgEAmmYG&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1gG52HYc5eFyoQTAVLcLILiHB61mWuRkbNzGyBAu6xBGew&oe=67A62C40",
           },
           {
             title:
               "Building a Brighter Tomorrow, One Act of Kindness at a Time",
             description: "Emphasize positive change through each small action",
             image:
-              "https://imagev3.vietnamplus.vn/w1000/Uploaded/2024/fsmsy/2024_06_16/ttxvn-tre-em-gaza-1855.jpg.webp",
+              "https://scontent.xx.fbcdn.net/v/t1.15752-9/472303340_3828393274139217_1243827506585040785_n.png?stp=dst-png_s552x414&_nc_cat=108&ccb=1-7&_nc_sid=0024fc&_nc_ohc=mf-nZgs0Hv0Q7kNvgFv4SKV&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1gHAmtZJ4GJI9DBYelZiS01_L-0zetD5Xe2W6ED-1tTsAg&oe=67A61454",
           },
           {
             title: "Every Gift Counts Empowering Lives Through Generosity",
