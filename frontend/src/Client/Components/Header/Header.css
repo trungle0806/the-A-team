@@ -6,17 +6,14 @@
   justify-content: space-between;
   align-items: center;
   width: 95%;
-  color: white; /* Màu mặc định */
+  color: black; /* Màu mặc định */
   font-family: Arial, sans-serif;
   padding: 30px 48px;
   position: fixed;
   z-index: 100;
+  border: 1px solid #8db883;
   background-color: transparent; /* Nền trong suốt */
   transition: background-color 0.3s ease, padding 0.3s ease;
-}
-
-.cart {
-  color: #49516f;
 }
 
 /* Khi header cuộn */
@@ -25,17 +22,16 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px 48px;
   color: #000; /* Đổi thành màu đen */
-  
 }
 
 .header-container.scrolled .navbar-header-link a,
-.header-container.scrolled .favorites-icon,
+.header-container.scrolled .favorites-icon1,
 .header-container.scrolled .user-icon-style {
   color: #ededed; /* Màu đen cho các liên kết và icon */
 }
 
 .header-container.scrolled .navbar-header-link a:hover,
-.header-container.scrolled .favorites-icon :hover,
+.header-container.scrolled .favorites-icon1 :hover,
 .header-container.scrolled .user-icon-style:hover {
   color: #ededed; /* Màu vàng khi hover */
 }
@@ -63,9 +59,7 @@
   color: #8db883; /* Màu vàng khi hover */
 }
 
-/* .header-container.other-page .logo-header img {
-  filter: brightness(0); 
-} */
+/* Khi header cuộn, thay đổi màu của logo đăng xuất thành màu đen */
 .header-container.scrolled .logo-header img {
   filter: brightness(1100);
 }
@@ -137,7 +131,7 @@
 
 .auth-buttons button {
   background-color: #e74c3c;
-  color: white;
+  color: black;
   padding: 8px 15px;
   border: none;
   border-radius: 5px;
@@ -155,6 +149,9 @@
   color: inherit; /* Kế thừa màu từ header-container */
   font-size: 20px;
   transition: color 0.3s ease;
+}
+.favorites-icon {
+  color: black;
 }
 
 .favorites-icon:hover {
@@ -190,18 +187,19 @@
 
 .logout-icon-style {
   font-size: 20px;
-  color: white;
+  color: black;
   transition: color 0.3s ease;
 }
 
 .logout-icon-style:hover {
-  color: #49516f;
+  color: #8db883;
 }
 
 /* Khi header cuộn, thay đổi màu của logo đăng xuất thành màu đen */
 .header-container.scrolled .logout-icon-style {
-  color: #ededed; /* Thay đổi màu của icon đăng xuất thành đen khi cuộn */
+  color: black; /* Thay đổi màu của icon đăng xuất thành đen khi cuộn */
 }
+
 .favorites {
   display: flex;
   align-items: center;
@@ -217,37 +215,60 @@
   transition: color 0.3s ease, transform 0.3s ease; /* Smooth animation for hover */
 }
 
-.favorites-icon {
+.favorites-icon1 {
   font-size: 24px; /* Adjust icon size */
-  color: white; /* Default heart icon color */
+  color: black; /* Default heart icon color */
 }
 
 .favorites-link:hover .favorites-icon {
   color: #8db883; /* Bright red on hover */
-  /* transform: scale(1.2); */
 }
+
 .favorites-count {
   color: white;
   background-color: #49516f;
   border-radius: 49%;
-  /* margin: 10px; */
   padding: 4px;
   margin-bottom: 18px;
-  /* margin-right: 10px; */
   position: relative;
 }
-/* When on the About, News, Contact, and Program pages */
-.header-container.other-page .logout-icon-style {
-  color: black; /* Set the color to black for logout icon */
+
+/* Khi vào trang Home */
+.header-container.home {
+  background-color: white; /* Nền trắng */
+  color: black; /* Chữ màu đen */
 }
 
-/* Default logout icon style for other pages */
-.logout-icon-style {
-  font-size: 20px;
-  color: white;
-  transition: color 0.3s ease;
+/* Các liên kết trong navbar của trang Home */
+.header-container.home .navbar-header-link a {
+  color: black; /* Liên kết màu đen */
 }
 
-.logout-icon-style:hover {
-  color: #8db883;
+/* Hover hiệu ứng cho các liên kết trong navbar của trang Home */
+.header-container.home .navbar-header-link a:hover {
+  color: #8db883; /* Màu vàng khi hover */
+}
+
+/* Logo trong header trang Home */
+.header-container.home .logo-header img {
+  filter: brightness(0); /* Biến logo thành đen */
+}
+
+/* Các icon trong phần header */
+.header-container.home .favorites-icon1,
+.header-container.home .user-icon-style,
+.header-container.home .logout-icon-style {
+  color: black !important; /* Màu đen cho các icon */
+}
+
+/* Thêm vào đây để đảm bảo icon yêu thích luôn có màu đen */
+.header-container.home .favorites-icon1 {
+  color: black !important; /* Đảm bảo icon yêu thích luôn có màu đen */
+}
+
+/* Các icon trong phần header của trang Home */
+.header-container.home .favorites-icon1:hover,
+.header-container.home .user-icon-style:hover,
+.header-container.home .logout-icon-style:hover {
+  color: #8db883; /* Màu vàng khi hover */
 }

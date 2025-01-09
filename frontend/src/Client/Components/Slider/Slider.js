@@ -1,87 +1,95 @@
-import React from "react";
-import "./Slider.css"; // Đảm bảo bạn import file CSS ở đây
+import React, { useState, useEffect } from "react";
+import "./Slider.css";
 import Header from "../Header/Header";
 
 const Slider = () => {
-  const sliderRef = React.useRef(null);
+  const slides = [
+    {
+      title: "It's not just Coffee, It's",
+      highlight: "Starbuck's",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus aliquid vitae nihil id, inventore error corporis hic dolore, optio dignissimos iure beatae dolores possimus porro cumque.",
+      image:
+        "https://vufo.org.vn/data/data/quynhhoa/2023/10/cao-bang-cai-thien-dieu-kien-song.jpg",
+      link: "/donate",
+    },
+    {
+      title: "Delicious Brews, Great Moments",
+      highlight: "Cafe Delight",
+      description:
+        "Experience the perfect blend of fresh beans and warm ambiance. Let every sip take you to a world of comfort and joy.",
+      image:
+        "https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/472878506_1171899590959099_8282383191005360724_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=1&ccb=1-7&_nc_sid=833d8c&_nc_ohc=yXR5PulSuesQ7kNvgH9jIZM&_nc_oc=AdhTm6n0D2hpdnDrYgv0GGkS_qVtgsuVkdYisHFbJQ46Gk1m7krf2N15kEW99LWQCck&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&_nc_gid=AwsBtFDUOl0bxAad5NmFPf1&oh=00_AYBJ-LYNRAqiZTZw1IkeVyXIPx2LIND-v_4GSU2JAPG6Mg&oe=6785BEFD",
+      link: "/donate",
+    },
+    {
+      title: "Brewed to Perfection",
+      highlight: "The Coffee Hub",
+      description:
+        "Indulge in our special selection of hand-crafted coffees made to suit every taste. Your perfect cup is just a click away.",
+      image: "https://bepharco.com/Data/Sites/1/News/3880/minigadine-bai-3.jpg",
+      link: "/donate",
+    },
+  ];
 
-  const activate = (e) => {
-    const items = sliderRef.current.querySelectorAll(".item-slider");
-    if (e.target.classList.contains("next-slider")) {
-      sliderRef.current.append(items[0]);
-    } else if (e.target.classList.contains("prev-slider")) {
-      sliderRef.current.prepend(items[items.length - 1]);
-    }
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [show, setShow] = useState(true);
+
+  const nextSlide = () => {
+    setShow(false);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+      setShow(true);
+    }, 1000); // Đợi 1 giây trước khi cập nhật slider
   };
 
+  const prevSlide = () => {
+    setShow(false);
+    setTimeout(() => {
+      setCurrentIndex(
+        (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+      );
+      setShow(true);
+    }, 1000); // Đợi 1 giây trước khi cập nhật slider
+  };
+
+  // Tự động thay đổi slide mỗi 10 giây
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 10000); // 10 giây
+
+    // Dọn dẹp interval khi component bị hủy
+    return () => clearInterval(interval);
+  }, []); // Chỉ chạy một lần khi component mount
+
+  const { title, highlight, description, image, link } = slides[currentIndex];
+
   return (
-    <div className="slider-container-slider">
+    <div className="slider-container">
       <Header />
-      <ul className="slider-slider" ref={sliderRef}>
-        {[
-          {
-            title: "Together, We Can Transform Lives",
-            description:
-              "Aim for community strength in supporting difficult situations.",
-            image:
-              "https://scontent.xx.fbcdn.net/v/t1.15752-9/472336735_1493795368186907_432249080599126556_n.png?stp=dst-png_s640x640&_nc_cat=107&ccb=1-7&_nc_sid=0024fc&_nc_ohc=EJfMkW0PG54Q7kNvgEAmmYG&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1gG52HYc5eFyoQTAVLcLILiHB61mWuRkbNzGyBAu6xBGew&oe=67A62C40",
-          },
-          {
-            title:
-              "Building a Brighter Tomorrow, One Act of Kindness at a Time",
-            description: "Emphasize positive change through each small action",
-            image:
-              "https://scontent.xx.fbcdn.net/v/t1.15752-9/472303340_3828393274139217_1243827506585040785_n.png?stp=dst-png_s552x414&_nc_cat=108&ccb=1-7&_nc_sid=0024fc&_nc_ohc=mf-nZgs0Hv0Q7kNvgFv4SKV&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1gHAmtZJ4GJI9DBYelZiS01_L-0zetD5Xe2W6ED-1tTsAg&oe=67A61454",
-          },
-          {
-            title: "Every Gift Counts Empowering Lives Through Generosity",
-            description:
-              "Celebrate the meaning and value of contributions, no matter how small or large.",
-            image:
-              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--65e211ef-5bb7-4985-b3c6-c60ae21c37a4/human-trafficking.jpg.webp?preferwebp=true&width=760",
-          },
-          {
-            title: "Creating a World Where No One Is Left Behind",
-            description:
-              "Aiming for a mission to eliminate inequality and bring opportunities to all.",
-            image:
-              "https://amity.keydesign.xyz/ngo/wp-content/uploads/sites/9/2024/03/home-ngo-donation-1.jpg",
-          },
-          {
-            title: "Hope in Every Heart, Help in Every Hand",
-            description:
-              "Encourage the spirit of contribution from each individual to make a difference.",
-            image:
-              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--ff9d8ac6-4055-413b-9856-8f44237efd59/mentoring-charities.jpg.webp?preferwebp=true&width=760",
-          },
-          {
-            title: "Your Compassion, Their Hope",
-            description: "Connect supporters with people receiving help.",
-            image:
-              "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--ed426efd-bbb0-44ce-b7e1-0155fbbd71c1/girl_leaf_env.png.webp?preferwebp=true&width=760",
-          },
-        ].map((slide, index) => (
-          <li
-            className="item-slider"
-            key={index}
-            style={{ backgroundImage: `url(${slide.image})` }}
-          >
-            <div className="content-slider">
-              <h2 className="title-slider">{slide.title}</h2>
-              <p className="description-slider">{slide.description}</p>
-              <button className="slider-more-slider">Read More</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <nav className="nav-slider">
-        <button className="btn prev-slider" onClick={activate}>
-          ❮
+      <div className={`text-content ${show ? "show" : ""}`}>
+        <h1>{title}</h1>
+        <div className="highlight">{highlight}</div>
+        <p>{description}</p>
+        <a href={link} className="learn-more">
+          Donate
+        </a>
+      </div>
+      <div className={`image-content ${show ? "show" : ""}`}>
+        <img className="main-image" src={image} alt={highlight} />
+      </div>
+
+      <div className="slider-navigation">
+        <button onClick={prevSlide} className="prev-btn">
+          <i className="fas fa-chevron-left"></i>{" "}
+          {/* Biểu tượng mũi tên trái */}
         </button>
-        <button className="btn next-slider" onClick={activate}>
-          ❯
+        <button onClick={nextSlide} className="next-btn">
+          <i className="fas fa-chevron-right"></i>{" "}
+          {/* Biểu tượng mũi tên phải */}
         </button>
-      </nav>
+      </div>
     </div>
   );
 };
