@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NgoService from "../Service/ngoService";
+import { getNGOById } from "../Service/ngoService";  // Sử dụng named import
 
 const NgoDetail = ({ ngoId }) => {
   const [ngo, setNgo] = useState(null);
@@ -9,7 +9,7 @@ const NgoDetail = ({ ngoId }) => {
   useEffect(() => {
     const fetchNgo = async () => {
       try {
-        const data = await NgoService.getNGOById(ngoId);
+        const data = await getNGOById(ngoId);
         setNgo(data);
       } catch (err) {
         setError("Không thể tải thông tin chi tiết của NGO.");
