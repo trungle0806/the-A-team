@@ -39,7 +39,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </Link>
         </li>
          <li className='sidebar-list-item'>
-          <Link to="/ngo/ngo-form" className="sidebar-link">
+          <Link to="/ngo/ngo-form/${ngoId}" className="sidebar-link">
             <FaBuildingNgo className='icon-1' /> NGO
           </Link>
         </li>

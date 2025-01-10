@@ -34,7 +34,7 @@ import DashBoard from "./NGO/Ngo/Home";
 import ProgramList1 from "./NGO/Program/ProgramList1";
 import ProgramDetail from "./NGO/Program/ProgramDetail";
 import NgoDetail from "./NGO/Ngocerter/NgoDetail";
-import NgoForm from "./NGO/Ngocerter/NgoForm";
+import NGOEditForm from "./NGO/Ngocerter/NgoForm";
 import ProgramDonationList from "./NGO/ProgramDonation/ProgramDonationList";
 import ProgramDonationDetail from "./NGO/ProgramDonation/ProgramDonationDetail";
 import GalleryImageList from "./NGO/GalleryImage/GalleryImageList";
@@ -82,7 +82,7 @@ function App() {
             <Route path="program-list" element={<ProgramList1 />} />
             <Route path="program/:id" element={<ProgramDetail />} />
             <Route path="ngo-detail" element={<NgoDetail />} />
-            <Route path="ngo-form" element={<NgoForm />} />
+            <Route path="ngo-form/:id" element={<NGOEditForm />} />
             <Route path="program-donation" element={<ProgramDonationList />} />
             <Route path="program-donation/:id" element={<ProgramDonationDetail />} />
             <Route path="gallery-image" element={<GalleryImageList />} />
