@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import axios from "axios";
 import "./Ngos.css";
 
 const Ngos = () => {
-  // Danh sách dữ liệu bài viết
-  const newItems = [
-    // Thêm dữ liệu bài viết của bạn tại đây
-  
-  ];
+  const [ngos, setNgos] = useState([]); // State to hold the list of NGOs
+  const [loading, setLoading] = useState(true); // State for loading status
+  const [error, setError] = useState(""); // State to capture any errors
 
-  // State để quản lý số lượng bài viết hiển thị
-  const [visibleCount] = useState(3);
+  useEffect(() => {
+    // Fetch the list of NGOs when the component mounts
+    const fetchNgos = async () => {
+      try {
+        const response = await axios.get(" http://localhost:5024/api/ngo"); // Make API call to fetch NGOs
+        setNgos(response.data); // Set the fetched NGOs in the state
+      } catch (error) {
+        setError("Failed to load NGOs.");
+      } finally {
+        setLoading(false); // Set loading to false once the request is completed
+      }
+    };
+
+    fetchNgos();
+  }, []);
 
   return (
     <div>
@@ -20,7 +32,7 @@ const Ngos = () => {
         {/* Breadcrumb */}
         <div className="color">
           <div className="brand">
-            <h1 className="new-h1">Ngos</h1>
+            <h1 className="new-h1">NGOs</h1>
           </div>
 
           {/* Header */}
@@ -43,21 +55,27 @@ const Ngos = () => {
 
           {/* Content */}
           <div className="new-container">
-            <section className="new-items">
-              {newItems.slice(0, visibleCount).map((item) => (
-                <div className="new-item" key={item.id}>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="new-item-image"
-                  />
-                  <div className="new-item-content">
-                    <h2>{item.title}</h2>
-                    <p>{item.description}</p>
+            {loading ? (
+              <p>Loading NGOs...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : (
+              <section className="new-items">
+                {ngos.$values.map((ngo) => (
+                  <div className="new-item" key={ngo.NGOId}>
+                    <img
+                      src={ngo.image} // Assuming each NGO has an 'image' property
+                      alt={ngo.name}
+                      className="new-item-image"
+                    />
+                    <div className="new-item-content">
+                      <h2>{ngo.name}</h2>
+                      <p>{ngo.description}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </section>
+                ))}
+              </section>
+            )}
           </div>
         </div>
         <Footer />
