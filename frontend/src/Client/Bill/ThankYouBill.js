@@ -1,19 +1,20 @@
 import React from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./ThankYouBill.css";
 
 const ThankYouBill = () => {
   const { state } = useLocation();
   const { donationData } = state || {};
-  const navigate = useNavigate();  // Use useNavigate instead of useHistory
+  const navigate = useNavigate();
 
   if (!donationData) {
     return <div>Loading...</div>;
   }
 
   const goToHome = () => {
-    navigate("/home"); // Navigate to the home page
+    navigate("/"); // Navigate to the home page
   };
+  console.log("Received donation data:", donationData);
 
   return (
     <div className="container">
@@ -26,32 +27,26 @@ const ThankYouBill = () => {
       </div>
       <div className="details">
         <p>
-          <span className="label">Donor:</span>{" "}
-          {donationData.donorName}
+          <span className="label">Donor:</span> {donationData.donorName}
         </p>
         <p>
-          <span className="label">Email:</span> {donationData.donorEmail}
+          <span className="label">Donor Email:</span> {donationData.donorEmail}
         </p>
         <p>
           <span className="label">Organization:</span> Give-AID
         </p>
         <p>
-          <span className="label">Donation Amount:</span>{" "}
-          {donationData.donationAmount} $
+          <span className="label">Donation Amount:</span> {donationData.donationAmount} $
         </p>
         <p>
-          <span className="label">Donation Date:</span>{" "}
-          {donationData.donationDate}
+          <span className="label">Donation Date:</span> {donationData.donationDate}
         </p>
         <p>
-          <span className="label">Payment Method:</span>{" "}
-          {donationData.paymentMethod}
+          <span className="label">Payment Method:</span> {donationData.paymentMethod}
         </p>
       </div>
       <div className="thank-ted">
-      <p>
-        Thank you for trusting us, we wish you all the best.
-        </p>
+        <p>Thank you for trusting us, we wish you all the best.</p>
         <a onClick={goToHome} className="go-home-btn">
           Go Back to Home
         </a>

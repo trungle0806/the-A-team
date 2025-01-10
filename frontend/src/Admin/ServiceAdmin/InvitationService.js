@@ -67,6 +67,7 @@ const addInvitation = async (invitation) => {
             throw new Error('Unauthorized: Only Admin and NGO roles can add invitations.');
         }
 
+        console.log('Adding invitation:', invitation);
         const response = await axios.post(API_URL, invitation, { headers });
         return response.data;
     } catch (error) {

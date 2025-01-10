@@ -48,9 +48,9 @@ function Authentication() {
             <li className={isActive("customers") ? "active" : ""}>
               <Link to="customers">Customers</Link>
             </li>
-            <li className={isActive("customerngo") ? "active" : ""}>
+            {/* <li className={isActive("customerngo") ? "active" : ""}>
               <Link to="customerngo">CustomerNgo</Link>
-            </li>
+            </li> */}
             <li className={isActive("inviation") ? "active" : ""}>
               <Link to="inviation">Invitation</Link>
             </li>
@@ -63,9 +63,9 @@ function Authentication() {
             <li className={isActive("censorngo") ? "active" : ""}>
               <Link to="censorngo">CensorNgo</Link>
             </li>
-            <li className={isActive("transactionhistory") ? "active" : ""}>
+            {/* <li className={isActive("transactionhistory") ? "active" : ""}>
               <Link to="transactionhistory">TransactionHistory</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </aside>
@@ -152,7 +152,7 @@ function Authentication() {
               </Link>
             </li>
             <li>
-              <Link to="customerngo" className="admin-mobile-list">CustomerNgo</Link>
+              {/* <Link to="customerngo" className="admin-mobile-list">CustomerNgo</Link> */}
             </li>
             <li>
               <Link to="inviation" className="admin-mobile-list">Invitation</Link>
