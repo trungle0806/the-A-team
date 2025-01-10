@@ -1,131 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
-import { IoSearch } from "react-icons/io5";
+import axios from "axios";
 import "./Ngos.css";
 
 const Ngos = () => {
-  // Danh sách dữ liệu bài viết
-  const newItems = [
-    {
-      id: 1,
-      title: "Juneteenth: A Call to Action for Donors",
-      description:
-        "Consider donating to Black-founded nonprofits in support of Juneteenth.",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--b95df872-67bd-42e9-8019-84eb7d632c09/juneteenth.jpg.webp?width=760&preferwebp=true",
-      link: "/product/1",
-    },
-    {
-      id: 2,
-      title: "Factoring COVID-19 into Charity Ratings",
-      description:
-        "Learn how COVID-19 impacts charity ratings and what steps you can take.",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--80aaa591-befc-46e9-8153-dbdb3ca184c5/covid-people.jpg.webp?preferwebp=true&width=760",
-      link: "/blog/1",
-    },
-    {
-      id: 3,
-      title: "Finding and Evaluating Effective Nonprofits",
-      description:
-        "Explore how to evaluate nonprofits effectively and make informed decisions.",
-      image:
-        "https://www.charitynavigator.org/about-us/news-thought-leadership/2024-finding-and-evaluating-effective-nonprofits/_jcr_content/root/container/container/container/image.coreimg.85.1600.png/1730397665040.png",
-      link: "/product/2",
-    },
-    {
-      id: 4,
-      title: "Embracing Iteration: Fall Methodology Update 2023",
-      description:
-        "Charity Navigator is thrilled to unveil its revamped Accountability & Finance methodology.",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--b8d1c55f-3528-4e65-b743-d8f016b9a698/financials.jpg.webp?preferwebp=true&width=760",
-      link: "/blog/2",
-    },
-    {
-      id: 5,
-      title: "How do Charity Navigator Users Plan to Give in 2023?",
-      description: "Helpful donating insights from 356 individuals.",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--661ee443-92f4-4507-aa70-64f4d9eab691/plantogive23.jpg.webp?preferwebp=true&width=760",
-      link: "/blog/3",
-    },
-    {
-      id: 6,
-      title: "Reflecting on 2023: A Year of Challenges and Growth",
-      description:
-        "A message from Michael Thatcher, President & CEO, Charity Navigator.",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--0c905c98-aa8a-41a7-aa22-6cb502751975/Michael-and-Dugans-Edit.png.webp?preferwebp=true&width=760",
-      link: "/blog/4",
-    },
-    {
-      id: 7,
-      title: "Donors Prefer Charities that Earn All Four Beacons",
-      description:
-        "Two years ago, Charity Navigator introduced the Encompass Rating System.",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--80b14e07-c5b7-401c-903f-8585e4da2582/donor-prefs.jpg.webp?preferwebp=true&width=760",
-      link: "/blog/5",
-    },
-    {
-      id: 8,
-      title: "Advisories are now Alerts: Here’s Why…",
-      description:
-        "Alerts ensure donors have the relevant information to make more informed choices about their charitable support..",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--d1f36a8d-557e-4d8c-8ff0-eed8176dab29/woman_laptop.png.webp?preferwebp=true&width=760",
-      link: "/blog/5",
-    },
-    {
-      id: 9,
-      title: " 2022 Holiday Giving Insights",
-      description:
-        "Charity Navigator surveyed 3011 donors and 853 charities to gain insights into how the 2022 giving season compared to 2021. These findings are not a comprehensive assessment of giving, but they can provide a window into the trends that shaped the season..",
-      image:
-        "https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--7881faca-a891-4771-83e2-abef405674cf/donate-for-the-holidays.jpg.webp?preferwebp=true&width=760",
-      link: "/blog/5",
-    },
-  ];
+  const [ngos, setNgos] = useState([]); // State to hold the list of NGOs
+  const [loading, setLoading] = useState(true); // State for loading status
+  const [error, setError] = useState(""); // State to capture any errors
 
-  // State để quản lý số lượng bài viết hiển thị
-  const [visibleCount, setVisibleCount] = useState(3);
-  // State tìm kiếm
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredItems, setFilteredItems] = useState(newItems);
+  useEffect(() => {
+    // Fetch the list of NGOs when the component mounts
+    const fetchNgos = async () => {
+      try {
+        const response = await axios.get(" http://localhost:5024/api/ngo"); // Make API call to fetch NGOs
+        setNgos(response.data); // Set the fetched NGOs in the state
+      } catch (error) {
+        setError("Failed to load NGOs.");
+      } finally {
+        setLoading(false); // Set loading to false once the request is completed
+      }
+    };
 
-  // State để hiển thị gợi ý
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  // Hàm xử lý Load More
-  const handleLoadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 3);
-  };
-
-  // Hàm xử lý tìm kiếm
-  const handleSearch = (event) => {
-    const query = event.target.value;
-    setSearchTerm(query);
-
-    if (query.trim() === "") {
-      setFilteredItems(newItems);
-    } else {
-      const results = newItems.filter((item) =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredItems(results);
-    }
-  };
-
-  // Hàm xử lý khi nhấp vào gợi ý
-  const handleSuggestionClick = (suggestion) => {
-    setSearchTerm(suggestion);
-    setShowSuggestions(false); // Ẩn gợi ý sau khi chọn
-    const results = newItems.filter((item) =>
-      item.title.toLowerCase().includes(suggestion.toLowerCase())
-    );
-    setFilteredItems(results);
-  };
+    fetchNgos();
+  }, []);
 
   return (
     <div>
@@ -134,7 +32,7 @@ const Ngos = () => {
         {/* Breadcrumb */}
         <div className="color">
           <div className="brand">
-            <h1 className="new-h1">Ngos</h1>
+            <h1 className="new-h1">NGOs</h1>
           </div>
 
           {/* Header */}
@@ -157,32 +55,26 @@ const Ngos = () => {
 
           {/* Content */}
           <div className="new-container">
-            <section className="new-items">
-              {newItems.slice(0, visibleCount).map((item) => (
-                <div className="new-item" key={item.id}>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="new-item-image"
-                  />
-                  <div className="new-item-content">
-                    <h2>{item.title}</h2>
-                    <p>{item.description}</p>
-                    <a href={item.link} className="btn">
-                      Read More
-                    </a>
+            {loading ? (
+              <p>Loading NGOs...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : (
+              <section className="new-items">
+                {ngos.$values.map((ngo) => (
+                  <div className="new-item" key={ngo.NGOId}>
+                    <img
+                      src={ngo.image} // Assuming each NGO has an 'image' property
+                      alt={ngo.name}
+                      className="new-item-image"
+                    />
+                    <div className="new-item-content">
+                      <h2>{ngo.name}</h2>
+                      <p>{ngo.description}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </section>
-
-            {/* Load More Button */}
-            {visibleCount < newItems.length && (
-              <div className="load-more-container">
-                <button className="btn load-more" onClick={handleLoadMore}>
-                  Load More
-                </button>
-              </div>
+                ))}
+              </section>
             )}
           </div>
         </div>
