@@ -3,15 +3,14 @@ import {
   BsCart3,
   BsGrid1X2Fill,
   BsFillArchiveFill,
-  BsFillGrid3X3GapFill,
-  BsPeopleFill,
-  BsListCheck,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 import { IoMdImages } from "react-icons/io";
 import { FaBuildingNgo } from "react-icons/fa6";
 import "./Ngo.css";
+import { FaDonate } from "react-icons/fa";
+import { BsImages } from "react-icons/bs";
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
   return (
@@ -45,17 +44,17 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </Link>
         </li>
         
+        <li className='sidebar-list-item'>
+          <Link to="/ngo/program-donation" className="sidebar-link">
+            <FaDonate  className='icon-1' /> ProgramDonation
+          </Link>
+        </li>
+        <li className='sidebar-list-item'>
+          <Link to="/ngo/gallery-image" className="sidebar-link">
+            <BsImages className='icon-1' /> Gallery Image
+          </Link>
+        </li>
         {/* <li className='sidebar-list-item'>
-          <Link to="/admin/category" className="sidebar-link">
-            <BsFillGrid3X3GapFill className='icon' /> Categories
-          </Link>
-        </li>
-        <li className='sidebar-list-item'>
-          <Link to="/admin/authors" className="sidebar-link">
-            <RxAvatar className='icon' /> Authors
-          </Link>
-        </li>
-        <li className='sidebar-list-item'>
           <Link to="/admin/user" className="sidebar-link">
             <BsPeopleFill className='icon' /> User
           </Link>

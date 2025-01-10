@@ -1,77 +1,92 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import DonationHistory from "./DonationHistory/DonationHistory";
-import EditProfile from "./EditProfile/EditProfile"; // Ensure correct path
-import TabNavigation from "./TabNavigation/TabNavigation";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Profile = () => {
-  const [userData, setUserData] = useState(null);
-  const [activeTab, setActiveTab] = useState("info");
+const CustomerData = () => {
+  const [customerData, setCustomerData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      navigate("/login"); // Navigate to login if no token
-    } else {
-      fetch("http://localhost:5024/api/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch user data");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setUserData(data);
+    const fetchCustomerData = async () => {
+      try {
+        const token = localStorage.getItem('authToken'); // or sessionStorage depending on where you store it
+        if (!token) {
+          setError('Authentication token is missing');
           setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-          setLoading(false);
-        });
-    }
-  }, [navigate]);
+          return;
+        }
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab); // Switch tab when user clicks
-  };
+        // Decode the token to extract the user ID (assuming the token includes "id" claim)
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const accountId = decodedToken.id;
+
+        const response = await axios.get(`http://localhost:5024/api/customer/get-customer-data`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setCustomerData(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching customer data:", err);
+        setError('Failed to load customer data');
+        setLoading(false);
+      }
+    };
+
+    fetchCustomerData();
+  }, []);
 
   if (loading) {
-    return <p>Loading...</p>; // Show loading when fetching data
+    return <div>Loading...</div>;
   }
 
-  // Ensure userData is available before attempting to access donations
-  const donations = userData?.donations || []; // Default to empty array if donations is null or undefined
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
-    <div className="profile-container">
-      <h1>Profile Information</h1>
-      <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />
-
-      {/* Render tabs based on activeTab */}
-      {activeTab === "info" && userData && <ProfileInfo userData={userData} />}
-      {activeTab === "edit" && userData && <EditProfile userData={userData} />}
-
-      {/* Show donation history or message only on the donations tab */}
-      {activeTab === "donations" && (
-        <>
-          {donations.length > 0 ? (
-            <DonationHistory donations={donations} />
-          ) : (
-            <p>No donation history available.</p>
-          )}
-        </>
-      )}
+    <div>
+      <h2>Customer Information</h2>
+      <div>
+        <strong>Customer ID:</strong> {customerData.customerId}
+      </div>
+      <div>
+        <strong>Account ID:</strong> {customerData.accountId}
+      </div>
+      <div>
+        <strong>First Name:</strong> {customerData.firstName}
+      </div>
+      <div>
+        <strong>Last Name:</strong> {customerData.lastName}
+      </div>
+      <div>
+        <strong>Date of Birth:</strong> {new Date(customerData.dateOfBirth).toLocaleDateString()}
+      </div>
+      <div>
+        <strong>Phone Number:</strong> {customerData.phoneNumber || 'Not provided'}
+      </div>
+      <div>
+        <strong>Address:</strong> {customerData.address || 'Not provided'}
+      </div>
+      <div>
+        <strong>Gender:</strong> {customerData.gender}
+      </div>
+      <div>
+        <strong>Created At:</strong> {new Date(customerData.createdAt).toLocaleString()}
+      </div>
+      <div>
+        <strong>Updated At:</strong> {new Date(customerData.updatedAt).toLocaleString()}
+      </div>
+      <div>
+        <strong>Program Donations:</strong> {customerData.programDonations?.$values?.length || 'No donations'}
+      </div>
+      <div>
+        <strong>Queries:</strong> {customerData.queries?.$values?.length || 'No queries'}
+      </div>
     </div>
   );
 };
 
-export default Profile;
+export default CustomerData;

@@ -9,7 +9,7 @@ import RegisterForm from "./Client/Register/RegisterForm";
 import ForgotAndResetPassword from "./Client/ForgotPassword/ForgotPassword";
 import Authentication from "./Admin/Authentication/Authentication";
 import AuthContext, { AuthProvider } from "./Context/AuthContext"; // Import AuthProvider
-import Profile from "./Client/Profile/Profile";
+import CustomerData from "./Client/Profile/Profile";
 import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
@@ -35,6 +35,9 @@ import ProgramList1 from "./NGO/Program/ProgramList1";
 import ProgramDetail from "./NGO/Program/ProgramDetail";
 import NgoDetail from "./NGO/Ngocerter/NgoDetail";
 import NgoForm from "./NGO/Ngocerter/NgoForm";
+import ProgramDonationList from "./NGO/ProgramDonation/ProgramDonationList";
+import ProgramDonationDetail from "./NGO/ProgramDonation/ProgramDonationDetail";
+import GalleryImageList from "./NGO/GalleryImage/GalleryImageList";
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -57,7 +60,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<CustomerData />} />
           <Route path="/thank-you-bill" element={<ThankYouBill />} />
           <Route path="/notfound" element={<NotFound />} />
 
@@ -80,6 +83,9 @@ function App() {
             <Route path="program/:id" element={<ProgramDetail />} />
             <Route path="ngo-detail" element={<NgoDetail />} />
             <Route path="ngo-form" element={<NgoForm />} />
+            <Route path="program-donation" element={<ProgramDonationList />} />
+            <Route path="program-donation/:id" element={<ProgramDonationDetail />} />
+            <Route path="gallery-image" element={<GalleryImageList />} />
           </Route>
 
           {/* Reset Password Route */}
