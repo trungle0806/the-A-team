@@ -28,7 +28,7 @@
 #sidebar {
   grid-area: sidebar;
   height: 100%;
-  background-color: #8db883;
+  background: linear-gradient(to top, #a6dfa6, #a7e696, #8db883);
   color: #fff;
   overflow-y: auto;
   transition: all 0.5s;

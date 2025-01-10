@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { GoOrganization } from "react-icons/go";
+import "./ProgramDetail.css";
 
 const ProgramDetail = () => {
   const { id } = useParams(); // Get the program ID from the URL
@@ -56,7 +57,7 @@ const ProgramDetail = () => {
   };
 
   // Render loading state if data is not yet available
-  if (!program) return <div className="loading">Loading...</div>;
+  if (!program) return <div className="ProgramDetail-loading">Loading...</div>;
 
   // Extract program details for display
   const totalDonationDays = calculateDonationDays(
@@ -71,79 +72,88 @@ const ProgramDetail = () => {
       : 0;
 
   return (
-    <div className="program-detail">
+    <div className="ProgramDetail-container">
       {/* Program Header */}
-      <div className="target-progress">
-        <h1 className="donate-title">
+      <div className="ProgramDetail-target-progress">
+        <h1 className="ProgramDetail-donate-title">
           <FaBullseye /> {program.name || "No name available"}
         </h1>
-        <p className="donate-description">
+        <p className="ProgramDetail-donate-description">
           <GoOrganization /> {organizationName}
         </p>
-        <p className="donate-description">
-          <FaHandHoldingHeart /> {program.description || "No description available"}
+        <p className="ProgramDetail-donate-description">
+          <FaHandHoldingHeart />{" "}
+          {program.description || "No description available"}
         </p>
 
         {/* Donation Statistics */}
-        <p className="target-amount">
+        <p className="ProgramDetail-target-amount">
           <AiOutlineDollarCircle /> Target:{" "}
           {program.targetAmount?.toFixed(2) || "0.00"}
         </p>
-        <p className="total-donated">
+        <p className="ProgramDetail-total-donated">
           <FaHandHoldingHeart /> Total Donated:{" "}
           {program.totalDonatedAmount?.toFixed(2) || "0.00"}
         </p>
 
         {/* Progress Bar */}
-        <div className="progress-container">
+        <div className="ProgramDetail-progress-container">
           <div
-            className="progress-bar"
+            className="ProgramDetail-progress-bar"
             style={{ width: `${percentageAchieved}%` }}
           ></div>
         </div>
-        <p className="progress-percentage">
+        <p className="ProgramDetail-progress-percentage">
           Percentage Achieved: {percentageAchieved.toFixed(2)}%
         </p>
         {program.excessAmount > 0 && (
-          <p className="excess-amount">
+          <p className="ProgramDetail-excess-amount">
             Excess Amount: ${program.excessAmount.toFixed(2)}
           </p>
         )}
 
         {/* Donation Details */}
-        <div className="donation-stats">
+        <div className="ProgramDetail-donation-stats">
           <div
-            className="stat-box"
+            className="ProgramDetail-stat-box"
             onClick={handleViewDonations}
             style={{ cursor: "pointer" }}
           >
-            <FaUsers className="icon" />
-            <span className="stat-label">Total Donors:</span>
-            <span className="stat-value">{getUniqueDonorsCount(program.donations)}</span>
+            <FaUsers className="ProgramDetail-icon" />
+            <span className="ProgramDetail-stat-label">Total Donors:</span>
+            <span className="ProgramDetail-stat-value">
+              {getUniqueDonorsCount(program.donations)}
+            </span>
           </div>
-          <div className="stat-box">
-            <FaClock className="icon" />
-            <span className="stat-label">Total Days of Donation:</span>
-            <span className="stat-value">{totalDonationDays}</span>
+          <div className="ProgramDetail-stat-box">
+            <FaClock className="ProgramDetail-icon" />
+            <span className="ProgramDetail-stat-label">
+              Total Days of Donation:
+            </span>
+            <span className="ProgramDetail-stat-value">
+              {totalDonationDays}
+            </span>
           </div>
-          <div className="stat-box">
-            <FaCalendarAlt className="icon" />
-            <span className="stat-label">Current Date:</span>
-            <span className="stat-value">
+          <div className="ProgramDetail-stat-box">
+            <FaCalendarAlt className="ProgramDetail-icon" />
+            <span className="ProgramDetail-stat-label">Current Date:</span>
+            <span className="ProgramDetail-stat-value">
               {new Date().toLocaleDateString()}
             </span>
           </div>
-          <div className="stat-box">
-            <FaCalendarAlt className="icon" />
-            <span className="stat-label">Donation End Date:</span>
-            <span className="stat-value">
+          <div className="ProgramDetail-stat-box">
+            <FaCalendarAlt className="ProgramDetail-icon" />
+            <span className="ProgramDetail-stat-label">Donation End Date:</span>
+            <span className="ProgramDetail-stat-value">
               {new Date(program.endDate).toLocaleDateString()}
             </span>
           </div>
-          <div className="stat-box">
-            <FaClock className="icon" />
-            <span className="stat-label">Remaining Days:</span>
-            <span className="stat-value">{remainingDonationDays}</span>
+          <div className="ProgramDetail-stat-box">
+            <FaClock className="ProgramDetail-icon" />
+            <span className="ProgramDetail-stat-label">Remaining Days:</span>
+            <span className="ProgramDetail-stat-value">
+              {remainingDonationDays}
+            </span>
           </div>
         </div>
       </div>

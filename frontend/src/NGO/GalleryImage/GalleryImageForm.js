@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./GalleryImageList.css";
 
 const GalleryImageForm = ({ onSubmit, initialData = {} }) => {
   const [formData, setFormData] = useState({
@@ -25,25 +26,33 @@ const GalleryImageForm = ({ onSubmit, initialData = {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
+    <form onSubmit={handleSubmit} className="GalleryImageForm-container">
+      <div className="GalleryImageForm-input-container">
+        <label className="GalleryImageForm-label">
           Caption:
           <input
             type="text"
             name="caption"
             value={formData.caption}
             onChange={handleInputChange}
+            className="GalleryImageForm-input"
           />
         </label>
       </div>
-      <div>
-        <label>
+      <div className="GalleryImageForm-input-container">
+        <label className="GalleryImageForm-label">
           File:
-          <input type="file" name="file" onChange={handleFileChange} />
+          <input
+            type="file"
+            name="file"
+            onChange={handleFileChange}
+            className="GalleryImageForm-file-input"
+          />
         </label>
       </div>
-      <button type="submit">Save</button>
+      <button type="submit" className="GalleryImageForm-submit-btn">
+        Save
+      </button>
     </form>
   );
 };

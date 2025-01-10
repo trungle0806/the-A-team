@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa"; // Import các biểu tượng Edit và Delete
 import {
   fetchGalleryImages,
   deleteGalleryImage,
 } from "../Service/GalleryImageService";
 import GalleryImageForm from "./GalleryImageForm";
+import "./GalleryImageList.css";
 
 const GalleryImageList = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -37,7 +39,6 @@ const GalleryImageList = () => {
   };
 
   const handleSave = async (formData) => {
-    // Handle save functionality here.
     console.log("Saved data:", formData);
     await loadGalleryImages();
     setIsEditing(false);
@@ -45,43 +46,62 @@ const GalleryImageList = () => {
   };
 
   return (
-    <div>
-      <h1>Gallery Images</h1>
+    <div className="GalleryImageList-container">
+      <h1 className="GalleryImageList-title">Gallery Images</h1>
       <input
         type="text"
         placeholder="Search by caption"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        className="GalleryImageList-search-input"
       />
       {!isEditing ? (
-        <GalleryImageForm onSubmit={handleSave} />
+        <GalleryImageForm
+          onSubmit={handleSave}
+          className="GalleryImageList-form"
+        />
       ) : (
-        <GalleryImageForm onSubmit={handleSave} initialData={editData} />
+        <GalleryImageForm
+          onSubmit={handleSave}
+          initialData={editData}
+          className="GalleryImageList-form"
+        />
       )}
-      <ul>
+      <ul className="GalleryImageList-items">
         {galleryImages.map((image) => (
-          <li key={image.imageId}>
+          <li key={image.imageId} className="GalleryImageList-item">
             {image.fileName ? (
               <img
                 src={URL.createObjectURL(new Blob([image.fileName]))}
                 alt={image.caption}
-                style={{ width: "100px" }}
+                className="GalleryImageList-image"
               />
             ) : (
-              <p>No image available</p>
+              <p className="GalleryImageList-no-image">No image available</p>
             )}
-            <p>{image.caption}</p>
-            <button onClick={() => handleEdit(image)}>Edit</button>
-            <button onClick={() => handleDelete(image.imageId)}>Delete</button>
+            <p className="GalleryImageList-caption">{image.caption}</p>
+            <button
+              onClick={() => handleEdit(image)}
+              className="GalleryImageList-edit-btn"
+            >
+              <FaEdit className="GalleryImageList-icon" />
+            </button>
+            <button
+              onClick={() => handleDelete(image.imageId)}
+              className="GalleryImageList-delete-btn"
+            >
+              <FaTrashAlt className="GalleryImageList-icon" />
+            </button>
           </li>
         ))}
       </ul>
-      <div>
+      <div className="GalleryImageList-pagination">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
             onClick={() => setCurrentPage(index + 1)}
             disabled={currentPage === index + 1}
+            className="GalleryImageList-pagination-btn"
           >
             {index + 1}
           </button>

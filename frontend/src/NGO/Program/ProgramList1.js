@@ -3,7 +3,12 @@ import { getProgramsByNGO, deleteProgram } from "../Service/programService";
 import ProgramForm from "./ProgramForm";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faInfoCircle, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserPlus,
+  faInfoCircle,
+  faEdit,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import "./ProgramList.css";
 
 const ProgramList1 = () => {
@@ -47,7 +52,9 @@ const ProgramList1 = () => {
   const handleDeleteClick = async (programId) => {
     try {
       await deleteProgram(programId);
-      const updatedPrograms = programs.filter((program) => program.programId !== programId);
+      const updatedPrograms = programs.filter(
+        (program) => program.programId !== programId
+      );
       setPrograms(updatedPrograms);
       setFilteredPrograms(updatedPrograms);
     } catch (error) {
@@ -88,45 +95,53 @@ const ProgramList1 = () => {
   // Pagination logic
   const indexOfLastProgram = currentPage * programsPerPage;
   const indexOfFirstProgram = indexOfLastProgram - programsPerPage;
-  const currentPrograms = filteredPrograms.slice(indexOfFirstProgram, indexOfLastProgram);
+  const currentPrograms = filteredPrograms.slice(
+    indexOfFirstProgram,
+    indexOfLastProgram
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
       <h1 className="Program-List-h1">Program List</h1>
-      <div className="Program-filters">
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="Program-search"
-        />
-        <input
-          type="date"
-          value={filterStartDate}
-          onChange={(e) => setFilterStartDate(e.target.value)}
-          className="Program-date"
-        />
-        <input
-          type="date"
-          value={filterEndDate}
-          onChange={(e) => setFilterEndDate(e.target.value)}
-          className="Program-date"
-        />
-        <select
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
-          className="Program-status"
-        >
-          <option value="all">Status</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="completed">Completed</option>
-        </select>
-        <button className="Program-add" onClick={handleAddProgramClick}>
-          <FontAwesomeIcon icon={faUserPlus} />
-        </button>
+      <div className="Program-filters-Search1">
+        <div className="Program-filters">
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="Program-search"
+          />
+
+          <button className="Program-add" onClick={handleAddProgramClick}>
+            <FontAwesomeIcon icon={faUserPlus} />
+          </button>
+        </div>
+        <div className="Program-Search1">
+          <input
+            type="date"
+            value={filterStartDate}
+            onChange={(e) => setFilterStartDate(e.target.value)}
+            className="Program-date"
+          />
+          <input
+            type="date"
+            value={filterEndDate}
+            onChange={(e) => setFilterEndDate(e.target.value)}
+            className="Program-date"
+          />
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            className="Program-status"
+          >
+            <option value="all">Status</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
       </div>
       {editProgramId || showAddForm ? (
         <ProgramForm

@@ -1,7 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { getNGOById } from '../Service/ngoService'; // Make sure to import your API function
+import React, { useEffect, useState } from "react";
+import { getNGOById } from "../Service/ngoService";
+import {
+  FaEnvelope,
+  FaInfoCircle,
+  FaTrophy,
+  FaCheckCircle,
+  FaClock,
+  FaEdit, // Thêm icon edit
+} from "react-icons/fa";
+import "./NgoForm.css";
 
-const NGODetail = ({ id }) => {
+const NGODetail = ({ id, onEditClick }) => {
+  // Thêm onEditClick prop
   const [ngoData, setNgoData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -14,7 +24,7 @@ const NGODetail = ({ id }) => {
         setError(error.message);
       }
     };
-    
+
     fetchNGOData();
   }, [id]);
 
@@ -27,17 +37,47 @@ const NGODetail = ({ id }) => {
   }
 
   return (
-    <div className="ngo-detail">
-      <h2>{ngoData.name}</h2>
-      <img src={ngoData.logoUrl} alt={ngoData.name} />
-      <p><strong>Description:</strong> {ngoData.description}</p>
-      <p><strong>Code:</strong> {ngoData.code}</p>
-      <p><strong>Email:</strong> {ngoData.email}</p>
-      <p><strong>Achievements:</strong> {ngoData.achievements}</p>
-      <p><strong>Approved:</strong> {ngoData.isApproved ? 'Yes' : 'No'}</p>
-      <p><strong>Created At:</strong> {new Date(ngoData.createdAt).toLocaleString()}</p>
-      <p><strong>Updated At:</strong> {new Date(ngoData.updatedAt).toLocaleString()}</p>
-      {/* Display other data as needed */}
+    <div>
+      <h2 className="ngo-title">{ngoData.name}</h2>
+
+      <div className="ngo-detail1">
+        <div className="ngo-img">
+          <img className="ngo-logo" src={ngoData.logoUrl} alt={ngoData.name} />
+        </div>
+        <div className="ngo-info1">
+          <div className="ngo-item">
+            <FaInfoCircle className="ngo-icon" />
+            <strong>Description:</strong> {ngoData.description}
+          </div>
+          <div className="ngo-item">
+            <FaEnvelope className="ngo-icon" />
+            <strong>Email:</strong> {ngoData.email}
+          </div>
+          <div className="ngo-item">
+            <FaTrophy className="ngo-icon" />
+            <strong>Achievements:</strong> {ngoData.achievements}
+          </div>
+        </div>
+        <div className="ngo-info2">
+          <div className="ngo-item">
+            <FaCheckCircle className="ngo-icon" />
+            <strong>Approved:</strong> {ngoData.isApproved ? "Yes" : "No"}
+          </div>
+          <div className="ngo-item">
+            <FaClock className="ngo-icon" />
+            <strong>Created At:</strong>{" "}
+            {new Date(ngoData.createdAt).toLocaleString()}
+          </div>
+          <div className="ngo-item">
+            <FaClock className="ngo-icon" />
+            <strong>Updated At:</strong>{" "}
+            {new Date(ngoData.updatedAt).toLocaleString()}
+          </div>
+        </div>
+        <button onClick={onEditClick} className="edit-btn-ngo">
+          <FaEdit />
+        </button>
+      </div>
     </div>
   );
 };

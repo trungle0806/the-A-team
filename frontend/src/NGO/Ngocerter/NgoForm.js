@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { getNGOById, updateNGO } from '../Service/ngoService'; // Import your API functions
-import NGODetail from './NgoDetail'; // Import NGODetail to show the NGO data
+import React, { useState, useEffect } from "react";
+import { getNGOById, updateNGO } from "../Service/ngoService"; // Import your API functions
+import NGODetail from "./NgoDetail"; // Import NGODetail to show the NGO data
+import "./NgoForm.css"; // Import your
 
 const NGOEditForm = ({ id }) => {
   const [ngoData, setNgoData] = useState(null);
   const [updatedNGO, setUpdatedNGO] = useState({
-    name: '',
-    description: '',
-    code: '',
-    logoUrl: '',
-    achievements: '',
-    email: '',
+    name: "",
+    description: "",
+    code: "",
+    logoUrl: "",
+    achievements: "",
+    email: "",
     isApproved: true,
   });
   const [error, setError] = useState(null);
@@ -51,14 +52,15 @@ const NGOEditForm = ({ id }) => {
     e.preventDefault();
     try {
       const updatedData = await updateNGO(id, updatedNGO);
-      setSuccess('NGO updated successfully!');
+      setSuccess("NGO updated successfully!");
       setNgoData(updatedData); // Update the displayed NGO data
       setIsEditing(false); // Hide the form after successful submission
     } catch (error) {
-      setError('Error updating NGO data');
+      setError("Error updating NGO data");
     }
   };
 
+  // Tạo một hàm để xử lý sự kiện chỉnh sửa
   const handleEditClick = () => {
     setIsEditing(true); // Show the form when Edit button is clicked
   };
@@ -73,15 +75,10 @@ const NGOEditForm = ({ id }) => {
 
   return (
     <div>
-      {/* Display NGO details */}
-      <NGODetail data={ngoData} />
+      {/* Hiển thị chi tiết NGO */}
+      <NGODetail id={id} onEditClick={handleEditClick} />
 
-      {/* Show Edit button if not editing */}
-      {!isEditing && (
-        <button onClick={handleEditClick}>Edit NGO</button>
-      )}
-
-      {/* Show form if editing */}
+      {/* Hiển thị form chỉnh sửa khi đang chỉnh sửa */}
       {isEditing && (
         <form onSubmit={handleSubmit} className="ngo-edit-form">
           <h2>Edit NGO</h2>
@@ -145,7 +142,9 @@ const NGOEditForm = ({ id }) => {
               type="checkbox"
               name="isApproved"
               checked={updatedNGO.isApproved}
-              onChange={(e) => setUpdatedNGO({ ...updatedNGO, isApproved: e.target.checked })}
+              onChange={(e) =>
+                setUpdatedNGO({ ...updatedNGO, isApproved: e.target.checked })
+              }
             />
           </div>
           <div>
