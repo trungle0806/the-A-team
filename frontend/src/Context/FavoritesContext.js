@@ -56,7 +56,7 @@ export const FavoritesProvider = ({ children }) => {
         return prevFavorites;
       }
       const updatedFavorites = [...prevFavorites, program];
-      toast.success("Chương trình đã được thêm vào danh sách yêu thích!");
+      toast.success();
       return updatedFavorites;
     });
   };
@@ -74,7 +74,7 @@ export const FavoritesProvider = ({ children }) => {
       const updatedFavorites = prevFavorites.filter(
         (fav) => fav.programId !== programId
       );
-      toast.success("Chương trình đã bị xóa khỏi danh sách yêu thích.");
+      toast.success();
       return updatedFavorites;
     });
   };

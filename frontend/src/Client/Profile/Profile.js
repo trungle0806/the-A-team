@@ -71,14 +71,6 @@ const CustomerData = () => {
                 <FaUser className="icon" />
               </div>
               <div className="customer-info">
-                <strong>Customer ID:</strong> {customerData.customerId}
-              </div>
-            </div>
-            <div className="customer-item">
-              <div className="icon-container">
-                <FaUser className="icon" />
-              </div>
-              <div className="customer-info">
                 <strong>First Name:</strong> {customerData.firstName}
               </div>
             </div>
@@ -90,6 +82,15 @@ const CustomerData = () => {
                 <strong>Last Name:</strong> {customerData.lastName}
               </div>
             </div>
+            <div className="customer-item">
+              <div className="icon-container">
+                <FaUser className="icon" />
+              </div>
+              <div className="customer-info">
+                <strong>Customer ID:</strong> {customerData.customerId}
+              </div>
+            </div>
+
             <div className="customer-item">
               <div className="icon-container">
                 <FaBirthdayCake className="icon" />
