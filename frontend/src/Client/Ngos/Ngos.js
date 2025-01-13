@@ -64,7 +64,7 @@ const Ngos = () => {
                 {ngos.$values.map((ngo) => (
                   <div className="new-item" key={ngo.NGOId}>
                     <img
-                      src={ngo.image} // Assuming each NGO has an 'image' property
+                      src={ngo.logoUrl} // Assuming each NGO has an 'image' property
                       alt={ngo.name}
                       className="new-item-image"
                     />

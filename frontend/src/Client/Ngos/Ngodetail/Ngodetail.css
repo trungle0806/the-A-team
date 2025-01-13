@@ -1,0 +1,126 @@
+/* Global Styles */
+.body3 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  background: #f9fafb;
+  color: #333;
+}
+
+/* Container */
+.ngo-detail-container {
+  padding-top: 115px;
+  /* padding: 40px 20px; */
+  /* max-width: 900px; */
+  /* margin: 0 auto; */
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Image Section */
+.ngodetail-img {
+  display: flex;
+      flex-direction: column;
+      align-items: center;
+}
+
+.ngo-image img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.ngo-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ngo-title {
+  font-size: 42px;
+  color: #2c3e50;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.ngo-subtitle {
+  font-size: 20px;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+/* Content Section */
+.ngo-content {
+  padding: 160px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #effbeb;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.ngo-text {
+  margin-bottom: 25px;
+}
+
+.ngo-text h2 {
+  color: #8db883;
+    font-size: 28px;
+    margin-bottom: 15px;
+     /* padding-left: 10px; */
+}
+.ngo-text h1 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  color: #8db883;
+  text-align: center;
+  font-size: 28px;
+  padding-left: 10px;
+}
+
+.ngo-text p {
+  line-height: 1.8;
+  font-size: 16px;
+  color: #555;
+}
+
+.ngo-text ul {
+  padding-left: 20px;
+  list-style-type: square;
+}
+
+.ngo-text ul li {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+/* Donate Button */
+.donate-button {
+  display: inline-block;
+  padding: 12px 24px;
+  color: #fff;
+  background-color: #8db883;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 25px;
+}
+
+.donate-button:hover {
+  background-color: #8db883;
+}
+@media (forced-colors: active) {
+  /* Update styles for forced colors mode */
+  body {
+    background-color: black;
+    color: white;
+  }
+}
+
