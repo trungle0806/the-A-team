@@ -3,7 +3,7 @@
 /* General container styling */
 .program-donation-admin {
   margin-top: 0px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   /* padding: 20px; */
   /* background-color: #f4f7fb; */
   border-radius: 8px;
@@ -224,19 +224,19 @@
   background-color: #4c57a3;
 }
 
-.add-donation-form{
+.add-donation-form {
   max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out;
-    background-color: #f9f9f9;
-    padding: 0 20px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+  background-color: #f9f9f9;
+  padding: 0 20px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
-.add-donation-form.show{
+.add-donation-form.show {
   max-height: 400px; /* Adjust according to your content height */
-    padding: 20px;
+  padding: 20px;
 }
 .add-donation-form.hide {
   max-height: 0;
@@ -252,7 +252,7 @@
   opacity: 1;
   transform: translateY(0);
 }
-.donation-name{
+.donation-name {
   font-size: 1.5rem;
 }
 
@@ -271,7 +271,7 @@
 }
 
 .pagination button.active {
-  background-color: #007bff;
+  background-color: #8db883;
   color: white;
 }
 .donation-list {

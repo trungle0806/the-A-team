@@ -14,6 +14,7 @@ import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
+import NgoDetail from "./Client/Ngos/NgoDetail/NgoDetail";
 import NotFound from "./404/NotFound";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
@@ -32,12 +33,10 @@ import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
 import ProgramList1 from "./NGO/Program/ProgramList1";
 import ProgramDetail from "./NGO/Program/ProgramDetail";
-import NgoDetail from "./NGO/Ngocerter/NgoDetail";
 import NGOEditForm from "./NGO/Ngocerter/NgoForm";
 import ProgramDonationList from "./NGO/ProgramDonation/ProgramDonationList";
 import ProgramDonationDetail from "./NGO/ProgramDonation/ProgramDonationDetail";
 import GalleryImageList from "./NGO/GalleryImage/GalleryImageList";
-import Ngodetail from "./Client/Ngos/Ngodetail/Ngodetail";
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -55,6 +54,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/ngos" element={<Ngos />} />
           <Route path="/program" element={<ProgramList />} />
+          <Route path="/ngos/:id" element={<NgoDetail />} />
           <Route path="/donate/:programId" element={<Donate />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
@@ -64,7 +64,6 @@ function App() {
           <Route path="/notfound" element={<NotFound />} />
 
           <Route path="/thank-you-bill" element={<ThankYouBill />} />
-          <Route path="/ngodetail" element={<Ngodetail />} />
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
             <Route path="dashboard" element={<Dashboard />} />
@@ -85,7 +84,10 @@ function App() {
             <Route path="ngo-detail" element={<NgoDetail />} />
             <Route path="ngo-form/:id" element={<NGOEditForm />} />
             <Route path="program-donation" element={<ProgramDonationList />} />
-            <Route path="program-donation/:id" element={<ProgramDonationDetail />} />
+            <Route
+              path="program-donation/:id"
+              element={<ProgramDonationDetail />}
+            />
             <Route path="gallery-image" element={<GalleryImageList />} />
           </Route>
 

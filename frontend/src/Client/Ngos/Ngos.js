@@ -1,41 +1,46 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import axios from "axios";
 import "./Ngos.css";
 
 const Ngos = () => {
-  const [ngos, setNgos] = useState([]); // State to hold the list of NGOs
-  const [loading, setLoading] = useState(true); // State for loading status
-  const [error, setError] = useState(""); // State to capture any errors
+  const [ngos, setNgos] = useState([]); // Khởi tạo ngos là mảng
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // Fetch the list of NGOs when the component mounts
     const fetchNgos = async () => {
       try {
-        const response = await axios.get(" http://localhost:5024/api/ngo"); // Make API call to fetch NGOs
-        setNgos(response.data); // Set the fetched NGOs in the state
+        const response = await axios.get("http://localhost:5024/api/ngo");
+        console.log("Response data:", response.data); // Kiểm tra phản hồi
+
+        // Kiểm tra xem phản hồi có phải là mảng không
+        if (Array.isArray(response.data.$values)) {
+          setNgos(response.data.$values); // Thiết lập ngos là mảng từ $values
+        } else {
+          setNgos([]); // Trong trường hợp không có dữ liệu hợp lệ
+        }
       } catch (error) {
         setError("Failed to load NGOs.");
       } finally {
-        setLoading(false); // Set loading to false once the request is completed
+        setLoading(false); // Đặt loading thành false sau khi hoàn thành
       }
     };
 
-    fetchNgos();
+    fetchNgos(); // Gọi hàm fetch
   }, []);
 
   return (
     <div>
       <Header />
       <div className="new-header">
-        {/* Breadcrumb */}
         <div className="color">
           <div className="brand">
             <h1 className="new-h1">NGOs</h1>
           </div>
 
-          {/* Header */}
           <div className="news-header">
             <div className="banner-image">
               <img
@@ -53,7 +58,6 @@ const Ngos = () => {
             </div>
           </div>
 
-          {/* Content */}
           <div className="new-container">
             {loading ? (
               <p>Loading NGOs...</p>
@@ -61,25 +65,34 @@ const Ngos = () => {
               <p>{error}</p>
             ) : (
               <section className="new-items">
-                {ngos.$values.map((ngo) => (
-                  <div className="new-item" key={ngo.NGOId}>
-                    <img
-                      src={ngo.logoUrl} // Assuming each NGO has an 'image' property
-                      alt={ngo.name}
-                      className="new-item-image"
-                    />
-                    <div className="new-item-content">
-                      <h2>{ngo.name}</h2>
-                      <p>{ngo.description}</p>
+                {ngos.map((ngo) => {
+                  const ngoId = ngo.ngoId; // Sử dụng ngoId từ dữ liệu phản hồi
+                  if (!ngoId) {
+                    console.error("ngoId is undefined for:", ngo); // Ghi lại thông tin không hợp lệ
+                    return null; // Không render NGO này nếu ngoId không hợp lệ
+                  }
+                  return (
+                    <div className="new-item" key={ngoId}>
+                      <Link to={`/ngos/${ngoId}`}>
+                        <img
+                          src={ngo.logoUrl || "fallback-image-url.jpg"} // Thay thế bằng URL hình ảnh mặc định nếu không tồn tại
+                          alt={ngo.name}
+                          className="new-item-image"
+                        />
+                        <div className="new-item-content">
+                          <h2>{ngo.name}</h2>
+                          <p>{ngo.description}</p>
+                        </div>
+                      </Link>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </section>
             )}
           </div>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };
