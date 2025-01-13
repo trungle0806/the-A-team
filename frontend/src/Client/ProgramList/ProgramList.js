@@ -5,15 +5,11 @@ import { useFavorites } from "../../Context/FavoritesContext";
 import { toast, ToastContainer } from "react-toastify";  
 import { useNavigate } from "react-router-dom";  
 import { FaSearch } from "react-icons/fa";  
-import Modal from "react-modal";  
 import "react-toastify/dist/ReactToastify.css";  
 import "./ProgramList.css";  
 import Header from "../Components/Header/Header";  
 import Footer from "../Components/Footer/Footer";  
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";  
-
-// Thiết lập Modal  
-Modal.setAppElement('#root');  
 
 const ProgramList = () => {  
   const [programs, setPrograms] = useState([]);  
@@ -25,8 +21,6 @@ const ProgramList = () => {
   const [currentPage, setCurrentPage] = useState(1);  
   const itemsPerPage = 9;  
   const [selectedCategories, setSelectedCategories] = useState([]);  
-  const [selectedProgram, setSelectedProgram] = useState(null);  
-  const [isModalOpen, setIsModalOpen] = useState(false);  
 
   const fetchPrograms = async () => {  
     try {  
@@ -77,19 +71,9 @@ const ProgramList = () => {
     setCurrentPage(1); // Reset to the first page  
   };  
 
-  const showProgramDetails = (program) => {  
-    setSelectedProgram(program);  
-    setIsModalOpen(true);  
-  };  
-
-  const closeModal = () => {  
-    setIsModalOpen(false);  
-    setSelectedProgram(null); // Reset selected program  
-  };  
-
   const filteredPrograms = programs.filter((program) => {  
     const matchesCategories = selectedCategories.length  
-      ? selectedCategories.includes(program.category)  
+      ? selectedCategories.includes(program.category) // Check if program belongs to the selected category  
       : true;  
 
     const matchesSearchTerm = program.name?.toLowerCase().includes(searchTerm.toLowerCase());  
@@ -162,7 +146,7 @@ const ProgramList = () => {
                       <p>No programs available.</p>  
                     ) : (  
                       currentPrograms.map((program) => (  
-                        <div key={program.programId} className="program-card" onClick={() => showProgramDetails(program)}>  
+                        <div key={program.programId} className="program-card">  
                           <div className="program-image">  
                             <img  
                               src={program.ImageUrl}  
@@ -239,34 +223,6 @@ const ProgramList = () => {
                     </li>  
                   </ul>  
                 </div>  
-
-                {/* Modal để hiển thị chi tiết chương trình */}  
-                {selectedProgram && (  
-                  <Modal  
-                    isOpen={isModalOpen}  
-                    onRequestClose={closeModal}  
-                    contentLabel="Program Details"  
-                    className="Modal"  
-                    overlayClassName="Overlay"  
-                  >  
-                    <h2>{selectedProgram.name}</h2>  
-                    <img src={selectedProgram.ImageUrl} alt={selectedProgram.name} />  
-                    <p>{selectedProgram.description}</p>  
-                    <p>  
-                      <strong>Start date:</strong>{" "}  
-                      {new Date(selectedProgram.startDate).toLocaleDateString()}  
-                    </p>  
-                    <p>  
-                      <strong>End date:</strong>{" "}  
-                      {new Date(selectedProgram.endDate).toLocaleDateString()}  
-                    </p>  
-                    <p>  
-                      <strong>Is about to happen:</strong>{" "}  
-                      {selectedProgram.isUpcoming ? "Yes" : "No"}  
-                    </p>  
-                    <button onClick={closeModal}>Close</button>  
-                  </Modal>  
-                )}  
               </div>  
             </div>  
           </div>  
