@@ -3,16 +3,24 @@ import axios from "axios";
 const API_URL = "http://localhost:5024/api/ProgramDonation"; // Thay đổi URL nếu cần
 
 // Lấy danh sách lịch sử giao dịch
-export const getProgramDonations = async (searchQuery = "") => {
+// export const getProgramDonations = async (searchQuery = "") => {
+//   try {
+//     const response = await axios.get(`${API_URL}?searchQuery=${searchQuery}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching program donations:", error);
+//     throw error;
+//   }
+// };
+export const getProgramDonationsForNGOAndProgram = async (ngoId, programId) => {
   try {
-    const response = await axios.get(`${API_URL}?searchQuery=${searchQuery}`);
+    const response = await axios.get(`${API_URL}/ngo/${ngoId}/program/${programId}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching program donations:", error);
+    console.error("Error fetching donations:", error);
     throw error;
   }
 };
-
 // Lấy thông tin chi tiết của một giao dịch theo ID
 export const getProgramDonationById = async (id) => {
   try {

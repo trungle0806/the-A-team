@@ -86,11 +86,7 @@ function App() {
             <Route path="program/:id" element={<ProgramDetail />} />
             <Route path="ngo-detail" element={<NgoDetail />} />
             <Route path="ngo-form/:id" element={<NGOEditForm />} />
-            <Route path="program-donation" element={<ProgramDonationList />} />
-            <Route
-              path="program-donation/:id"
-              element={<ProgramDonationDetail />}
-            />
+            <Route path=":ngoId/program/:programId/donations" element={<ProgramDonationList />} />
             <Route path="gallery-image" element={<GalleryImageList />} />
           </Route>
           {/* Reset Password Route */}
