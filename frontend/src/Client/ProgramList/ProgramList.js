@@ -1,215 +1,281 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { CiHeart } from "react-icons/ci";
-import { useFavorites } from "../../Context/FavoritesContext";
-import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import "react-toastify/dist/ReactToastify.css";
-import "./ProgramList.css";
-import Header from "../Components/Header/Header";
-import Footer from "../Components/Footer/Footer";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import React, { useEffect, useState } from "react";  
+import axios from "axios";  
+import { CiHeart } from "react-icons/ci";  
+import { useFavorites } from "../../Context/FavoritesContext";  
+import { toast, ToastContainer } from "react-toastify";  
+import { useNavigate } from "react-router-dom";  
+import { FaSearch } from "react-icons/fa";  
+import Modal from "react-modal";  
+import "react-toastify/dist/ReactToastify.css";  
+import "./ProgramList.css";  
+import Header from "../Components/Header/Header";  
+import Footer from "../Components/Footer/Footer";  
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";  
 
-const ProgramList = () => {
-  const [programs, setPrograms] = useState([]);
-  const [programLoading, setProgramLoading] = useState(true);
-  const [error, setError] = useState("");
-  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 1;
+// Thiết lập Modal  
+Modal.setAppElement('#root');  
 
-  const fetchPrograms = async () => {
-    try {
-      setProgramLoading(true);
-      const response = await axios.get(`http://localhost:5024/api/program1`);
-      const programsData = response.data?.$values || [];
-      setPrograms(programsData);
-    } catch (err) {
-      setError("Failed to fetch programs.");
-      toast.error("Failed to fetch programs.");
-    } finally {
-      setProgramLoading(false);
-    }
-  };
+const ProgramList = () => {  
+  const [programs, setPrograms] = useState([]);  
+  const [programLoading, setProgramLoading] = useState(true);  
+  const [error, setError] = useState("");  
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();  
+  const navigate = useNavigate();  
+  const [searchTerm, setSearchTerm] = useState("");  
+  const [currentPage, setCurrentPage] = useState(1);  
+  const itemsPerPage = 9;  
+  const [selectedCategories, setSelectedCategories] = useState([]);  
+  const [selectedProgram, setSelectedProgram] = useState(null);  
+  const [isModalOpen, setIsModalOpen] = useState(false);  
 
-  useEffect(() => {
-    fetchPrograms();
-  }, []);
+  const fetchPrograms = async () => {  
+    try {  
+      setProgramLoading(true);  
+      const response = await axios.get(`http://localhost:5024/api/program1`);  
+      const programsData = response.data?.$values || [];  
+      setPrograms(programsData);  
+    } catch (err) {  
+      setError("Failed to fetch programs.");  
+      toast.error("Failed to fetch programs.");  
+    } finally {  
+      setProgramLoading(false);  
+    }  
+  };  
 
-  const toggleFavorite = (program) => {
-    if (favorites.some((fav) => fav.programId === program.programId)) {
-      removeFromFavorites(program.programId);
-      toast.success("Removed from favorites.");
-    } else {
-      addToFavorites(program);
-      toast.success("Added to favorites.");
-    }
-  };
+  useEffect(() => {  
+    fetchPrograms();  
+  }, []);  
 
-  const handleDonateClick = (programId) => {
-    navigate(`/donate/${programId}`);
-  };
+  const toggleFavorite = (program) => {  
+    if (favorites.some((fav) => fav.programId === program.programId)) {  
+      removeFromFavorites(program.programId);  
+      toast.success("Removed from favorites.");  
+    } else {  
+      addToFavorites(program);  
+      toast.success("Added to favorites.");  
+    }  
+  };  
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleDonateClick = (programId) => {  
+    navigate(`/donate/${programId}`);  
+  };  
 
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-    }
-  };
+  const handleSearch = (e) => {  
+    setSearchTerm(e.target.value);  
+  };  
 
-  const filteredPrograms = programs.filter((program) =>
-    program.name?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handlePageChange = (newPage) => {  
+    if (newPage >= 1 && newPage <= totalPages) {  
+      setCurrentPage(newPage);  
+    }  
+  };  
 
-  const totalPages = Math.ceil(filteredPrograms.length / itemsPerPage);
-  const currentPrograms = filteredPrograms.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const handleCategorySelect = (category, e) => {  
+    e.preventDefault();  
+    setSelectedCategories([category]); // Set the selected category  
+    setSearchTerm(""); // Reset search term  
+    setCurrentPage(1); // Reset to the first page  
+  };  
 
-  return (
-    <div>
-      <Header />
-      <div className="program-header">
-        <div className="program-list1">
-          <h1 className="program-list">PROGRAM LIST</h1>
-          <div className="program-to">
-            <div className="program-to2">
-              <div className="program-to3">
-                <div className="program-sidebar">
-                  <div className="search-bar3">
-                    <div className="program-container">
-                      <div className="program-content">
-                        <input
-                          type="text"
-                          placeholder="Search..."
-                          value={searchTerm}
-                          onChange={handleSearch}
-                        />
-                        <button className="program-btn1">
-                          <FaSearch className="program-fa" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <h1 className="program-title">Charity</h1>
-                  <div className="program-border"></div>
-                  <ul className="program-categor">
-                    <li className="program-li">
-                      <a href="#">Child support charity</a>
-                    </li>
-                    <li className="program-li">
-                      <a href="#">Education charity</a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="program-col">
-                  <div className="program-grid">
-                    {programLoading ? (
-                      <p>Loading programs...</p>
-                    ) : currentPrograms.length === 0 ? (
-                      <p>No programs available.</p>
-                    ) : (
-                      currentPrograms.map((program) => (
-                        <div key={program.programId} className="program-card">
-                          <div className="program-image">
-                            <img
-                              src={program.image || "default-image.jpg"}
-                              alt={program.name}
-                            />
-                          </div>
-                          <div className="program-details">
-                            <h2>{program.name}</h2>
-                            <p>{program.description}</p>
-                            <p>
-                              <strong>Start date:</strong>{" "}
-                              {new Date(program.startDate).toLocaleDateString()}
-                            </p>
-                            <p>
-                              <strong>End date:</strong>{" "}
-                              {new Date(program.endDate).toLocaleDateString()}
-                            </p>
-                            <p>
-                              <strong>Is about to happen:</strong>{" "}
-                              {program.isUpcoming ? "Yes" : "No"}
-                            </p>
-                            <div className="program-ci">
-                              <CiHeart
-                                className={`program-heart ${
-                                  favorites.some(
-                                    (fav) => fav.programId === program.programId
-                                  )
-                                    ? "favorite"
-                                    : ""
-                                }`}
-                                onClick={() => toggleFavorite(program)}
-                                aria-label="Toggle favorite"
-                              />
-                              <button
-                                className="program-donate-btn"
-                                onClick={() => handleDonateClick(program.programId)}
-                                aria-label="Donate to program"
-                              >
-                                Donate
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                  
-                  <ul className="pagination program-grid__pagination">
-                    <li className="pagination-item">
-                      <button
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="pagination-item__link"
-                      >
-                        <MdKeyboardArrowLeft className="program-left" />
-                      </button>
-                    </li>
-                    {[...Array(totalPages)].map((_, index) => (
-                      <li
-                        key={index}
-                        className={`pagination-item ${
-                          currentPage === index + 1 ? "pagination-item--active" : ""
-                        }`}
-                      >
-                        <button
-                          onClick={() => handlePageChange(index + 1)}
-                          className="pagination-item__link"
-                        >
-                          {index + 1}
-                        </button>
-                      </li>
-                    ))}
-                    <li className="pagination-item">
-                      <button
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        className="pagination-item__link"
-                      >
-                        <MdKeyboardArrowRight className="program fa-right-from-bracket" />
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ToastContainer />
-        <Footer />
-      </div>
-    </div>
-  );
-};
+  const showProgramDetails = (program) => {  
+    setSelectedProgram(program);  
+    setIsModalOpen(true);  
+  };  
+
+  const closeModal = () => {  
+    setIsModalOpen(false);  
+    setSelectedProgram(null); // Reset selected program  
+  };  
+
+  const filteredPrograms = programs.filter((program) => {  
+    const matchesCategories = selectedCategories.length  
+      ? selectedCategories.includes(program.category)  
+      : true;  
+
+    const matchesSearchTerm = program.name?.toLowerCase().includes(searchTerm.toLowerCase());  
+
+    return matchesCategories && matchesSearchTerm;  
+  });  
+
+  const totalPages = Math.ceil(filteredPrograms.length / itemsPerPage);  
+
+  const currentPrograms = filteredPrograms.slice(  
+    (currentPage - 1) * itemsPerPage,  
+    currentPage * itemsPerPage  
+  );  
+
+  const categoryCounts = programs.reduce((acc, program) => {  
+    const category = program.category;  
+    if (category) {  
+      acc[category] = (acc[category] || 0) + 1;  
+    }  
+    return acc;  
+  }, {});  
+
+  return (  
+    <div>  
+      <Header />  
+      <div className="program-header">  
+        <div className="program-list1">  
+          <h1 className="program-list">Charity Programs</h1>  
+          <div className="program-to">  
+            <div className="program-to2">  
+              <div className="program-to3">  
+                <div className="program-sidebar">  
+                  <div className="search-bar3">  
+                    <div className="program-container">  
+                      <div className="program-content">  
+                        <input  
+                          type="text"  
+                          placeholder="Search..."  
+                          value={searchTerm}  
+                          onChange={handleSearch}  
+                        />  
+                        <button className="program-btn1">  
+                          <FaSearch className="program-fa" />  
+                        </button>  
+                      </div>  
+                    </div>  
+                  </div>  
+                  <h1 className="program-title">Charity Categories</h1>  
+                  <div className="program-border"></div>  
+                  <ul className="program-categor">  
+                    {["child-support charity", "education charity"].map((category) => (  
+                      <li key={category} className="program-li">  
+                        <a  
+                          href="#"  
+                          onClick={(e) => handleCategorySelect(category, e)}  
+                          className={selectedCategories.includes(category) ? "active" : ""}  
+                        >  
+                          {category.charAt(0).toUpperCase() + category.slice(1).replace("-", " ")}   
+                          ({categoryCounts[category] || 0})  
+                        </a>  
+                      </li>  
+                    ))}  
+                  </ul>  
+                </div>  
+                <div className="program-col">  
+                  <div className="program-grid">  
+                    {programLoading ? (  
+                      <p>Loading programs...</p>  
+                    ) : currentPrograms.length === 0 ? (  
+                      <p>No programs available.</p>  
+                    ) : (  
+                      currentPrograms.map((program) => (  
+                        <div key={program.programId} className="program-card" onClick={() => showProgramDetails(program)}>  
+                          <div className="program-image">  
+                            <img  
+                              src={program.ImageUrl}  
+                              alt={program.name}  
+                            />  
+                          </div>  
+                          <div className="program-details">  
+                            <h2>{program.name}</h2>  
+                            <p>{program.description}</p>  
+                            <p>  
+                              <strong>Start date:</strong>{" "}  
+                              {new Date(program.startDate).toLocaleDateString()}  
+                            </p>  
+                            <p>  
+                              <strong>End date:</strong>{" "}  
+                              {new Date(program.endDate).toLocaleDateString()}  
+                            </p>  
+                            <p>  
+                              <strong>Is about to happen:</strong>{" "}  
+                              {program.isUpcoming ? "Yes" : "No"}  
+                            </p>  
+                            <div className="program-ci">  
+                              <CiHeart  
+                                className={`program-heart ${favorites.some(  
+                                  (fav) => fav.programId === program.programId  
+                                ) ? "favorite" : ""}`}  
+                                onClick={() => toggleFavorite(program)}  
+                                aria-label="Toggle favorite"  
+                              />  
+                              <button  
+                                className="program-donate-btn"  
+                                onClick={() => handleDonateClick(program.programId)}  
+                                aria-label="Donate to program"  
+                              >  
+                                Donate  
+                              </button>  
+                            </div>  
+                          </div>  
+                        </div>  
+                      ))  
+                    )}  
+                  </div>  
+                  <ul className="pagination1 program-grid__pagination">  
+                    <li className="pagination1-item">  
+                      <button  
+                        onClick={() => handlePageChange(currentPage - 1)}  
+                        disabled={currentPage === 1}  
+                        className="pagination1-item__link"  
+                      >  
+                        <MdKeyboardArrowLeft className="program-left" />  
+                      </button>  
+                    </li>  
+                    {[...Array(totalPages)].map((_, index) => (  
+                      <li  
+                        key={index}  
+                        className={`pagination1-item ${currentPage === index + 1 ? "pagination1-item--active" : ""}`}  
+                      >  
+                        <button  
+                          onClick={() => handlePageChange(index + 1)}  
+                          className="pagination1-item__link"  
+                        >  
+                          {index + 1}  
+                        </button>  
+                      </li>  
+                    ))}  
+                    <li className="pagination1-item">  
+                      <button  
+                        onClick={() => handlePageChange(currentPage + 1)}  
+                        disabled={currentPage === totalPages}  
+                        className="pagination1-item__link"  
+                      >  
+                        <MdKeyboardArrowRight className="program fa-right-from-bracket" />  
+                      </button>  
+                    </li>  
+                  </ul>  
+                </div>  
+
+                {/* Modal để hiển thị chi tiết chương trình */}  
+                {selectedProgram && (  
+                  <Modal  
+                    isOpen={isModalOpen}  
+                    onRequestClose={closeModal}  
+                    contentLabel="Program Details"  
+                    className="Modal"  
+                    overlayClassName="Overlay"  
+                  >  
+                    <h2>{selectedProgram.name}</h2>  
+                    <img src={selectedProgram.ImageUrl} alt={selectedProgram.name} />  
+                    <p>{selectedProgram.description}</p>  
+                    <p>  
+                      <strong>Start date:</strong>{" "}  
+                      {new Date(selectedProgram.startDate).toLocaleDateString()}  
+                    </p>  
+                    <p>  
+                      <strong>End date:</strong>{" "}  
+                      {new Date(selectedProgram.endDate).toLocaleDateString()}  
+                    </p>  
+                    <p>  
+                      <strong>Is about to happen:</strong>{" "}  
+                      {selectedProgram.isUpcoming ? "Yes" : "No"}  
+                    </p>  
+                    <button onClick={closeModal}>Close</button>  
+                  </Modal>  
+                )}  
+              </div>  
+            </div>  
+          </div>  
+        </div>  
+        <ToastContainer />  
+        <Footer />  
+      </div>  
+    </div>  
+  );  
+};  
 
 export default ProgramList;
