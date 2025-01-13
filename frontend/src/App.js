@@ -15,7 +15,6 @@ import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
 import NotFound from "./404/NotFound";
-
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
 // Admin routes
@@ -38,6 +37,7 @@ import NGOEditForm from "./NGO/Ngocerter/NgoForm";
 import ProgramDonationList from "./NGO/ProgramDonation/ProgramDonationList";
 import ProgramDonationDetail from "./NGO/ProgramDonation/ProgramDonationDetail";
 import GalleryImageList from "./NGO/GalleryImage/GalleryImageList";
+import Ngodetail from "./Client/Ngos/Ngodetail/Ngodetail";
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -62,8 +62,9 @@ function App() {
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<CustomerData />} />
           <Route path="/notfound" element={<NotFound />} />
-          <Route path="/thank-you-bill" element={<ThankYouBill />} />
 
+          <Route path="/thank-you-bill" element={<ThankYouBill />} />
+          <Route path="/ngodetail" element={<Ngodetail />} />
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
             <Route path="dashboard" element={<Dashboard />} />
