@@ -15,6 +15,7 @@ import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
 import NgoDetail from "./Client/Ngos/NgoDetail/NgoDetail";
+import ProgramListDetail from "./Client/ProgramList/ProgramListDetail/ProgramListDetail";
 import NotFound from "./404/NotFound";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
 
@@ -61,8 +62,11 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<CustomerData />} />
+          <Route
+            path="/program/:programId"
+            element={<ProgramListDetail />}
+          />{" "}
           <Route path="/notfound" element={<NotFound />} />
-
           <Route path="/thank-you-bill" element={<ThankYouBill />} />
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
@@ -75,7 +79,6 @@ function App() {
             <Route path="censorngo" element={<CensorNgo />} />
             <Route path="transactionhistory" element={<TransactionHistory />} />
           </Route>
-
           <Route path="/ngo" element={<Ngo />}>
             <Route index element={<DashBoard />} />
             <Route path="dashboard" element={<DashBoard />} />
@@ -90,7 +93,6 @@ function App() {
             />
             <Route path="gallery-image" element={<GalleryImageList />} />
           </Route>
-
           {/* Reset Password Route */}
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
