@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getProgramDonationsForNGOAndProgram } from "../Service/programDonationService";
+import { getProgramDonations } from "../Service/programDonationService";
 import "./ProgramDonationList.css";
 
 const ProgramDonationList = () => {
-  const { ngoId, programId } = useParams(); // Lấy ngoId và programId từ URL
   const [donations, setDonations] = useState([]);
   const [filteredDonations, setFilteredDonations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,21 +11,13 @@ const ProgramDonationList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Fetch donations từ API
   useEffect(() => {
     const fetchDonations = async () => {
       try {
-        const data = await getProgramDonationsForNGOAndProgram(ngoId, programId);
-        console.log("Fetched donations:", data);
-
-        // Kiểm tra nếu API trả về một mảng hoặc dữ liệu phù hợp
-        const donationsArray = Array.isArray(data) ? data : data.$values || [];
-        if (!Array.isArray(donationsArray)) {
-          throw new Error("Invalid data format");
-        }
-
-        setDonations(donationsArray);
-        setFilteredDonations(donationsArray);
+        const data = await getProgramDonations();
+        const donationList = data.$values || [];
+        setDonations(donationList);
+        setFilteredDonations(donationList); // Initialize filtered list
       } catch (err) {
         console.error("Error fetching donations:", err);
         setError("Failed to fetch program donations.");
@@ -37,88 +27,82 @@ const ProgramDonationList = () => {
     };
 
     fetchDonations();
-  }, [ngoId, programId]);
+  }, []);
 
-  // Xử lý tìm kiếm
+  // Handle search functionality
   useEffect(() => {
-    const filtered = Array.isArray(donations)
-      ? donations.filter((donation) =>
-        Object.values(donation)
-          .join(" ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      )
-      : [];
+    const filtered = donations.filter((donation) =>
+      Object.values(donation)
+        .join(" ")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    );
     setFilteredDonations(filtered);
-    setCurrentPage(1); // Reset lại trang hiện tại khi tìm kiếm
+    setCurrentPage(1); // Reset to first page on search
   }, [searchTerm, donations]);
 
-  // Tính toán cho phân trang
+  // Calculate the displayed donations for the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentDonations = Array.isArray(filteredDonations)
-    ? filteredDonations.slice(startIndex, endIndex)
-    : [];
+  const currentDonations = filteredDonations.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil((filteredDonations.length || 0) / itemsPerPage);
+  const totalPages = Math.ceil(filteredDonations.length / itemsPerPage);
 
-  if (loading) return <p className="loading">Loading...</p>;
-  if (error) return <p className="error">{error}</p>;
+  if (loading) return <p className="ProgramDonationList-loading">Loading...</p>;
+  if (error) return <p className="ProgramDonationList-error">{error}</p>;
 
   return (
-    <div className="donation-list">
-      <h2>Program Donation History</h2>
+    <div className="ProgramDonationList-container">
+      <h2 className="ProgramDonationList-title">Program Donation History</h2>
 
-      {/* Thanh tìm kiếm */}
-      <div className="search-container">
+      {/* Search Bar */}
+      <div className="ProgramDonationList-search-container">
         <input
           type="text"
-          placeholder="Search donations..."
+          placeholder="Search amount..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
+          className="ProgramDonationList-search-input"
         />
       </div>
 
-      {/* Bảng quyên góp */}
-      <div className="table-container">
-        <table className="donation-table">
+      {/* Donation Table */}
+      <div className="ProgramDonationList-table-container">
+        <table className="ProgramDonationList-table">
           <thead>
             <tr>
               <th>Donation ID</th>
+              <th>Program ID</th>
+              <th>Customer ID</th>
               <th>Amount</th>
               <th>Payment Status</th>
               <th>Donation Date</th>
-              <th>Donor Name</th>
-              <th>Donor Email</th>
-              <th>Program Name</th>
             </tr>
           </thead>
           <tbody>
             {currentDonations.map((donation) => (
               <tr key={donation.donationId}>
                 <td>{donation.donationId}</td>
-                <td>{donation.amount.toLocaleString()}</td>
+                <td>{donation.programId}</td><td>{donation.customerId}</td>
+                <td className="ProgramDonationList-td">{donation.amount}</td>
                 <td>{donation.paymentStatus}</td>
                 <td>{new Date(donation.donationDate).toLocaleString()}</td>
-                <td>{donation.donorName}</td>
-                <td>{donation.donorEmail}</td>
-                <td>{donation.programName}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-
-      {/* Phân trang */}
-      <div className="pagination">
+      {/* Pagination */}
+      <div className="ProgramDonationList-pagination">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
             onClick={() => setCurrentPage(index + 1)}
             disabled={currentPage === index + 1}
-            className={`pagination-button ${currentPage === index + 1 ? "disabled" : ""}`}
+            className={`ProgramDonationList-pagination-button ${
+              currentPage === index + 1 ? "disabled" : ""
+            }`}
           >
             {index + 1}
           </button>
