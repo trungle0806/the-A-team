@@ -61,8 +61,8 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/forgot-password" element={<ForgotAndResetPassword />} />
           <Route path="/profile" element={<CustomerData />} />
-          <Route path="/thank-you-bill" element={<ThankYouBill />} />
           <Route path="/notfound" element={<NotFound />} />
+          <Route path="/thank-you-bill" element={<ThankYouBill />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>

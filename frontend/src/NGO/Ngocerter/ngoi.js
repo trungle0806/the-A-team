@@ -72,7 +72,6 @@ const ProgramDonationAdmin = () => {
     }
   };
 
-
   // Handle updating an existing donation
   const handleUpdateDonation = async () => {
     if (editingDonation) {
@@ -156,51 +155,71 @@ const ProgramDonationAdmin = () => {
 
       {/* Donation List */}
       <div className="donation-list">
-          <h3>Existing Donations</h3>
-          {paginatedDonations.length > 0 ? (
-            <div className="donation-grid">
-              <div className="donation-header">
-                <div>Customer ID</div>
-                <div>Name</div>
-                <div>Amount</div>
-                <div>Donation Date</div>
-                <div>Payment Status</div>
-                <div>Program ID</div>
-              </div>
-              {paginatedDonations.map((donation) => (
-                <div className="donation-row" key={donation.donationId}>
-                 {/* Customer ID */}
-                 <div>{donation.customer?.customerId || donation.customerId || 'N/A'}</div>
-                  {/* Name */}
-                  <div>
-                  {donation.customer 
-                    ? `${donation.customer.firstName || 'Unknown'} ${donation.customer.lastName || ''}`.trim() 
-                    : 'No name available'}
-                  </div>
+        <h3>Existing Donations</h3>
+        <ul>
+        {paginatedDonations.length > 0 ? (
+          paginatedDonations.map((donation) => (
+              <li key={donation.donationId} className="donation-item">
+                <div className="donation-details">
+                  {/* Check and display donation details */}
+                  <p>Name: {donation.customer?.firstName && donation.customer?.lastName 
+                    ? `${donation.customer.firstName} ${donation.customer.lastName}` 
+                    : 'No name available'}</p>
+                  <p>Amount: ${donation.amount}</p>
+                  <p>Donation Date: {donation.donationDate ? new Date(donation.donationDate).toLocaleDateString() : 'N/A'}</p>
+                  <p>Payment Status: {donation.paymentStatus}</p>
 
+                  {/* Display Program Info */}
+                  {donation.program1 && donation.program1.name && (
+                    <p>Program: {donation.program1.name}</p>
+                  )}
 
-                  {/* Amount */}
-                  <div>${donation.amount || '0.00'}</div>
+                  {/* Display Customer Info */}
+                  {donation.customer && donation.customer.customerId && (
+                    <p>Customer ID: {donation.customer.customerId}</p>
+                  )}
 
-                  {/* Donation Date */}
-                  <div>
-                    {donation.donationDate 
-                      ? new Date(donation.donationDate).toLocaleDateString() 
-                      : 'N/A'}
-                  </div>
-
-                  {/* Payment Status */}
-                  <div>{donation.paymentStatus || 'N/A'}</div>
-
-                  {/* Program ID */}
-                  <div>{donation.program1?.name || `Program ID: ${donation.programId}` || 'N/A'}</div>
+                  {/* Display Account ID */}
+                  {donation.customer && donation.customer.accountId && (
+                    <p>Account ID: {donation.customer.accountId}</p>
+                  )}
                 </div>
-              ))}
-            </div>
+
+                {/* Transactions Section */}
+                <div className="transactions">
+                  <h4>Transactions:</h4>
+                  <ul>
+                    {getDonationTransactions(donation).map((transaction, index) => (
+                      <li key={index}>
+                        <p>Transaction ID: {transaction.$id}</p>
+                        <p>Amount: ${transaction.amount}</p>
+                        <p>Status: {transaction.paymentStatus}</p>
+                        <p>Transaction Date: {transaction.donationDate ? new Date(transaction.donationDate).toLocaleDateString() : 'N/A'}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Edit and Delete Buttons */}
+                <button
+                  className="edit-button"
+                  onClick={() => setEditingDonation(donation)}
+                >
+                  <FiEdit />
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeleteDonation(donation.donationId)}
+                >
+                  <RiDeleteBin6Line />
+                </button>
+              </li>
+            ))
           ) : (
-            <p>No donations available.</p>
+            <p>No donations found.</p>
           )}
-        </div>
+        </ul>
+      </div>
 
        {/* Pagination Controls */}
        <div className="pagination">

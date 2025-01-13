@@ -235,7 +235,7 @@
     border-radius: 5px;
 }
 .add-donation-form.show{
-  max-height: 300px; /* Adjust according to your content height */
+  max-height: 400px; /* Adjust according to your content height */
     padding: 20px;
 }
 .add-donation-form.hide {
@@ -254,4 +254,71 @@
 }
 .donation-name{
   font-size: 1.5rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+.donation-list {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.donation-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 cột tương ứng với số trường */
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+
+.donation-header {
+  display: contents; /* Hiển thị nội dung trong cùng grid */
+  background-color: #f4f4f4;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid #ccc;
+}
+
+.donation-header div {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.donation-row {
+  display: contents; /* Giữ các hàng nằm trong cùng grid */
+}
+
+.donation-row div {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.donation-row:nth-child(even) div {
+  background-color: #f9f9f9; /* Màu nền cho hàng chẵn */
+}
+
+.donation-row:nth-child(odd) div {
+  background-color: #ffffff; /* Màu nền cho hàng lẻ */
+}
+
+.donation-list h3 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  color: #333;
 }

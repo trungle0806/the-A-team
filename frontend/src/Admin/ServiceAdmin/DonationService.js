@@ -1,39 +1,29 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5024/api/ProgramDonation/'; // Adjusted to match the ProgramDonationController route
+const API_URL = 'http://localhost:5024/api/ProgramDonation/';
 
-// Utility function to get token and role
+// Utility function to get authorization headers
 const getAuthHeaders = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     const role = localStorage.getItem('role');
 
     if (!token) {
-        console.error('Authorization token is missing.');
-        throw new Error('Unauthorized: Missing authorization token.');
+        throw new Error('Authorization token is missing.');
     }
 
     if (!role) {
-        console.error('User role is missing.');
-        throw new Error('Unauthorized: Missing user role.');
+        throw new Error('User role is missing.');
     }
 
-    return { token, role, headers: { Authorization: `Bearer ${token}` } };
+    return { headers: { Authorization: `Bearer ${token}` } };
 };
 
-// Fetch all Program Donations with an optional search query (Admin, User, NGO roles)
+// Fetch all Program Donations with an optional search query
 const getProgramDonations = async (searchQuery = '') => {
-    const { token, role, headers } = getAuthHeaders();
-    console.log('Token:', token); // Check if token is available and valid
-    console.log('Role:', role); // Check if the role matches the expected roles
-
     try {
-        if (!['Admin', 'User', 'NGO'].includes(role)) {
-            throw new Error('Unauthorized: Access is restricted to Admin, User, and NGO roles.');
-        }
-
         const response = await axios.get(API_URL, {
             params: { searchQuery },
-            headers,
+            ...getAuthHeaders(),
         });
         return response.data;
     } catch (error) {
@@ -42,20 +32,10 @@ const getProgramDonations = async (searchQuery = '') => {
     }
 };
 
-// Fetch Program Donation by ID (Admin, User, NGO roles)
+// Fetch a specific Program Donation by ID
 const getProgramDonationById = async (id) => {
-    const { token, role, headers } = getAuthHeaders();
-    console.log('Token:', token); // Check if token is available and valid
-    console.log('Role:', role); // Check if the role matches the expected roles
-
     try {
-        if (!['Admin', 'User', 'NGO'].includes(role)) {
-            throw new Error('Unauthorized: Access is restricted to Admin, User, and NGO roles.');
-        }
-
-        const response = await axios.get(`${API_URL}${id}`, {
-            headers,
-        });
+        const response = await axios.get(`${API_URL}${id}`, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error(`Failed to fetch program donation with ID ${id}:`, error.response?.data || error.message);
@@ -63,20 +43,10 @@ const getProgramDonationById = async (id) => {
     }
 };
 
-// Add a new Program Donation (Admin, NGO roles)
+// Add a new Program Donation
 const addProgramDonation = async (donation) => {
-    const { token, role, headers } = getAuthHeaders();
-    console.log('Token:', token); // Check if token is available and valid
-    console.log('Role:', role); // Check if the role matches the expected roles
-
     try {
-        if (!['Admin', 'NGO'].includes(role)) {
-            throw new Error('Unauthorized: Only Admin and NGO roles can add program donations.');
-        }
-
-        const response = await axios.post(API_URL, donation, {
-            headers,
-        });
+        const response = await axios.post(API_URL, donation, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error('Failed to add program donation:', error.response?.data || error.message);
@@ -84,20 +54,10 @@ const addProgramDonation = async (donation) => {
     }
 };
 
-// Update an existing Program Donation (Admin, NGO roles)
+// Update an existing Program Donation
 const updateProgramDonation = async (id, updatedDonation) => {
-    const { token, role, headers } = getAuthHeaders();
-    console.log('Token:', token); // Check if token is available and valid
-    console.log('Role:', role); // Check if the role matches the expected roles
-
     try {
-        if (!['Admin', 'NGO'].includes(role)) {
-            throw new Error('Unauthorized: Only Admin and NGO roles can update program donations.');
-        }
-
-        const response = await axios.put(`${API_URL}${id}`, updatedDonation, {
-            headers,
-        });
+        const response = await axios.put(`${API_URL}${id}`, updatedDonation, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error(`Failed to update program donation with ID ${id}:`, error.response?.data || error.message);
@@ -105,26 +65,32 @@ const updateProgramDonation = async (id, updatedDonation) => {
     }
 };
 
-// Delete a Program Donation (Admin role only)
+// Delete a Program Donation
 const deleteProgramDonation = async (id) => {
-    const { token, role, headers } = getAuthHeaders();
-    console.log('Token:', token); // Check if token is available and valid
-    console.log('Role:', role); // Check if the role matches the expected roles
-
     try {
-        if (role !== 'Admin') {
-            throw new Error('Unauthorized: Only Admin role can delete program donations.');
-        }
-
-        const response = await axios.delete(`${API_URL}${id}`, {
-            headers,
-        });
+        const response = await axios.delete(`${API_URL}${id}`, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error(`Failed to delete program donation with ID ${id}:`, error.response?.data || error.message);
         throw error;
     }
 };
+
+// ServiceAdmin/DonationService.js
+export const getCustomerById = async (customerId) => {
+    try {
+      const response = await fetch(`http://localhost:5024/api/Customer/${customerId}`);
+       // Kiểm tra xem phản hồi có phải là 404 hay không
+    if (!response.ok) {
+        throw new Error(`Customer with ID ${customerId} not found`);
+      }
+      return await response.json(); // Trả về thông tin customer
+    } catch (error) {
+      console.error("Error fetching customer:", error);
+      throw error;
+    }
+  };
+  
 
 export {
     getProgramDonations,
