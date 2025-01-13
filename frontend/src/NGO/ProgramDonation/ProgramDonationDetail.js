@@ -3,7 +3,7 @@ import { getProgramDonationById } from "../Service/programDonationService";
 import { useParams } from "react-router-dom";
 
 const ProgramDonationDetail = () => {
-  const { id } = useParams(); // Lấy ID giao dịch từ URL
+  const { id } = useParams(); // Get donation ID from URL
   const [donationDetail, setDonationDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ const ProgramDonationDetail = () => {
         const data = await getProgramDonationById(id);
         setDonationDetail(data);
       } catch (err) {
-        setError("Error fetching donation details");
+        setError("Error fetching donation details.");
       } finally {
         setLoading(false);
       }
@@ -36,19 +36,19 @@ const ProgramDonationDetail = () => {
           </tr>
           <tr>
             <th>Email</th>
-            <td>{donationDetail.email}</td>
+            <td>{donationDetail.donorEmail}</td>
           </tr>
           <tr>
             <th>Amount</th>
-            <td>${donationDetail.amount}</td>
+            <td>{donationDetail.amount}</td>
           </tr>
           <tr>
-            <th>Date</th>
-            <td>{new Date(donationDetail.date).toLocaleDateString()}</td>
+            <th>Payment Status</th>
+            <td>{donationDetail.paymentStatus}</td>
           </tr>
           <tr>
-            <th>Message</th>
-            <td>{donationDetail.message}</td>
+            <th>Donation Date</th>
+            <td>{new Date(donationDetail.donationDate).toLocaleString()}</td>
           </tr>
         </tbody>
       </table>

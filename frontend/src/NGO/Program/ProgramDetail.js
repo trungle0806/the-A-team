@@ -11,9 +11,11 @@ import {
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { GoOrganization } from "react-icons/go";
 import "./ProgramDetail.css";
+import { getProgramDonationsForNGOAndProgram } from "../Service/programDonationService";
 
 const ProgramDetail = () => {
   const { id } = useParams(); // Get the program ID from the URL
+  const { ngoId, programId } = useParams();
   const [program, setProgram] = useState(null); // State to hold program data
   const navigate = useNavigate(); // Hook for navigation
 
@@ -53,7 +55,7 @@ const ProgramDetail = () => {
 
   // Navigate to the donation history page
   const handleViewDonations = () => {
-    navigate(`/ngo/program-donation/${id}`);
+    navigate(`/ngo/${program.ngoId}/program/${program.programId}/donations`);
   };
 
   // Render loading state if data is not yet available
