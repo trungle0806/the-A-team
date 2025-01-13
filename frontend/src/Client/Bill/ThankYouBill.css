@@ -4,16 +4,21 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  color: #333;
-  font-family: 'Arial', sans-serif;
+  font-family: "arial-black";
   padding: 20px;
   text-align: center;
   box-sizing: border-box;
+  background: white;
+  border: 1px solid black;
+}
+
+.thank-you-bro {
+  border: 1px solid #ddd;
+  width: 43%;
 }
 
 .logo-charity img {
-  width: 120px;
+  width: 35%;
   height: auto;
   margin-bottom: 20px;
   animation: fadeIn 2s ease-in-out;
@@ -21,37 +26,48 @@
 
 .thank-you-header h1 {
   font-size: 2.5rem;
-  color: #354557;
+  color: #8db883;
   margin-bottom: 10px;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .thank-you-header p {
-  font-size: 1.2rem;
-  color: #555;
+  font-size: 1rem;
+  color: black;
   margin-bottom: 20px;
 }
 
 .donation-details {
-  background: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  margin: 20px 0;
-  width: 100%;
-  max-width: 500px;
+  width: 94%;
   text-align: left;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 194px;
 }
 
 .donation-details p {
-  margin: 10px 0;
+  margin: 0;
   font-size: 1rem;
   line-height: 1.5;
+  display: flex;
+  align-items: center;
 }
 
 .donation-details .label {
   font-weight: bold;
-  color: #007bff;
+  color: #8db883;
+  width: 150px;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.donation-details .value {
+  flex: 1;
+  text-align: left;
 }
 
 .thank-you-note {
@@ -59,15 +75,15 @@
 }
 
 .thank-you-note p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 20px;
-  color: #444;
+  color: black;
 }
 
 .go-home-btn {
-  background: #007bff;
-  color: #fff;
-  border: none;
+  background: white;
+  color: #8db883;
+  border: 1px solid #8db883;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 1rem;
@@ -76,32 +92,44 @@
 }
 
 .go-home-btn:hover {
-  background: #0056b3;
+  background: #8db883;
+  color: white;
   transform: scale(1.05);
 }
 
 .thank-you-footer {
-  margin-top: 30px;
+  margin-top: 16px;
   font-size: 0.9rem;
-  color: #555;
+  color: black;
 }
 
 .thank-you-footer a {
-  color: #007bff;
+  color: #8db883;
   text-decoration: none;
 }
 
 .thank-you-footer a:hover {
   text-decoration: underline;
 }
-
+.go-home-btn-icon {
+  margin-right: -546px;
+  text-align: right;
+  position: relative;
+  margin-top: 10px;
+  border: none;
+  color: #8db883;
+  background: white;
+}
+.go-home-btn-icon:hover {
+  color: black;
+}
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }

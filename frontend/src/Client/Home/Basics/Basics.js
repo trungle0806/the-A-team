@@ -1,95 +1,72 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Basics.css";
 
 const Basics = () => {
+  const [ngos, setNgos] = useState([]); // State để lưu trữ danh sách NGOs
+  const [loading, setLoading] = useState(true); // Trạng thái loading
+  const [error, setError] = useState(""); // Trạng thái lỗi
+
+  useEffect(() => {
+    // Lấy dữ liệu từ API
+    const fetchNgos = async () => {
+      try {
+        const response = await axios.get("http://localhost:5024/api/ngo");
+        setNgos(response.data.$values.slice(0, 3)); // Chỉ lấy 3 mục đầu tiên
+      } catch (error) {
+        setError("Failed to load NGOs.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNgos();
+  }, []);
+
   return (
     <div className="basics-aem">
       <div className="basics-list">
         <div className="basics-card">
           <div className="basics-warp">
             <div className="basics-header">
-              <div className="basics-title">Donor Basics</div>
+              <div className="basics-title">Featured NGOs</div>
               <div className="basics-button">
-                <a className="basics-a" href="">
-                  See more
+                <a className="basics-a" href="/ngos">
+                  See All NGOs
                 </a>
               </div>
             </div>
             <div className="basics-cards">
-              <ul className="basics-active">
-                <li className="basics-Item">
-                  <div className="basics-content">
-                    <div className="basics-image">
-                      <picture>
-                        <img
-                          className="basics-anh"
-                          src="https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--409966a0-e1e0-4bf0-8664-621487dcc748/module_illo_giving101-a-4.svg.webp?preferwebp=true&width=760"
-                          alt="Protect Your Giving"
-                        />
-                      </picture>
-                      <div className="basics-overlay">
-                        <div className="basics-title-overlay">Giving 101</div>
-                      </div>
-                    </div>
-                    <div className="basics-description">
-                      <div className="promp-ton">Giving 101</div>
-                      <div className="basics-date">
-                        Just starting out with giving? Look here for questions
-                        to ask a charity, strategies for maximizing your
-                        donation, and more.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li className="basics-Item">
-                  <div className="basics-content">
-                    <div className="basics-image">
-                      <picture>
-                        <img
-                          className="basics-anh"
-                          src="https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--3a106627-65ce-4366-93f0-0927e5e899aa/module_illo_giving101-a-3.svg.webp?preferwebp=true&width=760"
-                          alt="Where to Give"
-                        />
-                      </picture>
-                      <div className="basics-overlay">
-                        <div className="basics-title-overlay">
-                          Where to Give
+              {loading ? (
+                <p>Loading NGOs...</p>
+              ) : error ? (
+                <p>{error}</p>
+              ) : (
+                <ul className="basics-active">
+                  {ngos.map((ngo) => (
+                    <li className="basics-Item" key={ngo.NGOId}>
+                      <div className="basics-content">
+                        <div className="basics-image">
+                          <img
+                            className="basics-anh"
+                            src={ngo.image} // Assuming `image` is a property in the API response
+                            alt={ngo.name}
+                          />
+                          <div className="basics-overlay">
+                            <div className="basics-title-overlay">
+                              {ngo.name}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="basics-description">
+                          <div className="promp-ton">{ngo.name}</div>
+                          <div className="basics-date">{ngo.description}</div>
                         </div>
                       </div>
-                    </div>
-                    <div className="basics-description">
-                      <div className="promp-ton">Where to Give</div>
-                      <div className="basics-date">
-                        Discover and support organizations responding to current
-                        events and crises.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li className="basics-Item">
-                  <div className="basics-content">
-                    <div className="basics-image">
-                      <picture>
-                        <img
-                          className="basics-anh"
-                          src="https://www.charitynavigator.org/adobe/dynamicmedia/deliver/dm-aid--be1f4011-46d5-4ca4-9f93-4cde31421d56/module_illo_giving101-a.svg.webp?preferwebp=true&width=760"
-                          alt="Donor Tools"
-                        />
-                      </picture>
-                      <div className="basics-overlay">
-                        <div className="basics-title-overlay">Donor Tools</div>
-                      </div>
-                    </div>
-                    <div className="basics-description">
-                      <div className="promp-ton">Donor Tools</div>
-                      <div className="basics-date">
-                        Whether you’re a new donor or a seasoned philanthropist,
-                        use these tools to help make the most of your giving.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>
