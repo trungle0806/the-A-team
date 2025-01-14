@@ -48,13 +48,16 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await fetch("https://shopy-emahgphwbhgpd3bs.japanwest-01.azurewebsites.net/api/auth/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://shopy-emahgphwbhgpd3bs.japanwest-01.azurewebsites.net/api/auth/reset-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
         alert("Password reset successfully!");
@@ -71,11 +74,15 @@ const ResetPassword = () => {
   return (
     <div className="form-container">
       <h2>Reset Password</h2>
-      <p>Reset password for: <strong>{email}</strong></p>
+      <p>
+        Reset password for: <strong>{email}</strong>
+      </p>
       <form onSubmit={handleSubmit} className="form">
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="form-group">
           <label htmlFor="password">New Password</label>
+        </div>
+        <div>
           <input
             type="password"
             id="password"
@@ -85,7 +92,9 @@ const ResetPassword = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm New Password</label>
+          <div>
+            <label htmlFor="confirmPassword">Confirm New Password</label>
+          </div>
           <input
             type="password"
             id="confirmPassword"

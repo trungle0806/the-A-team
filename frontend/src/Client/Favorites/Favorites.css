@@ -12,7 +12,7 @@
 }
 
 /* Banner */
-.favorites-banner {
+.favorites-banner1 {
   background-image: url("https://imagev3.vietnamplus.vn/w1000/Uploaded/2024/fsmsy/2024_06_16/ttxvn-tre-em-gaza-1855.jpg.webp");
   background-size: cover;
   background-position: center;
@@ -26,11 +26,12 @@
   margin-bottom: 20px;
 }
 
-.favorites-banner h1 {
+.favorites-banner1 h1 {
   font-size: 36px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   margin: 0;
   font-weight: bold;
+  margin-top: 78px;
 }
 
 /* Danh sách */
