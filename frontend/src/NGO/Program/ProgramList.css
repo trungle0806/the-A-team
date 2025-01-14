@@ -158,10 +158,11 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 .Program-List-h1 {
-  font-size: 38px;
+  font-size: 32px;
   justify-content: center;
   align-items: center;
   display: flex;
+  color: #8db883;
 }
 .Program-icon {
   gap: 10px;
@@ -173,7 +174,7 @@
 }
 .Program-search {
   border: 1px solid #8db883;
-  font-size: 24px;
+  font-size: 20px;
   border-radius: 14px;
   padding-left: 13px;
   font-family: "arial-black";
@@ -191,9 +192,10 @@
   border-collapse: collapse;
   margin-bottom: 20px;
   margin-left: 51px;
-  border: 1px solid #8db883;
+  border: none;
   height: auto;
   border-radius: 5px;
+  margin-top: 50px;
 }
 .Program-tr {
   border-bottom: 1px solid #8db883;
@@ -205,12 +207,18 @@
 .Program-tr th {
   padding: 10px;
   text-align: left;
+  padding-left: 24px;
+  font-size: 18px;
+}
+.Program-name {
+  font-size: 1.1rem;
+  color: black;
 }
 .Program-td {
   color: #75df5d;
 }
 .Program-tr1 td {
-  padding: 10px;
+  padding: 24px;
 }
 .Program-icon1 {
   display: flex;
@@ -230,7 +238,7 @@
   border: none;
   padding: 8px;
   background: #d0e3ff;
-  color: #334eac;
+  color: #6074bc;
   border-radius: 100%;
 }
 .Program-Edit-icon {
@@ -240,7 +248,7 @@
   border: none;
   padding: 8px;
   background: #f0d2d2;
-  color: #ff0000;
+  color: #d56565;
   border-radius: 100%;
 }
 .Program-Delete-icon {
@@ -259,6 +267,7 @@
   align-items: center;
   width: 77vw;
   gap: 208px;
+  margin-top: 50px;
 }
 .Program-filters {
   margin-left: 0px;
@@ -283,7 +292,7 @@
   border: 1px solid #8db883;
   background-color: white;
   font-family: "arial-black";
-  font-size: 16px;
+  font-size: 14px;
   box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
   transition: all 0.3s ease-in-out; /* Hiệu ứng khi hover */
 }

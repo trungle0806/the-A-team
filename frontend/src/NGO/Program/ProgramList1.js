@@ -164,7 +164,7 @@ const ProgramList1 = () => {
         <tbody>
           {currentPrograms.map((program) => (
             <tr className="Program-tr1" key={program.programId}>
-              <td>{program.name}</td>
+              <td className="Program-name">{program.name}</td>
               <td>{new Date(program.startDate).toLocaleDateString()}</td>
               <td>{new Date(program.endDate).toLocaleDateString()}</td>
               <td className="Program-td">{program.targetAmount}</td>

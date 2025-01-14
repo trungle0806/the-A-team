@@ -108,16 +108,14 @@
   margin-top: 50px;
   font-family: Arial, sans-serif;
   padding: 20px;
-  background-color: white;
   border-radius: 10px;
   /* max-width: 1000px; */
   /* margin: 30px auto; */
-  border: 1px solid #8db883;
   margin-left: 98px;
-  width: 91%;
-  display: flex;
+  width: 86%;
   align-items: center;
   justify-content: center;
+  padding-left: 0px;
 }
 .edit-btn-ngo {
   background: #d0e3ff;
@@ -130,13 +128,19 @@
   /* border-radius: 144px; */
   border-radius: 100%;
   bottom: 0;
-  width: 27px;
+  width: 36px;
+  margin-left: 1022px;
 }
 .ngo-img {
-  width: 30%;
+  width: 106%;
   display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
+  gap: 61px;
+  height: 225px;
+}
+.ngo-logo-img {
 }
 
 .ngo-title {
@@ -150,10 +154,11 @@
 }
 
 .ngo-logo {
-  display: block;
+  display: flex;
   margin: 0 auto 20px;
   max-width: 150px;
   border-radius: 8px;
+  margin-left: 201px;
 }
 
 .ngo-info {
@@ -163,15 +168,33 @@
 }
 
 .ngo-item {
-  display: flex;
   align-items: center;
   gap: 12px;
   padding: 15px;
   font-family: "arial-black";
-  width: 200px; /* Đặt chiều rộng cố định */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 103%; /* Đặt chiều rộng cố định */
+  font-size: 1.3rem;
+}
+.ngo-item1 {
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  font-family: "arial-black";
+  width: 101%; /* Đặt chiều rộng cố định */
+  font-size: 1.3rem;
+}
+.ngo-item-strong {
+  font-size: 1.5rem;
+}
+.ngo-item-description {
+  margin-top: 10px;
+  line-height: 26px;
+  font-size: 1.2rem;
+  color: #333;
+}
+.ngo-itemm {
+  display: flex;
+  gap: 10px;
 }
 
 .ngo-icon {
@@ -342,4 +365,6 @@ strong {
 
 .ngo-detail button:hover {
   background-color: #2980b9;
+}
+.ngo-infor1 {
 }

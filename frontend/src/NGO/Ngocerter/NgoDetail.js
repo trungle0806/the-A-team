@@ -42,36 +42,48 @@ const NGODetail = ({ id, onEditClick }) => {
 
       <div className="ngo-detail1">
         <div className="ngo-img">
-          <img className="ngo-logo" src={ngoData.logoUrl} alt={ngoData.name} />
-        </div>
-        <div className="ngo-info1">
+          <img
+            className="ngo-logo-img"
+            src={ngoData.logoUrl}
+            alt={ngoData.name}
+          />
           <div className="ngo-item">
-            <FaInfoCircle className="ngo-icon" />
-            <strong>Description:</strong> {ngoData.description}
-          </div>
-          <div className="ngo-item">
-            <FaEnvelope className="ngo-icon" />
-            <strong>Email:</strong> {ngoData.email}
-          </div>
-          <div className="ngo-item">
-            <FaTrophy className="ngo-icon" />
-            <strong>Achievements:</strong> {ngoData.achievements}
+            <div>
+              <strong className="ngo-item-strong">Description:</strong>
+            </div>{" "}
+            <div className="ngo-item-description">{ngoData.description}</div>
           </div>
         </div>
-        <div className="ngo-info2">
+        <div className="ngo-infor1">
+          <div className="ngo-item1">
+            <div>
+              <strong className="ngo-item-strong">Achievements:</strong>{" "}
+            </div>
+            <div className="ngo-item-description">{ngoData.achievements}</div>
+          </div>
+        </div>
+        <div className="ngo-itemm">
           <div className="ngo-item">
-            <FaCheckCircle className="ngo-icon" />
-            <strong>Approved:</strong> {ngoData.isApproved ? "Yes" : "No"}
+            <strong className="ngo-item-strong">Email:</strong>{" "}
+            <div className="ngo-item-description">{ngoData.email}</div>
           </div>
           <div className="ngo-item">
-            <FaClock className="ngo-icon" />
-            <strong>Created At:</strong>{" "}
-            {new Date(ngoData.createdAt).toLocaleString()}
+            <strong className="ngo-item-strong">Approved:</strong>{" "}
+            <div className="ngo-item-description">
+              {ngoData.isApproved ? "Yes" : "No"}
+            </div>
           </div>
           <div className="ngo-item">
-            <FaClock className="ngo-icon" />
-            <strong>Updated At:</strong>{" "}
-            {new Date(ngoData.updatedAt).toLocaleString()}
+            <strong className="ngo-item-strong">Created At:</strong>{" "}
+            <div className="ngo-item-description">
+              {new Date(ngoData.createdAt).toLocaleString()}
+            </div>
+          </div>
+          <div className="ngo-item">
+            <strong className="ngo-item-strong">Updated At:</strong>{" "}
+            <div className="ngo-item-description">
+              {new Date(ngoData.updatedAt).toLocaleString()}
+            </div>
           </div>
         </div>
         <button onClick={onEditClick} className="edit-btn-ngo">

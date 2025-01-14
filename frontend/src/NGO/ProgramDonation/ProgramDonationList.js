@@ -83,7 +83,8 @@ const ProgramDonationList = () => {
             {currentDonations.map((donation) => (
               <tr key={donation.donationId}>
                 <td>{donation.donationId}</td>
-                <td>{donation.programId}</td><td>{donation.customerId}</td>
+                <td>{donation.programId}</td>
+                <td>{donation.customerId}</td>
                 <td className="ProgramDonationList-td">{donation.amount}</td>
                 <td>{donation.paymentStatus}</td>
                 <td>{new Date(donation.donationDate).toLocaleString()}</td>

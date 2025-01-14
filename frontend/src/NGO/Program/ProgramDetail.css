@@ -11,13 +11,14 @@
 }
 
 .ProgramDetail-donate-title {
-  font-size: 30px;
+  font-size: 29px;
   text-align: center;
   color: black;
+  margin-bottom: 100px;
 }
 
 .ProgramDetail-donate-description {
-  font-size: 16px;
+  font-size: 19px;
   text-align: center;
   color: #333;
   display: flex;
@@ -25,7 +26,7 @@
 
 .ProgramDetail-target-amount,
 .ProgramDetail-total-donated {
-  font-size: 16px;
+  font-size: 19px;
   text-align: center;
   color: #4caf50;
   display: flex;
@@ -46,13 +47,14 @@
 .ProgramDetail-progress-percentage {
   text-align: center;
   color: #4caf50;
-  font-size: 16px;
+  font-size: 19px;
 }
 
 .ProgramDetail-excess-amount {
   text-align: center;
   color: #f44336;
-  font-size: 16px;
+  font-size: 19px;
+  margin-bottom: 50px;
 }
 
 .ProgramDetail-donation-stats {
@@ -84,12 +86,12 @@
 }
 
 .ProgramDetail-stat-label {
-  font-size: 14px;
+  font-size: 17px;
   color: #333;
 }
 
 .ProgramDetail-stat-value {
-  font-size: 16px;
+  font-size: 17px;
   color: #666;
 }
 
