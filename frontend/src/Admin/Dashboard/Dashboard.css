@@ -36,11 +36,18 @@
 }
 
 .recent-transactions {
-    margin-top: 30px;
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: 50px;
+}
+
+.recent-saction{
+    display: flex;
+    gap: 30px;
 }
 
 .recent-transactions h2 {
-    text-align: center;
+    text-align: left;
     color: #444;
     margin-bottom: 20px;
 }
@@ -68,8 +75,44 @@ tr:hover {
     background-color: #f9f9f9;
 }
 
+.donation-leaderboard{
+    width: 25%;
+    flex: 0 0 auto;
+}
+
 .error {
     color: red;
     text-align: center;
     margin-bottom: 20px;
+}
+.donation-leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.donation-leaderboard th, .donation-leaderboard td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.donation-leaderboard th {
+    background-color: #f4f4f4;
+}
+
+.performance-summary {
+    margin-top: 30px;
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.performance-summary .stat-card {
+    width: 30%;
+    /* margin-right: 20px; */
+}
+
+.recent-donation-container {
+    display: flex;
+    gap: 30px;
 }

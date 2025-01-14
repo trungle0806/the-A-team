@@ -172,7 +172,7 @@ const AdminApproval = () => {
                             </div>
                             {programsByNgo[ngo.ngoId] && programsByNgo[ngo.ngoId].length > 0 ? (
                                 <div className="program-list1">
-                                    <h4>Programs:</h4>
+                                    <h2>Programs</h2>
                                     <ul>
                                         {programsByNgo[ngo.ngoId].map((program) => {
                                             console.log('Program Data:', program); // Kiểm tra dữ liệu chương trình
@@ -193,16 +193,16 @@ const AdminApproval = () => {
                                                     <p><strong>Target Amount:</strong> ${program.targetAmount.toFixed(2)}</p>
                                                     <p><strong>Amount Donated:</strong> ${donatedAmount.toFixed(2)}</p> {/* Hiển thị số tiền đã donate */}
                                                     <p><strong>Days Remaining:</strong> {daysRemaining > 0 ? `${daysRemaining} day(s)` : 'Program Ended'}</p>
-                                                    <button onClick={() => approveProgram(program.programId, ngo.ngoId)}>
+                                                    {/* <button onClick={() => approveProgram(program.programId, ngo.ngoId)}>
                                                         {program.isApproved ? 'Approved' : 'Approve Program'}
-                                                    </button>
+                                                    </button> */}
                                                 </li>
                                             );
                                         })}
                                     </ul>
                                 </div>
                             ) : (
-                                <p>No programs found.</p>
+                                <p></p>
                             )}
                         </li>
                     ))}
