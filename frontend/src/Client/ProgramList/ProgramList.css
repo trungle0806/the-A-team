@@ -69,9 +69,20 @@
 
 .program-details p {  
   color: #666;  
-  margin: 5px 0;  
-  text-align: left;  
+  margin: 0px 0;  
+  max-height: 49px;
+  font-size: 1.3rem;
+  color: black;
+  margin-top: 0;
+  overflow: hidden;
+  font-family: "arial-black";
+  /* margin-bottom: 10px; */
+  text-align: justify;
 }  
+.program-detailss{
+  text-align: justify;
+  margin-top: 15px;
+}
 
 .program-details strong {  
   color: #000;  
