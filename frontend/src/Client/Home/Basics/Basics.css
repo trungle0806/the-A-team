@@ -106,7 +106,7 @@ li.basics-Item {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
   color: white;
   text-align: center;
   padding: 10px;
@@ -123,7 +123,8 @@ li.basics-Item {
   bottom: -100%;
   left: 0;
   width: 100%;
-  background: white;
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.4s ease-in-out;

@@ -12,8 +12,11 @@ const Basics = () => {
     const fetchNgos = async () => {
       try {
         const response = await axios.get("http://localhost:5024/api/ngo");
-        setNgos(response.data.$values.slice(0, 3)); // Chỉ lấy 3 mục đầu tiên
+        console.log("API Response:", response.data); // Kiểm tra phản hồi API
+        const ngoList = response.data.$values || []; // Lấy danh sách NGOs từ $values
+        setNgos(ngoList.slice(0, 3)); // Chỉ lấy 3 mục đầu tiên
       } catch (error) {
+        console.error("Error fetching NGOs:", error);
         setError("Failed to load NGOs.");
       } finally {
         setLoading(false);
@@ -44,13 +47,16 @@ const Basics = () => {
               ) : (
                 <ul className="basics-active">
                   {ngos.map((ngo) => (
-                    <li className="basics-Item" key={ngo.NGOId}>
+                    <li className="basics-Item" key={ngo.ngoId || ngo.id}>
                       <div className="basics-content">
                         <div className="basics-image">
                           <img
                             className="basics-anh"
-                            src={ngo.image} // Assuming `image` is a property in the API response
+                            src={ngo.logoUrl || "fallback-image-url.jpg"} // Dùng logoUrl hoặc fallback nếu không có
                             alt={ngo.name}
+                            onError={(e) =>
+                              (e.target.src = "fallback-image-url.jpg")
+                            } // Thay thế URL fallback nếu ảnh lỗi
                           />
                           <div className="basics-overlay">
                             <div className="basics-title-overlay">

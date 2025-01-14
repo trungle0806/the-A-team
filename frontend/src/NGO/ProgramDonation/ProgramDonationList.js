@@ -70,7 +70,7 @@ const ProgramDonationList = () => {
       <div className="ProgramDonationList-table-container">
         <table className="ProgramDonationList-table">
           <thead>
-            <tr>
+            <tr className="ProgramDonationList-table-tr">
               <th>Donation ID</th>
               <th>Program ID</th>
               <th>Customer ID</th>
@@ -81,7 +81,10 @@ const ProgramDonationList = () => {
           </thead>
           <tbody>
             {currentDonations.map((donation) => (
-              <tr key={donation.donationId}>
+              <tr
+                className="ProgramDonationList-table-tr2"
+                key={donation.donationId}
+              >
                 <td>{donation.donationId}</td>
                 <td>{donation.programId}</td>
                 <td>{donation.customerId}</td>
