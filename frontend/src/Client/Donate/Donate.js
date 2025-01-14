@@ -5,61 +5,61 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { FaBullseye, FaHandHoldingHeart, FaClock, FaUsers, FaCalendarAlt } from "react-icons/fa";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import "./Donate.css";
 import { GoOrganization } from "react-icons/go";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
-import "./Donate.css";
 
 const Donate = () => {
     const { programId } = useParams();
     const { auth } = useAuth();
     const [program, setProgram] = useState(null);
-    const [customer, setCustomer] = useState(null);
     const [amount, setAmount] = useState("");
     const [error, setError] = useState("");
+    const [customerId, setCustomerId] = useState(null);
     const [isPaymentSelected, setIsPaymentSelected] = useState(false);
-    const navigate = useNavigate();
 
-    // Fetch program and customer details
+    const navigate = useNavigate(); // Use the new useNavigate hook
+
     useEffect(() => {
         if (!auth.token) {
-            navigate("/login"); // Redirect if not logged in
+            navigate("/login"); // Redirect to login if not authenticated
             return;
         }
-
         if (!programId) {
-            navigate("/error"); // Redirect if programId is missing
+            console.error("Program ID is missing.");
+            navigate("/error"); // Redirect to an error page
             return;
         }
-
-        const fetchProgram = async () => {
-            try {
-                const response = await axios.get(
-                    `http://localhost:5024/api/program1/${programId}`
-                );
-                setProgram(response.data);
-            } catch (err) {
-                console.error("Failed to fetch program details.", err);
-            }
-        };
-
-        const fetchCustomer = async () => {
-            try {
-                const response = await axios.get(
-                    `http://localhost:5024/api/customer/get-customer-data`,
-                    {
-                        headers: { Authorization: `Bearer ${auth.token}` },
-                    }
-                );
-                setCustomer(response.data);
-            } catch (err) {
-                console.error("Failed to fetch customer details.", err);
-            }
-        };
 
         fetchProgram();
-        fetchCustomer();
-    }, [programId, auth.token, navigate]);
+        fetchCustomerId();
+    }, [programId, auth.token, navigate]); // Add navigate to dependencies
+
+    const fetchProgram = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:5024/api/program1/${programId}`
+            );
+            setProgram(response.data);
+        } catch (err) {
+            console.error("Failed to fetch program details.");
+        }
+    };
+
+    const fetchCustomerId = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:5024/api/customer/get-customer-data",
+                {
+                    headers: { Authorization: `Bearer ${auth.token}` }
+                }
+            );
+            setCustomerId(response.data.customerId);
+        } catch (err) {
+            console.error("Failed to fetch customer details.");
+        }
+    };
 
     const handleAmountChange = (e) => {
         const value = parseFloat(e.target.value) || "";
@@ -73,12 +73,11 @@ const Donate = () => {
 
     const handleSuccess = async (details) => {
         try {
-            // Send donation details to the backend
             await axios.post(
                 "http://localhost:5024/api/ProgramDonation",
                 {
                     programId,
-                    customerId: customer.customerId,
+                    customerId,
                     amount,
                     paymentStatus: "Completed",
                     transactionId: details.id,
@@ -89,26 +88,12 @@ const Donate = () => {
                     },
                 }
             );
-
             alert("Donation successful! Thank you for your support.");
             setAmount("");
             setIsPaymentSelected(false);
-
-            // Navigate to Thank You Bill page
-            navigate("/thank-you-bill", {
-                state: {
-                    donationData: {
-                        donorName: `${customer.firstName || 'N/A'} ${customer.lastName || 'N/A'}`,
-                        donorEmail: customer?.account?.email || 'N/A', // Ensure email is present
-                        donationAmount: amount,
-                        donationDate: new Date().toLocaleDateString(),
-                        paymentMethod: "PayPal",
-                        logoUrl: "https://path-to-your-logo",
-                    },
-                },
-            });
+            fetchProgram(); // Re-fetch program details after a successful donation
         } catch (err) {
-            console.error("Donation processing failed.", err);
+            console.error("Donation processing failed.");
             alert("Donation processing failed. Please try again.");
         }
     };
@@ -127,11 +112,11 @@ const Donate = () => {
 
     const getUniqueDonorsCount = (donations) => {
         const donationsArray = donations?.$values || [];
-        const donorIds = donationsArray.map((donation) => donation.customerId);
+        const donorIds = donationsArray.map(donation => donation.customerId);
         return new Set(donorIds).size;
     };
 
-    if (!program || !customer) return <div className="loading">Loading...</div>;
+    if (!program) return <div className="loading">Loading...</div>;
 
     const totalDonationDays = calculateDonationDays(program.startDate, program.endDate);
     const remainingDonationDays = calculateRemainingDays(program.endDate);
@@ -172,6 +157,7 @@ const Donate = () => {
                     <div className="progress-container">
                         <div className="progress-bar" style={{ width: `${percentageAchieved}%` }}></div>
                     </div>
+
                     <p className="progress-percentage">
                         Percentage Achieved: {percentageAchieved.toFixed(2)}%
                     </p>
@@ -180,7 +166,36 @@ const Donate = () => {
                             Excess Amount: ${program.excessAmount.toFixed(2)}
                         </p>
                     )}
+
+                    <div className="donation-stats">
+                        <div className="stat-box">
+                            <FaUsers className="icon" />
+                            <span className="stat-label">Total Donors:</span>
+                            <span className="stat-value">{getUniqueDonorsCount(program.donations)}</span>
+                        </div>
+                        <div className="stat-box">
+                            <FaClock className="icon" />
+                            <span className="stat-label">Total Days of Donation:</span>
+                            <span className="stat-value">{totalDonationDays}</span>
+                        </div>
+                        <div className="stat-box">
+                            <FaCalendarAlt className="icon" />
+                            <span className="stat-label">Current Date:</span>
+                            <span className="stat-value">{new Date().toLocaleDateString()}</span>
+                        </div>
+                        <div className="stat-box">
+                            <FaCalendarAlt className="icon" />
+                            <span className="stat-label">Donation End Date:</span>
+                            <span className="stat-value">{new Date(program.endDate).toLocaleDateString()}</span>
+                        </div>
+                        <div className="stat-box">
+                            <FaClock className="icon" />
+                            <span className="stat-label">Remaining Days:</span>
+                            <span className="stat-value">{remainingDonationDays}</span>
+                        </div>
+                    </div>
                 </div>
+
                 <div className="donate-paypal">
                     <div className="donation-input-section">
                         {isPaymentSelected && (
@@ -202,7 +217,7 @@ const Donate = () => {
                         <PayPalButtons
                             createOrder={(data, actions) => {
                                 return actions.order.create({
-                                    purchase_units: [{ amount: { value: amount.toString() } }],
+                                    purchase_units: [{ amount: { value: amount.toString() } }], 
                                 });
                             }}
                             onApprove={(data, actions) => {
@@ -215,7 +230,11 @@ const Donate = () => {
                         />
                     )}
                     <div className="payment-button">
-                        <button onClick={() => setIsPaymentSelected(true)}>Donate Now</button>
+                        <button
+                            onClick={() => setIsPaymentSelected(true)}
+                        >
+                            Donate Now
+                        </button>
                     </div>
                 </div>
             </div>

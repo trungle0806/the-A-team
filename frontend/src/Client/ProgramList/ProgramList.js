@@ -71,9 +71,9 @@ const ProgramList = () => {
     setCurrentPage(1); // Reset to the first page
   };
 
-  const handleProgramClick = (programId) => {
-    navigate(`/program/${programId}`);
-  };
+  // const handleProgramClick = (programId) => {
+  //   navigate(`/program/${programId}`);
+  // };
 
   const filteredPrograms = programs.filter((program) => {
     const matchesCategories = selectedCategories.length
@@ -162,7 +162,7 @@ const ProgramList = () => {
                         <div
                           key={program.programId}
                           className="program-card"
-                          onClick={() => handleProgramClick(program.programId)}
+                          // onClick={() => handleProgramClick(program.programId)}
                         >
                           <div className="program-image">
                             <img src={program.ImageUrl} alt={program.name} />
@@ -206,8 +206,8 @@ const ProgramList = () => {
                             </div>
                           </div>
                         </div>
-                      ))
-                    )}
+                       ))
+                     )}
                   </div>
                   <ul className="pagination1 program-grid__pagination">
                     <li className="pagination1-item">
