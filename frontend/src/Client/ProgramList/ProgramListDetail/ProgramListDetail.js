@@ -39,12 +39,24 @@ const ProgramListDetail = () => {
     <div>
       <Header />
       <div className="program-detail">
-        <h1>{program.name}</h1>
-        <img src={program.ImageUrl} alt={program.name} />
-        <p>{program.description}</p>
-        <p>Start Date: {new Date(program.startDate).toLocaleDateString()}</p>
-        <p>End Date: {new Date(program.endDate).toLocaleDateString()}</p>
-        <p>{program.aboutFund}</p>
+        <h1>Food Distribution for the Needy</h1>
+        <div className="program-detail-buttons">
+        <img
+          src={program.ImageUrl || "/path-to-default-food-image.jpg"}
+          alt={program.name}
+          className="program-detail-image"
+        />
+        </div>
+        <div className="program-content">
+          <p>{program.description || "This program aims to distribute food to those in need, ensuring no one goes hungry."}</p>
+          <p>
+            <strong>Start Date:</strong> {new Date(program.startDate).toLocaleDateString()}
+          </p>
+          <p>
+            <strong>End Date:</strong> {new Date(program.endDate).toLocaleDateString()}
+          </p>
+          {/* <p>{program.aboutFund || "The fund will help us purchase food supplies, arrange logistics, and reach more communities in need."}</p> */}
+        </div>
       </div>
       <Footer />
     </div>
@@ -52,3 +64,4 @@ const ProgramListDetail = () => {
 };
 
 export default ProgramListDetail;
+

@@ -1,293 +1,56 @@
-.body1 {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    color: #051740;
-}
-
-.header1 {
-    background-color: #051740;
-    color: #ffffff;
-    padding: 1rem 0;
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-.describe-page {
-    padding-top: 110px;
-}
-
-.describe {
-    padding: 2rem 0;
-    text-align: center;
-}
-
-.container1 {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 5rem;
-}
-
-.hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-}
-
-.hero-content {
-    width: 55%;
-    text-align: left;
-}
-
-.hero-content h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.hero-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 4.5rem;
-    color: #333333;
-    margin-right: 70px;
-    text-align: unset;
-}
-
-.hero-content a {
-    background-color:#ffffff;
-    color: #8db883;
-    border: none;
-    border-radius: 5px;
-    padding: 0.8rem 1.5rem;
-    font-size: 1.3rem;
-    cursor: pointer;
-    border: 1px solid #8db883;
-    font-family: "arial-black";
-
-}
-
-.hero-content button:hover {
-    background-color: #8db883;
-}
-
-.hero img {
-    width: 40%;
+.program-detail {
+    padding-top: 120px;
     border-radius: 10px;
-    height: 400px;
-}
-
-.stats {
-    margin-bottom: 5rem;
-    background-color: #051740;
-    color: #ffffff;
-    padding: 2rem 0;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 5rem;
-    flex-wrap: wrap;
-}
-
-.stat {
-    text-align: center;
-    width: 22%;
-    margin-bottom: 1rem;
-}
-
-.stat h2 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.stat p {
-    font-size: 1rem;
-}
-
-/* New Section: About the Animal Welfare Fund */
-.about-fund {
-    background-color: #effbeb      
-    ;
-    padding: 3rem 2rem;
-}
-
-.about-fund h2 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .program-detail h1 {
     font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #051740;
+    color: #333;
     text-align: center;
-}
-
-.about-fund p {
-    font-size: 1.3rem;
-    line-height: 1.8;
     margin-bottom: 1.5rem;
-    color: #333333;
-    text-align: unset;
-}
-
-.about-fund h3 {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #051740;
-}
-
-.about-fund p:last-of-type {
-    margin-bottom: 0;
-}
-
-.about-fund .read-more-button {
-    display: inline-block;
-    background-color: #051740;
-    color: #ffffff;
-    padding: 0.8rem 1.5rem;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    margin-top: 1.5rem;
-}
-
-.about-fund .read-more-button:hover {
-    background-color: #364e86;
-}
-
-.about-fund1 {
-    margin-right: 100px;
-    margin-left: 100px;
-    /* background-color: #f7f5f3; */
-}
-
-
-/* New Section: Discover Charities */
-.describe-container {
-    background-color:#effbeb      
-    ;
-    padding: 3rem 2rem;
-    text-align: center;
-
-}
-
-.describe-heading {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #051740;
-}
-
-.describe-subheading {
-    font-size: 1.2rem;
+  }
+  
+  .program-detail-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .program-content {
+    font-size: 1.1rem;
+    color: #555;
     line-height: 1.6;
-    margin-bottom: 2rem;
-    color: #333333;
-}
-
-.discover{
-    display: inline-block;
-    background-color:#ffffff;
-    color: #8db883;
-    padding: 0.8rem 1.5rem;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.3rem;
-    cursor: pointer;
-    font-family: "arial-black";
-    border: 1px solid #8db883;
-
-}
-
-.discover:hover {
-    background-color: #8db883;
-}
-.comment-section {
-    background-color: #f4f4f4;
-    padding: 2rem 2rem;
-    margin-top: 3rem;
-    text-align: center;
-    /* border-top: 2px solid #051740; */
-  }
-  
-  .comment-section h2 {
-    font-size: 2rem;
-    color: #051740;
-    margin-bottom: 1rem;
-  }
-  
-  .comment-section textarea {
-    width: 97.70%;
-    padding: 1rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 1.5rem;
-    resize: none;
-  }
-  
-  .comment-section button {
-    background-color: #8db883;
-    color: #ffffff;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .comment-section button:hover {
-    background-color: #8db883;
-  }
-  
-  .comment_wrapper {
-    margin-top: 2rem;
-    text-align: left;
-    max-width: 80%;
-    margin: 0 auto;
-  }
-  
-  .comment_item {
-    background-color: #ffffff;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-  }
-  
-  .comment_item p {
-    margin: 0;
-    font-size: 1rem;
-  }
-  
-  .comment_item img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  
-  .comment_item span {
-    font-weight: bold;
-    color: #051740;
-  }
-  
-  .comment_item time {
-    font-size: 0.9rem;
-    color: #888;
-  }
-  .describe-comment{
     display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        margin: 0 165px 30px 165px;
+    flex-direction: column;
+    text-align: justify;
   }
   
-.donateButton1:hover{
-    background-color:#8db883;
-    color:#ffffff;    
-}
-.discover:hover{
-    background-color:#8db883;
-    color:#ffffff;   
-}
+  .program-content p {
+    margin: 0.5rem 0;
+    font-size: 1.3rem;
+    color: #333;
+  }
+  
+  .program-content strong {
+    color: #333;
+  }
+  .program-detail-buttons{
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .program-detail {
+      padding: 1rem;
+    }
+  
+    .program-detail h1 {
+      font-size: 1.5rem;
+    }
+  }
+  

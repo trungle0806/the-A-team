@@ -66,24 +66,22 @@ const ProgramList = () => {
 
   const handleCategorySelect = (category, e) => {
     e.preventDefault();
-    setSelectedCategories([category]); // Set the selected category
-    setSearchTerm(""); // Reset search term
-    setCurrentPage(1); // Reset to the first page
+    setSelectedCategories([category]);
+    setSearchTerm("");
+    setCurrentPage(1);
   };
 
-  // const handleProgramClick = (programId) => {
-  //   navigate(`/program/${programId}`);
-  // };
+  const handleProgramClick = (programId) => {
+    navigate(`/program/${programId}`);
+  };
 
   const filteredPrograms = programs.filter((program) => {
     const matchesCategories = selectedCategories.length
-      ? selectedCategories.includes(program.category) // Check if program belongs to the selected category
+      ? selectedCategories.includes(program.category)
       : true;
-
     const matchesSearchTerm = program.name
       ?.toLowerCase()
       .includes(searchTerm.toLowerCase());
-
     return matchesCategories && matchesSearchTerm;
   });
 
@@ -159,20 +157,22 @@ const ProgramList = () => {
                       <p>No programs available.</p>
                     ) : (
                       currentPrograms.map((program) => (
-                        <div
-                          key={program.programId}
-                          className="program-card"
-                          // onClick={() => handleProgramClick(program.programId)}
-                        >
-                          <div className="program-image">
+                        <div key={program.programId} className="program-card">
+                          <div
+                            className="program-image"
+                            onClick={() => handleProgramClick(program.programId)}
+                          >
                             <img src={program.ImageUrl} alt={program.name} />
                           </div>
                           <div className="program-details">
                             <h2>{program.name}</h2>
                             <p>{program.description}</p>
+                            <div className="program-detailss">
                             <p>
                               <strong>Start date:</strong>{" "}
-                              {new Date(program.startDate).toLocaleDateString()}
+                              {new Date(
+                                program.startDate
+                              ).toLocaleDateString()}
                             </p>
                             <p>
                               <strong>End date:</strong>{" "}
@@ -182,11 +182,13 @@ const ProgramList = () => {
                               <strong>Is about to happen:</strong>{" "}
                               {program.isUpcoming ? "Yes" : "No"}
                             </p>
+                            </div>
                             <div className="program-ci">
                               <CiHeart
                                 className={`program-heart ${
                                   favorites.some(
-                                    (fav) => fav.programId === program.programId
+                                    (fav) =>
+                                      fav.programId === program.programId
                                   )
                                     ? "favorite"
                                     : ""
@@ -206,8 +208,8 @@ const ProgramList = () => {
                             </div>
                           </div>
                         </div>
-                       ))
-                     )}
+                      ))
+                    )}
                   </div>
                   <ul className="pagination1 program-grid__pagination">
                     <li className="pagination1-item">
