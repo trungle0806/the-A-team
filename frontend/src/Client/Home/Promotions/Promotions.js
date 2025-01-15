@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Promotions.css";
 
@@ -15,7 +16,11 @@ const Promotions = () => {
           "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1"
         );
         const promotionsData = response.data?.$values || [];
-        setPromotions(promotionsData.slice(0, 6)); // Limit to 6 items
+
+        // Log the data structure to verify the id field
+        console.log(promotionsData);
+
+        setPromotions(promotionsData.slice(0, 6));
       } catch (err) {
         setError("Failed to fetch promotions.");
       } finally {
@@ -48,23 +53,28 @@ const Promotions = () => {
                   {promotions.map((promo, index) => (
                     <li key={index} className="promo-Item">
                       <div className="promo-content">
-                        <a
+                        <Link
                           className="promo-discover"
-                          href={`/promotions/${promo.id}`}
-                        ></a>
-                        <div className="promo-image">
-                          <picture>
-                            <img
-                              className="promo-anh"
-                              src={promo.image || "default-image.jpg"}
-                              alt={promo.name}
-                            />
-                          </picture>
-                        </div>
-                        <div className="promo-description">
-                          <div className="promp-ton">{promo.name}</div>
-                          <div className="promo-date">{promo.description}</div>
-                        </div>
+                          to={`/program/${promo.programId}`} // Make sure 'programId' exists in the data
+                        >
+                          <div className="promo-image">
+                            <picture>
+                              <img
+                                className="promo-anh"
+                                src={promo.image || "default-image.jpg"}
+                                alt={promo.name || "Default Promotion"}
+                              />
+                            </picture>
+                          </div>
+                          <div className="promo-description">
+                            <div className="promp-ton">
+                              {promo.name || "No Name Available"}
+                            </div>
+                            <div className="promo-date">
+                              {promo.description || "No Description Available"}
+                            </div>
+                          </div>
+                        </Link>
                       </div>
                     </li>
                   ))}

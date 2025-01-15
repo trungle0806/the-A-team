@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Import Link for navigation
 import axios from "axios";
 import "./Basics.css";
 
 const Basics = () => {
-  const [ngos, setNgos] = useState([]); // State để lưu trữ danh sách NGOs
-  const [loading, setLoading] = useState(true); // Trạng thái loading
-  const [error, setError] = useState(""); // Trạng thái lỗi
+  const [ngos, setNgos] = useState([]); // State to store the list of NGOs
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(""); // Error state
 
   useEffect(() => {
-    // Lấy dữ liệu từ API
     const fetchNgos = async () => {
       try {
         const response = await axios.get(
           "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ngo"
         );
-        console.log("API Response:", response.data); // Kiểm tra phản hồi API
-        const ngoList = response.data.$values || []; // Lấy danh sách NGOs từ $values
-        setNgos(ngoList.slice(0, 3)); // Chỉ lấy 3 mục đầu tiên
+        console.log("API Response:", response.data); // Check API response
+        const ngoList = response.data.$values || []; // Get NGOs list from $values
+        setNgos(ngoList.slice(0, 3)); // Fetch only the first 3 items
       } catch (error) {
         console.error("Error fetching NGOs:", error);
         setError("Failed to load NGOs.");
@@ -50,27 +50,30 @@ const Basics = () => {
                 <ul className="basics-active">
                   {ngos.map((ngo) => (
                     <li className="basics-Item" key={ngo.ngoId || ngo.id}>
-                      <div className="basics-content">
-                        <div className="basics-image">
-                          <img
-                            className="basics-anh"
-                            src={ngo.logoUrl || "fallback-image-url.jpg"} // Dùng logoUrl hoặc fallback nếu không có
-                            alt={ngo.name}
-                            onError={(e) =>
-                              (e.target.src = "fallback-image-url.jpg")
-                            } // Thay thế URL fallback nếu ảnh lỗi
-                          />
-                          <div className="basics-overlay">
-                            <div className="basics-title-overlay">
-                              {ngo.name}
+                      <Link to={`/ngos/${ngo.ngoId || ngo.id}`}>
+                        {/* Navigate to the detail page */}
+                        <div className="basics-content">
+                          <div className="basics-image">
+                            <img
+                              className="basics-anh"
+                              src={ngo.logoUrl || "fallback-image-url.jpg"}
+                              alt={ngo.name}
+                              onError={(e) =>
+                                (e.target.src = "fallback-image-url.jpg")
+                              }
+                            />
+                            <div className="basics-overlay">
+                              <div className="basics-title-overlay">
+                                {ngo.name}
+                              </div>
                             </div>
                           </div>
+                          <div className="basics-description">
+                            <div className="promp-ton">{ngo.name}</div>
+                            <div className="basics-date">{ngo.description}</div>
+                          </div>
                         </div>
-                        <div className="basics-description">
-                          <div className="promp-ton">{ngo.name}</div>
-                          <div className="basics-date">{ngo.description}</div>
-                        </div>
-                      </div>
+                      </Link>
                     </li>
                   ))}
                 </ul>
