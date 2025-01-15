@@ -18,7 +18,7 @@ const Favorites = () => {
   return (
     <div>
       <Header />
-      <div className="favorites-banner">
+      <div className="favorites-banner1">
         <h1>Your Favorite Programs</h1>
       </div>
       <div className="favorites-container">

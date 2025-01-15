@@ -32,6 +32,21 @@ export const getNGOById = async (id) => {
   }
 };
 
+// Function to get all NGOs
+export const getAllNGOs = async () => {
+  try {
+    const response = await api.get(`ngo`, {
+      headers: {
+        Authorization: getToken(),
+      },
+    });
+    return response.data; // Assuming the backend returns an array of all NGOs
+  } catch (error) {
+    console.error('Error fetching all NGOs:', error);
+    throw error; // Re-throw error to be handled by the caller
+  }
+};
+
 // Function to update NGO data by ID
 export const updateNGO = async (id, updatedNGO) => {
   try {

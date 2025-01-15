@@ -18,28 +18,28 @@ const Footer = () => {
             <h3>Organization</h3>
             <ul>
               <li>
-                <a href="#">
+                <a href="/ngos">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Join Academy
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/ngos">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Press Releases
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/ngos">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Upcoming Events
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/ngos">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Recent Cause
@@ -63,28 +63,28 @@ const Footer = () => {
             <h3>Support</h3>
             <ul>
               <li>
-                <a href="#">
+                <a href="/about">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Love Philosophy
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/about">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Share & Care
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/about">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Child Education
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/about">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Medical Treatment
@@ -108,25 +108,25 @@ const Footer = () => {
             <h3>Discover</h3>
             <ul>
               <li>
-                <a href="#">
+                <a href="/program">
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   How to Sponsor
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/program">
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Support a Volunteer
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/program">
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Community Attitudes
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/program">
                   {" "}
                   <i className="fa fa-angle-double-right fa-footer"></i>
                   Family Adopting

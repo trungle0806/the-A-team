@@ -28,7 +28,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pftEnvTMxS8Q7kNvgHLPfKH&_nc_oc=AdiOmTgcS1PVcje4rCF4T67yHhRkhWlLkKqz-xxmmCIGzr1EiTmh53CctVT_YwDJj8s&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=A-fUqKblFpGDEYhzxArhoXT&oh=00_AYCMdQlL6EYZnomkgnO4pwUAWPJ_sV5voP7wqeCQhCF2Tg&oe=6785F426");
+  background-image: url("https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=m2qeBA47siMQ7kNvgGmiwHS&_nc_oc=AdhNI7RRcW-Nyef6YL8_gLxh3I41za05kRg0-A2Guabz3tue2Z25wFGiu60iDPxqg-M&_nc_zt=23&_nc_ht=scontent.fhan2-3.fna&_nc_gid=AmpBM195j5j29ANpFqLBvMy&oh=00_AYCYTxuQc3sHpQ-1PN-6hLcZE9mIFENIdLANouKv2pcVBw&oe=678C8BA6");
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
@@ -37,7 +37,7 @@
 }
 
 .body-login {
-  background-image: url("https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pftEnvTMxS8Q7kNvgHLPfKH&_nc_oc=AdiOmTgcS1PVcje4rCF4T67yHhRkhWlLkKqz-xxmmCIGzr1EiTmh53CctVT_YwDJj8s&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=A-fUqKblFpGDEYhzxArhoXT&oh=00_AYCMdQlL6EYZnomkgnO4pwUAWPJ_sV5voP7wqeCQhCF2Tg&oe=6785F426");
+  background-image: url("https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/472907735_1171899264292465_3535676050286301289_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=m2qeBA47siMQ7kNvgGmiwHS&_nc_oc=AdhNI7RRcW-Nyef6YL8_gLxh3I41za05kRg0-A2Guabz3tue2Z25wFGiu60iDPxqg-M&_nc_zt=23&_nc_ht=scontent.fhan2-3.fna&_nc_gid=AmpBM195j5j29ANpFqLBvMy&oh=00_AYCYTxuQc3sHpQ-1PN-6hLcZE9mIFENIdLANouKv2pcVBw&oe=678C8BA6");
   background-size: cover; /* Tự động co dãn để phủ hết màn hình */
   background-position: center center; /* Đặt hình ảnh ở giữa màn hình */
   background-attachment: fixed; /* Nền cố định khi cuộn trang */
