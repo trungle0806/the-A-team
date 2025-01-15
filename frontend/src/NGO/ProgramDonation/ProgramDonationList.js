@@ -8,6 +8,9 @@ const ProgramDonationList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchDonor, setSearchDonor] = useState("");
+  const [searchNGO, setSearchNGO] = useState("");
+  const [searchProgram, setSearchProgram] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -29,17 +32,30 @@ const ProgramDonationList = () => {
     fetchDonations();
   }, []);
 
-  // Handle search functionality
+  // Handle filtering functionality
   useEffect(() => {
     const filtered = donations.filter((donation) =>
-      Object.values(donation)
-        .join(" ")
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+      (searchTerm
+        ? Object.values(donation)
+            .join(" ")
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
+        : true) &&
+      (searchDonor
+        ? donation.donorName?.toLowerCase().includes(searchDonor.toLowerCase())
+        : true) &&
+      (searchNGO
+        ? donation.ngoName?.toLowerCase().includes(searchNGO.toLowerCase())
+        : true) &&
+      (searchProgram
+        ? donation.programName
+            ?.toLowerCase()
+            .includes(searchProgram.toLowerCase())
+        : true)
     );
     setFilteredDonations(filtered);
-    setCurrentPage(1); // Reset to first page on search
-  }, [searchTerm, donations]);
+    setCurrentPage(1); // Reset to first page on filter change
+  }, [searchTerm, searchDonor, searchNGO, searchProgram, donations]);
 
   // Calculate the displayed donations for the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -55,13 +71,34 @@ const ProgramDonationList = () => {
     <div className="ProgramDonationList-container">
       <h2 className="ProgramDonationList-title">Program Donation History</h2>
 
-      {/* Search Bar */}
+      {/* Search Filters */}
       <div className="ProgramDonationList-search-container">
         <input
           type="text"
-          placeholder="Search amount..."
+          placeholder="Search anything..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          className="ProgramDonationList-search-input"
+        />
+        <input
+          type="text"
+          placeholder="Search by Donor Name..."
+          value={searchDonor}
+          onChange={(e) => setSearchDonor(e.target.value)}
+          className="ProgramDonationList-search-input"
+        />
+        <input
+          type="text"
+          placeholder="Search by NGO Name..."
+          value={searchNGO}
+          onChange={(e) => setSearchNGO(e.target.value)}
+          className="ProgramDonationList-search-input"
+        />
+        <input
+          type="text"
+          placeholder="Search by Program Name..."
+          value={searchProgram}
+          onChange={(e) => setSearchProgram(e.target.value)}
           className="ProgramDonationList-search-input"
         />
       </div>
@@ -72,8 +109,10 @@ const ProgramDonationList = () => {
           <thead>
             <tr className="ProgramDonationList-table-tr">
               <th>Donation ID</th>
-              <th>Program ID</th>
-              <th>Customer ID</th>
+              <th>Donor Name</th>
+              <th>Donor Email</th>
+              <th>NGO Name</th>
+              <th>Program Name</th>
               <th>Amount</th>
               <th>Payment Status</th>
               <th>Donation Date</th>
@@ -86,8 +125,10 @@ const ProgramDonationList = () => {
                 key={donation.donationId}
               >
                 <td>{donation.donationId}</td>
-                <td>{donation.programId}</td>
-                <td>{donation.customerId}</td>
+                <td>{donation.donorName}</td>
+                <td>{donation.donorEmail}</td>
+                <td>{donation.ngoName}</td>
+                <td>{donation.programName}</td>
                 <td className="ProgramDonationList-td">{donation.amount}</td>
                 <td>{donation.paymentStatus}</td>
                 <td>{new Date(donation.donationDate).toLocaleString()}</td>

@@ -14,7 +14,7 @@ const Ngos = () => {
     const fetchNgos = async () => {
       try {
         const response = await axios.get(
-          "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/api/ngo"
+          "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ngo"
         );
         console.log("Response data:", response.data); // Kiểm tra phản hồi
 

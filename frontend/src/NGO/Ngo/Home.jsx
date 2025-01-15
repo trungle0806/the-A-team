@@ -39,22 +39,6 @@ function DashBoard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch products, users, and orders
-        // const productResponse = await getPrograms();
-        // const productsData = productResponse;
-
-        // const userResponse = await getUsers();
-        // const usersData = userResponse;
-
-        // const orderResponse = await getOrder();
-        // const orderData = orderResponse;
-
-        // const orderDataFormatted = groupByDay(orderData); // Group data by day
-
-        // setProducts(productsData);
-        // setUsers(usersData);
-        // setOrders(orderData);
-        // setChartData(orderDataFormatted);
 
       } catch (error) {
         console.error('Error fetching data:', error);
