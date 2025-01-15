@@ -125,6 +125,10 @@
   font-size: 1.125rem;
   line-height: 1.375rem;
   font-family: "arial-black";
+  color: #8db883;
+}
+.give-ton:hover {
+  color: white;
 }
 .give-button {
   padding-bottom: 32px !important;
