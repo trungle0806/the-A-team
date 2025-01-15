@@ -21,6 +21,9 @@
   font-size: 48px;
   margin-bottom: 20px;
 }
+.donate-completed {
+  width: 22vw;
+}
 
 .not-found-container p {
   font-size: 18px;

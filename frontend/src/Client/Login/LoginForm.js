@@ -9,6 +9,7 @@ const LoginForm = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [errorMessages, setErrorMessages] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -30,7 +31,6 @@ const LoginForm = () => {
       console.error("Invalid role provided:", role);
     }
   };
-  
 
   const loginRequest = async (emailOrUsername, password) => {
     setLoading(true);
@@ -47,8 +47,20 @@ const LoginForm = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Login failed.");
+        let errorMessage = "Login failed.";
+
+        try {
+          // Kiểm tra nếu response trả về là JSON
+          const errorData = await response.json();
+          errorMessage = errorData.message || "Login failed.";
+        } catch (e) {
+          // Nếu không phải JSON, sử dụng thông báo mặc định
+          errorMessage =
+            "Your password is incorrect. Please re-enter your password to log in!";
+        }
+
+        setError(errorMessage);
+        return;
       }
 
       const data = await response.json();
@@ -89,11 +101,9 @@ const LoginForm = () => {
       const decodedToken = jwtDecode(token);
       const userRole = decodedToken.Role;
 
-      // Lưu token vào localStorage
       localStorage.setItem("authToken", token);
       localStorage.setItem("role", userRole);
 
-      // Gửi sự kiện cập nhật giao diện
       window.dispatchEvent(new Event("loginStatusChanged"));
 
       handleNavigation(userRole);
@@ -106,10 +116,27 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isValidEmail(emailOrUsername)) {
-      setError("Invalid email format.");
+    let errors = {};
+
+    // Kiểm tra nếu email hoặc username trống
+    if (!emailOrUsername) {
+      errors.emailOrUsername = "Please enter email or username!";
+    } else if (!isValidEmail(emailOrUsername)) {
+      errors.emailOrUsername = "Your email is not in the correct format!";
+    }
+
+    // Kiểm tra nếu mật khẩu trống
+    if (!password) {
+      errors.password = "Please enter your password!";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setErrorMessages(errors);
       return;
     }
+
+    // Nếu không có lỗi, thực hiện yêu cầu đăng nhập
+    setErrorMessages({});
     loginRequest(emailOrUsername, password);
   };
 
@@ -117,13 +144,6 @@ const LoginForm = () => {
     <div className="body-login">
       <Header />
       <div className="form-container-login">
-        {/* <img
-        src="https://d20umu42aunjpx.cloudfront.net/_gfx_/main/CN_Logo_New2022.png"
-        className="form-img"
-        alt="Logo"
-      />
-      <h1 className="form-h1">Welcome</h1>
-      <p className="form-p1">Login in to Charity Navigator to continue.</p> */}
         <form onSubmit={handleSubmit} className="form">
           <div className="form-group-login">
             <label htmlFor="emailOrUsername" className="conten-login">
@@ -134,8 +154,14 @@ const LoginForm = () => {
               id="emailOrUsername"
               value={emailOrUsername}
               onChange={(e) => setEmailOrUsername(e.target.value)}
-              required
+              className={errorMessages.emailOrUsername ? "input-error" : ""}
+              placeholder="Enter your email or username"
             />
+            {errorMessages.emailOrUsername && (
+              <small className="error-text">
+                {errorMessages.emailOrUsername}
+              </small>
+            )}
           </div>
           <div className="form-group-login">
             <label htmlFor="password" className="conten-login">
@@ -146,8 +172,12 @@ const LoginForm = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
+              className={errorMessages.password ? "input-error" : ""}
+              placeholder="Enter your password"
             />
+            {errorMessages.password && (
+              <small className="error-text">{errorMessages.password}</small>
+            )}
           </div>
           {error && <p className="error-message">{error}</p>}
           <Link to="/forgot-password" className="login-link1">

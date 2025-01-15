@@ -130,7 +130,7 @@ export const Header = () => {
       <div className="navbar-header-container3">
         {/* Favorites Icon */}
         <div className="favorites">
-          <NavLink className="favorites-link" to="/favorites">
+          <NavLink className="favorites-link1" to="/favorites">
             <FontAwesomeIcon icon={faHeart} className="favorites-icon1" />
             {favorites.length > 0 && (
               <span className="favorites-count">{favorites.length}</span>

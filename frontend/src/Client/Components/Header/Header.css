@@ -26,13 +26,15 @@
 
 .header-container.scrolled .navbar-header-link a,
 .header-container.scrolled .favorites-icon1,
-.header-container.scrolled .user-icon-style {
+.header-container.scrolled .user-icon-style,
+.header-container.scrolled .logout-item1 {
   color: #ededed; /* Màu đen cho các liên kết và icon */
 }
 
 .header-container.scrolled .navbar-header-link a:hover,
 .header-container.scrolled .favorites-icon1 :hover,
-.header-container.scrolled .user-icon-style:hover {
+.header-container.scrolled .user-icon-style:hover,
+.logout-item1:hover {
   color: #ededed; /* Màu vàng khi hover */
 }
 
@@ -206,7 +208,7 @@
   margin-right: 2px; /* Adjust spacing to the right */
 }
 
-.favorites-link {
+.favorites-link1 {
   text-decoration: none; /* Remove underline from the link */
   color: inherit; /* Inherit text color from parent */
   display: flex;
@@ -220,7 +222,7 @@
   color: black; /* Default heart icon color */
 }
 
-.favorites-link:hover .favorites-icon {
+.favorites-icon1:hover {
   color: #8db883; /* Bright red on hover */
 }
 
@@ -271,4 +273,18 @@
 .header-container.home .user-icon-style:hover,
 .header-container.home .logout-icon-style:hover {
   color: #8db883; /* Màu vàng khi hover */
+}
+.logout-item1 {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: black;
+
+  font-size: 1.3rem;
+}
+.logout-item1:hover {
+  color: #8db883;
+}
+.logout-icon {
+  font-family: 1rem;
 }

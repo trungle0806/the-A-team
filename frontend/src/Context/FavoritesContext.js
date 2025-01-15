@@ -43,16 +43,14 @@ export const FavoritesProvider = ({ children }) => {
   // Thêm chương trình vào danh sách yêu thích
   const addToFavorites = (program) => {
     if (!isAuthenticated()) {
-      toast.error(
-        "Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích."
-      );
+      toast.error("You need to login to add products to your wishlist.");
       return;
     }
 
     // Kiểm tra xem chương trình đã có trong danh sách yêu thích chưa
     setFavorites((prevFavorites) => {
       if (prevFavorites.some((fav) => fav.programId === program.programId)) {
-        toast.info("Chương trình đã có trong danh sách yêu thích.");
+        toast.info("The program is already in your favorites list.");
         return prevFavorites;
       }
       const updatedFavorites = [...prevFavorites, program];
@@ -65,7 +63,7 @@ export const FavoritesProvider = ({ children }) => {
   const removeFromFavorites = (programId) => {
     if (!isAuthenticated()) {
       toast.error(
-        "Bạn cần đăng nhập để xóa chương trình khỏi danh sách yêu thích."
+        "You need to log in to remove a program from your favorites list."
       );
       return;
     }

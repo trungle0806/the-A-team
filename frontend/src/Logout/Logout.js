@@ -10,13 +10,13 @@ const Logout = ({ onLogout }) => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("role");
-    if (onLogout) onLogout(); // Call the onLogout prop for additional logic if needed
+    if (onLogout) onLogout(); // Đóng dropdown khi logout
     navigate("/login");
   };
 
   return (
-    <div className="logout-icon" onClick={handleLogout}>
-      <FontAwesomeIcon icon={faSignOutAlt} className="logout-icon-style" />
+    <div className="logout-item1" onClick={handleLogout}>
+      <FontAwesomeIcon icon={faSignOutAlt} className="logout-icon" />
     </div>
   );
 };

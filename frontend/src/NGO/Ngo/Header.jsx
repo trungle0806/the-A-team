@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BsFillBellFill,
   BsFillEnvelopeFill,
@@ -6,15 +6,17 @@ import {
   BsSearch,
   BsJustify,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import Logout from "../../Logout/Logout";
 import "./Header.css";
 
 function Header({ OpenSidebar }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
+  // Use useEffect to set dropdown visibility when the component mounts
+  useEffect(() => {
+    setIsDropdownVisible(true); // Show the dropdown immediately when the component mounts
+  }, []);
+
   return (
     <header className="header3">
       <div className="menu-icon">
@@ -26,18 +28,11 @@ function Header({ OpenSidebar }) {
       <div className="header-right">
         <BsFillBellFill className="icon" />
         <BsFillEnvelopeFill className="icon" />
-        <div className="admin-container" onClick={toggleDropdown}>
-          <BsPersonCircle className="icon" />
-        </div>
 
+        {/* Always show the menu dropdown */}
         {isDropdownVisible && (
-          <div className="menu">
-            <Link to="/login" className="item">
-              Login
-            </Link>
-            <Link to="/infomation" className="infomation">
-              infomation
-            </Link>
+          <div className="menu-logout">
+            <Logout onLogout={() => setIsDropdownVisible(false)} />
           </div>
         )}
       </div>

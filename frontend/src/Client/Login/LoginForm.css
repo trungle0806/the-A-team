@@ -213,6 +213,16 @@
   color: #333; /* Màu đen nhẹ */
   font-weight: 500;
 }
+.input-error {
+  border: 2px solid red;
+}
+
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin-top: 6px;
+  margin-left: 10px;
+}
 
 /* Responsive */
 @media (max-width: 600px) {
