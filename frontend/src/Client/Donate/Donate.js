@@ -113,9 +113,12 @@ const Donate = () => {
   const calculateRemainingDays = (endDate) => {
     const today = new Date();
     const end = new Date(endDate);
-    return Math.ceil((end - today) / (1000 * 3600 * 24));
+    const remainingTime = end - today;
+    
+    // Ensure the remaining days are not negative
+    return remainingTime > 0 ? Math.ceil(remainingTime / (1000 * 3600 * 24)) : 0;
   };
-
+  
   const getUniqueDonorsCount = (donations) => {
     const donationsArray = donations?.$values || [];
     const donorIds = donationsArray.map((donation) => donation.customerId);

@@ -43,8 +43,12 @@ const ProgramDetail = () => {
   const calculateRemainingDays = (endDate) => {
     const today = new Date();
     const end = new Date(endDate);
-    return Math.ceil((end - today) / (1000 * 3600 * 24));
+    const remainingTime = end - today;
+
+    // Ensure the remaining days are not negative
+    return remainingTime > 0 ? Math.ceil(remainingTime / (1000 * 3600 * 24)) : 0;
   };
+
 
   // Utility to count unique donors based on their IDs
   const getUniqueDonorsCount = (donations) => {
