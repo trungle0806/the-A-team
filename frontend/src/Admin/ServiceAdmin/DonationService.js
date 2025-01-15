@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:5024/api/ProgramDonation/';
+const CUSTOMER_API_URL = 'http://localhost:5024/api/Customer/';
 
 // Utility function to get authorization headers
 const getAuthHeaders = () => {
@@ -27,8 +28,7 @@ const getProgramDonations = async (searchQuery = '') => {
         });
         return response.data;
     } catch (error) {
-        console.error('Failed to fetch program donations:', error.response?.data || error.message);
-        throw error;
+        handleAxiosError(error, 'Failed to fetch program donations');
     }
 };
 
@@ -38,8 +38,7 @@ const getProgramDonationById = async (id) => {
         const response = await axios.get(`${API_URL}${id}`, getAuthHeaders());
         return response.data;
     } catch (error) {
-        console.error(`Failed to fetch program donation with ID ${id}:`, error.response?.data || error.message);
-        throw error;
+        handleAxiosError(error, `Failed to fetch program donation with ID ${id}`);
     }
 };
 
@@ -49,8 +48,7 @@ const addProgramDonation = async (donation) => {
         const response = await axios.post(API_URL, donation, getAuthHeaders());
         return response.data;
     } catch (error) {
-        console.error('Failed to add program donation:', error.response?.data || error.message);
-        throw error;
+        handleAxiosError(error, 'Failed to add program donation');
     }
 };
 
@@ -60,8 +58,7 @@ const updateProgramDonation = async (id, updatedDonation) => {
         const response = await axios.put(`${API_URL}${id}`, updatedDonation, getAuthHeaders());
         return response.data;
     } catch (error) {
-        console.error(`Failed to update program donation with ID ${id}:`, error.response?.data || error.message);
-        throw error;
+        handleAxiosError(error, `Failed to update program donation with ID ${id}`);
     }
 };
 
@@ -71,31 +68,32 @@ const deleteProgramDonation = async (id) => {
         const response = await axios.delete(`${API_URL}${id}`, getAuthHeaders());
         return response.data;
     } catch (error) {
-        console.error(`Failed to delete program donation with ID ${id}:`, error.response?.data || error.message);
-        throw error;
+        handleAxiosError(error, `Failed to delete program donation with ID ${id}`);
     }
 };
 
-// ServiceAdmin/DonationService.js
-export const getCustomerById = async (customerId) => {
+// Fetch a specific Customer by ID
+const getCustomerById = async (customerId) => {
     try {
-      const response = await fetch(`http://localhost:5024/api/Customer/${customerId}`);
-       // Kiểm tra xem phản hồi có phải là 404 hay không
-    if (!response.ok) {
-        throw new Error(`Customer with ID ${customerId} not found`);
-      }
-      return await response.json(); // Trả về thông tin customer
+        const response = await axios.get(`${CUSTOMER_API_URL}${customerId}`, getAuthHeaders());
+        return response.data;
     } catch (error) {
-      console.error("Error fetching customer:", error);
-      throw error;
+        handleAxiosError(error, `Customer with ID ${customerId} not found`);
     }
-  };
-  
+};
 
+// Helper function to handle Axios errors
+const handleAxiosError = (error, customMessage) => {
+    console.error(customMessage, error.response?.data || error.message);
+    throw new Error(error.response?.data?.message || customMessage);
+};
+
+// Export all functions
 export {
     getProgramDonations,
     getProgramDonationById,
     addProgramDonation,
     updateProgramDonation,
     deleteProgramDonation,
+    getCustomerById,
 };

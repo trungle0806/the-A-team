@@ -1,0 +1,49 @@
+.program-detail-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .program-detail-container h3 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .program-detail-container div {
+    margin-bottom: 15px;
+  }
+  
+  .program-detail-container label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  
+  .program-detail-container p {
+    font-size: 1.1em;
+    margin: 0;
+    color: #666;
+  }
+  
+  .loading-message,
+  .error-message {
+    font-size: 1.2em;
+    color: #ff6b6b;
+    text-align: center;
+  }
+  
+  .loading-message {
+    font-style: italic;
+  }
+  
+  .program-detail-container .program-header {
+    margin-bottom: 20px;
+  }
+  

@@ -30,21 +30,6 @@ const AdminApproval = () => {
         fetchAccount();
     }, []);
 
-    // ServiceAdmin/DonationService.js
- const getCustomerById = async (customerId) => {
-    try {
-      const response = await fetch(`http://localhost:5024/api/Customer/${customerId}`);
-       // Kiểm tra xem phản hồi có phải là 404 hay không
-    if (!response.ok) {
-        throw new Error(`Customer with ID ${customerId} not found`);
-      }
-      return await response.json(); // Trả về thông tin customer
-    } catch (error) {
-      console.error("Error fetching customer:", error);
-      throw error;
-    }
-  };
-
     // Fetch NGOs
     useEffect(() => {
         const fetchNGOs = async () => {
@@ -97,19 +82,28 @@ const AdminApproval = () => {
             setError('Error fetching programs: ' + err.message);
         }
     };
-   
 
-    // Handle amount change for validation
-    const handleAmountChange = (e, program) => {
-        const value = parseFloat(e.target.value) || "";
-        if (value <= 0) {
-            setError("Amount must be greater than zero.");
-        } else if (value > program.targetAmount) {
-            setError(`Amount cannot exceed the target amount of ${program.targetAmount}`);
-        } else {
-            setError("");
+    // Approve a NGO
+    const approveNgo = async (ngoId) => {
+        console.log('Approving NGO with ID:', ngoId); // Kiểm tra ID tổ chức đang được duyệt
+        try {
+            const response = await fetch(`http://localhost:5024/api/NGO/${ngoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ isApproved: true }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to approve NGO');
+            }
+
+            setNgos((prev) => prev.filter((ngo) => ngo.ngoId !== ngoId)); // Xóa NGO đã duyệt khỏi danh sách
+        } catch (err) {
+            console.error('Error approving NGO:', err.message);
+            setError('Error approving NGO: ' + err.message);
         }
-        setAmount(value);
     };
 
     // Approve a program
@@ -162,7 +156,9 @@ const AdminApproval = () => {
                                     <p><strong>Code:</strong> {ngo.code}</p>
                                     <p><strong>Achievements:</strong> {ngo.achievements}</p>
                                     <p><strong>Created At:</strong> {new Date(ngo.createdAt).toLocaleDateString()}</p>
-
+                                    <button onClick={() => approveNgo(ngo.ngoId)}>
+                                        {ngo.isApproved ? 'Approved' : 'Approve NGO'}
+                                    </button>
                                     {expandedNGO !== ngo.ngoId && (
                                         <button onClick={() => fetchPrograms(ngo.ngoId)}>
                                             Show Programs
@@ -193,16 +189,16 @@ const AdminApproval = () => {
                                                     <p><strong>Target Amount:</strong> ${program.targetAmount.toFixed(2)}</p>
                                                     <p><strong>Amount Donated:</strong> ${donatedAmount.toFixed(2)}</p> {/* Hiển thị số tiền đã donate */}
                                                     <p><strong>Days Remaining:</strong> {daysRemaining > 0 ? `${daysRemaining} day(s)` : 'Program Ended'}</p>
-                                                    {/* <button onClick={() => approveProgram(program.programId, ngo.ngoId)}>
+                                                    <button onClick={() => approveProgram(program.programId, ngo.ngoId)}>
                                                         {program.isApproved ? 'Approved' : 'Approve Program'}
-                                                    </button> */}
+                                                    </button>
                                                 </li>
                                             );
                                         })}
                                     </ul>
                                 </div>
                             ) : (
-                                <p></p>
+                                <p>No programs available.</p>
                             )}
                         </li>
                     ))}

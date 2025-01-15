@@ -1,0 +1,94 @@
+.program-list-container {
+    padding: 20px;
+    background-color: #f4f7fc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .program-list-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .loading-message {
+    font-size: 18px;
+    color: #888;
+  }
+  
+  .program-table-container {
+    overflow-x: auto;
+  }
+  
+  .program-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  .program-row {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .program-row:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .program-name,
+  .program-organization,
+  .program-start-date,
+  .program-end-date,
+  .program-status {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .program-actions {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .program-actions button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .view-details-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .approve-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .reject-button {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .no-programs {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+  }
+  

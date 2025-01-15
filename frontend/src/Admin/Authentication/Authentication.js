@@ -48,20 +48,20 @@ function Authentication() {
             <li className={isActive("customers") ? "active" : ""}>
               <Link to="customers">Customers</Link>
             </li>
-            {/* <li className={isActive("customerngo") ? "active" : ""}>
-              <Link to="customerngo">CustomerNgo</Link>
-            </li> */}
+            <li className={isActive("ngoadmin") ? "active" : ""}>
+              <Link to="ngoadmin">Ngo</Link>
+            </li>
             <li className={isActive("inviation") ? "active" : ""}>
               <Link to="inviation">Invitation</Link>
             </li>
-            <li className={isActive("partner") ? "active" : ""}>
-              <Link to="partner">Partner</Link>
+            <li className={isActive("programadmin") ? "active" : ""}>
+              <Link to="programadmin">Program</Link>
             </li>
-            <li className={isActive("programDonation") ? "active" : ""}>
-              <Link to="programDonation">Donation</Link>
+            <li className={isActive("programdonatelist1") ? "active" : ""}>
+              <Link to="programdonatelist1">Donation</Link>
             </li>
             <li className={isActive("censorngo") ? "active" : ""}>
-              <Link to="censorngo">CensorNgo</Link>
+              <Link to="censorngo">Ngo and Program</Link>
             </li>
             {/* <li className={isActive("transactionhistory") ? "active" : ""}>
               <Link to="transactionhistory">TransactionHistory</Link>
@@ -152,23 +152,23 @@ function Authentication() {
               </Link>
             </li>
             <li>
-              {/* <Link to="customerngo" className="admin-mobile-list">CustomerNgo</Link> */}
+              <Link to="ngoadmin" className="admin-mobile-list">Ngo</Link>
             </li>
             <li>
               <Link to="inviation" className="admin-mobile-list">Invitation</Link>
             </li>
             <li>
-              <Link to="partner" className="admin-mobile-list">Partner</Link>
+              <Link to="programadmin" className="admin-mobile-list">Program</Link>
             </li>
             <li>
-              <Link to="programDonation" className="admin-mobile-list">Donation</Link>
+              <Link to="programdonatelist1" className="admin-mobile-list">Donation</Link>
             </li>
             <li>
               <Link to="censorngo" className="admin-mobile-list">CensorNgo</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="transactionhistory" className="admin-mobile-list">TransactionHistory</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
 

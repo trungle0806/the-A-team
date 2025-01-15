@@ -74,6 +74,7 @@
   text-decoration: none;
 }
 .values-header h4 {
+  text-align: justify;
   font-size: 35.18px;
   line-height: 37px;
   text-decoration: none;
