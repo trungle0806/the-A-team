@@ -14,7 +14,7 @@ import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
-import NgoDetail from "./Client/Ngos/NgoDetail/NgoDetail";
+import NgoDetail from "./Client/Ngos/NgoDetail/Ngodetail";
 import ProgramListDetail from "./Client/ProgramList/ProgramListDetail/ProgramListDetail";
 import NotFound from "./404/NotFound";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
@@ -25,9 +25,7 @@ import Dashboard from "./Admin/Dashboard/Dashboard";
 import CustomerManagement from "./Admin/Customer/CustomerManagement";
 import Inviation from "./Admin/Invitation/Invitation";
 import ProgramAdminForm from "./Admin/Programadmin/Programadminform";
-import ProgramDonateList1 from "./Admin/ProgramDonation/ProgramDonateList1";
-import ProgramDonateForm from "./Admin/ProgramDonation/ProgramDonateForm";
-import ProgramDonateDetail from "./Admin/ProgramDonation/ProgramDonateDetail";
+import ProgramDonation from "./Admin/ProgramDonation/ProgramDonation";
 import CensorNgo from "./Admin/CensorNgo/CensorNgo";
 import Ngoadmin from "./Admin/Ngoadmin/Ngoadmin";
 import Programadmin from "./Admin/Programadmin/Programadmin";
@@ -88,12 +86,7 @@ function App() {
             <Route path="censorngo" element={<CensorNgo />} />
             <Route path="program/:programId" element={<ProgramAdminForm />} />
             <Route path="programadmin" element={<Programadmin />} />
-            <Route path="programdonatelist1" element={<ProgramDonateList1 />} />
-            <Route path="programdonateform" element={<ProgramDonateForm />} />
-            <Route
-              path="programdonatedetail"
-              element={<ProgramDonateDetail />}
-            />
+            <Route path="programdonation" element={<ProgramDonation />} />
             <Route path="transactionhistory" element={<TransactionHistory />} />
             <Route
               path="ngo/:ngoId/program/:programId/donations"

@@ -9,6 +9,26 @@
   transition: all 0.3s ease-in-out;
 }
 
+/* Sidebar active item */
+.sidebar-list-item.active .sidebar-link {
+  background-color: #b1d8a6; /* Thay đổi màu nền khi chọn */
+  color: white; /* Thay đổi màu chữ khi chọn */
+  font-weight: bold; /* Làm đậm chữ */
+  border-radius: 10px;
+}
+
+.sidebar-list-item .sidebar-link {
+  color: #333; /* Màu chữ mặc định */
+  text-decoration: none;
+  padding: 10px 10px;
+  display: block;
+}
+
+/* .sidebar-list-item .sidebar-link:hover {
+  background-color: #f1f1f1; /* Màu nền khi hover 
+} */
+
+
 /* Header */
 .header3 {
   grid-area: header;

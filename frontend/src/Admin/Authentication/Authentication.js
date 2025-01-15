@@ -54,12 +54,12 @@ function Authentication() {
             <li className={isActive("programadmin") ? "active" : ""}>
               <Link to="programadmin">Program</Link>
             </li>
-            <li className={isActive("programdonatelist1") ? "active" : ""}>
-              <Link to="programdonatelist1">Donation</Link>
+            <li className={isActive("programdonattion") ? "active" : ""}>
+              <Link to="programdonation">Donation</Link>
             </li>
-            <li className={isActive("censorngo") ? "active" : ""}>
+            {/* <li className={isActive("censorngo") ? "active" : ""}>
               <Link to="censorngo">Ngo and Program</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </aside>

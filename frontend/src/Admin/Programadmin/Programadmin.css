@@ -1,6 +1,6 @@
 .program-list-container {
     padding: 20px;
-    background-color: #f4f7fc;
+    background-color: #f9fcf4;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -28,7 +28,7 @@
   }
   
   .table-header {
-    background-color: #007bff;
+    background-color: #729167;
     color: #fff;
     padding: 10px;
     text-align: left;

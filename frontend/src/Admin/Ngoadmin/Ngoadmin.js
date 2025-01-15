@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getNGOs, approveNGO, deleteNGO } from '../ServiceAdmin/NgoadminService';
+import { getNGOs, updateNGO, deleteNGO } from '../ServiceAdmin/NgoadminService';
 import "./Ngoadmin.css";
 
 const Ngoadmin = () => {
@@ -25,15 +25,12 @@ const Ngoadmin = () => {
   
   // Hàm duyệt NGO
   const handleApprove = async (ngoId) => {
-    console.log("Approving NGO with ID:", ngoId);
+    console.log("Approving NGO with ID:", ngoId); // Log để kiểm tra ID
     try {
       // Gọi API duyệt NGO
-      const response = await approveNGO(ngoId);
-  
-      // Log phản hồi từ API
-      console.log("API Response:", response); // Kiểm tra dữ liệu trả về
-  
-      // Kiểm tra nếu phản hồi có trường isApproved và giá trị là true
+      const response = await updateNGO(ngoId);
+
+      // Kiểm tra phản hồi từ server
       if (response && response.isApproved) {
         setNgos(prevNgos =>
           prevNgos.map(ngo =>
@@ -41,15 +38,12 @@ const Ngoadmin = () => {
           )
         );
         alert('NGO approved successfully!');
-      } else {
-        alert('Failed to approve NGO or response is incorrect');
       }
     } catch (error) {
       console.error('Error approving NGO:', error);
       alert('Failed to approve NGO');
     }
-  };     
-  
+  };
 
   // Hàm xóa NGO
   const handleDelete = async (ngoId) => {
@@ -85,13 +79,13 @@ const Ngoadmin = () => {
                     <p><strong>Code:</strong> {ngo.code}</p>
                     <p><strong>Achievements:</strong> {ngo.achievements}</p>
                     <p><strong>Created At:</strong> {new Date(ngo.createdAt).toLocaleDateString()}</p>
-                    <button 
+                    {/* <button 
                       className="approve-btn" 
                       onClick={() => handleApprove(ngo.ngoId)} 
                       disabled={ngo.isApproved} // Disable the button if already approved
-                      >
+                    >
                       {ngo.isApproved ? 'Approved' : 'Approve'}
-                    </button>
+                    </button> */}
                     <button className="delete-btn" onClick={() => handleDelete(ngo.ngoId)}>Delete</button>
                   </div>
                 </div>
