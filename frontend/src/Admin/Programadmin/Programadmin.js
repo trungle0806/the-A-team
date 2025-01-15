@@ -6,6 +6,7 @@ import './Programadmin.css';
 const ProgramList = () => {
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pendingPrograms, setPendingPrograms] = useState([]);  // Danh sách chương trình "Pending"
   const navigate = useNavigate();
 
   const loadPrograms = async () => {
@@ -13,16 +14,19 @@ const ProgramList = () => {
     try {
       const programsData = await getProgramsByNGO();
       console.log("Fetched programs:", programsData); // Kiểm tra dữ liệu trả về
+
       if (programsData && Array.isArray(programsData)) {
         setPrograms(programsData);
+        setPendingPrograms(programsData.filter(program => program.status === 'Pending')); // Lọc ra chương trình Pending
       } else if (programsData && programsData.$values && Array.isArray(programsData.$values)) {
         setPrograms(programsData.$values);
+        setPendingPrograms(programsData.$values.filter(program => program.status === 'Pending'));
       }
     } catch (error) {
       console.error('Error fetching programs:', error);
     }
     setLoading(false);
-  };  
+  };
 
   const handleDonateProgram = (programId) => {
     if (!programId) {
@@ -32,7 +36,6 @@ const ProgramList = () => {
     console.log("Navigating to program with ID:", programId);
     navigate(`/admin/program/${programId}`);
   };
-  
 
   const handleDeleteProgram = async (programId) => {
     try {
@@ -65,9 +68,14 @@ const ProgramList = () => {
     loadPrograms();
   }, []);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('vi-VN');  // Định dạng ngày theo kiểu Việt Nam (dd/mm/yyyy)
+  };
+
   return (
     <div className="program-list-container">
-      <h2 className="program-list-heading">Chương trình của NGO</h2>
+      <h2 className="program-list-heading">NGO Program</h2>
       {loading ? (
         <p className="loading-message">Loading...</p>
       ) : (
@@ -89,10 +97,10 @@ const ProgramList = () => {
                   <tr key={program.id} className="program-row">
                     <td className="program-name">{program.name}</td>
                     <td className="program-organization">
-                      {program.organization ? program.organization.name : 'No organization'}
+                      {program.ngo && program.ngo.name ? program.ngo.name : 'No organization'}
                     </td>
-                    <td className="program-start-date">{program.startDate}</td>
-                    <td className="program-end-date">{program.endDate}</td>
+                    <td className="program-start-date">{formatDate(program.startDate)}</td>
+                    <td className="program-end-date">{formatDate(program.endDate)}</td>
                     <td className="program-status">{program.status}</td>
                     <td className="program-actions">
                       <button 
@@ -107,21 +115,30 @@ const ProgramList = () => {
                       >
                         Delete
                       </button>
-                      {program.status === 'Pending' && (
-                        <>
-                          <button 
-                            onClick={() => handleApproveProgram(program.id)} 
-                            className="approve-button"
-                          >
-                            Approve
-                          </button>
-                          <button 
-                            onClick={() => handleRejectProgram(program.id)} 
-                            className="reject-button"
-                          >
-                            Reject
-                          </button>
-                        </>
+
+                      {pendingPrograms.length > 0 && (
+                        <div className="pending-programs-actions">
+                          <h3>Chương trình cần duyệt:</h3>
+                          <div className="pending-programs-list">
+                            {pendingPrograms.map((program) => (
+                              <div key={program.id} className="pending-program-item">
+                                <h4>{program.name}</h4>
+                                <button 
+                                  onClick={() => handleApproveProgram(program.id)} 
+                                  className="approve-button"
+                                >
+                                  Approve
+                                </button>
+                                <button 
+                                  onClick={() => handleRejectProgram(program.id)} 
+                                  className="reject-button"
+                                >
+                                  Reject
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       )}
                     </td>
                   </tr>
@@ -135,6 +152,8 @@ const ProgramList = () => {
           </table>
         </div>
       )}
+
+      {/* Hiển thị các chương trình Pending ngoài bảng */}
     </div>
   );
 };

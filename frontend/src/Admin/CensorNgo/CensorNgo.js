@@ -85,26 +85,40 @@ const AdminApproval = () => {
 
     // Approve a NGO
     const approveNgo = async (ngoId) => {
-        console.log('Approving NGO with ID:', ngoId); // Kiểm tra ID tổ chức đang được duyệt
+        console.log('Approving NGO with ID:', ngoId);
         try {
-            const response = await fetch(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/NGO/${ngoId}`, {
-                method: 'PUT',
+            const response = await fetch(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ngo/${ngoId}/approval`, {
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
+                    // 'Authorization': `Bearer ${yourToken}`, // Thêm nếu cần
                 },
                 body: JSON.stringify({ isApproved: true }),
             });
-
+    
             if (!response.ok) {
-                throw new Error('Failed to approve NGO');
+                // Nếu API trả về lỗi, xử lý lỗi trước khi đọc body
+                const errorText = await response.text(); // Đọc nội dung text nếu có
+                throw new Error(`Error: ${response.status} - ${errorText || 'Unknown error'}`);
             }
-
-            setNgos((prev) => prev.filter((ngo) => ngo.ngoId !== ngoId)); // Xóa NGO đã duyệt khỏi danh sách
+    
+            // Kiểm tra nếu response có body
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                const data = await response.json();
+                console.log('API Response:', data);
+            } else {
+                console.log('No JSON body returned.');
+            }
+    
+            // Xóa NGO đã được duyệt khỏi danh sách
+            setNgos((prev) => prev.filter((ngo) => ngo.ngoId !== ngoId));
         } catch (err) {
             console.error('Error approving NGO:', err.message);
             setError('Error approving NGO: ' + err.message);
         }
-    };
+    };    
+    
 
     // Approve a program
     const approveProgram = async (programId, ngoId) => {

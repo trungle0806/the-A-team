@@ -19,6 +19,16 @@ const getAccountIdFromToken = () => {
     return decoded.id; // Lấy `id` (accountId) từ token
 };
 
+export const getProgramsByout = async () => {
+    try {
+      const response = await axios.get('https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ngo/{ngoId}/programs');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching programs:', error);
+      throw error;
+    }
+  };
+
 // Lấy thông tin NGO từ accountId
 export const getNGOByAccountId = async () => {
     try {

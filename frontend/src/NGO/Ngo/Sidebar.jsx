@@ -1,18 +1,17 @@
 import React from "react";
-import {
-  BsCart3,
-  BsGrid1X2Fill,
-  BsFillArchiveFill,
-} from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { RxAvatar } from "react-icons/rx";
-import { IoMdImages } from "react-icons/io";
+import { BsCart3, BsGrid1X2Fill, BsFillArchiveFill } from "react-icons/bs";
+import { Link, useLocation } from "react-router-dom";
 import { FaBuildingNgo } from "react-icons/fa6";
-import "./Ngo.css";
 import { FaDonate } from "react-icons/fa";
 import { BsImages } from "react-icons/bs";
+import "./Ngo.css";
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
+  const location = useLocation();
+
+  // Hàm kiểm tra nếu đường dẫn hiện tại khớp với link
+  const isActive = (path) => location.pathname.includes(path);
+
   return (
     <aside
       id="sidebar"
@@ -20,7 +19,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
     >
       <div className="sidebar-title">
         <div className="sidebar-brand">
-          <BsCart3 className="icon_header" /> SHOP
+          <BsCart3 className="icon_header" /> NGO
         </div>
         <span className="icon close_icon" onClick={OpenSidebar}>
           X
@@ -28,30 +27,29 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
       </div>
 
       <ul className="sidebar-list">
-        <li className="sidebar-list-item">
+        <li className={`sidebar-list-item ${isActive('/ngo/dashboard') ? 'active' : ''}`}>
           <Link to="/ngo/dashboard" className="sidebar-link">
             <BsGrid1X2Fill className="icon-1" /> Dashboard
           </Link>
         </li>
-        <li className="sidebar-list-item">
+        <li className={`sidebar-list-item ${isActive('/ngo/program-list') ? 'active' : ''}`}>
           <Link to="/ngo/program-list" className="sidebar-link">
             <BsFillArchiveFill className="icon-1" /> Programs
           </Link>
         </li>
-         <li className='sidebar-list-item'>
+        <li className={`sidebar-list-item ${isActive('/ngo/ngo-form') ? 'active' : ''}`}>
           <Link to="/ngo/ngo-form/${ngoId}" className="sidebar-link">
-            <FaBuildingNgo className='icon-1' /> NGO
+            <FaBuildingNgo className="icon-1" /> NGO
           </Link>
         </li>
-        
-        <li className='sidebar-list-item'>
+        <li className={`sidebar-list-item ${isActive('/ngo/program-donation') ? 'active' : ''}`}>
           <Link to="/ngo/program-donation" className="sidebar-link">
-            <FaDonate  className='icon-1' /> ProgramDonation
+            <FaDonate className="icon-1" /> ProgramDonation
           </Link>
         </li>
-        <li className='sidebar-list-item'>
+        <li className={`sidebar-list-item ${isActive('/ngo/gallery-image') ? 'active' : ''}`}>
           <Link to="/ngo/gallery-image" className="sidebar-link">
-            <BsImages className='icon-1' /> Gallery Image
+            <BsImages className="icon-1" /> Gallery Image
           </Link>
         </li>
         {/* <li className='sidebar-list-item'>
