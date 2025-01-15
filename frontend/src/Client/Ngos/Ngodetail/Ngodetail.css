@@ -1,7 +1,7 @@
 /* NgoDetail.css */  
 
 .NgoDetail-container {  
-  margin: 0 auto;
+  margin: 0 auto;  
   padding-top: 50px;  
 }  
 
@@ -11,7 +11,7 @@
   font-size: 2.5rem;  
   color: #2c3e50;  
   margin-left: 62px;  
-  font-family: "arial-black";
+  font-family: "arial-black";  
 }  
 
 .NgoDetail-main {  
@@ -38,31 +38,29 @@
   flex: 2;  
   padding-left: 20px;  
   margin-left: 20px;  
-  font-family: "Arial Black", sans-serif;  
 }  
 
 .NgoDetail-description {  
-  font-family: "arial-black";
-    font-size: 1.3rem;
-    color: #333;
-    line-height: 1.6;
-    margin-left: 62px;
-    margin-right: 190px;
-    margin-top: 40px;
-    margin-bottom: 15px;
+  font-family: "arial-black";  
+  font-size: 1.3rem;  
+  color: #333;  
+  line-height: 1.6;  
+  margin-left: 62px;  
+  margin-right: 190px;  
+  margin-top: 40px;  
+  margin-bottom: 15px;  
 }  
 
 .NgoDetail-section {  
   text-align: justify;  
   margin-left: 200px;  
   margin-right: 200px;  
-  font-family: "Arial Black", sans-serif;  
 }  
 
 .NgoDetail-section h3 {  
   font-size: 1.7rem;  
-  margin-bottom: 10px; 
-  font-family: "arial-black"; 
+  margin-bottom: 10px;   
+  font-family: "arial-black";   
 }  
 
 .NgoDetail-section p {  
@@ -70,7 +68,7 @@
   color: #333;  
   margin: 0;  
   text-align: justify;  
-  font-family: "arial-black";
+  font-family: "arial-black";  
 }  
 
 .NgoDetail-section p strong {  
@@ -94,7 +92,7 @@
   color: #8db883;  
   padding-top: 10px;  
   padding-bottom: 10px;  
-  font-family: "Arial Black", sans-serif;  
+  font-family: "arial-black";  
   cursor: pointer;  
   margin-left: 65px;  
 }  
@@ -123,7 +121,7 @@
 }  
 
 .new-itemss h2 {  
-  font-family: "Arial Black", sans-serif;  
+  font-family: "arial-black";  
 }  
 
 .new-item h2 {  
@@ -154,37 +152,31 @@
 
 .arrow-left,  
 .arrow-right {  
-  font-size: 40px; /* Increase the size of the arrow */  
-  color: #000; /* Set the color of the arrow */  
+  font-size: 3rem;
+  position: absolute;  
+  top: 50%; /* Center vertically */  
+  transform: translateY(-50%); /* Center vertically */  
+  z-index: 2; /* Ensure they appear above other content */  
+  padding: 15px; /* Increase padding to make the arrows bigger */  
+  border-radius: 50%; /* Make the buttons circular */  
   background-color: transparent; /* Make the background transparent */  
   border: none; /* Remove border */  
   cursor: pointer; /* Change cursor to indicate it's clickable */  
   transition: all 0.3s ease; /* Add a smooth transition effect */  
 }  
 
-.arrow-left,  
-.arrow-right {  
-  position: absolute;  
-  top: 50%; /* Center vertically */  
-  transform: translateY(-75%); /* Center vertically */  
-  z-index: 2; /* Ensure they appear above other content */  
-  padding: 15px; /* Increase padding to make the arrows bigger */  
-  border-radius: 50%; /* Make the buttons circular */  
-}  
-
 /* Arrow positioning */  
 .arrow-left {  
-  left: -17px; /* Move the left arrow outside to the left */  
+  left: 10px; /* Position the left arrow */  
 }  
 
 .arrow-right {  
-  right: -17px; /* Move the right arrow outside to the right */  
+  right: 10px; /* Position the right arrow */  
 }  
 
 /* Hover effect for arrows */  
 .arrow-left:hover,  
 .arrow-right:hover {  
-  /* background-color: rgba(0, 123, 255, 0.8); Blue background on hover */  
   transform: translateY(-50%) scale(1.2); /* Slightly enlarge on hover */  
 }  
 
@@ -229,3 +221,5 @@
   margin: 0 15px 15px;  
   color: #555;  
 }
+
+
