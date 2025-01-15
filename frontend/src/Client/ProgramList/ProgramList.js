@@ -105,7 +105,7 @@ const ProgramList = () => {
       <Header />
       <div className="program-header">
         <div className="program-list1">
-          <h1 className="program-list">Charity Programs</h1>
+          <h1 className="program-list">Programs</h1>
           <div className="program-to">
             <div className="program-to2">
               <div className="program-to3">
@@ -125,7 +125,7 @@ const ProgramList = () => {
                       </div>
                     </div>
                   </div>
-                  <h1 className="program-title">Charity Categories</h1>
+                  <h1 className="program-title">Charity </h1>
                   <div className="program-border"></div>
                   <ul className="program-categor">
                     {["child-support charity", "education charity"].map(
