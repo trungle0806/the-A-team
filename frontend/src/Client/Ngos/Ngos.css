@@ -76,7 +76,7 @@
 .new-item {
   background-color: white;
   background-color: white;
-  border-radius: 16px;
+  border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s;
@@ -99,7 +99,7 @@
 }
 
 .new-item-content {
-  padding: 15px;
+  padding: 25px;
   font-family: "arial-black";
   display: flex;
       flex-direction: column;
@@ -114,9 +114,11 @@
 .new-item-content p {
   font-size: 1.3rem;
   text-align: unset;
-  color: black;
+  color: #333;
   margin-top: 0;
   margin-bottom: 0;
+  max-height: 70px;
+  overflow: hidden;
 }
 
 .btn {

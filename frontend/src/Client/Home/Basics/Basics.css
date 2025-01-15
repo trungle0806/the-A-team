@@ -129,6 +129,8 @@ li.basics-Item {
   box-sizing: border-box;
   transition: all 0.4s ease-in-out;
   text-align: left;
+  max-height: 80px;
+
 }
 .basics-content:hover .basics-anh {
   transform: none !important; /* Không cho phép phóng to ảnh */

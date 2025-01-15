@@ -1,217 +1,231 @@
-/* NgoDetail.css */
-.NgoDetail-container {
-  /* padding: 20px; */
-  margin: 0 auto;
-  /* background-color: #f4f4f9; */
-}
-
-.NgoDetail-name {
-  margin-bottom: 20px;
-  margin-top: 5px;
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-left: 62px;
-}
-
-.NgoDetail-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 20px;
-}
-
-.NgoDetail-img {
-  /* flex: 1; */
-  padding-right: 20px;
-  padding-left: 25px;
-  /* margin-left: 70px; */
-}
-
-.NgoDetail-logo {
-  width: 100%;
-  max-width: 470px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 360px;
-}
-
-.NgoDetail-info {
-  flex: 2;
-  padding-left: 20px;
-  margin-left: 20px;
-  font-family: "arial-black";
-}
-
-.NgoDetail-description {
-  font-size: 1.3rem;
-  color: #34495e;
-  line-height: 1.6;
-  margin-left: 62px;
-  margin-right: 190px;
-  margin-top: 40px;
-  margin-bottom: 15px;
-}
-
-.NgoDetail-section {
-  text-align: justify;
-  margin-left: 200px;
-  margin-right: 200px;
-  font-family: "arial-black";
-
-}
-
-.NgoDetail-section h3 {
-  font-size: 1.5rem;
-  /* color: #8db883; */
-  margin-bottom: 10px;
-  text-align: justify;
-}
-
-.NgoDetail-section p {
-  font-size: 1.3rem;
-  color:#333;
-  margin: 0;
-  text-align: justify;
-  font-family: "arial-black";
-}
-.NgoDetail-section p strong {
-  font-weight: bold;
-  color: #2c3e50;
-}
-.NgoDetail-big{
-  margin-left: 170px;
-  margin-right: 100px;
-  padding-top: 100px;
-}
-.NgoDetail-but{
-  font-size: 1.3rem;
-  background: white;
-  width: 15%;
-  text-align: center;
-  border: 1px solid #8db883;
-  border-radius: 10px;
-  color: #8db883;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-family: "arial-black";
-  background: #fff;
-  cursor: pointer;
-  margin-left: 65px;
-
-}
-.NgoDetail-but a{
-  color: white;
-
-}
-.NgoDetail-but:hover{
-  background: #8db883;
-  color: white;
-}
-.NgoDetail-section1{
-  text-align: center;
-  /* background-color: #effbeb; */
-  padding-top: 10px;
-    padding-bottom: 20px;
-}
-.NgoDetail-section2{
-  margin-top: 25px;
-  padding-top: 20px;
-}
-.related-articles {  
-  margin: 40px 0;  
-  text-align: center; /* Căn giữa tiêu đề */  
-}  
-
-.related-articles-container {  
-  display: flex;  
-  justify-content: center; /* Căn giữa các thẻ */  
-  gap: 20px; /* Khoảng cách giữa các thẻ */  
-  flex-wrap: wrap; /* Cho phép các thẻ xuống dòng */  
-}  
-
-.related-article-card {  
-  background-color: #ffffff; /* Màu nền trắng */  
-  border-radius: 10px; /* Bo tròn góc */  
-  overflow: hidden; /* Ẩn phần dư thừa */  
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */  
-  width: 300px; /* Chiều rộng cố định của thẻ */  
-  transition: transform 0.2s; /* Hiệu ứng chuyển tiếp */  
-}  
-
-.related-article-card:hover {  
-  transform: scale(1.05); /* Phóng to khi hover */  
-}  
-
-.related-article-image {  
-  width: 100%; /* Chiều rộng đầy đủ */  
-  height: 200px; /* Chiều cao cố định */  
-  object-fit: cover; /* Giữ tỷ lệ hình ảnh */  
-}  
-
-.related-article-card h3 {  
-  margin: 15px; /* Khoảng cách trên/dưới của tiêu đề */  
-  font-size: 1.2rem; /* Kích thước chữ tiêu đề */  
-}  
-
-.related-article-card p {  
-  margin: 0 15px 15px; /* Khoảng cách cho mô tả */  
-  color: #555; /* Màu chữ */  
-}
 /* NgoDetail.css */  
+
+.NgoDetail-container {  
+  margin: 0 auto;
+  padding-top: 50px;  
+}  
+
+.NgoDetail-name {  
+  margin-bottom: 20px;  
+  margin-top: 5px;  
+  font-size: 2.5rem;  
+  color: #2c3e50;  
+  margin-left: 62px;  
+  font-family: "arial-black";
+}  
+
+.NgoDetail-main {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: flex-start;  
+  margin-top: 20px;  
+}  
+
+.NgoDetail-img {  
+  padding-right: 20px;  
+  padding-left: 25px;  
+}  
+
+.NgoDetail-logo {  
+  width: 100%;  
+  max-width: 470px;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  height: 360px;  
+}  
+
+.NgoDetail-info {  
+  flex: 2;  
+  padding-left: 20px;  
+  margin-left: 20px;  
+  font-family: "Arial Black", sans-serif;  
+}  
+
+.NgoDetail-description {  
+  font-family: "arial-black";
+    font-size: 1.3rem;
+    color: #333;
+    line-height: 1.6;
+    margin-left: 62px;
+    margin-right: 190px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}  
+
+.NgoDetail-section {  
+  text-align: justify;  
+  margin-left: 200px;  
+  margin-right: 200px;  
+  font-family: "Arial Black", sans-serif;  
+}  
+
+.NgoDetail-section h3 {  
+  font-size: 1.7rem;  
+  margin-bottom: 10px; 
+  font-family: "arial-black"; 
+}  
+
+.NgoDetail-section p {  
+  font-size: 1.3rem;  
+  color: #333;  
+  margin: 0;  
+  text-align: justify;  
+  font-family: "arial-black";
+}  
+
+.NgoDetail-section p strong {  
+  font-weight: bold;  
+  color: #2c3e50;  
+}  
+
+.NgoDetail-big {  
+  margin-left: 170px;  
+  margin-right: 100px;  
+  padding-top: 100px;  
+}  
+
+.NgoDetail-but {  
+  font-size: 1.3rem;  
+  background: white;  
+  width: 15%;  
+  text-align: center;  
+  border: 1px solid #8db883;  
+  border-radius: 10px;  
+  color: #8db883;  
+  padding-top: 10px;  
+  padding-bottom: 10px;  
+  font-family: "Arial Black", sans-serif;  
+  cursor: pointer;  
+  margin-left: 65px;  
+}  
+
+.NgoDetail-but:hover {  
+  background: #8db883;  
+  color: white;  
+}  
+
+.NgoDetail-section1 {  
+  text-align: center;  
+  padding-top: 10px;  
+  padding-bottom: 20px;  
+}  
+
+.NgoDetail-section2 {  
+  margin-top: 25px;  
+  padding-top: 20px;  
+}  
+
 .new-itemss {  
   display: flex;  
   flex-direction: column;  
   align-items: center;  
-  margin-top: 20px; /* Khoảng cách với các phần khác */  
+  margin-top: 20px;  
 }  
-.new-itemss h2{
-  font-family: "arial-black";
 
-}
+.new-itemss h2 {  
+  font-family: "Arial Black", sans-serif;  
+}  
 
-.new-items h2 {  
-  margin-bottom: 10px; /* Khoảng cách giữa tiêu đề và danh sách NGOs */  
+.new-item h2 {  
+  margin-bottom: 10px;  
 }  
 
 .ngo-slider {  
   display: flex;  
   position: relative;  
-  width: 70%; /* Chiều rộng của slider để phù hợp với container */  
-  overflow: hidden; /* Ẩn phần của NGOs ngoài khung */  
+  width: 70%;  
+  overflow: hidden;  
+  margin: 0 auto;  
 }  
 
 .ngo-slider-content {  
-  display: flex; /* Hiển thị các NGO theo hàng ngang */  
-  /* transition: transform 0.3s ease; /* Hiệu ứng chuyển động */   
-  transition: transform 0.5s ease;
-  width: max-content; /* Chiều rộng tự động lớn nhất */  
-  margin-bottom: 30px;
-    padding-bottom: 25px;
-
+  display: flex;  
+  transition: transform 0.5s ease;  
+  width: max-content;  
+  margin-bottom: 30px;  
+  padding-bottom: 25px;  
 }  
 
 .new-item {  
-  flex: 0 0 29.33%; /* 3 NGOs trong một hàng, chiếm 1/3 chiều rộng */  
-  box-sizing: border-box; /* Đảm bảo padding và margin không ảnh hưởng đến chiều rộng */  
-  /* padding: 15px; */
-  margin: 0px 25px; 
+  flex: 0 0 29.33%; /* Control the width of each NGO item */  
+  box-sizing: border-box;  
+  margin: 0px 21px;  
 }  
 
-.arrow {  
+.arrow-left,  
+.arrow-right {  
+  font-size: 40px; /* Increase the size of the arrow */  
+  color: #000; /* Set the color of the arrow */  
+  background-color: transparent; /* Make the background transparent */  
+  border: none; /* Remove border */  
+  cursor: pointer; /* Change cursor to indicate it's clickable */  
+  transition: all 0.3s ease; /* Add a smooth transition effect */  
+}  
+
+.arrow-left,  
+.arrow-right {  
   position: absolute;  
-  top: 50%;  
-  /* transform: translateY(-50%);   */
-  background: rgba(255, 255, 255, 0.7);  
-  border: none;  
-  cursor: pointer;  
-  z-index: 1;  
-  padding: 10px;  
+  top: 50%; /* Center vertically */  
+  transform: translateY(-75%); /* Center vertically */  
+  z-index: 2; /* Ensure they appear above other content */  
+  padding: 15px; /* Increase padding to make the arrows bigger */  
+  border-radius: 50%; /* Make the buttons circular */  
 }  
 
+/* Arrow positioning */  
 .arrow-left {  
-  left: 10px;  
+  left: -17px; /* Move the left arrow outside to the left */  
 }  
 
 .arrow-right {  
-  right: 10px;  
+  right: -17px; /* Move the right arrow outside to the right */  
+}  
+
+/* Hover effect for arrows */  
+.arrow-left:hover,  
+.arrow-right:hover {  
+  /* background-color: rgba(0, 123, 255, 0.8); Blue background on hover */  
+  transform: translateY(-50%) scale(1.2); /* Slightly enlarge on hover */  
+}  
+
+/* Styling for related items section */  
+.related-articles {  
+  margin: 40px 0;  
+  text-align: center;  
+}  
+
+.related-articles-container {  
+  display: flex;  
+  justify-content: center;  
+  gap: 20px;  
+  flex-wrap: wrap;  
+}  
+
+.related-article-card {  
+  background-color: #ffffff;  
+  border-radius: 10px;  
+  overflow: hidden;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  width: 300px;  
+  transition: transform 0.2s;  
+}  
+
+.related-article-card:hover {  
+  transform: scale(1.05);  
+}  
+
+.related-article-image {  
+  width: 100%;  
+  height: 200px;  
+  object-fit: cover;  
+}  
+
+.related-article-card h3 {  
+  margin: 15px;  
+  font-size: 1.2rem;  
+}  
+
+.related-article-card p {  
+  margin: 0 15px 15px;  
+  color: #555;  
 }

@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";  
 import { useParams, Link } from "react-router-dom";  
 import axios from "axios";  
-import "./NgoDetail.css"; // Đảm bảo đã import file CSS  
+import "./NgoDetail.css"; // Ensure you've imported the CSS file  
 import Header from "../../Components/Header/Header";  
 import Footer from "../../Components/Footer/Footer";  
 
 const NgoDetail = () => {  
-  const { id } = useParams(); // Lấy id từ URL  
+  const { id } = useParams(); // Get the id from the URL  
   const [ngo, setNgo] = useState(null);  
   const [loading, setLoading] = useState(true);  
   const [error, setError] = useState("");  
-  const [ngos, setNgos] = useState([]); // State để lưu trữ danh sách NGO khác  
-  const [currentIndex, setCurrentIndex] = useState(0); // State để theo dõi chỉ số hiện tại  
+  const [ngos, setNgos] = useState([]); // State to store the list of other NGOs  
+  const [currentIndex, setCurrentIndex] = useState(0); // State to track the current index  
 
   useEffect(() => {  
     const fetchNgoDetail = async () => {  
       try {  
         const response = await axios.get(`http://localhost:5024/api/ngo/${id}`);  
-        setNgo(response.data); // Lưu dữ liệu vào state  
+        setNgo(response.data); // Store NGO details  
       } catch (error) {  
         setError("Failed to load NGO details.");  
       } finally {  
@@ -29,22 +29,24 @@ const NgoDetail = () => {
       try {  
         const response = await axios.get("http://localhost:5024/api/ngo");  
         if (Array.isArray(response.data.$values)) {  
-          setNgos(response.data.$values); // Lưu danh sách NGO vào state  
+          // Exclude the current NGO from the list  
+          const filteredNgos = response.data.$values.filter(item => item.ngoId !== id);  
+          setNgos(filteredNgos); // Store the filtered NGOs list  
         } else {  
-          setNgos([]); // Nếu không có dữ liệu, khởi tạo danh sách trống  
+          setNgos([]); // Initialize an empty list if no data  
         }  
       } catch (error) {  
         console.error("Failed to load NGOs:", error);  
       }  
     };  
 
-    fetchNgoDetail(); // Gọi API khi component mount  
-    fetchNgos(); // Gọi API để lấy danh sách NGOs  
+    fetchNgoDetail(); // Fetch current NGO details  
+    fetchNgos(); // Fetch list of other NGOs  
 
-  }, [id]); // Dependency array để gọi lại API khi id thay đổi  
+  }, [id]); // Dependency array to re-fetch data when id changes  
 
-  if (loading) return <p>Loading NGO details...</p>; // Hiển thị khi đang tải dữ liệu  
-  if (error) return <p>{error}</p>; // Hiển thị khi có lỗi  
+  if (loading) return <p>Loading NGO details...</p>;  
+  if (error) return <p>{error}</p>;  
 
   const nextPage = () => {  
     if (currentIndex < ngos.length - 3) {  
@@ -72,7 +74,7 @@ const NgoDetail = () => {
           </div>  
         </div>  
       </div>  
-      
+
       <div className="NgoDetail-section2">  
         <div className="NgoDetail-section1">  
           <div className="NgoDetail-section">  
@@ -102,26 +104,25 @@ const NgoDetail = () => {
         </div>  
       </div>  
 
-      {/* Phần danh sách NGOs khác với điều hướng */} 
+      {/* List of other NGOs with pagination */}   
       <section className="new-itemss">  
         <h2>Other NGOs</h2>  
         <div className="ngo-slider">  
           <button   
-            className="arrow arrow-left"   
+            className="arrow-left"   
             onClick={prevPage}   
             disabled={currentIndex === 0}  
           >  
-            &#10094; {/* Mũi tên trái */}  
+            &#10094;  
           </button>  
           <div   
             className="ngo-slider-content"   
-            style={{ transform: `translateX(-${(currentIndex * 100) / 3}%)` }} // Di chuyển nội dung  
+            style={{ transform: `translateX(-${(currentIndex * 100) / 3}%)` }} // Move content  
           >  
             {ngos.map((ngoItem) => {  
               const ngoId = ngoItem.ngoId;   
               return (  
-                <div className="new-item" key={ngoId}> 
-                  {/* <div className="news-itemss"></div>  */}
+                <div className="new-item" key={ngoId}>  
                   <Link to={`/ngos/${ngoId}`}>  
                     <img  
                       src={ngoItem.logoUrl || "fallback-image-url.jpg"}  
@@ -138,11 +139,11 @@ const NgoDetail = () => {
             })}  
           </div>  
           <button   
-            className="arrow arrow-right"   
+            className="arrow-right"   
             onClick={nextPage}   
             disabled={currentIndex + 3 >= ngos.length}  
           >  
-            &#10095; {/* Mũi tên phải */}  
+            &#10095; {/* Right arrow */}  
           </button>  
         </div>  
       </section>  
