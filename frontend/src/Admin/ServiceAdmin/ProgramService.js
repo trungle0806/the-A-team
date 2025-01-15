@@ -63,17 +63,17 @@ export const getPrograms = async (searchQuery = '', page = 1, pageSize = 10) => 
 // Lấy thông tin chi tiết của chương trình theo ID
 export const getProgramById = async (programId) => {
     if (!programId) {
-        throw new Error('Invalid programId: ' + programId);
-      }
+        throw new Error('Invalid programId');
+    }
     try {
-      console.log('Requesting program with ID:', programId);  // Log the programId
-      const response = await axios.get(`program1/${programId}`);
-      return response.data;
+        const response = await api.get(`program1/${programId}`);
+        return response.data;
     } catch (error) {
-      console.error('Error fetching program by id:', error.response ? error.response.data : error.message);
-      throw error;
+        console.error('Error fetching program by id:', error);
+        throw error;
     }
   };
+  
 
 // Thêm một chương trình mới
 export const addProgram = async (program) => {

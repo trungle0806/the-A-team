@@ -14,7 +14,7 @@ import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
-import NgoDetail from "./Client/Ngos/NgoDetail/Ngodetail";
+import NgoDetail from "./Client/Ngos/NgoDetail/NgoDetail";
 import ProgramListDetail from "./Client/ProgramList/ProgramListDetail/ProgramListDetail";
 import NotFound from "./404/NotFound";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
@@ -32,6 +32,7 @@ import Ngoadmin from "./Admin/Ngoadmin/Ngoadmin";
 import Programadmin from "./Admin/Programadmin/Programadmin";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
+import DonateDetail from "./Admin/Programadmin/DonateDetail";
 
 import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
@@ -41,6 +42,7 @@ import NGOEditForm from "./NGO/Ngocerter/NgoForm";
 import ProgramDonationList from "./NGO/ProgramDonation/ProgramDonationList";
 import ProgramDonationDetail from "./NGO/ProgramDonation/ProgramDonationDetail";
 import GalleryImageList from "./NGO/GalleryImage/GalleryImageList";
+
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -69,21 +71,26 @@ function App() {
             path="/program/:programId"
             element={<ProgramListDetail />}
           />{" "}
-          <Route path="/notfound" element={<NotFound />} />
+          <Route path="/404" element={<NotFound />} />
           <Route path="/thank-you-bill" element={<ThankYouBill />} />
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
+            <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="customers" element={<CustomerManagement />} />
             <Route path="ngoadmin" element={<Ngoadmin />} />
             <Route path="inviation" element={<Inviation />} />
-            <Route path="censorngo" element= {<CensorNgo />}/>
-            <Route path="program/:programId" element={<ProgramAdminForm/>}/>
+            <Route path="censorngo" element={<CensorNgo />} />
+            <Route path="program/:programId" element={<ProgramAdminForm />} />
             <Route path="programadmin" element={<Programadmin />} />
             <Route path="programdonatelist1" element={<ProgramDonateList1 />} />
             <Route path="programdonateform" element={<ProgramDonateForm />} />
             <Route path="programdonatedetail" element={<ProgramDonateDetail />} />
             <Route path="transactionhistory" element={<TransactionHistory />} />
+            <Route
+              path="ngo/:ngoId/program/:programId/donations"
+              element={<DonateDetail />}
+            />
           </Route>
           <Route path="/ngo" element={<Ngo />}>
             <Route index element={<DashBoard />} />

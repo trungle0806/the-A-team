@@ -25,6 +25,10 @@ const ProgramList = () => {
   };  
 
   const handleDonateProgram = (programId) => {
+    if (!programId) {
+      console.error("Invalid programId:", programId);
+      return;
+    }
     console.log("Navigating to program with ID:", programId);
     navigate(`/admin/program/${programId}`);
   };
@@ -92,7 +96,7 @@ const ProgramList = () => {
                     <td className="program-status">{program.status}</td>
                     <td className="program-actions">
                       <button 
-                        onClick={() => handleDonateProgram(program.id)} 
+                        onClick={() => handleDonateProgram(program.programId)} 
                         className="donate-button"
                       >
                         view
