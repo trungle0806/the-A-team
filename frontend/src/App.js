@@ -32,6 +32,7 @@ import Ngoadmin from "./Admin/Ngoadmin/Ngoadmin";
 import Programadmin from "./Admin/Programadmin/Programadmin";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
 import ResetPassword from "./Client/ResetPassword/ResetPassword";
+import DonateDetail from "./Admin/Programadmin/DonateDetail";
 
 import Ngo from "./NGO/Ngo/Ngo";
 import DashBoard from "./NGO/Ngo/Home";
@@ -41,6 +42,7 @@ import NGOEditForm from "./NGO/Ngocerter/NgoForm";
 import ProgramDonationList from "./NGO/ProgramDonation/ProgramDonationList";
 import ProgramDonationDetail from "./NGO/ProgramDonation/ProgramDonationDetail";
 import GalleryImageList from "./NGO/GalleryImage/GalleryImageList";
+
 
 import "./App.css"; // Ensure no duplicate imports
 
@@ -69,10 +71,11 @@ function App() {
             path="/program/:programId"
             element={<ProgramListDetail />}
           />{" "}
-          <Route path="/notfound" element={<NotFound />} />
+          <Route path="/404" element={<NotFound />} />
           <Route path="/thank-you-bill" element={<ThankYouBill />} />
           {/* Admin Routes */}
           <Route path="/admin" element={<Authentication />}>
+            <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="customers" element={<CustomerManagement />} />
             <Route path="ngoadmin" element={<Ngoadmin />} />
@@ -87,6 +90,10 @@ function App() {
               element={<ProgramDonateDetail />}
             />
             <Route path="transactionhistory" element={<TransactionHistory />} />
+            <Route
+              path="ngo/:ngoId/program/:programId/donations"
+              element={<DonateDetail />}
+            />
           </Route>
           <Route path="/ngo" element={<Ngo />}>
             <Route index element={<DashBoard />} />
