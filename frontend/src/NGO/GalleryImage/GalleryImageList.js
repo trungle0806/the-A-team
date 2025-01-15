@@ -70,9 +70,9 @@ const GalleryImageList = () => {
       <ul className="GalleryImageList-items">
         {galleryImages.map((image) => (
           <li key={image.imageId} className="GalleryImageList-item">
-            {image.fileName ? (
+            {image.fileName  ? (
               <img
-                src={URL.createObjectURL(new Blob([image.fileName]))}
+                src={`http://localhost:5024/images/${image.fileName}`}
                 alt={image.caption}
                 className="GalleryImageList-image"
               />

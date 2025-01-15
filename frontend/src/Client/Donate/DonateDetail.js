@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProgramDonationsForNGOAndProgram } from "../../NGO/Service/programDonationService";
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 const DonateDetail = () => {
   const { ngoId, programId } = useParams();

@@ -75,6 +75,7 @@ const ProgramList = () => {
     navigate(`/program/${programId}`);
   };
 
+  // Filter programs to only show upcoming ones
   const filteredPrograms = programs.filter((program) => {
     const matchesCategories = selectedCategories.length
       ? selectedCategories.includes(program.category)
@@ -82,7 +83,8 @@ const ProgramList = () => {
     const matchesSearchTerm = program.name
       ?.toLowerCase()
       .includes(searchTerm.toLowerCase());
-    return matchesCategories && matchesSearchTerm;
+    const isUpcoming = program.isUpcoming; // Only show if upcoming
+    return matchesCategories && matchesSearchTerm && isUpcoming;
   });
 
   const totalPages = Math.ceil(filteredPrograms.length / itemsPerPage);
@@ -134,11 +136,7 @@ const ProgramList = () => {
                           <a
                             href="#"
                             onClick={(e) => handleCategorySelect(category, e)}
-                            className={
-                              selectedCategories.includes(category)
-                                ? "active"
-                                : ""
-                            }
+                            className={selectedCategories.includes(category) ? "active" : ""}
                           >
                             {category.charAt(0).toUpperCase() +
                               category.slice(1).replace("-", " ")}
@@ -154,7 +152,7 @@ const ProgramList = () => {
                     {programLoading ? (
                       <p>Loading programs...</p>
                     ) : currentPrograms.length === 0 ? (
-                      <p>No programs available.</p>
+                      <p>No upcoming programs available.</p>
                     ) : (
                       currentPrograms.map((program) => (
                         <div key={program.programId} className="program-card">
@@ -168,39 +166,32 @@ const ProgramList = () => {
                             <h2>{program.name}</h2>
                             <p>{program.description}</p>
                             <div className="program-detailss">
-                            <p>
-                              <strong>Start date:</strong>{" "}
-                              {new Date(
-                                program.startDate
-                              ).toLocaleDateString()}
-                            </p>
-                            <p>
-                              <strong>End date:</strong>{" "}
-                              {new Date(program.endDate).toLocaleDateString()}
-                            </p>
-                            <p>
-                              <strong>Is about to happen:</strong>{" "}
-                              <p>{program.status}</p>
-                            </p>
+                              <p>
+                                <strong>Start date:</strong>{" "}
+                                {new Date(program.startDate).toLocaleDateString()}
+                              </p>
+                              <p>
+                                <strong>End date:</strong>{" "}
+                                {new Date(program.endDate).toLocaleDateString()}
+                              </p>
+                              <p>
+                                <strong>Status:</strong> Ongoing
+                              </p>
                             </div>
                             <div className="program-ci">
                               <CiHeart
-                                className={`program-heart ${
-                                  favorites.some(
-                                    (fav) =>
-                                      fav.programId === program.programId
-                                  )
+                                className={`program-heart ${favorites.some(
+                                  (fav) => fav.programId === program.programId
+                                )
                                     ? "favorite"
                                     : ""
-                                }`}
+                                  }`}
                                 onClick={() => toggleFavorite(program)}
                                 aria-label="Toggle favorite"
                               />
                               <button
                                 className="program-donate-btn"
-                                onClick={() =>
-                                  handleDonateClick(program.programId)
-                                }
+                                onClick={() => handleDonateClick(program.programId)}
                                 aria-label="Donate to program"
                               >
                                 Donate
@@ -224,11 +215,10 @@ const ProgramList = () => {
                     {[...Array(totalPages)].map((_, index) => (
                       <li
                         key={index}
-                        className={`pagination1-item ${
-                          currentPage === index + 1
-                            ? "pagination1-item--active"
-                            : ""
-                        }`}
+                        className={`pagination1-item ${currentPage === index + 1
+                          ? "pagination1-item--active"
+                          : ""
+                          }`}
                       >
                         <button
                           onClick={() => handlePageChange(index + 1)}

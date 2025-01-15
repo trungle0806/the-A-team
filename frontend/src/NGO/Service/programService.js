@@ -9,6 +9,11 @@ const api = axios.create({
     },
 });
 
+const token = localStorage.getItem('authToken');
+if (token) {
+  const decodedToken = jwtDecode(token);
+  console.log(decodedToken); // Check the expiration and role
+}
 // Lấy accountId từ token
 const getAccountIdFromToken = () => {
     const token = localStorage.getItem('authToken');
@@ -75,24 +80,36 @@ export const getProgramById = async (id) => {
 // Thêm một chương trình mới
 export const addProgram = async (program) => {
     try {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            throw new Error('Authorization token is missing.');
+        }
+
         const response = await api.post('program1', program, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${token}`,
             },
         });
         return response.data;
     } catch (error) {
-        console.error('Error adding program:', error);
+        if (error.response && error.response.status === 403) {
+            console.error('Permission error: User is not authorized to add a program.');
+        } else {
+            console.error('Error adding program:', error);
+        }
         throw error;
     }
 };
+
+  
+
 
 // Cập nhật chương trình
 export const updateProgram = async (id, updatedProgram) => {
     try {
         const response = await api.put(`program1/${id}`, updatedProgram, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('authToken')}`,
             },
         });
         return response.data;
@@ -107,7 +124,7 @@ export const deleteProgram = async (id) => {
     try {
         const response = await api.delete(`program1/${id}`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('authToken')}`,
             },
         });
         return response.data;

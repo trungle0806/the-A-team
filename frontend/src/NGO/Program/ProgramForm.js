@@ -3,12 +3,13 @@ import {
   addProgram,
   updateProgram,
   getProgramById,
+  getNGOByAccountId, // Add this import
 } from "../Service/programService";
 import "./ProgramForm.css";
 
 const ProgramForm = ({ editProgramId, setEditProgramId }) => {
   const [program, setProgram] = useState({
-    NGOId: "",
+    NGOId: "", // Default value will be set here
     name: "",
     description: "",
     startDate: "",
@@ -17,7 +18,24 @@ const ProgramForm = ({ editProgramId, setEditProgramId }) => {
   });
   const [error, setError] = useState("");
 
+  // Fetch NGOId from accountId (token) when the form loads
   useEffect(() => {
+    const fetchNGOId = async () => {
+      try {
+        const ngo = await getNGOByAccountId(); // Get the NGO based on accountId
+        console.log(ngo);
+        setProgram((prevProgram) => ({
+          ...prevProgram,
+          NGOId: ngo.ngoId, // Set the NGOId in the form state
+        }));
+      } catch (error) {
+        console.error("Error fetching NGO by accountId:", error);
+        setError("Failed to load NGO information.");
+      }
+    };
+
+    fetchNGOId();
+
     if (editProgramId) {
       const fetchProgram = async () => {
         try {
@@ -41,6 +59,8 @@ const ProgramForm = ({ editProgramId, setEditProgramId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Clear previous error messages
+
     try {
       if (editProgramId) {
         // Update existing program
@@ -49,6 +69,7 @@ const ProgramForm = ({ editProgramId, setEditProgramId }) => {
         // Add new program
         await addProgram(program);
       }
+      // Reset form fields after successful submission
       setProgram({
         NGOId: "",
         name: "",
@@ -57,7 +78,7 @@ const ProgramForm = ({ editProgramId, setEditProgramId }) => {
         endDate: "",
         targetAmount: "",
       });
-      setEditProgramId(null);
+      setEditProgramId(null); // Close the form after submission
     } catch (error) {
       setError("Failed to save program.");
     }
@@ -66,7 +87,7 @@ const ProgramForm = ({ editProgramId, setEditProgramId }) => {
   return (
     <div className="Programadd">
       <h2>{editProgramId ? "Update Program" : "Add Program"}</h2>
-      {error && <p>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>Name:</label>
         <input
@@ -111,7 +132,7 @@ const ProgramForm = ({ editProgramId, setEditProgramId }) => {
             Save
           </button>
           <button
-            className="Program-Cance"
+            className="Program-Cancel"
             type="button"
             onClick={() => setEditProgramId(null)}
           >
