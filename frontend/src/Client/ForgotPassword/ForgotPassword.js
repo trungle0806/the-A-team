@@ -37,7 +37,7 @@ const ForgotAndResetPassword = () => {
 
     try {
       const response = await axios.post(
-        "https://shopy-emahgphwbhgpd3bs.japanwest-01.azurewebsites.net/api/auth/forgot-password",
+        "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/auth/forgot-password",
         { email }
       );
       setMessage(response.data);

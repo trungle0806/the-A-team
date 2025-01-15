@@ -25,7 +25,9 @@ const ProgramList = () => {
   const fetchPrograms = async () => {
     try {
       setProgramLoading(true);
-      const response = await axios.get(`http://localhost:5024/api/program1`);
+      const response = await axios.get(
+        `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1`
+      );
       const programsData = response.data?.$values || [];
       setPrograms(programsData);
     } catch (err) {
@@ -136,7 +138,11 @@ const ProgramList = () => {
                           <a
                             href="#"
                             onClick={(e) => handleCategorySelect(category, e)}
-                            className={selectedCategories.includes(category) ? "active" : ""}
+                            className={
+                              selectedCategories.includes(category)
+                                ? "active"
+                                : ""
+                            }
                           >
                             {category.charAt(0).toUpperCase() +
                               category.slice(1).replace("-", " ")}
@@ -158,16 +164,18 @@ const ProgramList = () => {
                         <div key={program.programId} className="program-card">
                           <div
                             className="program-image"
-                            onClick={() => handleProgramClick(program.programId)}
+                            onClick={() =>
+                              handleProgramClick(program.programId)
+                            }
                           >
-                              {program?.galleryImages?.$values?.map((image) => (
-                                <img
-                                  key={image.imageId}
-                                  src={`http://localhost:5024/images/${image.fileName}`}
-                                  alt={image.caption}
-                                  className="gallery-image"
-                                />
-                              ))}
+                            {program?.galleryImages?.$values?.map((image) => (
+                              <img
+                                key={image.imageId}
+                                src={`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/images/${image.fileName}`}
+                                alt={image.caption}
+                                className="gallery-image"
+                              />
+                            ))}
                           </div>
                           <div className="program-details">
                             <h2>{program.name}</h2>
@@ -175,7 +183,9 @@ const ProgramList = () => {
                             <div className="program-detailss">
                               <p>
                                 <strong>Start date:</strong>{" "}
-                                {new Date(program.startDate).toLocaleDateString()}
+                                {new Date(
+                                  program.startDate
+                                ).toLocaleDateString()}
                               </p>
                               <p>
                                 <strong>End date:</strong>{" "}
@@ -188,18 +198,21 @@ const ProgramList = () => {
                             </div>
                             <div className="program-ci">
                               <CiHeart
-                                className={`program-heart ${favorites.some(
-                                  (fav) => fav.programId === program.programId
-                                )
-                                  ? "favorite"
-                                  : ""
-                                  }`}
+                                className={`program-heart ${
+                                  favorites.some(
+                                    (fav) => fav.programId === program.programId
+                                  )
+                                    ? "favorite"
+                                    : ""
+                                }`}
                                 onClick={() => toggleFavorite(program)}
                                 aria-label="Toggle favorite"
                               />
                               <button
                                 className="program-donate-btn"
-                                onClick={() => handleDonateClick(program.programId)}
+                                onClick={() =>
+                                  handleDonateClick(program.programId)
+                                }
                                 aria-label="Donate to program"
                               >
                                 Donate
@@ -223,10 +236,11 @@ const ProgramList = () => {
                     {[...Array(totalPages)].map((_, index) => (
                       <li
                         key={index}
-                        className={`pagination1-item ${currentPage === index + 1
-                          ? "pagination1-item--active"
-                          : ""
-                          }`}
+                        className={`pagination1-item ${
+                          currentPage === index + 1
+                            ? "pagination1-item--active"
+                            : ""
+                        }`}
                       >
                         <button
                           onClick={() => handlePageChange(index + 1)}

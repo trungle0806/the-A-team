@@ -170,7 +170,9 @@ const AdminDashboard = () => {
                   <tr key={transaction.id}>
                     <td>{transaction.id}</td>
                     <td>{transaction.user}</td>
-                    <td>${transaction.amount.toLocaleString()}</td>
+                    <td className="Dashboard-td">
+                      ${transaction.amount.toLocaleString()}
+                    </td>
                     <td>{new Date(transaction.date).toLocaleDateString()}</td>
                   </tr>
                 ))}

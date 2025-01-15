@@ -16,7 +16,8 @@ const RegisterForm = () => {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5024/api/auth"; // Thay đổi API_URL nếu cần
+  const API_URL =
+    "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/auth"; // Thay đổi API_URL nếu cần
 
   // Kiểm tra email hợp lệ
   const isEmailValid = (email) => {

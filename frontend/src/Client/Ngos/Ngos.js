@@ -13,7 +13,9 @@ const Ngos = () => {
   useEffect(() => {
     const fetchNgos = async () => {
       try {
-        const response = await axios.get("http://localhost:5024/api/ngo");
+        const response = await axios.get(
+          "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/api/ngo"
+        );
         console.log("Response data:", response.data); // Kiểm tra phản hồi
 
         // Kiểm tra xem phản hồi có phải là mảng không

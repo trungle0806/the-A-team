@@ -28,7 +28,7 @@ import ProgramAdminForm from "./Admin/Programadmin/Programadminform";
 import ProgramDonateList1 from "./Admin/ProgramDonation/ProgramDonateList1";
 import ProgramDonateForm from "./Admin/ProgramDonation/ProgramDonateForm";
 import ProgramDonateDetail from "./Admin/ProgramDonation/ProgramDonateDetail";
-import CensorNgo from "./Admin/CensorNgo/CensorNgo"
+import CensorNgo from "./Admin/CensorNgo/CensorNgo";
 import Ngoadmin from "./Admin/Ngoadmin/Ngoadmin";
 import Programadmin from "./Admin/Programadmin/Programadmin";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
@@ -90,7 +90,10 @@ function App() {
             <Route path="programadmin" element={<Programadmin />} />
             <Route path="programdonatelist1" element={<ProgramDonateList1 />} />
             <Route path="programdonateform" element={<ProgramDonateForm />} />
-            <Route path="programdonatedetail" element={<ProgramDonateDetail />} />
+            <Route
+              path="programdonatedetail"
+              element={<ProgramDonateDetail />}
+            />
             <Route path="transactionhistory" element={<TransactionHistory />} />
             <Route
               path="ngo/:ngoId/program/:programId/donations"
