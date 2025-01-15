@@ -25,9 +25,7 @@ const ProgramList = () => {
   const fetchPrograms = async () => {
     try {
       setProgramLoading(true);
-      const response = await axios.get(
-        `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1`
-      );
+      const response = await axios.get(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1`);
       const programsData = response.data?.$values || [];
       setPrograms(programsData);
     } catch (err) {
@@ -138,11 +136,7 @@ const ProgramList = () => {
                           <a
                             href="#"
                             onClick={(e) => handleCategorySelect(category, e)}
-                            className={
-                              selectedCategories.includes(category)
-                                ? "active"
-                                : ""
-                            }
+                            className={selectedCategories.includes(category) ? "active" : ""}
                           >
                             {category.charAt(0).toUpperCase() +
                               category.slice(1).replace("-", " ")}
@@ -162,57 +156,59 @@ const ProgramList = () => {
                     ) : (
                       currentPrograms.map((program) => (
                         <div key={program.programId} className="program-card">
-                          <div
-                            className="program-image"
-                            onClick={() =>
-                              handleProgramClick(program.programId)
-                            }
-                          >
-                            {program?.galleryImages?.$values?.map((image) => (
-                              <img
-                                key={image.imageId}
-                                src={`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/images/${image.fileName}`}
-                                alt={image.caption}
-                                className="gallery-image"
-                              />
-                            ))}
+                          <div className="program-image" onClick={() => handleProgramClick(program.programId)}>
+                            {/* Check if the galleryImages array exists and has at least one image */}
+                            {program.galleryImages?.$values?.[0] ? (
+                              <div className="gallery-item">
+                                <img
+                                  src={`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/images/${program.galleryImages.$values[0].fileName}`}
+                                  alt={program.galleryImages.$values[0].caption || 'Default Program Image'}
+                                  className="gallery-image"
+                                />
+                              </div>
+                            ) : (
+                              <div className="gallery-item">
+                                <img
+                                  src="/path-to-default-image.jpg"
+                                  alt="Default Program Image"
+                                  className="gallery-image"
+                                />
+                              </div>
+                            )}
                           </div>
+
+
                           <div className="program-details">
                             <h2>{program.name}</h2>
                             <p>{program.description}</p>
                             <div className="program-detailss">
                               <p>
                                 <strong>Start date:</strong>{" "}
-                                {new Date(
-                                  program.startDate
-                                ).toLocaleDateString()}
+                                {new Date(program.startDate).toLocaleDateString()}
                               </p>
                               <p>
                                 <strong>End date:</strong>{" "}
                                 {new Date(program.endDate).toLocaleDateString()}
                               </p>
                               <p>
-                                <strong>Status:</strong> 
+                                <strong>Status:</strong>
                                 <p>{program.status}</p>
                               </p>
                             </div>
                             <div className="program-ci">
                               <CiHeart
-                                className={`program-heart ${
-                                  favorites.some(
-                                    (fav) => fav.programId === program.programId
-                                  )
-                                    ? "favorite"
-                                    : ""
-                                }`}
+                                className={`program-heart ${favorites.some(
+                                  (fav) => fav.programId === program.programId
+                                )
+                                  ? "favorite"
+                                  : ""
+                                  }`}
                                 onClick={() => toggleFavorite(program)}
                                 aria-label="Toggle favorite"
                               />
                               <button
                                 className="program-donate-btn"
-                                onClick={() =>
-                                  handleDonateClick(program.programId)
-                                }
+                                onClick={() => handleDonateClick(program.programId)}
                                 aria-label="Donate to program"
                               >
                                 Donate
@@ -223,44 +219,8 @@ const ProgramList = () => {
                       ))
                     )}
                   </div>
-                  <ul className="pagination1 program-grid__pagination">
-                    <li className="pagination1-item">
-                      <button
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="pagination1-item__link"
-                      >
-                        <MdKeyboardArrowLeft className="program-left" />
-                      </button>
-                    </li>
-                    {[...Array(totalPages)].map((_, index) => (
-                      <li
-                        key={index}
-                        className={`pagination1-item ${
-                          currentPage === index + 1
-                            ? "pagination1-item--active"
-                            : ""
-                        }`}
-                      >
-                        <button
-                          onClick={() => handlePageChange(index + 1)}
-                          className="pagination1-item__link"
-                        >
-                          {index + 1}
-                        </button>
-                      </li>
-                    ))}
-                    <li className="pagination1-item">
-                      <button
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        className="pagination1-item__link"
-                      >
-                        <MdKeyboardArrowRight className="program fa-right-from-bracket" />
-                      </button>
-                    </li>
-                  </ul>
                 </div>
+
               </div>
             </div>
           </div>

@@ -68,7 +68,7 @@ const ProgramListDetail = () => {
               <div key={index} className="gallery-item">
                 <img
                   src={
-                    `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/images/${image.fileName}` ||
+                    `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/images/${image.fileName}` ||
                     `/path-to-default-image.jpg`
                   } // Use a fallback image if no image URL is provided
                   alt={image.caption}
