@@ -18,6 +18,7 @@ import NgoDetail from "./Client/Ngos/NgoDetail/NgoDetail";
 import ProgramListDetail from "./Client/ProgramList/ProgramListDetail/ProgramListDetail";
 import NotFound from "./404/NotFound";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
+import DonateDetail1 from "./Client/Donate/DonateDetail";
 
 // Admin routes
 import Dashboard from "./Admin/Dashboard/Dashboard";
@@ -62,6 +63,10 @@ function App() {
           <Route path="/program" element={<ProgramList />} />
           <Route path="/ngos/:id" element={<NgoDetail />} />
           <Route path="/donate/:programId" element={<Donate />} />
+          <Route
+              path="/ngo/:ngoId/program/:programId/donations"
+              element={<DonateDetail1 />}
+            />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/favorites" element={<Favorites />} />

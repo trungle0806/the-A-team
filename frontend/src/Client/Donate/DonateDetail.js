@@ -4,7 +4,7 @@ import { getProgramDonationsForNGOAndProgram } from "../../NGO/Service/programDo
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 
-const DonateDetail = () => {
+const DonateDetail1 = () => {
   const { ngoId, programId } = useParams();
   const [donations, setDonations] = useState([]);
   const [filteredDonations, setFilteredDonations] = useState([]);
@@ -54,14 +54,10 @@ const DonateDetail = () => {
   if (error) return <p>{error}</p>;
 
   return (
+    <div>
+      <Header />
     <div className="donation-list">
       <h2>Program Donation History</h2>
-      <input
-        type="text"
-        placeholder="Search donations..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
       <table>
         <thead>
           <tr>
@@ -100,7 +96,9 @@ const DonateDetail = () => {
         ))}
       </div>
     </div>
+    <Footer />
+    </div>
   );
 };
 
-export default DonateDetail;
+export default DonateDetail1;

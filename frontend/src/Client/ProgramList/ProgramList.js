@@ -182,7 +182,8 @@ const ProgramList = () => {
                                 {new Date(program.endDate).toLocaleDateString()}
                               </p>
                               <p>
-                                <strong>Status:</strong> Ongoing
+                                <strong>Status:</strong> 
+                                <p>{program.status}</p>
                               </p>
                             </div>
                             <div className="program-ci">

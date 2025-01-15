@@ -138,7 +138,7 @@ const Donate = () => {
   const handleViewDonations = () => {
     if (programId && program.ngoId) {
       navigate(
-        `/donate/${programId}/ngo/${program.ngoId}/program/${programId}/donations`
+        `/ngo/${program.ngoId}/program/${programId}/donations`
       );
     } else {
       console.error("Missing programId or ngoId");
@@ -194,12 +194,11 @@ const Donate = () => {
           )}
 
           <div className="donation-stats">
-            <div className="stat-box">
+            <div className="stat-box" onClick={handleViewDonations}
+                style={{ cursor: "pointer" }}>
               <FaUsers className="icon" />
               <span
                 className="stat-label"
-                onClick={handleViewDonations}
-                style={{ cursor: "pointer" }}
               >
                 Total Donors:
               </span>
