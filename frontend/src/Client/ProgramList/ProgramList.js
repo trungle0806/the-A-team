@@ -180,7 +180,7 @@ const ProgramList = () => {
                             </p>
                             <p>
                               <strong>Is about to happen:</strong>{" "}
-                              {program.isUpcoming ? "Yes" : "No"}
+                              <p>{program.status}</p>
                             </p>
                             </div>
                             <div className="program-ci">

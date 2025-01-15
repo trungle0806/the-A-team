@@ -80,8 +80,8 @@ const ProgramList1 = () => {
       );
     }
     if (filterStatus !== "all") {
-      filtered = filtered.filter((program) =>
-        filterStatus === "upcoming" ? program.isUpcoming : !program.isUpcoming
+      filtered = filtered.filter(
+        (program) => program.status.toLowerCase() === filterStatus
       );
     }
     setFilteredPrograms(filtered);
@@ -138,7 +138,7 @@ const ProgramList1 = () => {
             className="Program-status"
           >
             <option value="all">Status</option>
-            <option value="upcoming">Upcoming</option>
+            <option value="ongoing">Ongoing</option>
             <option value="completed">Completed</option>
           </select>
         </div>
@@ -168,7 +168,7 @@ const ProgramList1 = () => {
               <td>{new Date(program.startDate).toLocaleDateString()}</td>
               <td>{new Date(program.endDate).toLocaleDateString()}</td>
               <td className="Program-td">{program.targetAmount}</td>
-              <td>{program.isUpcoming ? "Upcoming" : "Completed"}</td>
+              <td>{program.status}</td>
               <td>
                 <div className="Program-icon1">
                   <button

@@ -11,7 +11,7 @@ import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 
 const Donate = () => {
-    const { programId } = useParams();
+    const { ngoId, programId } = useParams();
     const { auth } = useAuth();
     const [program, setProgram] = useState(null);
     const [amount, setAmount] = useState("");
@@ -126,6 +126,15 @@ const Donate = () => {
             ? Math.min((program.totalDonatedAmount / program.targetAmount) * 100, 100)
             : 0;
 
+    const handleViewDonations = () => {
+        if (programId && program.ngoId) {
+            navigate(`/donate/${programId}/ngo/${program.ngoId}/program/${programId}/donations`);
+        } else {
+            console.error("Missing programId or ngoId");
+        }
+    };
+
+
     return (
         <PayPalScriptProvider
             options={{
@@ -170,7 +179,8 @@ const Donate = () => {
                     <div className="donation-stats">
                         <div className="stat-box">
                             <FaUsers className="icon" />
-                            <span className="stat-label">Total Donors:</span>
+                            <span className="stat-label" onClick={handleViewDonations}
+                                style={{ cursor: "pointer" }}>Total Donors:</span>
                             <span className="stat-value">{getUniqueDonorsCount(program.donations)}</span>
                         </div>
                         <div className="stat-box">
@@ -196,47 +206,57 @@ const Donate = () => {
                     </div>
                 </div>
 
-                <div className="donate-paypal">
-                    <div className="donation-input-section">
-                        {isPaymentSelected && (
-                            <>
-                                <input
-                                    type="number"
-                                    value={amount}
-                                    onChange={handleAmountChange}
-                                    placeholder="Enter amount"
-                                    min="0.01"
-                                    step="0.01"
-                                    className="donation-amount-input"
+                {program.status === "Completed" ? (
+                    <div className="completed-message">
+                        <h2>This program has already been completed.</h2>
+                        <p>Thank you for your interest in supporting this cause!</p>
+                    </div>
+                ) : (
+                    <>
+                        <div className="donate-paypal">
+                            <div className="donation-input-section">
+                                {isPaymentSelected && (
+                                    <>
+                                        <input
+                                            type="number"
+                                            value={amount}
+                                            onChange={handleAmountChange}
+                                            placeholder="Enter amount"
+                                            min="0.01"
+                                            step="0.01"
+                                            className="donation-amount-input"
+                                        />
+                                        {error && <p className="error-message">{error}</p>}
+                                    </>
+                                )}
+                            </div>
+                            {isPaymentSelected && amount > 0 && !error && (
+                                <PayPalButtons
+                                    createOrder={(data, actions) => {
+                                        return actions.order.create({
+                                            purchase_units: [{ amount: { value: amount.toString() } }],
+                                        });
+                                    }}
+                                    onApprove={(data, actions) => {
+                                        return actions.order.capture().then(handleSuccess);
+                                    }}
+                                    onError={(err) => {
+                                        console.error("PayPal transaction error: ", err);
+                                        alert("An error occurred during the transaction. Please try again.");
+                                    }}
                                 />
-                                {error && <p className="error-message">{error}</p>}
-                            </>
-                        )}
-                    </div>
-                    {isPaymentSelected && amount > 0 && !error && (
-                        <PayPalButtons
-                            createOrder={(data, actions) => {
-                                return actions.order.create({
-                                    purchase_units: [{ amount: { value: amount.toString() } }], 
-                                });
-                            }}
-                            onApprove={(data, actions) => {
-                                return actions.order.capture().then(handleSuccess);
-                            }}
-                            onError={(err) => {
-                                console.error("PayPal transaction error: ", err);
-                                alert("An error occurred during the transaction. Please try again.");
-                            }}
-                        />
-                    )}
-                    <div className="payment-button">
-                        <button
-                            onClick={() => setIsPaymentSelected(true)}
-                        >
-                            Donate Now
-                        </button>
-                    </div>
-                </div>
+                            )}
+                            <div className="payment-button">
+                                <button
+                                    onClick={() => setIsPaymentSelected(true)}
+                                >
+                                    Donate Now
+                                </button>
+                            </div>
+                        </div>
+                    </>
+                )}
+
             </div>
             <Footer />
         </PayPalScriptProvider>

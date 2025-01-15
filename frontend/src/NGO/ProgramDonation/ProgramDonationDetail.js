@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProgramDonationsForNGOAndProgram } from "../Service/programDonationService";
 
-const ProgramDonationList = () => {
+const ProgramDonationDetail = () => {
   const { ngoId, programId } = useParams(); // Lấy ngoId và programId từ URL
   const [donations, setDonations] = useState([]);
   const [filteredDonations, setFilteredDonations] = useState([]);
@@ -131,4 +131,4 @@ const ProgramDonationList = () => {
   );
 };
 
-export default ProgramDonationList;
+export default ProgramDonationDetail;
