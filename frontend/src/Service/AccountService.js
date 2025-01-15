@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5024/api/accounts";
+const API_URL = "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/accounts";
 
 // Lấy danh sách tất cả tài khoản
 export const getAccounts = async () => {

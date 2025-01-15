@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = " http://localhost:5024/api/GalleryImage";
+const API_BASE_URL = " https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/GalleryImage";
 
 export const fetchGalleryImages = async (searchQuery = "", page = 1, size = 10) => {
   const response = await axios.get(`${API_BASE_URL}?searchQuery=${searchQuery}&page=${page}&size=${size}`);

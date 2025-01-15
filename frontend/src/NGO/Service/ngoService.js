@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance for API calls
 const api = axios.create({
-  baseURL: 'http://localhost:5024/api/', // Adjust the URL based on your backend
+  baseURL: 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/', // Adjust the URL based on your backend
   headers: {
     'Content-Type': 'application/json',
   },

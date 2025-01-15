@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5024/api/ProgramDonation"; // Thay đổi URL nếu cần
+const API_URL = "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ProgramDonation"; // Thay đổi URL nếu cần
 
 //Lấy danh sách lịch sử giao dịch
 export const getProgramDonations = async (searchQuery = "") => {

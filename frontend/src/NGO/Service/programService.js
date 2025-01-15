@@ -3,7 +3,7 @@ import {jwtDecode} from 'jwt-decode';
 
 // Tạo instance axios
 const api = axios.create({
-    baseURL: 'http://localhost:5024/api/', // Cập nhật URL backend của bạn
+    baseURL: 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/', // Cập nhật URL backend của bạn
     headers: {
         'Content-Type': 'application/json',
     },
