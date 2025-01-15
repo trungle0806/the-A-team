@@ -15,7 +15,7 @@ const ProgramListDetail = () => {
     const fetchProgramDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5024/api/program1/${programId}`
+          `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1/${programId}`
         );
         setProgram(response.data);
       } catch (err) {
@@ -48,12 +48,17 @@ const ProgramListDetail = () => {
           />
         </div>
         <div className="program-content">
-          <p>{program.description || "This program aims to distribute food to those in need, ensuring no one goes hungry."}</p>
           <p>
-            <strong>Start Date:</strong> {new Date(program.startDate).toLocaleDateString()}
+            {program.description ||
+              "This program aims to distribute food to those in need, ensuring no one goes hungry."}
           </p>
           <p>
-            <strong>End Date:</strong> {new Date(program.endDate).toLocaleDateString()}
+            <strong>Start Date:</strong>{" "}
+            {new Date(program.startDate).toLocaleDateString()}
+          </p>
+          <p>
+            <strong>End Date:</strong>{" "}
+            {new Date(program.endDate).toLocaleDateString()}
           </p>
         </div>
         <div className="program-gallery">
@@ -62,7 +67,10 @@ const ProgramListDetail = () => {
             {program.galleryImages?.$values.map((image, index) => (
               <div key={index} className="gallery-item">
                 <img
-                  src={`http://localhost:5024/images/${image.fileName}` || `/path-to-default-image.jpg`} // Use a fallback image if no image URL is provided
+                  src={
+                    `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/images/${image.fileName}` ||
+                    `/path-to-default-image.jpg`
+                  } // Use a fallback image if no image URL is provided
                   alt={image.caption}
                   className="gallery-image"
                 />

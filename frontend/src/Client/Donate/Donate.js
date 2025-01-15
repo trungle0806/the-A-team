@@ -45,7 +45,7 @@ const Donate = () => {
   const fetchProgram = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5024/api/program1/${programId}`
+        `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1/${programId}`
       );
       setProgram(response.data);
     } catch (err) {
@@ -56,7 +56,7 @@ const Donate = () => {
   const fetchCustomerId = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5024/api/customer/get-customer-data",
+        "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/customer/get-customer-data",
         {
           headers: { Authorization: `Bearer ${auth.token}` },
         }
@@ -80,7 +80,7 @@ const Donate = () => {
   const handleSuccess = async (details) => {
     try {
       await axios.post(
-        "http://localhost:5024/api/ProgramDonation",
+        "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ProgramDonation",
         {
           programId,
           customerId,

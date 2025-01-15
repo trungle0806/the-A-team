@@ -11,7 +11,9 @@ const Promotions = () => {
     const fetchPromotions = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5024/api/program1");
+        const response = await axios.get(
+          "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1"
+        );
         const promotionsData = response.data?.$values || [];
         setPromotions(promotionsData.slice(0, 6)); // Limit to 6 items
       } catch (err) {

@@ -11,7 +11,9 @@ const Basics = () => {
     // Lấy dữ liệu từ API
     const fetchNgos = async () => {
       try {
-        const response = await axios.get("http://localhost:5024/api/ngo");
+        const response = await axios.get(
+          "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ngo"
+        );
         console.log("API Response:", response.data); // Kiểm tra phản hồi API
         const ngoList = response.data.$values || []; // Lấy danh sách NGOs từ $values
         setNgos(ngoList.slice(0, 3)); // Chỉ lấy 3 mục đầu tiên

@@ -14,7 +14,7 @@ import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
-import NgoDetail from "./Client/Ngos/NgoDetail/Ngodetail";
+import NgoDetail from "./Client/Ngos/NgoDetail/NgoDetail";
 import ProgramListDetail from "./Client/ProgramList/ProgramListDetail/ProgramListDetail";
 import NotFound from "./404/NotFound";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider
@@ -27,7 +27,7 @@ import ProgramAdminForm from "./Admin/Programadmin/Programadminform";
 import ProgramDonateList1 from "./Admin/ProgramDonation/ProgramDonateList1";
 import ProgramDonateForm from "./Admin/ProgramDonation/ProgramDonateForm";
 import ProgramDonateDetail from "./Admin/ProgramDonation/ProgramDonateDetail";
-import CensorNgo from "./Admin/CensorNgo/CensorNgo"
+import CensorNgo from "./Admin/CensorNgo/CensorNgo";
 import Ngoadmin from "./Admin/Ngoadmin/Ngoadmin";
 import Programadmin from "./Admin/Programadmin/Programadmin";
 import TransactionHistory from "./Admin/TransactionHistory/TransactionHistory";
@@ -77,12 +77,15 @@ function App() {
             <Route path="customers" element={<CustomerManagement />} />
             <Route path="ngoadmin" element={<Ngoadmin />} />
             <Route path="inviation" element={<Inviation />} />
-            <Route path="censorngo" element= {<CensorNgo />}/>
-            <Route path="program/:programId" element={<ProgramAdminForm/>}/>
+            <Route path="censorngo" element={<CensorNgo />} />
+            <Route path="program/:programId" element={<ProgramAdminForm />} />
             <Route path="programadmin" element={<Programadmin />} />
             <Route path="programdonatelist1" element={<ProgramDonateList1 />} />
             <Route path="programdonateform" element={<ProgramDonateForm />} />
-            <Route path="programdonatedetail" element={<ProgramDonateDetail />} />
+            <Route
+              path="programdonatedetail"
+              element={<ProgramDonateDetail />}
+            />
             <Route path="transactionhistory" element={<TransactionHistory />} />
           </Route>
           <Route path="/ngo" element={<Ngo />}>

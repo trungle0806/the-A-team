@@ -13,7 +13,8 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5024/api/auth";
+  const API_URL =
+    "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/auth";
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,7 +23,7 @@ const LoginForm = () => {
 
   const handleNavigation = (role) => {
     if (role === "Admin") {
-      navigate("/Admin", { state: { message: "Welcome Admin!" } });
+      navigate("/Admin/dashboard", { state: { message: "Welcome Admin!" } });
     } else if (role === "User") {
       navigate("/", { state: { message: "Login successful! Welcome back!" } });
     } else if (role === "NGO") {

@@ -40,14 +40,17 @@ const Contact = () => {
 
     // Gửi dữ liệu tới backend API
     try {
-      const response = await fetch("http://localhost:5024/api/query", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Gửi token trong header
-        },
-        body: JSON.stringify(formData), // Chuyển formData thành JSON
-      });
+      const response = await fetch(
+        "https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/query",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Gửi token trong header
+          },
+          body: JSON.stringify(formData), // Chuyển formData thành JSON
+        }
+      );
 
       // Log phản hồi từ backend
       const responseData = await response.json();

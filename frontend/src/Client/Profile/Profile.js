@@ -30,7 +30,7 @@ const CustomerData = () => {
         }
 
         const response = await axios.get(
-          `http://localhost:5024/api/customer/get-customer-data`,
+          `https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/customer/get-customer-data`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { IoMenu } from "react-icons/io5";
+import { IoMenu, IoSearch } from "react-icons/io5";
 import { FaRegTimesCircle } from "react-icons/fa";
-import { IoSearch } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Logout from "../../Logout/Logout";
 
 import "./Authentication.css";
 
@@ -51,9 +51,6 @@ function Authentication() {
             <li className={isActive("ngoadmin") ? "active" : ""}>
               <Link to="ngoadmin">Ngo</Link>
             </li>
-            {/* <li className={isActive("inviation") ? "active" : ""}>
-              <Link to="inviation">Invitation</Link>
-            </li> */}
             <li className={isActive("programadmin") ? "active" : ""}>
               <Link to="programadmin">Program</Link>
             </li>
@@ -63,9 +60,6 @@ function Authentication() {
             <li className={isActive("censorngo") ? "active" : ""}>
               <Link to="censorngo">Ngo and Program</Link>
             </li>
-            {/* <li className={isActive("transactionhistory") ? "active" : ""}>
-              <Link to="transactionhistory">TransactionHistory</Link>
-            </li> */}
           </ul>
         </nav>
       </aside>
@@ -100,12 +94,7 @@ function Authentication() {
 
             {/* User Info */}
             <div className="user-info">
-              <img
-                src="https://via.placeholder.com/40"
-                alt="User Avatar"
-                className="user-avatar"
-                />
-              <span className="user-name">John Doe</span>
+              <Logout />
             </div>
           </div>
         </nav>
@@ -152,58 +141,27 @@ function Authentication() {
               </Link>
             </li>
             <li>
-              <Link to="ngoadmin" className="admin-mobile-list">Ngo</Link>
+              <Link to="ngoadmin" className="admin-mobile-list">
+                Ngo
+              </Link>
             </li>
             <li>
-              <Link to="inviation" className="admin-mobile-list">Invitation</Link>
+              <Link to="programadmin" className="admin-mobile-list">
+                Program
+              </Link>
             </li>
             <li>
-              <Link to="programadmin" className="admin-mobile-list">Program</Link>
+              <Link to="programdonatelist1" className="admin-mobile-list">
+                Donation
+              </Link>
             </li>
             <li>
-              <Link to="programdonatelist1" className="admin-mobile-list">Donation</Link>
+              <Link to="censorngo" className="admin-mobile-list">
+                CensorNgo
+              </Link>
             </li>
-            <li>
-              <Link to="censorngo" className="admin-mobile-list">CensorNgo</Link>
-            </li>
-            {/* <li>
-              <Link to="transactionhistory" className="admin-mobile-list">TransactionHistory</Link>
-            </li> */}
           </ul>
         </nav>
-
-        {/* Right-side menu */}
-        <div
-          className={`admin-overlay1 ${isRightMenuOpen ? "show" : ""}`}
-          onClick={toggleRightMenu}
-        ></div>
-        <div className={`admin-mobile1 ${isRightMenuOpen ? "open" : ""}`}>
-          <div className="admin-mobile-close" onClick={toggleRightMenu}>
-            <FaRegTimesCircle />
-          </div>
-          <div className="admin-toin">
-            <div className="search-box">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="search-input"
-              />
-              <button className="search-btn">
-                <IoSearch />
-              </button>
-            </div>
-            <div className="icon gmail-icon">Gmail</div>
-            <div className="icon notification-icon">Notification</div>
-            <div className="user-info">
-              <img
-                src="https://via.placeholder.com/40"
-                alt="User Avatar"
-                className="user-avatar"
-              />
-              <span className="user-name">John Doe</span>
-            </div>
-          </div>
-        </div>
 
         {/* Outlet for nested routes */}
         <div className="admin-content">
