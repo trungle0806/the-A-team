@@ -32,10 +32,16 @@
 }
 
 .donate-description {
-  font-size: 1.25rem;
   max-width: 800px;
-  margin-bottom: 2rem;
-  color: #4e342e;
+  color: #333;
+  margin: 0px 0;
+  max-height: 49px;
+  font-size: 1.3rem;
+  margin-top: 0;
+  overflow: hidden;
+  font-family: "arial-black";
+  text-align: justify;
+  margin-bottom: 15px;
 }
 
 .target-progress {
