@@ -160,7 +160,14 @@ const ProgramList = () => {
                             className="program-image"
                             onClick={() => handleProgramClick(program.programId)}
                           >
-                            <img src={program.ImageUrl} alt={program.name} />
+                              {program?.galleryImages?.$values?.map((image) => (
+                                <img
+                                  key={image.imageId}
+                                  src={`http://localhost:5024/images/${image.fileName}`}
+                                  alt={image.caption}
+                                  className="gallery-image"
+                                />
+                              ))}
                           </div>
                           <div className="program-details">
                             <h2>{program.name}</h2>
@@ -183,8 +190,8 @@ const ProgramList = () => {
                                 className={`program-heart ${favorites.some(
                                   (fav) => fav.programId === program.programId
                                 )
-                                    ? "favorite"
-                                    : ""
+                                  ? "favorite"
+                                  : ""
                                   }`}
                                 onClick={() => toggleFavorite(program)}
                                 aria-label="Toggle favorite"
