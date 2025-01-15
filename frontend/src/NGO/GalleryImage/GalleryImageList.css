@@ -34,15 +34,19 @@
 .GalleryImageList-items {
   list-style: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Tạo 2 cột */
 }
 
 .GalleryImageList-item {
-  border: 1px solid #8db883;
+  border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 36vw;
 }
 
 .GalleryImageList-image {
@@ -53,6 +57,7 @@
 
 .GalleryImageList-caption {
   flex-grow: 1;
+  text-align: center;
 }
 
 .GalleryImageList-no-image {
