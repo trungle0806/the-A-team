@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5024/api/ProgramDonation/';
-const CUSTOMER_API_URL = 'http://localhost:5024/api/Customer/';
+const API_URL = 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/ProgramDonation/';
+const CUSTOMER_API_URL = 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/Customer/';
 
 // Utility function to get authorization headers
 const getAuthHeaders = () => {

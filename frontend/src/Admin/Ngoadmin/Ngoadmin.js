@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getNGOs, approveNGO, deleteNGO } from '../ServiceAdmin/NgoadminService';
-import "./Ngoadmin.css"
+import "./Ngoadmin.css";
 
 const Ngoadmin = () => {
   const [ngos, setNgos] = useState([]);
@@ -10,10 +10,9 @@ const Ngoadmin = () => {
   const loadNGOs = async () => {
     setLoading(true);
     try {
-      const ngosData = await getNGOs(); // Lấy tất cả các NGO chưa được duyệt
-      // Kiểm tra nếu ngosData là đối tượng và chứa trường $values là mảng
+      const ngosData = await getNGOs(); // Lấy tất cả các NGO
       if (ngosData && Array.isArray(ngosData.$values)) {
-        setNgos(ngosData.$values.filter(ngo => !ngo.isApproved)); // Chỉ hiển thị các NGO chưa được duyệt
+        setNgos(ngosData.$values); // Lấy tất cả các NGO mà không cần lọc
       } else {
         console.error('Dữ liệu trả về không đúng định dạng:', ngosData);
       }
@@ -22,19 +21,35 @@ const Ngoadmin = () => {
     }
     setLoading(false);
   };
-
+  
+  
   // Hàm duyệt NGO
   const handleApprove = async (ngoId) => {
+    console.log("Approving NGO with ID:", ngoId);
     try {
-      await approveNGO(ngoId); // Duyệt NGO
-      // Cập nhật trạng thái isApproved của NGO
-      setNgos(prevNgos => prevNgos.map(ngo => 
-        ngo.ngoId === ngoId ? { ...ngo, isApproved: true } : ngo
-      ));
+      // Gọi API duyệt NGO
+      const response = await approveNGO(ngoId);
+  
+      // Log phản hồi từ API
+      console.log("API Response:", response); // Kiểm tra dữ liệu trả về
+  
+      // Kiểm tra nếu phản hồi có trường isApproved và giá trị là true
+      if (response && response.isApproved) {
+        setNgos(prevNgos =>
+          prevNgos.map(ngo =>
+            ngo.ngoId === ngoId ? { ...ngo, isApproved: true } : ngo
+          )
+        );
+        alert('NGO approved successfully!');
+      } else {
+        alert('Failed to approve NGO or response is incorrect');
+      }
     } catch (error) {
       console.error('Error approving NGO:', error);
+      alert('Failed to approve NGO');
     }
-  };
+  };     
+  
 
   // Hàm xóa NGO
   const handleDelete = async (ngoId) => {
@@ -59,27 +74,27 @@ const Ngoadmin = () => {
         <table className="ngos-table">
           <tbody>
             {ngos.map((ngo) => (
-              <li key={ngo.ngoId} className='ong'>
-              <div className='ngo-info1'>
-                <div className="ngo-src">
-                  <img src={ngo.logoUrl} alt={ngo.name} className='ngo-logo1' />
+              <li key={ngo.ngoId} className="ong">
+                <div className="ngo-info1">
+                  <div className="ngo-src">
+                    <img src={ngo.logoUrl} alt={ngo.name} className="ngo-logo1" />
+                  </div>
+                  <div className="ngo-url1">
+                    <h3>{ngo.name}</h3>
+                    <p><strong>Description:</strong> {ngo.description}</p>
+                    <p><strong>Code:</strong> {ngo.code}</p>
+                    <p><strong>Achievements:</strong> {ngo.achievements}</p>
+                    <p><strong>Created At:</strong> {new Date(ngo.createdAt).toLocaleDateString()}</p>
+                    <button 
+                      className="approve-btn" 
+                      onClick={() => handleApprove(ngo.ngoId)} 
+                      disabled={ngo.isApproved} // Disable the button if already approved
+                      >
+                      {ngo.isApproved ? 'Approved' : 'Approve'}
+                    </button>
+                    <button className="delete-btn" onClick={() => handleDelete(ngo.ngoId)}>Delete</button>
+                  </div>
                 </div>
-                <div className='ngo-url1'>
-                <h3>{ngo.name}</h3>
-                  <p><strong>Description:</strong> {ngo.description}</p>
-                  <p><strong>Code:</strong> {ngo.code}</p>
-                  <p><strong>Achievements:</strong> {ngo.achievements}</p>
-                  <p><strong>Created At:</strong> {new Date(ngo.createdAt).toLocaleDateString()}</p>
-                  <button 
-                    className="approve-btn" 
-                    onClick={() => handleApprove(ngo.ngoId)} 
-                    disabled={ngo.isApproved} // Disable the button if already approved
-                  >
-                    {ngo.isApproved ? 'Approved' : 'Approve'}
-                  </button>
-                  <button className="delete-btn" onClick={() => handleDelete(ngo.ngoId)}>Delete</button>
-                </div>
-              </div>
               </li>
             ))}
           </tbody>

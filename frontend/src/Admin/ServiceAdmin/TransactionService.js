@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5024/api/TransactionHistory/'; // Base URL for the TransactionHistoryController
+const API_URL = 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/TransactionHistory/'; // Base URL for the TransactionHistoryController
 
 // Utility function to get token and role
 const getAuthHeaders = () => {

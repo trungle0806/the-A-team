@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 
 // Tạo instance axios
 const api = axios.create({
-    baseURL: 'http://localhost:5024/api/', // Cập nhật URL backend của bạn
+    baseURL: 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/', // Cập nhật URL backend của bạn
     headers: {
         'Content-Type': 'application/json',
     },
@@ -62,9 +62,12 @@ export const getPrograms = async (searchQuery = '', page = 1, pageSize = 10) => 
 
 // Lấy thông tin chi tiết của chương trình theo ID
 export const getProgramById = async (programId) => {
+    if (!programId) {
+        throw new Error('Invalid programId: ' + programId);
+      }
     try {
       console.log('Requesting program with ID:', programId);  // Log the programId
-      const response = await axios.get(`/api/programs/${programId}`);
+      const response = await axios.get(`program1/${programId}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching program by id:', error.response ? error.response.data : error.message);

@@ -12,6 +12,7 @@ const ProgramList = () => {
     setLoading(true);
     try {
       const programsData = await getProgramsByNGO();
+      console.log("Fetched programs:", programsData); // Kiểm tra dữ liệu trả về
       if (programsData && Array.isArray(programsData)) {
         setPrograms(programsData);
       } else if (programsData && programsData.$values && Array.isArray(programsData.$values)) {
@@ -21,11 +22,13 @@ const ProgramList = () => {
       console.error('Error fetching programs:', error);
     }
     setLoading(false);
-  };
+  };  
 
   const handleDonateProgram = (programId) => {
-    navigate(`/admin/program/${programId}`);  // Điều hướng đến trang donate
+    console.log("Navigating to program with ID:", programId);
+    navigate(`/admin/program/${programId}`);
   };
+  
 
   const handleDeleteProgram = async (programId) => {
     try {
@@ -87,7 +90,6 @@ const ProgramList = () => {
                     <td className="program-start-date">{program.startDate}</td>
                     <td className="program-end-date">{program.endDate}</td>
                     <td className="program-status">{program.status}</td>
-                    <td className="program-status">Pending</td>
                     <td className="program-actions">
                       <button 
                         onClick={() => handleDonateProgram(program.id)} 

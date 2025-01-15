@@ -14,7 +14,7 @@ import Favorites from "./Client/Favorites/Favorites";
 import ProgramList from "./Client/ProgramList/ProgramList";
 import Donate from "./Client/Donate/Donate";
 import ThankYouBill from "./Client/Bill/ThankYouBill";
-import NgoDetail from "./Client/Ngos/NgoDetail/NgoDetail";
+import NgoDetail from "./Client/Ngos/NgoDetail/Ngodetail";
 import ProgramListDetail from "./Client/ProgramList/ProgramListDetail/ProgramListDetail";
 import NotFound from "./404/NotFound";
 import { FavoritesProvider } from "./Context/FavoritesContext"; // Import FavoritesProvider

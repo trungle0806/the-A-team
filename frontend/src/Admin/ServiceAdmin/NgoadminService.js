@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5024/api'; // URL backend của bạn
+const API_URL = 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api'; // URL backend của bạn
 
 // Hàm lấy tất cả các NGO, có thể tìm kiếm qua query string
 export const getNGOs = async (searchQuery = '') => {
@@ -83,17 +83,53 @@ export const searchNGOs = async (name, code, isApproved) => {
 };
 
 // Hàm duyệt NGO (Admin duyệt)
+// Hàm duyệt NGO (Admin duyệt)
 export const approveNGO = async (id) => {
-    try {
-      const response = await axios.patch(`${API_URL}/ngo/approve/${id}`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}` // Token admin
-        }
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error approving NGO:', error);
-      throw error;
+  try {
+    // Lấy token từ localStorage
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      throw new Error('No authentication token found');
     }
-  };
-  
+
+    // Gửi yêu cầu PATCH để duyệt NGO với token xác thực
+    const response = await axios.patch(
+      `${API_URL}/ngo/${id}/approval`,
+      {}, // Giả sử yêu cầu không cần dữ liệu body, có thể thêm nếu cần
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Thêm token vào header
+        },
+      }
+    );
+
+    // Kiểm tra phản hồi xem có chứa dữ liệu và isApproved
+    if (response && response.data && response.data.isApproved !== undefined) {
+      if (response.data.isApproved === true) {
+        console.log(`NGO with ID: ${id} has been approved successfully.`);
+        return response.data; // Trả về dữ liệu nếu duyệt thành công
+      } else {
+        // Nếu isApproved là false, cho thông báo lỗi chi tiết hơn
+        throw new Error('NGO approval failed: isApproved is false');
+      }
+    } else {
+      throw new Error('Failed to approve NGO: Response data is incorrect or missing isApproved field');
+    }
+  } catch (error) {
+    // Xử lý lỗi chi tiết
+    if (error.response) {
+      // Lỗi từ server, có thể là dữ liệu phản hồi không hợp lệ hoặc lỗi API
+      console.error('Error approving NGO:', error.response.data);
+      alert(`Error: ${error.response.data.message || 'An error occurred while approving NGO'}`);
+    } else if (error.request) {
+      // Không nhận được phản hồi từ server
+      console.error('No response received from server:', error.request);
+      alert('No response from server. Please check your network connection.');
+    } else {
+      // Lỗi trong cấu hình yêu cầu
+      console.error('Error in request:', error.message);
+      alert(`Error: ${error.message}`);
+    }
+    throw error; // Ném lại lỗi để frontend có thể xử lý thêm nếu cần
+  }
+};

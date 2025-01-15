@@ -14,7 +14,7 @@ const AdminApproval = () => {
         const fetchAccount = async () => {
             try {
                 const accountId = 1; // Example, you can get it from session or token
-                const response = await fetch(`http://localhost:5024/api/NGO/account/${accountId}`);
+                const response = await fetch(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/NGO/account/${accountId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch account information');
                 }
@@ -34,7 +34,7 @@ const AdminApproval = () => {
     useEffect(() => {
         const fetchNGOs = async () => {
             try {
-                const response = await fetch('http://localhost:5024/api/NGO');
+                const response = await fetch('https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/NGO');
                 if (!response.ok) {
                     throw new Error('Failed to fetch NGOs');
                 }
@@ -62,7 +62,7 @@ const AdminApproval = () => {
             [ngoId]: [], // Reset programs for the selected NGO
         }));
         try {
-            const response = await fetch(`http://localhost:5024/api/NGO/${ngoId}/programs`);
+            const response = await fetch(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/NGO/${ngoId}/programs`);
             if (!response.ok) {
                 throw new Error('Failed to fetch programs');
             }
@@ -87,7 +87,7 @@ const AdminApproval = () => {
     const approveNgo = async (ngoId) => {
         console.log('Approving NGO with ID:', ngoId); // Kiểm tra ID tổ chức đang được duyệt
         try {
-            const response = await fetch(`http://localhost:5024/api/NGO/${ngoId}`, {
+            const response = await fetch(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/NGO/${ngoId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ const AdminApproval = () => {
     const approveProgram = async (programId, ngoId) => {
         console.log('Approving Program with ID:', programId); // Kiểm tra ID chương trình đang được duyệt
         try {
-            const response = await fetch(`http://localhost:5024/api/Program1/${programId}`, {
+            const response = await fetch(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/Program1/${programId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

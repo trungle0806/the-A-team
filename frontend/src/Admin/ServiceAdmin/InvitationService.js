@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5024/api/Invitation/'; // API endpoint cho InvitationController
+const API_URL = 'https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/Invitation/'; // API endpoint cho InvitationController
 
 // Hàm tiện ích để lấy headers xác thực
 const getAuthHeaders = () => {
