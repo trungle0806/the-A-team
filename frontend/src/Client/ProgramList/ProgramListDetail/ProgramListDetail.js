@@ -16,7 +16,7 @@ const ProgramListDetail = () => {
   useEffect(() => {
     const fetchProgramDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5024/api/program1/${programId}`);
+        const response = await axios.get(`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/program1/${programId}`);
         setProgram(response.data);
       } catch (err) {
         if (err.response?.status === 404) {
@@ -46,11 +46,13 @@ const ProgramListDetail = () => {
     <div>
       <Header />
       <div className="program-detail">
+        
         <h1>{program.name}</h1>
         <div className="program-content">
           <p>{program.description || "This program aims to distribute food to those in need, ensuring no one goes hungry."}</p>
          
         </div>
+
         
         {/* Gallery Section */}
         <div className="program-gallery">
@@ -59,7 +61,7 @@ const ProgramListDetail = () => {
             {imagesToShow.map((image, index) => (
               <div key={index} className="gallery-item">
                 <img
-                  src={`http://localhost:5024/images/${image.fileName}` || "/path-to-default-image.jpg"}
+                  src={`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/images/${image.fileName}` || "/path-to-default-image.jpg"}
                   alt={image.caption}
                   className="gallery-image"
                 />

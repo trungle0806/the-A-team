@@ -241,7 +241,7 @@ const Donate = () => {
           </div>
         </div>
 
-        {program.status === "Completed" ? (
+        {program.status === "" ? (
           <div className="completed-message">
             <img
               src="/images/Completed-bro.png"

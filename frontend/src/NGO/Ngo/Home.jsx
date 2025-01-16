@@ -29,11 +29,11 @@ function DashBoard() {
         const programList = data?.$values || [];
         
         // Kiểm tra xem dữ liệu có chương trình với trạng thái 'RUNNING' và 'COMPLETED'
-        console.log("Running Programs:", programList.filter((program) => program.status === 'RUNNING'));
-        console.log("Completed Programs:", programList.filter((program) => program.status === 'COMPLETED'));
+        console.log("Running Programs:", programList.filter((program) => program.status === 'Ongoing'));
+        console.log("Completed Programs:", programList.filter((program) => program.status === 'Completed'));
     
-        const runningPrograms = programList.filter((program) => program.status === 'RUNNING').length;
-        const completedPrograms = programList.filter((program) => program.status === 'COMPLETED').length;
+        const runningPrograms = programList.filter((program) => program.status === 'Ongoing').length;
+        const completedPrograms = programList.filter((program) => program.status === 'Completed').length;
     
         setStats((prevStats) => ({
           ...prevStats,
