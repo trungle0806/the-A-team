@@ -76,7 +76,6 @@ const Donate = () => {
     }
     setAmount(value);
   };
-
   const handleSuccess = async (details) => {
     try {
       await axios.post(
@@ -94,10 +93,17 @@ const Donate = () => {
           },
         }
       );
-      alert("Donation successful! Thank you for your support.");
-      setAmount("");
-      setIsPaymentSelected(false);
-      fetchProgram(); // Re-fetch program details after a successful donation
+
+      // Chuẩn bị dữ liệu cho trang ThankYouBill
+      const donationData = {
+        donorName: "John Doe", // Cần thay bằng dữ liệu thực tế của người dùng
+        donorEmail: "john.doe@example.com", // Cần thay bằng dữ liệu thực tế
+        donationAmount: amount.toFixed(2),
+        donationDate: new Date().toLocaleDateString(),
+        paymentMethod: "PayPal",
+      };
+
+      navigate("/thank-you-bill", { state: { donationData } });
     } catch (err) {
       console.error("Donation processing failed.");
       alert("Donation processing failed. Please try again.");
@@ -114,11 +120,13 @@ const Donate = () => {
     const today = new Date();
     const end = new Date(endDate);
     const remainingTime = end - today;
-    
+
     // Ensure the remaining days are not negative
-    return remainingTime > 0 ? Math.ceil(remainingTime / (1000 * 3600 * 24)) : 0;
+    return remainingTime > 0
+      ? Math.ceil(remainingTime / (1000 * 3600 * 24))
+      : 0;
   };
-  
+
   const getUniqueDonorsCount = (donations) => {
     const donationsArray = donations?.$values || [];
     const donorIds = donationsArray.map((donation) => donation.customerId);
@@ -140,9 +148,7 @@ const Donate = () => {
 
   const handleViewDonations = () => {
     if (programId && program.ngoId) {
-      navigate(
-        `/ngo/${program.ngoId}/program/${programId}/donations`
-      );
+      navigate(`/ngo/${program.ngoId}/program/${programId}/donations`);
     } else {
       console.error("Missing programId or ngoId");
     }
@@ -197,14 +203,13 @@ const Donate = () => {
           )}
 
           <div className="donation-stats">
-            <div className="stat-box" onClick={handleViewDonations}
-                style={{ cursor: "pointer" }}>
+            <div
+              className="stat-box"
+              onClick={handleViewDonations}
+              style={{ cursor: "pointer" }}
+            >
               <FaUsers className="icon" />
-              <span
-                className="stat-label"
-              >
-                Total Donors:
-              </span>
+              <span className="stat-label">Total Donors:</span>
               <span className="stat-value">
                 {getUniqueDonorsCount(program.donations)}
               </span>
