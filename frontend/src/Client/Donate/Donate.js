@@ -163,7 +163,7 @@ const Donate = () => {
       }}
     >
       <Header />
-      <div className="favorites-banner">
+      <div className="favorites-banner11">
         <h1>Donate</h1>
       </div>
       <div className="donate-container">
