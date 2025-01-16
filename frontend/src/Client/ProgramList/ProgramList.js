@@ -77,7 +77,6 @@ const ProgramList = () => {
     navigate(`/program/${programId}`);
   };
 
-  // Filter programs to only show upcoming ones
   const filteredPrograms = programs.filter((program) => {
     const matchesCategories = selectedCategories.length
       ? selectedCategories.includes(program.category)
@@ -85,7 +84,7 @@ const ProgramList = () => {
     const matchesSearchTerm = program.name
       ?.toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const isUpcoming = program.isUpcoming; // Only show if upcoming
+    const isUpcoming = program.isUpcoming;
     return matchesCategories && matchesSearchTerm && isUpcoming;
   });
 
@@ -129,9 +128,8 @@ const ProgramList = () => {
                       </div>
                     </div>
                   </div>
-                  <h1 className="program-title">Charity </h1>
+                  <h1 className="program-title">Charity Navigate </h1>
                   <div className="program-border"></div>
-                  
                 </div>
                 <div className="program-col">
                   <div className="program-grid">
@@ -148,14 +146,22 @@ const ProgramList = () => {
                               handleProgramClick(program.programId)
                             }
                           >
-                            {program?.galleryImages?.$values?.map((image) => (
+                            {program?.galleryImages?.$values?.length > 0 ? (
                               <img
-                                key={image.imageId}
-                                src={`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/images/${image.fileName}`}
-                                alt={image.caption}
+                                src={`https://charitynavigator-hma3agega6fwfgb2.canadacentral-01.azurewebsites.net/api/images/${program.galleryImages.$values[0].fileName}`}
+                                alt={
+                                  program.galleryImages.$values[0].caption ||
+                                  "Program Image"
+                                }
                                 className="gallery-image"
                               />
-                            ))}
+                            ) : (
+                              <img
+                                src="https://image.baophapluat.vn/w840/Uploaded/2025/athlrainaghat/2023_05_21/den-vau-trong-san-pham-am-nhac-moi-ra-mat-anh-nhan-vat-4409.jpeg"
+                                alt="Default Program"
+                                className="gallery-image"
+                              />
+                            )}
                           </div>
                           <div className="program-details">
                             <h2>{program.name}</h2>
@@ -169,10 +175,12 @@ const ProgramList = () => {
                               </p>
                               <p>
                                 <strong>End date:</strong>{" "}
-                                {new Date(program.endDate).toLocaleDateString()}
+                                {new Date(
+                                  program.endDate
+                                ).toLocaleDateString()}
                               </p>
                               <p>
-                                <strong>Status:</strong> 
+                                <strong>Status:</strong>
                                 <p>{program.status}</p>
                               </p>
                             </div>
@@ -180,7 +188,8 @@ const ProgramList = () => {
                               <CiHeart
                                 className={`program-heart ${
                                   favorites.some(
-                                    (fav) => fav.programId === program.programId
+                                    (fav) =>
+                                      fav.programId === program.programId
                                   )
                                     ? "favorite"
                                     : ""

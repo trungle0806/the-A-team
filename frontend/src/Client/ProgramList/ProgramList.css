@@ -51,8 +51,8 @@
 
 .program-image img {  
   width: 100%;  
-  max-width: 250px;  
-  height: auto;  
+  max-width: 327px;
+    height: auto;  
   border-radius: 8px;  
 }  
 
@@ -135,7 +135,7 @@
   margin-top: 50px; 
 }  
 .program-title {  
-  text-align: left;  
+  text-align: center;  
   margin-top: 0px;  
   cursor: pointer;
 }  

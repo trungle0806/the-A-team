@@ -61,9 +61,15 @@ const Promotions = () => {
                             <picture>
                               <img
                                 className="promo-anh"
-                                src={promo.image || "default-image.jpg"}
+                                src={promo.image || "https://image.baophapluat.vn/w840/Uploaded/2025/athlrainaghat/2023_05_21/den-vau-trong-san-pham-am-nhac-moi-ra-mat-anh-nhan-vat-4409.jpeg"}
                                 alt={promo.name || "Default Promotion"}
                               />
+                               <img
+                                className="promo-anh"
+                                src={promo.image || ""}
+                                alt={promo.name || "Default Promotion"}
+                              />
+                              
                             </picture>
                           </div>
                           <div className="promo-description">

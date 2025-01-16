@@ -105,6 +105,9 @@
   color: #fff;
 }
 
+.favorites-banner{
+  display: none;
+}
 @media (max-width: 768px) {
   .program-detail {
     padding: 1rem;
